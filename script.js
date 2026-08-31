@@ -4,7 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnFilterAll = document.getElementById('btn-filter-all');
     const btnFilterFavs = document.getElementById('btn-filter-favs');
     const btnFilterIntro = document.getElementById('btn-filter-intro');
+    const btnFilterDev = document.getElementById('btn-filter-dev');
     const inputSearchRep = document.getElementById('repertory-search');
+    const filterBar = document.getElementById('repertory-filter-bar');
 
     if (inputSearchRep) {
         inputSearchRep.addEventListener('input', (e) => {
@@ -17,25 +19,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateFilterBtns() {
         if (!btnFilterAll) return;
-        [btnFilterAll, btnFilterFavs, btnFilterIntro].forEach(b => {
-            b.classList.remove('active');
-            b.style.background = 'transparent';
-            b.style.color = 'var(--text-main)';
-            b.style.borderColor = 'var(--panel-border)';
+        [btnFilterAll, btnFilterFavs, btnFilterIntro, btnFilterDev].forEach(b => {
+            if (b) {
+                b.classList.remove('active');
+                b.style.background = 'transparent';
+                b.style.color = 'var(--text-main)';
+                b.style.borderColor = 'var(--panel-border)';
+            }
         });
 
         let activeBtn = currentRepertoryFilter === 'all' ? btnFilterAll :
-            currentRepertoryFilter === 'favs' ? btnFilterFavs : btnFilterIntro;
-        activeBtn.classList.add('active');
-        activeBtn.style.background = 'var(--primary)';
-        activeBtn.style.color = '#fff';
-        activeBtn.style.borderColor = 'var(--primary)';
+            currentRepertoryFilter === 'favs' ? btnFilterFavs : 
+            currentRepertoryFilter === 'intro' ? btnFilterIntro : btnFilterDev;
+            
+        if (activeBtn) {
+            activeBtn.classList.add('active');
+            activeBtn.style.background = 'var(--primary)';
+            activeBtn.style.color = '#fff';
+            activeBtn.style.borderColor = 'var(--primary)';
+        }
     }
 
     if (btnFilterAll) {
         btnFilterAll.addEventListener('click', () => { currentRepertoryFilter = 'all'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
         btnFilterFavs.addEventListener('click', () => { currentRepertoryFilter = 'favs'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
         btnFilterIntro.addEventListener('click', () => { currentRepertoryFilter = 'intro'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
+        if (btnFilterDev) btnFilterDev.addEventListener('click', () => { currentRepertoryFilter = 'dev'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
         updateFilterBtns();
     }
     const essayInput = document.getElementById('essay');
@@ -241,6 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentEixoIndex = currentBanca.eixosTematicos.indexOf(eixo);
 
         if (eixo.repertorios) {
+            if (filterBar) filterBar.style.display = 'flex';
             let favs = JSON.parse(localStorage.getItem('redacao_favorite_repertories') || '[]');
             
             let repsToRender = eixo.repertorios.filter(rep => {
@@ -248,6 +258,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
                 if (currentRepertoryFilter === 'favs' && !favs.includes(rep.obra)) return false;
                 if (currentRepertoryFilter === 'intro' && !isIntro) return false;
+                if (currentRepertoryFilter === 'dev' && isIntro) return false;
                 
                 if (currentRepertorySearch) {
                     const searchable = `${rep.obra} ${rep.autor} ${rep.resumo} ${rep.uso || ''} ${rep.frase}`.toLowerCase();
@@ -256,6 +267,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 return true;
             });
+
+            if (repsToRender.length === 0) {
+                const emptyMsg = document.createElement('div');
+                emptyMsg.style.textAlign = 'center';
+                emptyMsg.style.color = 'var(--text-muted)';
+                emptyMsg.style.padding = '20px';
+                emptyMsg.style.fontStyle = 'italic';
+                emptyMsg.textContent = 'Nenhum repertório encontrado com o filtro atual.';
+                repertoryList.appendChild(emptyMsg);
+            }
 
             // Agrupar os repertórios
             let favReps = [];
@@ -330,6 +351,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             initFlashcards(repsToRender);
         } else if (eixo.topicos) {
+            if (filterBar) filterBar.style.display = 'none';
+            const avisoItem = document.createElement('div');
+            avisoItem.style.marginBottom = '20px';
+            avisoItem.innerHTML = `<p style="color: var(--text-muted); font-size: 0.9em; text-align: center;"><em>Esta banca não exige repertórios socioculturais abertos. Abaixo estão os pontos de atenção e apostas focados na obra/edital.</em></p>`;
+            repertoryList.appendChild(avisoItem);
+
             eixo.topicos.forEach(topico => {
                 const item = document.createElement('div');
                 item.className = 'repertory-item';

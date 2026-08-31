@@ -329,7 +329,7 @@
 
                         <!-- Lista de Repertórios do Eixo (Modo Prática) -->
                         <div id="repertory-practice-container">
-                            <div class="filter-bar"
+                            <div class="filter-bar" id="repertory-filter-bar"
                                 style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap: wrap;">
                                 <input type="text" id="repertory-search" placeholder="Pesquisar repertório..." style="flex: 1; min-width: 200px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); color: var(--text-color); font-family: 'Inter', sans-serif;">
                                 <button class="btn btn-secondary active" id="btn-filter-all"
@@ -343,7 +343,9 @@
                                         </polygon>
                                     </svg> Favoritos</button>
                                 <button class="btn btn-secondary" id="btn-filter-intro"
-                                    style="padding: 5px 15px; font-size: 0.9em;">Só Introdução</button>
+                                    style="padding: 5px 15px; font-size: 0.9em;">Introdução</button>
+                                <button class="btn btn-secondary" id="btn-filter-dev"
+                                    style="padding: 5px 15px; font-size: 0.9em;">Desenvolvimento</button>
                             </div>
                             <div class="repertory-list" id="repertory-list">
                                 <!-- Injetado via JS -->

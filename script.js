@@ -1,8 +1,19 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentRepertoryFilter = 'all';
+    let currentRepertorySearch = '';
     const btnFilterAll = document.getElementById('btn-filter-all');
     const btnFilterFavs = document.getElementById('btn-filter-favs');
     const btnFilterIntro = document.getElementById('btn-filter-intro');
+    const inputSearchRep = document.getElementById('repertory-search');
+
+    if (inputSearchRep) {
+        inputSearchRep.addEventListener('input', (e) => {
+            currentRepertorySearch = e.target.value.trim().toLowerCase();
+            if (currentBanca && currentBanca.eixosTematicos[currentEixoIndex]) {
+                mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]);
+            }
+        });
+    }
 
     function updateFilterBtns() {
         if (!btnFilterAll) return;
@@ -236,6 +247,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 const isIntro = (rep.obra && rep.obra.includes('INTRODUÇÃO')) || (rep.uso && rep.uso.includes('Introdução'));
                 if (currentRepertoryFilter === 'favs' && !favs.includes(rep.obra)) return false;
                 if (currentRepertoryFilter === 'intro' && !isIntro) return false;
+                
+                if (currentRepertorySearch) {
+                    const searchable = `${rep.obra} ${rep.autor} ${rep.resumo} ${rep.uso || ''} ${rep.frase}`.toLowerCase();
+                    if (!searchable.includes(currentRepertorySearch)) return false;
+                }
+                
                 return true;
             });
 
@@ -278,6 +295,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         </h4>
                         <p><strong>Resumo:</strong> ${rep.resumo}</p>
                         ${rep.uso ? `<p style="margin-top:0.5rem; font-size:0.85rem; color:var(--warning);"><strong>Uso:</strong> ${rep.uso}</p>` : ''}
+                        
+                        ${rep.audio ? `<div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.2); border-radius: 8px;"><div style="font-size: 0.8em; margin-bottom: 5px; color: var(--primary); font-weight: bold;">🎧 Resumo em Áudio</div><audio controls style="width: 100%; height: 35px;" src="${rep.audio}"></audio></div>` : 
+                        (isFav ? `<div style="margin-top: 15px; padding: 10px; background: rgba(0,0,0,0.1); border-radius: 8px; border: 1px dashed var(--panel-border); text-align: center; font-size: 0.8em; color: var(--text-muted);">Você ainda não adicionou o áudio para esta obra favorita.<br>Para adicionar, insira <code>"audio": "caminho_do_audio.mp3"</code> nesta ficha no arquivo <code>repertories.js</code>.</div>` : '')}
                     `;
                     item.querySelector('.fav-star').addEventListener('click', (e) => {
                         let f = JSON.parse(localStorage.getItem('redacao_favorite_repertories') || '[]');

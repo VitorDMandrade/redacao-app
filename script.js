@@ -88,7 +88,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const titleContainer = document.getElementById('title-container');
     const titleStatus = document.getElementById('title-status');
     const essayTitle = document.getElementById('essay-title');
-    const navButtons = document.querySelectorAll('.nav-btn');
     const finalScoreValue = document.getElementById('final-score-value');
     const finalScoreMax = document.getElementById('final-score-max');
     const competenciesContainer = document.getElementById('competencies-container');

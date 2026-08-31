@@ -20,7 +20,10 @@ const EIXOS_MESTRES = [
         repertorios: [
             { obra: "Princípio Responsabilidade (Livro)", autor: "Hans Jonas", resumo: "Afirma que a humanidade tem a obrigação ética de preservar a natureza para garantir a vida das gerações futuras.", uso: "Essencial para qualquer tema ambiental (crise climática, desmatamento)." },
             { obra: "A Queda do Céu (Livro)", autor: "Davi Kopenawa", resumo: "Alerta indígena sobre a destruição da floresta pelos 'homens da mercadoria' (capitalismo predador).", uso: "Temas sobre povos originários, garimpo ilegal e preservação da Amazônia." },
-            { obra: "A Era do Capitaloceno (Conceito)", autor: "Jason W. Moore", resumo: "Critica o sistema capitalista como principal motor da degradação ambiental global, focando no lucro acima da vida.", uso: "Agronegócio, descarte de lixo, e priorização do lucro sobre a natureza." }
+            { obra: "A Era do Capitaloceno (Conceito)", autor: "Jason W. Moore", resumo: "Critica o sistema capitalista como principal motor da degradação ambiental global, focando no lucro acima da vida.", uso: "Agronegócio, descarte de lixo, e priorização do lucro sobre a natureza." },
+            { obra: "Ideias para Adiar o Fim do Mundo (Livro)", autor: "Ailton Krenak", resumo: "Critica a ilusão antropocêntrica de separar a humanidade da natureza, denunciando que a conversão dos bens naturais em mercadoria esgota a vida no planeta.", uso: "Uso em temas de crise climática, visão eurocêntrica e desmatamento." },
+            { obra: "Wall-E (Animação)", autor: "Pixar", resumo: "Mostra uma Terra inabitável devido ao acúmulo extremo de lixo e ao consumismo desenfreado da humanidade, que precisou fugir para o espaço.", uso: "Perfeito para introduzir temas sobre obsolescência programada, poluição e consumismo." },
+            { obra: "Avatar (Filme)", autor: "James Cameron", resumo: "Aborda a exploração predatória de recursos naturais por corporações em detrimento da vida e da cultura de povos nativos.", uso: "Introdução para temas de mineração ilegal, povos originários e ganância corporativa." }
         ]
     },
     {
@@ -28,7 +31,8 @@ const EIXOS_MESTRES = [
         repertorios: [
             { obra: "Pedagogia do Oprimido (Livro)", autor: "Paulo Freire", resumo: "Crítica à 'educação bancária' (mera transferência de dados). A educação deve ser emancipadora e formar senso crítico.", uso: "Temas sobre evasão escolar, analfabetismo funcional e reforma do ensino." },
             { obra: "Os Miseráveis (Livro)", autor: "Victor Hugo", resumo: "Ilustra como a miséria e a falta de oportunidades (e educação) empurram o indivíduo para a marginalidade.", uso: "Educação como ferramenta de ressocialização e combate ao crime." },
-            { obra: "Constituição Federal de 1988 (Art. 205)", autor: "Assembleia Constituinte", resumo: "A educação é direito de todos e dever do Estado e da família.", uso: "Coringão para introdução de qualquer tema educacional." }
+            { obra: "Constituição Federal de 1988 (Art. 205)", autor: "Assembleia Constituinte", resumo: "A educação é direito de todos e dever do Estado e da família.", uso: "Coringão para introdução de qualquer tema educacional." },
+            { obra: "Sociedade dos Poetas Mortos (Filme)", autor: "Peter Weir", resumo: "Um professor usa a poesia para encorajar seus alunos a pensarem por si mesmos e desafiarem as rígidas regras da escola.", uso: "Introdução sobre o papel transformador da escola, metodologias ativas e pensamento crítico." }
         ]
     },
     {
@@ -36,7 +40,8 @@ const EIXOS_MESTRES = [
         repertorios: [
             { obra: "O Mito da Democracia Racial", autor: "Florestan Fernandes", resumo: "Descontrói a ilusão de que no Brasil há convivência harmônica entre as raças, evidenciando o racismo estrutural mascarado.", uso: "Qualquer tema de racismo, desigualdade racial e cotas." },
             { obra: "Quarto de Despejo (Livro)", autor: "Carolina Maria de Jesus", resumo: "Diário de uma mulher negra e favelada, retratando a fome, o racismo e a invisibilidade social.", uso: "Fome, marginalização, racismo estrutural e papel da mulher negra." },
-            { obra: "Casa-Grande & Senzala (Livro)", autor: "Gilberto Freyre", resumo: "Obra fundadora sobre a formação do Brasil, mostrando a profunda herança escravocrata nas relações sociais (usar criticamente).", uso: "Heranças históricas do preconceito no país." }
+            { obra: "Casa-Grande & Senzala (Livro)", autor: "Gilberto Freyre", resumo: "Obra fundadora sobre a formação do Brasil, mostrando a profunda herança escravocrata nas relações sociais (usar criticamente).", uso: "Heranças históricas do preconceito no país." },
+            { obra: "Estrelas Além do Tempo (Filme)", autor: "Theodore Melfi", resumo: "Conta a história real de cientistas negras na NASA que enfrentaram dupla discriminação (raça e gênero) nos anos 60.", uso: "Introdução para temas de invisibilidade, racismo no mercado de trabalho e meritocracia ilusória." }
         ]
     },
     {
@@ -52,7 +57,8 @@ const EIXOS_MESTRES = [
         repertorios: [
             { obra: "Cidadania de Papel (Livro)", autor: "Gilberto Dimenstein", resumo: "Mostra como muitos direitos previstos em lei não se aplicam na prática para as classes marginalizadas.", uso: "Excelente para apontar a falha do Estado em garantir direitos básicos." },
             { obra: "Vidas Secas (Livro)", autor: "Graciliano Ramos", resumo: "Retrata a desumanização do sertanejo e a opressão cíclica pela seca e pelo descaso político.", uso: "Fome, pobreza extrema, refugiados climáticos." },
-            { obra: "Capitães da Areia (Livro)", autor: "Jorge Amado", resumo: "Meninos de rua marginalizados em Salvador, mostrando como a sociedade prefere punir a acolher.", uso: "Menores infratores, adoção, invisibilidade infantil." }
+            { obra: "Capitães da Areia (Livro)", autor: "Jorge Amado", resumo: "Meninos de rua marginalizados em Salvador, mostrando como a sociedade prefere punir a acolher.", uso: "Menores infratores, adoção, invisibilidade infantil." },
+            { obra: "Parasita (Filme)", autor: "Bong Joon-ho", resumo: "Retrata o abismo social e financeiro entre duas famílias, revelando a falta de mobilidade e a crueldade da estrutura de classes.", uso: "Introdução para desigualdade social, invisibilidade arquitetônica e precarização." }
         ]
     },
     {
@@ -60,7 +66,8 @@ const EIXOS_MESTRES = [
         repertorios: [
             { obra: "O Leviatã (Livro)", autor: "Thomas Hobbes", resumo: "O Estado deve ser forte para garantir a paz e evitar a 'guerra de todos contra todos'.", uso: "Quando o Estado falha na segurança pública ou na mediação de conflitos." },
             { obra: "Contrato Social (Conceito)", autor: "Jean-Jacques Rousseau", resumo: "O povo abre mão de parte de sua liberdade em troca da proteção e garantia do bem comum pelo Estado.", uso: "Quebra do contrato social (corrupção, descaso com saúde/educação)." },
-            { obra: "Utopia (Livro)", autor: "Thomas More", resumo: "Descreve uma sociedade ideal, organizada e sem desigualdades, que contrasta com as falhas do mundo real.", uso: "Contraste entre o que deveria ser feito politicamente e a realidade." }
+            { obra: "Utopia (Livro)", autor: "Thomas More", resumo: "Descreve uma sociedade ideal, organizada e sem desigualdades, que contrasta com as falhas do mundo real.", uso: "Contraste entre o que deveria ser feito politicamente e a realidade." },
+            { obra: "Jogos Vorazes (Série)", autor: "Suzanne Collins", resumo: "O governo da Capital explora os distritos pobres e usa a miséria como espetáculo para manter o controle totalitário.", uso: "Introdução para alienação, opressão estatal e negligência social." }
         ]
     }
 ];

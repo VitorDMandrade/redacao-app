@@ -244,7 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let favs = JSON.parse(localStorage.getItem('redacao_favorite_repertories') || '[]');
             
             let repsToRender = eixo.repertorios.filter(rep => {
-                const isIntro = (rep.obra && rep.obra.includes('INTRODUÇÃO')) || (rep.uso && rep.uso.includes('Introdução'));
+                const introKeywords = ['INTRODUÇÃO', 'CINEMA', 'SÉRIE', 'ANIMAÇÃO', 'DOCUMENTÁRIO', 'FILME', 'MÚSICA', 'FICÇÃO', 'ROMANCE'];
+                const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
                 if (currentRepertoryFilter === 'favs' && !favs.includes(rep.obra)) return false;
                 if (currentRepertoryFilter === 'intro' && !isIntro) return false;
                 
@@ -262,7 +263,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let otherReps = [];
 
             repsToRender.forEach(rep => {
-                const isIntro = (rep.obra && rep.obra.includes('INTRODUÇÃO')) || (rep.uso && rep.uso.includes('Introdução'));
+                const introKeywords = ['INTRODUÇÃO', 'CINEMA', 'SÉRIE', 'ANIMAÇÃO', 'DOCUMENTÁRIO', 'FILME', 'MÚSICA', 'FICÇÃO', 'ROMANCE'];
+                const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
                 if (favs.includes(rep.obra)) {
                     favReps.push(rep);
                 } else if (isIntro) {
@@ -319,7 +321,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderGroup('Meus Favoritos', favReps, '#fbbf24');
             renderGroup('Para Introdução', introReps, 'var(--primary)');
-            renderGroup('Para Desenvolvimento / Coringas', otherReps, 'var(--text-main)');
+            
+            let devTitle = 'Para Desenvolvimento / Coringas';
+            if (currentBanca && (currentBanca.nome.includes('UFG') || currentBanca.nome.includes('UEMA'))) {
+                devTitle = 'Para Desenvolvimento (Filósofos e Sociólogos - Uso Crítico)';
+            }
+            renderGroup(devTitle, otherReps, 'var(--text-main)');
 
             initFlashcards(repsToRender);
         } else if (eixo.topicos) {

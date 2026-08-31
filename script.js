@@ -299,12 +299,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let otherReps = [];
 
             repsToRender.forEach(rep => {
-                const introKeywords = ['INTRODUÇÃO', 'CINEMA', 'SÉRIE', 'ANIMAÇÃO', 'DOCUMENTÁRIO', 'FILME', 'MÚSICA', 'FICÇÃO', 'ROMANCE'];
-                const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
                 if (favs.includes(rep.obra)) {
                     favReps.push(rep);
-                } else if (isIntro) {
+                } else if (rep.tipo === 'intro') {
                     introReps.push(rep);
+                } else if (rep.tipo === 'dev') {
+                    otherReps.push(rep);
                 } else {
                     otherReps.push(rep);
                 }
@@ -678,7 +678,7 @@ document.addEventListener('DOMContentLoaded', () => {
             promptUser += `\nRedação:\n${rawText}`;
 
             // Monta o prompt completo (Sistema + Usuário)
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : 'Você é um avaliador de redações rigoroso.'}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\n${promptUser}`;
+            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : 'Você é um avaliador de redações rigoroso.'}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\n${promptUser}`;
 
             // Copia para a área de transferência
             navigator.clipboard.writeText(fullPrompt).then(() => {
@@ -1107,7 +1107,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (btnCopyGrammarChallenge) {
         btnCopyGrammarChallenge.addEventListener('click', () => {
-            navigator.clipboard.writeText(PROMPT_GERAR_DESAFIO).then(() => {
+            const fullPromptGen = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${PROMPT_GERAR_DESAFIO}`;
+            navigator.clipboard.writeText(fullPromptGen).then(() => {
                 alert("Prompt copiado! Cole no Gemini e traga o JSON de volta para o passo 2.");
             });
         });
@@ -1148,8 +1149,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             let prompt = PROMPT_CORRIGIR_DESAFIO.replace("{TEXTO_ORIGINAL}", currentGrammarChallenge).replace("{REESCRITA_ALUNO}", studentRewrite);
-
-            navigator.clipboard.writeText(prompt).then(() => {
+            const fullPromptEval = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${prompt}`;
+            navigator.clipboard.writeText(fullPromptEval).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
                     const resultObj = JSON.parse(jsonStr);
 
@@ -1818,7 +1819,8 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
 
             const fullPrompt = `INSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAja como o Prof. Daniel Lino. O aluno perguntou: "${question}". \nResponda sendo claro, didático e direto, focando na dúvida gramatical ou estrutural. Seja rigoroso quanto à norma culta (sem gerundismo, sem queísmo), mas mostre encorajamento. Leve em consideração que o aluno está treinando para a banca: ${currentBanca.nome}.\n\nSUA TAREFA:\nRetorne EXCLUSIVAMENTE um JSON neste formato:\n{\n  "resposta_html": "<p>Sua resposta formatada em tags HTML <strong>aqui</strong>.</p>"\n}`;
 
-            navigator.clipboard.writeText(fullPrompt).then(() => {
+            const tutorPromptFinal = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${fullPrompt}`;
+            navigator.clipboard.writeText(tutorPromptFinal).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
                     const resultObj = JSON.parse(jsonStr);
                     const cleanHtml = resultObj.resposta_html || '';
@@ -1917,7 +1919,7 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const promptFinal = PROMPT_MEU_MODELO
+            const promptFinal = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${PROMPT_MEU_MODELO}`
                 .replace("{TEMA}", tema)
                 .replace("{BANCA}", currentBanca.nome);
 

@@ -1945,7 +1945,19 @@ const REPERTORIOS_MAPEADOS = [
         ],
         "nome": "7. Política/Cidadania (Geral)"
     }
-];
+}, {
+    "obra": "FICHA 93: AILTON KRENAK (IDEIAS PARA ADIAR O FIM DO MUNDO)",
+    "autor": "Escritor, filósofo, ativista socioambiental e líder indígena brasileiro da etnia Krenak, membro da Academia Brasileira de Letras, no livro 'Ideias para Adiar o Fim do Mundo' (2019).",
+    "resumo": "Critica a ilusão antropocêntrica ocidental de separar a humanidade da natureza, denunciando que a conversão dos bens naturais em mercadoria explorável esgota as bases da vida no planeta; sustenta que 'adiar o fim do mundo' exige reatar o vínculo cósmico com a Terra e valorizar as cosmovisões ancestrais dos povos originários contra a lógica do consumo predatório.",
+    "uso": "Crise Climática e Degradação Ambiental: A exploração predatória de recursos hídricos, solos e florestas sob a lógica do lucro desenfreado.; Povos Originários e Saberes Tradicionais: O desrespeito e a invisibilidade impostos às culturas indígenas, ribeirinhas e quilombolas.; Consumismo e Limites Ecológicos: A crítica ao modelo de desenvolvimento capitalista que busca crescimento infinito em um planeta de recursos finitos.; Demarcação de Terras Indígenas: A preservação dos biomas por meio do reconhecimento dos territórios dos povos que atuam como guardiões da biodiversidade.",
+    "frase": "\"Na seminal obra 'Ideias para Adiar o Fim do Mundo', o pensador indígena Ailton Krenak denuncia a fratura entre o ser humano e a natureza, evidenciando como a mercantilização dos bens ecológicos compromete a própria continuidade da vida no planeta. No cenário brasileiro contemporâneo, tal diagnóstico revela-se indispensável diante de [TEMA], conjuntura na qual a exploração predatória do meio ambiente e a marginalização dos saberes ancestrais aprofundam a crise socioambiental, violando o direito constitucional a um ecossistema equilibrado.\""
+}, {
+    "obra": "FICHA 94: THEODOR W. ADORNO (INDÚSTRIA CULTURAL)",
+    "autor": "Filósofo, sociólogo e teórico crítico alemão, expoente da Escola de Frankfurt, ao formular o conceito de 'Indústria Cultural' (obra 'Dialética do Esclarecimento', 1944/1947, com Max Horkheimer).",
+    "resumo": "Postula que a cultura e a arte foram convertidas em mercadorias padronizadas e produzidas em escala industrial com o objetivo de gerar lucro e docilizar a população; essa produção seriada anestesia o pensamento crítico, induz necessidades de consumo artificiais e transforma os cidadãos em meros consumidores passivos para manter o status quo.",
+    "uso": "Ditadura dos Padrões Estéticos: A mercantilização e a uniformização dos corpos impostas pela publicidade e pelas redes sociais gerando transtornos de imagem.; Consumismo Infantil e Hiperconsumo: A manipulação do desejo de crianças e jovens por meio de estímulos de marketing direcionados.; Alienação e Passividade Cívica: O uso do entretenimento de massa superficial e fragmentado para desviar o debate público de questões estruturais urgentes.; Homogeneização Cultural por Algoritmos: A perda da pluralidade e do letramento artístico em plataformas que priorizam fórmulas repetitivas de fácil engajamento.",
+    "frase": "\"Ao formular o conceito de 'Indústria Cultural', o filósofo Theodor W. Adorno adverte que a transformação dos bens culturais em mercadorias padronizadas atrofia a capacidade reflexiva dos indivíduos, condicionando-os à passividade e ao consumo alienado. Ao transpor essa tese para a sociedade brasileira contemporânea no tocante a [TEMA], constata-se a gravidade dessa dinâmica, cenário no qual imperativos comerciais moldam o comportamento coletivo e fragilizam a autonomia e a emancipação crítica dos cidadãos.\""
+}];
 
 if (typeof EIXOS_MESTRES !== 'undefined') {
     EIXOS_MESTRES.length = 0;

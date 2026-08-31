@@ -233,8 +233,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let favs = JSON.parse(localStorage.getItem('redacao_favorite_repertories') || '[]');
             
             let repsToRender = eixo.repertorios.filter(rep => {
+                const isIntro = (rep.obra && rep.obra.includes('INTRODUÇÃO')) || (rep.uso && rep.uso.includes('Introdução'));
                 if (currentRepertoryFilter === 'favs' && !favs.includes(rep.obra)) return false;
-                if (currentRepertoryFilter === 'intro' && rep.uso !== 'Introdução') return false;
+                if (currentRepertoryFilter === 'intro' && !isIntro) return false;
                 return true;
             });
 
@@ -244,9 +245,10 @@ document.addEventListener('DOMContentLoaded', () => {
             let otherReps = [];
 
             repsToRender.forEach(rep => {
+                const isIntro = (rep.obra && rep.obra.includes('INTRODUÇÃO')) || (rep.uso && rep.uso.includes('Introdução'));
                 if (favs.includes(rep.obra)) {
                     favReps.push(rep);
-                } else if (rep.uso === 'Introdução') {
+                } else if (isIntro) {
                     introReps.push(rep);
                 } else {
                     otherReps.push(rep);
@@ -295,13 +297,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             };
 
-            if (currentRepertoryFilter === 'all') {
-                renderGroup('Meus Favoritos', favReps, '#fbbf24');
-                renderGroup('Para Introdução', introReps, 'var(--primary)');
-                renderGroup('Para Desenvolvimento / Coringas', otherReps, 'var(--text-main)');
-            } else {
-                renderGroup('Repertórios Filtrados', repsToRender, 'var(--primary)');
-            }
+            renderGroup('Meus Favoritos', favReps, '#fbbf24');
+            renderGroup('Para Introdução', introReps, 'var(--primary)');
+            renderGroup('Para Desenvolvimento / Coringas', otherReps, 'var(--text-main)');
+
             initFlashcards(repsToRender);
         } else if (eixo.topicos) {
             eixo.topicos.forEach(topico => {

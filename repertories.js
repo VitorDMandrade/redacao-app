@@ -495,7 +495,8 @@ const REPERTORIOS_COMPLETOS = [
         "resumo": "Desvela a intersecção entre o racismo institucional e o machismo estrutural na produção científica de ponta, evidenciando como a segregação espacial e o preconceito epistêmico operam barreiras que invisibilizam a capacidade intelectual de mulheres negras.",
         "uso": "Sub-representação de Minorias na Ciência: Barreiras históricas e simbólicas que restringem a presença de mulheres negras em posições de liderança e pesquisa acadêmica.; Segregação Espacial e Racismo Institucional: A demarcação física e protocolar de privilégios que naturaliza o tratamento desigual em instituições públicas e privadas.; Desvalorização Epistêmica: O descrédito preliminar direcionado à produção intelectual e científica de grupos historicamente subalternizados.; Ações Afirmativas e Democratização: A necessidade de políticas públicas reparatórias para mitigar disparidades históricas no acesso ao ensino superior de excelência.",
         "frase": "No longa-metragem 'Estrelas Além do Tempo', o cineasta norte-americano Theodore Melfi expõe a intersecção entre o racismo institucional e a opressão de gênero na produção científica, contexto no qual barreiras estruturais invisibilizam o protagonismo de mulheres negras. De maneira análoga à obra cinematográfica, o panorama hodierno de [TEMA] reitera essa dinâmica discriminatória, porquanto a omissão estatal no combate às assimetrias sociais perpetua a exclusão de grupos vulnerabilizados, com o consequente comprometimento da equidade social.",
-        "tipo": "intro"
+        "tipo": "intro",
+        "audio": "arquivos de audio para repertório/Estrelas alem do tempo.m4a"
     },
     {
         "obra": "KLEBER MENDONÇA FILHO",
@@ -543,7 +544,8 @@ const REPERTORIOS_COMPLETOS = [
         "resumo": "Retrata a história de um jovem do Malaui que, forçado a deixar a escola por falta de condições financeiras da família, recorre ao estudo autodidata em uma biblioteca local e constrói uma turbina eólica com materiais reciclados para produzir energia e irrigar as terras de sua comunidade. A obra evidencia a força emancipatória da educação, da ciência e da inovação no combate à fome, à seca e à extrema vulnerabilidade social.",
         "uso": "Evasão Escolar e Inacessibilidade Educacional: A carência econômica forçando o afastamento de jovens das salas de aula.; Valorização da Ciência e do Letramento: O acesso ao conhecimento científico e à leitura como vetores de transformação social e autonomia individual.; Insegurança Alimentar e Crises Climáticas: Os impactos de eventos climáticos extremos (como secas severas) sobre a subsistência de populações vulneráveis.; Negligência Estatal e Inovação Comunitária: A auto-organização de comunidades periféricas diante do abandono governamental em infraestrutura básica.",
         "frase": "Na produção cinematográfica 'O Menino que Descobriu o Vento', dirigida por Chiwetel Ejiofor, retrata-se a trajetória de um jovem que utiliza o conhecimento científico autodidata para erguer um moinho eólico, irrigar o solo e salvar sua comunidade da fome. De modo análogo à obra, a realidade brasileira reflete a gravidade de [TEMA], haja vista que a inoperância estatal em garantir o acesso universal à educação de qualidade e à inovação tecnológica priva populações marginalizadas de ferramentas essenciais para a superação de vulnerabilidades históricas.\"\n==================================================",
-        "tipo": "intro"
+        "tipo": "intro",
+        "audio": "arquivos de audio para repertório/O menino que descobriu o vento.m4a"
     },
     {
         "obra": "ALDOUS HUXLEY (DISTOPIA)",
@@ -583,7 +585,8 @@ const REPERTORIOS_COMPLETOS = [
         "resumo": "Retrata a desumanização do operário fabril tragado pela velocidade mecânica da linha de montagem e submetido à vigilância tirânica, demonstrando como a obsessão por produtividade trata o trabalhador como mera engrenagem substituível, culminando em colapso nervoso e alienação.",
         "uso": "Síndrome de Burnout e Esgotamento: A aceleração das rotinas laborais e a imposição de metas abusivas que ultrapassam os limites biológicos e psicológicos.; Precarização do Trabalho e Uberização: A transformação de trabalhadores em peças descartáveis de plataformas digitais sem direitos ou garantias.; Vigilância Corporativa e Controle: O monitoramento algorítmico do tempo de trabalho e a perda da autonomia individual.; Desumanização e Saúde Mental: A subordinação da dignidade humana e do bem-estar aos imperativos de eficiência do capital.",
         "frase": "No longa-metragem 'Tempos Modernos', o cineasta Charlie Chaplin retrata a desumanização do operário fabril, cujo esgotamento físico e mental decorre da subordinação aos imperativos de rendimento mecânico ininterrupto. Fora da ficção, verifica-se que [TEMA] reitera essa lógica predatória no Brasil hodierno, visto que a imposição de metas desumanizadas e a vigilância excessiva no ambiente profissional negligenciam a integridade do indivíduo, de modo a agravar o quadro de adoecimento psíquico coletivo.",
-        "tipo": "intro"
+        "tipo": "intro",
+        "audio": "arquivos de audio para repertório/Tempos modernos.m4a"
     },
     {
         "obra": "CHICO BUARQUE",
@@ -655,7 +658,8 @@ const REPERTORIOS_COMPLETOS = [
         "resumo": "Retrata o impacto transformador de uma pedagogia humanista e emancipatória que desafia a rigidez de currículos conteudistas e punitivos, estimulando a sensibilidade artística, a autonomia reflexiva e o pensamento crítico dos educandos.",
         "uso": "Rigidez Curricular e Metodologias Arcaicas: Ensino básico focado exclusivamente na decoreba e em testes padronizados sem espaço para inovação.; Educação Socioemocional e Pensamento Crítico: A urgência de formar cidadãos com equilíbrio emocional, empatia e capacidade analítica autônoma.; Saúde Mental no Meio Estudantil: Pressão excessiva por desempenho acadêmico e sufocamento das vocações e individualidades.; Valorização e Autonomia Docente: A relevância de conferir liberdade pedagógica ao professor como mediador cultural e transformador social.",
         "frase": "No consagrado longa-metragem 'Sociedade dos Poetas Mortos', o cineasta Peter Weir retrata o potencial emancipatório de uma pedagogia voltada ao estímulo do pensamento crítico e da sensibilidade, em oposição a métodos conteudistas e autoritários. Fora da ficção, a realidade educacional brasileira reflete a carência dessa abordagem no tocante a [TEMA], cenário no qual a imposição de práticas de ensino engessadas sufoca a criatividade e a autonomia dos estudantes, obstaculizando sua formação integral.",
-        "tipo": "intro"
+        "tipo": "intro",
+        "audio": "arquivos de audio para repertório/Sociedade dos poétas mortos.m4a"
     },
     {
         "obra": "PLATÃO (O MITO DA CAVERNA)",
@@ -719,7 +723,8 @@ const REPERTORIOS_COMPLETOS = [
         "resumo": "Desnuda a arquitetura comportamental predatória das plataformas digitais baseada na economia da atenção (\"se você não está pagando pelo produto, você é o produto\"), comprovando como o modelo de negócios das Big Techs é desenhado para alimentar o vício em dopamina, a polarização política e a disseminação viral de desinformação.",
         "uso": "Algoritmos de Engajamento e Polarização: Redes sociais desenhadas para privilegiar conteúdos radicais e de ódio com a finalidade de reter a atenção do usuário.; Proliferação de Fake News e Desinformação: A monetização e o impulsionamento de notícias falsas que geram alto engajamento em detrimento do debate público racional.; Vício Digital e Saúde Mental de Jovens: Mecanismos de recompensa intermitente (curtidas, notificações) gerando ansiedade crônica e dependência em telas.; Regulação das Big Techs: A necessidade de marcos regulatórios que responsabilizem as corporações de tecnologia pelos impactos sociais e políticos de suas plataformas.",
         "frase": "No consagrado documentário 'O Dilema das Redes', o cineasta Jeff Orlowski desvela o modelo de negócios predatório das plataformas digitais, evidenciando como a monetização da atenção dos usuários prioriza o engajamento baseado no conflito e na desinformação em detrimento da verdade. No contexto brasileiro hodierno, esse diagnóstico elucida os entraves em torno de [TEMA], haja vista que a ausência de regulação sobre os monopólios tecnológicos permite a manipulação sistemática da opinião pública, com o consequente enfraquecimento do tecido social e democrático.",
-        "tipo": "intro"
+        "tipo": "intro",
+        "audio": "arquivos de audio para repertório/O dilema das redes.m4a"
     },
     {
         "obra": "JODIE FOSTER (ARKANGEL / BLACK MIRROR)",
@@ -1005,7 +1010,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a história de um jovem do Malaui que, forçado a deixar a escola por falta de condições financeiras da família, recorre ao estudo autodidata em uma biblioteca local e constrói uma turbina eólica com materiais reciclados para produzir energia e irrigar as terras de sua comunidade. A obra evidencia a força emancipatória da educação, da ciência e da inovação no combate à fome, à seca e à extrema vulnerabilidade social.",
                 "uso": "Evasão Escolar e Inacessibilidade Educacional: A carência econômica forçando o afastamento de jovens das salas de aula.; Valorização da Ciência e do Letramento: O acesso ao conhecimento científico e à leitura como vetores de transformação social e autonomia individual.; Insegurança Alimentar e Crises Climáticas: Os impactos de eventos climáticos extremos (como secas severas) sobre a subsistência de populações vulneráveis.; Negligência Estatal e Inovação Comunitária: A auto-organização de comunidades periféricas diante do abandono governamental em infraestrutura básica.",
                 "frase": "Na produção cinematográfica 'O Menino que Descobriu o Vento', dirigida por Chiwetel Ejiofor, retrata-se a trajetória de um jovem que utiliza o conhecimento científico autodidata para erguer um moinho eólico, irrigar o solo e salvar sua comunidade da fome. De modo análogo à obra, a realidade brasileira reflete a gravidade de [TEMA], haja vista que a inoperância estatal em garantir o acesso universal à educação de qualidade e à inovação tecnológica priva populações marginalizadas de ferramentas essenciais para a superação de vulnerabilidades históricas.\"\n==================================================",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O menino que descobriu o vento.m4a"
             },
             {
                 "obra": "MILTON SANTOS",
@@ -1029,7 +1035,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a desumanização do operário fabril tragado pela velocidade mecânica da linha de montagem e submetido à vigilância tirânica, demonstrando como a obsessão por produtividade trata o trabalhador como mera engrenagem substituível, culminando em colapso nervoso e alienação.",
                 "uso": "Síndrome de Burnout e Esgotamento: A aceleração das rotinas laborais e a imposição de metas abusivas que ultrapassam os limites biológicos e psicológicos.; Precarização do Trabalho e Uberização: A transformação de trabalhadores em peças descartáveis de plataformas digitais sem direitos ou garantias.; Vigilância Corporativa e Controle: O monitoramento algorítmico do tempo de trabalho e a perda da autonomia individual.; Desumanização e Saúde Mental: A subordinação da dignidade humana e do bem-estar aos imperativos de eficiência do capital.",
                 "frase": "No longa-metragem 'Tempos Modernos', o cineasta Charlie Chaplin retrata a desumanização do operário fabril, cujo esgotamento físico e mental decorre da subordinação aos imperativos de rendimento mecânico ininterrupto. Fora da ficção, verifica-se que [TEMA] reitera essa lógica predatória no Brasil hodierno, visto que a imposição de metas desumanizadas e a vigilância excessiva no ambiente profissional negligenciam a integridade do indivíduo, de modo a agravar o quadro de adoecimento psíquico coletivo.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Tempos modernos.m4a"
             },
             {
                 "obra": "CHICO BUARQUE",
@@ -1077,7 +1084,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata o impacto transformador de uma pedagogia humanista e emancipatória que desafia a rigidez de currículos conteudistas e punitivos, estimulando a sensibilidade artística, a autonomia reflexiva e o pensamento crítico dos educandos.",
                 "uso": "Rigidez Curricular e Metodologias Arcaicas: Ensino básico focado exclusivamente na decoreba e em testes padronizados sem espaço para inovação.; Educação Socioemocional e Pensamento Crítico: A urgência de formar cidadãos com equilíbrio emocional, empatia e capacidade analítica autônoma.; Saúde Mental no Meio Estudantil: Pressão excessiva por desempenho acadêmico e sufocamento das vocações e individualidades.; Valorização e Autonomia Docente: A relevância de conferir liberdade pedagógica ao professor como mediador cultural e transformador social.",
                 "frase": "No consagrado longa-metragem 'Sociedade dos Poetas Mortos', o cineasta Peter Weir retrata o potencial emancipatório de uma pedagogia voltada ao estímulo do pensamento crítico e da sensibilidade, em oposição a métodos conteudistas e autoritários. Fora da ficção, a realidade educacional brasileira reflete a carência dessa abordagem no tocante a [TEMA], cenário no qual a imposição de práticas de ensino engessadas sufoca a criatividade e a autonomia dos estudantes, obstaculizando sua formação integral.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Sociedade dos poétas mortos.m4a"
             },
             {
                 "obra": "ALUÍSIO AZEVEDO (O MULATO)",
@@ -1101,7 +1109,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desnuda a arquitetura comportamental predatória das plataformas digitais baseada na economia da atenção (\"se você não está pagando pelo produto, você é o produto\"), comprovando como o modelo de negócios das Big Techs é desenhado para alimentar o vício em dopamina, a polarização política e a disseminação viral de desinformação.",
                 "uso": "Algoritmos de Engajamento e Polarização: Redes sociais desenhadas para privilegiar conteúdos radicais e de ódio com a finalidade de reter a atenção do usuário.; Proliferação de Fake News e Desinformação: A monetização e o impulsionamento de notícias falsas que geram alto engajamento em detrimento do debate público racional.; Vício Digital e Saúde Mental de Jovens: Mecanismos de recompensa intermitente (curtidas, notificações) gerando ansiedade crônica e dependência em telas.; Regulação das Big Techs: A necessidade de marcos regulatórios que responsabilizem as corporações de tecnologia pelos impactos sociais e políticos de suas plataformas.",
                 "frase": "No consagrado documentário 'O Dilema das Redes', o cineasta Jeff Orlowski desvela o modelo de negócios predatório das plataformas digitais, evidenciando como a monetização da atenção dos usuários prioriza o engajamento baseado no conflito e na desinformação em detrimento da verdade. No contexto brasileiro hodierno, esse diagnóstico elucida os entraves em torno de [TEMA], haja vista que a ausência de regulação sobre os monopólios tecnológicos permite a manipulação sistemática da opinião pública, com o consequente enfraquecimento do tecido social e democrático.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O dilema das redes.m4a"
             },
             {
                 "obra": "JODIE FOSTER (ARKANGEL / BLACK MIRROR)",
@@ -1321,7 +1330,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a história de um jovem do Malaui que, forçado a deixar a escola por falta de condições financeiras da família, recorre ao estudo autodidata em uma biblioteca local e constrói uma turbina eólica com materiais reciclados para produzir energia e irrigar as terras de sua comunidade. A obra evidencia a força emancipatória da educação, da ciência e da inovação no combate à fome, à seca e à extrema vulnerabilidade social.",
                 "uso": "Evasão Escolar e Inacessibilidade Educacional: A carência econômica forçando o afastamento de jovens das salas de aula.; Valorização da Ciência e do Letramento: O acesso ao conhecimento científico e à leitura como vetores de transformação social e autonomia individual.; Insegurança Alimentar e Crises Climáticas: Os impactos de eventos climáticos extremos (como secas severas) sobre a subsistência de populações vulneráveis.; Negligência Estatal e Inovação Comunitária: A auto-organização de comunidades periféricas diante do abandono governamental em infraestrutura básica.",
                 "frase": "Na produção cinematográfica 'O Menino que Descobriu o Vento', dirigida por Chiwetel Ejiofor, retrata-se a trajetória de um jovem que utiliza o conhecimento científico autodidata para erguer um moinho eólico, irrigar o solo e salvar sua comunidade da fome. De modo análogo à obra, a realidade brasileira reflete a gravidade de [TEMA], haja vista que a inoperância estatal em garantir o acesso universal à educação de qualidade e à inovação tecnológica priva populações marginalizadas de ferramentas essenciais para a superação de vulnerabilidades históricas.\"\n==================================================",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O menino que descobriu o vento.m4a"
             },
             {
                 "obra": "CHICO BUARQUE",
@@ -1819,7 +1829,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desvela a intersecção entre o racismo institucional e o machismo estrutural na produção científica de ponta, evidenciando como a segregação espacial e o preconceito epistêmico operam barreiras que invisibilizam a capacidade intelectual de mulheres negras.",
                 "uso": "Sub-representação de Minorias na Ciência: Barreiras históricas e simbólicas que restringem a presença de mulheres negras em posições de liderança e pesquisa acadêmica.; Segregação Espacial e Racismo Institucional: A demarcação física e protocolar de privilégios que naturaliza o tratamento desigual em instituições públicas e privadas.; Desvalorização Epistêmica: O descrédito preliminar direcionado à produção intelectual e científica de grupos historicamente subalternizados.; Ações Afirmativas e Democratização: A necessidade de políticas públicas reparatórias para mitigar disparidades históricas no acesso ao ensino superior de excelência.",
                 "frase": "No longa-metragem 'Estrelas Além do Tempo', o cineasta norte-americano Theodore Melfi expõe a intersecção entre o racismo institucional e a opressão de gênero na produção científica, contexto no qual barreiras estruturais invisibilizam o protagonismo de mulheres negras. De maneira análoga à obra cinematográfica, o panorama hodierno de [TEMA] reitera essa dinâmica discriminatória, porquanto a omissão estatal no combate às assimetrias sociais perpetua a exclusão de grupos vulnerabilizados, com o consequente comprometimento da equidade social.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Estrelas alem do tempo.m4a"
             },
             {
                 "obra": "ALBERT BANDURA",
@@ -1835,7 +1846,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a história de um jovem do Malaui que, forçado a deixar a escola por falta de condições financeiras da família, recorre ao estudo autodidata em uma biblioteca local e constrói uma turbina eólica com materiais reciclados para produzir energia e irrigar as terras de sua comunidade. A obra evidencia a força emancipatória da educação, da ciência e da inovação no combate à fome, à seca e à extrema vulnerabilidade social.",
                 "uso": "Evasão Escolar e Inacessibilidade Educacional: A carência econômica forçando o afastamento de jovens das salas de aula.; Valorização da Ciência e do Letramento: O acesso ao conhecimento científico e à leitura como vetores de transformação social e autonomia individual.; Insegurança Alimentar e Crises Climáticas: Os impactos de eventos climáticos extremos (como secas severas) sobre a subsistência de populações vulneráveis.; Negligência Estatal e Inovação Comunitária: A auto-organização de comunidades periféricas diante do abandono governamental em infraestrutura básica.",
                 "frase": "Na produção cinematográfica 'O Menino que Descobriu o Vento', dirigida por Chiwetel Ejiofor, retrata-se a trajetória de um jovem que utiliza o conhecimento científico autodidata para erguer um moinho eólico, irrigar o solo e salvar sua comunidade da fome. De modo análogo à obra, a realidade brasileira reflete a gravidade de [TEMA], haja vista que a inoperância estatal em garantir o acesso universal à educação de qualidade e à inovação tecnológica priva populações marginalizadas de ferramentas essenciais para a superação de vulnerabilidades históricas.\"\n==================================================",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O menino que descobriu o vento.m4a"
             },
             {
                 "obra": "MILTON SANTOS",
@@ -1867,7 +1879,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata o impacto transformador de uma pedagogia humanista e emancipatória que desafia a rigidez de currículos conteudistas e punitivos, estimulando a sensibilidade artística, a autonomia reflexiva e o pensamento crítico dos educandos.",
                 "uso": "Rigidez Curricular e Metodologias Arcaicas: Ensino básico focado exclusivamente na decoreba e em testes padronizados sem espaço para inovação.; Educação Socioemocional e Pensamento Crítico: A urgência de formar cidadãos com equilíbrio emocional, empatia e capacidade analítica autônoma.; Saúde Mental no Meio Estudantil: Pressão excessiva por desempenho acadêmico e sufocamento das vocações e individualidades.; Valorização e Autonomia Docente: A relevância de conferir liberdade pedagógica ao professor como mediador cultural e transformador social.",
                 "frase": "No consagrado longa-metragem 'Sociedade dos Poetas Mortos', o cineasta Peter Weir retrata o potencial emancipatório de uma pedagogia voltada ao estímulo do pensamento crítico e da sensibilidade, em oposição a métodos conteudistas e autoritários. Fora da ficção, a realidade educacional brasileira reflete a carência dessa abordagem no tocante a [TEMA], cenário no qual a imposição de práticas de ensino engessadas sufoca a criatividade e a autonomia dos estudantes, obstaculizando sua formação integral.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Sociedade dos poétas mortos.m4a"
             },
             {
                 "obra": "PLATÃO (O MITO DA CAVERNA)",
@@ -2112,7 +2125,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desvela a intersecção entre o racismo institucional e o machismo estrutural na produção científica de ponta, evidenciando como a segregação espacial e o preconceito epistêmico operam barreiras que invisibilizam a capacidade intelectual de mulheres negras.",
                 "uso": "Sub-representação de Minorias na Ciência: Barreiras históricas e simbólicas que restringem a presença de mulheres negras em posições de liderança e pesquisa acadêmica.; Segregação Espacial e Racismo Institucional: A demarcação física e protocolar de privilégios que naturaliza o tratamento desigual em instituições públicas e privadas.; Desvalorização Epistêmica: O descrédito preliminar direcionado à produção intelectual e científica de grupos historicamente subalternizados.; Ações Afirmativas e Democratização: A necessidade de políticas públicas reparatórias para mitigar disparidades históricas no acesso ao ensino superior de excelência.",
                 "frase": "No longa-metragem 'Estrelas Além do Tempo', o cineasta norte-americano Theodore Melfi expõe a intersecção entre o racismo institucional e a opressão de gênero na produção científica, contexto no qual barreiras estruturais invisibilizam o protagonismo de mulheres negras. De maneira análoga à obra cinematográfica, o panorama hodierno de [TEMA] reitera essa dinâmica discriminatória, porquanto a omissão estatal no combate às assimetrias sociais perpetua a exclusão de grupos vulnerabilizados, com o consequente comprometimento da equidade social.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Estrelas alem do tempo.m4a"
             },
             {
                 "obra": "KLEBER MENDONÇA FILHO",
@@ -2136,7 +2150,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a história de um jovem do Malaui que, forçado a deixar a escola por falta de condições financeiras da família, recorre ao estudo autodidata em uma biblioteca local e constrói uma turbina eólica com materiais reciclados para produzir energia e irrigar as terras de sua comunidade. A obra evidencia a força emancipatória da educação, da ciência e da inovação no combate à fome, à seca e à extrema vulnerabilidade social.",
                 "uso": "Evasão Escolar e Inacessibilidade Educacional: A carência econômica forçando o afastamento de jovens das salas de aula.; Valorização da Ciência e do Letramento: O acesso ao conhecimento científico e à leitura como vetores de transformação social e autonomia individual.; Insegurança Alimentar e Crises Climáticas: Os impactos de eventos climáticos extremos (como secas severas) sobre a subsistência de populações vulneráveis.; Negligência Estatal e Inovação Comunitária: A auto-organização de comunidades periféricas diante do abandono governamental em infraestrutura básica.",
                 "frase": "Na produção cinematográfica 'O Menino que Descobriu o Vento', dirigida por Chiwetel Ejiofor, retrata-se a trajetória de um jovem que utiliza o conhecimento científico autodidata para erguer um moinho eólico, irrigar o solo e salvar sua comunidade da fome. De modo análogo à obra, a realidade brasileira reflete a gravidade de [TEMA], haja vista que a inoperância estatal em garantir o acesso universal à educação de qualidade e à inovação tecnológica priva populações marginalizadas de ferramentas essenciais para a superação de vulnerabilidades históricas.\"\n==================================================",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O menino que descobriu o vento.m4a"
             },
             {
                 "obra": "MILTON SANTOS",
@@ -2479,7 +2494,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desnuda a arquitetura comportamental predatória das plataformas digitais baseada na economia da atenção (\"se você não está pagando pelo produto, você é o produto\"), comprovando como o modelo de negócios das Big Techs é desenhado para alimentar o vício em dopamina, a polarização política e a disseminação viral de desinformação.",
                 "uso": "Algoritmos de Engajamento e Polarização: Redes sociais desenhadas para privilegiar conteúdos radicais e de ódio com a finalidade de reter a atenção do usuário.; Proliferação de Fake News e Desinformação: A monetização e o impulsionamento de notícias falsas que geram alto engajamento em detrimento do debate público racional.; Vício Digital e Saúde Mental de Jovens: Mecanismos de recompensa intermitente (curtidas, notificações) gerando ansiedade crônica e dependência em telas.; Regulação das Big Techs: A necessidade de marcos regulatórios que responsabilizem as corporações de tecnologia pelos impactos sociais e políticos de suas plataformas.",
                 "frase": "No consagrado documentário 'O Dilema das Redes', o cineasta Jeff Orlowski desvela o modelo de negócios predatório das plataformas digitais, evidenciando como a monetização da atenção dos usuários prioriza o engajamento baseado no conflito e na desinformação em detrimento da verdade. No contexto brasileiro hodierno, esse diagnóstico elucida os entraves em torno de [TEMA], haja vista que a ausência de regulação sobre os monopólios tecnológicos permite a manipulação sistemática da opinião pública, com o consequente enfraquecimento do tecido social e democrático.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O dilema das redes.m4a"
             },
             {
                 "obra": "JODIE FOSTER (ARKANGEL / BLACK MIRROR)",
@@ -2795,7 +2811,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desvela a intersecção entre o racismo institucional e o machismo estrutural na produção científica de ponta, evidenciando como a segregação espacial e o preconceito epistêmico operam barreiras que invisibilizam a capacidade intelectual de mulheres negras.",
                 "uso": "Sub-representação de Minorias na Ciência: Barreiras históricas e simbólicas que restringem a presença de mulheres negras em posições de liderança e pesquisa acadêmica.; Segregação Espacial e Racismo Institucional: A demarcação física e protocolar de privilégios que naturaliza o tratamento desigual em instituições públicas e privadas.; Desvalorização Epistêmica: O descrédito preliminar direcionado à produção intelectual e científica de grupos historicamente subalternizados.; Ações Afirmativas e Democratização: A necessidade de políticas públicas reparatórias para mitigar disparidades históricas no acesso ao ensino superior de excelência.",
                 "frase": "No longa-metragem 'Estrelas Além do Tempo', o cineasta norte-americano Theodore Melfi expõe a intersecção entre o racismo institucional e a opressão de gênero na produção científica, contexto no qual barreiras estruturais invisibilizam o protagonismo de mulheres negras. De maneira análoga à obra cinematográfica, o panorama hodierno de [TEMA] reitera essa dinâmica discriminatória, porquanto a omissão estatal no combate às assimetrias sociais perpetua a exclusão de grupos vulnerabilizados, com o consequente comprometimento da equidade social.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Estrelas alem do tempo.m4a"
             },
             {
                 "obra": "KLEBER MENDONÇA FILHO",
@@ -2851,7 +2868,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Retrata a desumanização do operário fabril tragado pela velocidade mecânica da linha de montagem e submetido à vigilância tirânica, demonstrando como a obsessão por produtividade trata o trabalhador como mera engrenagem substituível, culminando em colapso nervoso e alienação.",
                 "uso": "Síndrome de Burnout e Esgotamento: A aceleração das rotinas laborais e a imposição de metas abusivas que ultrapassam os limites biológicos e psicológicos.; Precarização do Trabalho e Uberização: A transformação de trabalhadores em peças descartáveis de plataformas digitais sem direitos ou garantias.; Vigilância Corporativa e Controle: O monitoramento algorítmico do tempo de trabalho e a perda da autonomia individual.; Desumanização e Saúde Mental: A subordinação da dignidade humana e do bem-estar aos imperativos de eficiência do capital.",
                 "frase": "No longa-metragem 'Tempos Modernos', o cineasta Charlie Chaplin retrata a desumanização do operário fabril, cujo esgotamento físico e mental decorre da subordinação aos imperativos de rendimento mecânico ininterrupto. Fora da ficção, verifica-se que [TEMA] reitera essa lógica predatória no Brasil hodierno, visto que a imposição de metas desumanizadas e a vigilância excessiva no ambiente profissional negligenciam a integridade do indivíduo, de modo a agravar o quadro de adoecimento psíquico coletivo.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/Tempos modernos.m4a"
             },
             {
                 "obra": "JORGE AMADO",
@@ -2939,7 +2957,8 @@ const REPERTORIOS_MAPEADOS = [
                 "resumo": "Desnuda a arquitetura comportamental predatória das plataformas digitais baseada na economia da atenção (\"se você não está pagando pelo produto, você é o produto\"), comprovando como o modelo de negócios das Big Techs é desenhado para alimentar o vício em dopamina, a polarização política e a disseminação viral de desinformação.",
                 "uso": "Algoritmos de Engajamento e Polarização: Redes sociais desenhadas para privilegiar conteúdos radicais e de ódio com a finalidade de reter a atenção do usuário.; Proliferação de Fake News e Desinformação: A monetização e o impulsionamento de notícias falsas que geram alto engajamento em detrimento do debate público racional.; Vício Digital e Saúde Mental de Jovens: Mecanismos de recompensa intermitente (curtidas, notificações) gerando ansiedade crônica e dependência em telas.; Regulação das Big Techs: A necessidade de marcos regulatórios que responsabilizem as corporações de tecnologia pelos impactos sociais e políticos de suas plataformas.",
                 "frase": "No consagrado documentário 'O Dilema das Redes', o cineasta Jeff Orlowski desvela o modelo de negócios predatório das plataformas digitais, evidenciando como a monetização da atenção dos usuários prioriza o engajamento baseado no conflito e na desinformação em detrimento da verdade. No contexto brasileiro hodierno, esse diagnóstico elucida os entraves em torno de [TEMA], haja vista que a ausência de regulação sobre os monopólios tecnológicos permite a manipulação sistemática da opinião pública, com o consequente enfraquecimento do tecido social e democrático.",
-                "tipo": "intro"
+                "tipo": "intro",
+                "audio": "arquivos de audio para repertório/O dilema das redes.m4a"
             },
             {
                 "obra": "GRACILIANO RAMOS (VIDAS SECAS)",

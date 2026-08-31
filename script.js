@@ -271,12 +271,9 @@ document.addEventListener('DOMContentLoaded', () => {
             let favs = JSON.parse(localStorage.getItem('redacao_favorite_repertories') || '[]');
             
             let repsToRender = eixo.repertorios.filter(rep => {
-                const introKeywords = ['INTRODUÇÃO', 'CINEMA', 'SÉRIE', 'ANIMAÇÃO', 'DOCUMENTÁRIO', 'FILME', 'MÚSICA', 'FICÇÃO', 'ROMANCE'];
-                const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
-                
                 if (showFavoritesOnly && !favs.includes(rep.obra)) return false;
-                if (currentRepertoryFilter === 'intro' && !isIntro) return false;
-                if (currentRepertoryFilter === 'dev' && isIntro) return false;
+                if (currentRepertoryFilter === 'intro' && rep.tipo !== 'intro') return false;
+                if (currentRepertoryFilter === 'dev' && rep.tipo === 'intro') return false;
                 
                 if (currentRepertorySearch) {
                     const searchable = `${rep.obra} ${rep.autor} ${rep.resumo} ${rep.uso || ''} ${rep.frase}`.toLowerCase();

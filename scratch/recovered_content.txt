@@ -1,0 +1,209 @@
+﻿Created At: 2026-08-29T00:11:00-03:00
+Completed At: 2026-08-29T00:11:00-03:00
+File Path: `file:///c:/Users/Vitor/REDA%C3%87%C3%83O/script.js`
+Total Lines: 1235
+Total Bytes: 64679
+Showing lines 1 to 200
+The following code has been modified to include a line number before every line, in the format: <line_number>: <original_line>. Please note that any changes targeting the original code should remove the line number, colon, and leading space.
+1: document.addEventListener('DOMContentLoaded', () => {
+2:     const essayInput = document.getElementById('essay');
+3:     const wordCountVal = document.getElementById('word-count-val');
+4:     const analyzeBtn = document.getElementById('analyze-btn');
+5:     const clearBtn = document.getElementById('clear-btn');
+6:     const backBtn = document.getElementById('back-btn');
+7: 
+8:     const writeView = document.getElementById('write-view');
+9:     const resultView = document.getElementById('result-view');
+10:     const themeInput = document.getElementById('theme');
+11:     const themeDisplay = document.getElementById('theme-display');
+12:     const correctedText = document.getElementById('corrected-text');
+13: 
+14:     const tooltip = document.getElementById('error-tooltip');
+15:     const tooltipOriginal = document.getElementById('tooltip-original');
+16:     const tooltipSuggestion = document.getElementById('tooltip-suggestion');
+17:     const tooltipExplanation = document.getElementById('tooltip-explanation');
+18:     const tooltipHeader = document.querySelector('.tooltip-header');
+19: 
+20:     // Elementos da Banca
+21:     const bancaSelect = document.getElementById('banca-select');
+22:     const generoContainer = document.getElementById('genero-container');
+23:     const generoSelect = document.getElementById('genero-select');
+24:     const titleContainer = document.getElementById('title-container');
+25:     const titleStatus = document.getElementById('title-status');
+26:     const essayTitle = document.getElementById('essay-title');
+27:     const navButtons = document.querySelectorAll('.nav-btn');
+28:     const finalScoreValue = document.getElementById('final-score-value');
+29:     const finalScoreMax = document.getElementById('final-score-max');
+30:     const competenciesContainer = document.getElementById('competencies-container');
+31:     const resumoPraticoText = document.getElementById('resumo-pratico-text');
+32:     const axisSelector = document.getElementById('axis-selector');
+33:     const currentAxisTitle = document.getElementById('current-axis-title');
+34:     const repertoryList = document.getElementById('repertory-list');
+35: 
+36:     let currentBanca = BANCAS['ENEM']; // Default
+37: 
+38:     function updateBancaUI() {
+39:         currentBanca = BANCAS[bancaSelect.value];
+40: 
+41:         // Atualiza GÃªnero
+42:         if (currentBanca.generosPermitidos && currentBanca.generosPermitidos.includes('carta')) {
+43:             generoContainer.style.display = 'block';
+44:         } else {
+45:             generoContainer.style.display = 'none';
+46:             generoSelect.value = 'dissertativo';
+47:         }
+48: 
+49:         const selectedGenero = generoSelect.value;
+50: 
+51:         // Atualiza TÃ­tulo
+52:         if (selectedGenero === 'carta') {
+53:             titleContainer.style.display = 'none';
+54:         } else {
+55:             titleContainer.style.display = 'block';
+56:             if (currentBanca.exigeTitulo) {
+57:                 titleStatus.textContent = "(ObrigatÃ³rio)";
+58:                 titleStatus.style.color = "var(--danger)";
+59:             } else {
+60:                 titleStatus.textContent = "(Opcional)";
+61:                 titleStatus.style.color = "var(--text-muted)";
+62:             }
+63:         }
+64: 
+65:         // Atualiza Resumo PrÃ¡tico
+66:         resumoPraticoText.textContent = currentBanca.resumoPratico || "";
+67: 
+68:         // Atualiza Labels dos botÃµes de navegaÃ§Ã£o
+69:         navButtons.forEach(btn => {
+70:             if (btn.dataset.mode === 'training') btn.textContent = currentBanca.labelTreino || "Treino por Partes";
+71:             if (btn.dataset.mode === 'full') btn.textContent = currentBanca.labelFolha || "Folha de RedaÃ§Ã£o";
+72:         });
+73: 
+74:         // Atualiza Aba de Treino por Partes
+75:         if (selectedGenero === 'carta') {
+76:             document.getElementById('train-title-1').textContent = "1. CabeÃ§alho, Vocativo e IntroduÃ§Ã£o";
+77:             document.getElementById('train-hint-1').textContent = "Local, data, vocativo respeitoso e apresentaÃ§Ã£o do tema ao leitor/veÃ­culo.";
+78:             document.getElementById('train-title-2').textContent = "2. ArgumentaÃ§Ã£o (DiÃ¡logo com VeÃ­culo)";
+79:             document.getElementById('train-hint-2').textContent = "Apresente o argumento dialogando diretamente com a revista/jornal ou autor da matÃ©ria.";
+80:             document.getElementById('train-title-3').textContent = "3. Aprofundamento CrÃ­tico";
+81:             document.getElementById('train-hint-3').textContent = "Traga uma consequÃªncia ou repertÃ³rio produtivo e posicione-se criticamente.";
+82:             document.getElementById('train-title-4').textContent = "4. ConclusÃ£o, Despedida e Assinatura";
+83:             document.getElementById('train-hint-4').textContent = "ReflexÃ£o final, despedida formal e assinatura neutra (Ex: Um(a) leitor(a)).";
+84:         } else {
+85:             document.getElementById('train-title-1').textContent = "1. IntroduÃ§Ã£o";
+86:             document.getElementById('train-hint-1').textContent = "Apresente o tema e sua tese (ponto de vista).";
+87:             document.getElementById('train-title-2').textContent = "2. Desenvolvimento 1";
+88:             document.getElementById('train-hint-2').textContent = "Apresente o primeiro argumento e repertÃ³rio sociocultural.";
+89:             document.getElementById('train-title-3').textContent = "3. Desenvolvimento 2";
+90:             document.getElementById('train-hint-3').textContent = "Apresente o segundo argumento e aprofunde a discussÃ£o.";
+91:             document.getElementById('train-title-4').textContent = "4. ConclusÃ£o";
+92:             document.getElementById('train-hint-4').textContent = "Retome a tese e elabore a proposta de intervenÃ§Ã£o ou sÃ­ntese conclusiva.";
+93:         }
+94: 
+95:         // Renderiza Eixos TemÃ¡ticos
+96:         renderEixos();
+97:     }
+98: 
+99:     // Navigation Logic
+100:     navButtons.forEach(btn => {
+101:         btn.addEventListener('click', () => {
+102:             const targetView = document.getElementById(`${btn.dataset.mode}-view`);
+103:             switchMode(btn, targetView);
+104:         });
+105:     });
+106: 
+107:     bancaSelect.addEventListener('change', updateBancaUI);
+108:     generoSelect.addEventListener('change', updateBancaUI);
+109:     updateBancaUI(); // initial call
+110: 
+111:     // Mode Toggle
+112:     const btnModeFull = document.getElementById('btn-mode-full');
+113:     const btnModeTraining = document.getElementById('btn-mode-training');
+114:     const btnModeRepertory = document.getElementById('btn-mode-repertory');
+115:     const btnModeGrammar = document.getElementById('btn-mode-grammar');
+116: 
+117:     const trainingView = document.getElementById('training-view');
+118:     const repertoryView = document.getElementById('repertory-view');
+119:     const grammarView = document.getElementById('grammar-view');
+120: 
+121:     const analyzeTrainingBtn = document.getElementById('analyze-training-btn');
+122: 
+123:     let lastActiveView = writeView; // Track the last view before result
+124: 
+125:     function switchMode(activeBtn, activeView) {
+126:         [btnModeFull, btnModeTraining, btnModeRepertory, btnModeGrammar].forEach(btn => btn.classList.remove('active'));
+127:         [writeView, trainingView, repertoryView, grammarView, resultView].forEach(view => view.classList.add('hidden'));
+128: 
+129:         activeBtn.classList.add('active');
+130:         activeView.classList.remove('hidden');
+131:         lastActiveView = activeView;
+132:     }
+133: 
+134:     btnModeFull.addEventListener('click', () => switchMode(btnModeFull, writeView));
+135:     btnModeTraining.addEventListener('click', () => switchMode(btnModeTraining, trainingView));
+136:     btnModeRepertory.addEventListener('click', () => switchMode(btnModeRepertory, repertoryView));
+137:     btnModeGrammar.addEventListener('click', () => switchMode(btnModeGrammar, grammarView));
+138: 
+139:     // Reiniciar PÃ¡gina
+140:     const btnResetPage = document.getElementById('btn-reset-page');
+141:     if (btnResetPage) {
+142:         btnResetPage.addEventListener('click', () => {
+143:             if (confirm("Tem certeza que deseja apagar todo o conteÃºdo de TODAS as abas e recomeÃ§ar?")) {
+144:                 // Clear Full
+145:                 essayInput.value = '';
+146:                 themeInput.value = '';
+147:                 essayTitle.value = '';
+148:                 wordCountVal.textContent = '0';
+149: 
+150:                 // Clear Training Textareas
+151:                 document.querySelectorAll('.training-textarea').forEach(t => t.value = '');
+152: 
+153:                 // Clear Timers (Mock reset, real implementation depends on timer logic)
+154:                 document.querySelectorAll('.training-timer-display').forEach(d => d.textContent = '00:00');
+155: 
+156:                 // Switch back to Full Mode
+157:                 btnModeFull.click();
+158:             }
+159:         });
+160:     }
+161: 
+162:     // Removida configuraÃ§Ã£o de API Key e chamadas da antiga callGeminiAPI
+163: 
+164:     // Renderiza Eixos TemÃ¡ticos
+165:     function renderEixos() {
+166:         axisSelector.innerHTML = '';
+167:         repertoryList.innerHTML = '';
+168:         currentAxisTitle.textContent = 'Selecione um eixo';
+169: 
+170:         if (!currentBanca.eixosTematicos) return;
+171: 
+172:         currentBanca.eixosTematicos.forEach((eixo, index) => {
+173:             const btn = document.createElement('button');
+174:             btn.className = 'axis-btn';
+175:             btn.textContent = eixo.nome;
+176:             if (index === 0) btn.classList.add('active'); // O primeiro fica ativo por padrÃ£o
+177: 
+178:             btn.addEventListener('click', () => {
+179:                 document.querySelectorAll('.axis-btn').forEach(b => b.classList.remove('active'));
+180:                 btn.classList.add('active');
+181:                 mostrarEixo(eixo);
+182:             });
+183: 
+184:             axisSelector.appendChild(btn);
+185:         });
+186: 
+187:         // Mostra o primeiro eixo automaticamente
+188:         if (currentBanca.eixosTematicos.length > 0) {
+189:             mostrarEixo(currentBanca.eixosTematicos[0]);
+190:         }
+191:     }
+192: 
+193:     function mostrarEixo(eixo) {
+194:         currentAxisTitle.textContent = `Eixo: ${eixo.nome}`;
+195:         repertoryList.innerHTML = '';
+196: 
+197:         eixo.topicos.forEach(topico => {
+198:             const item = document.createElement('div');
+199:             item.className = 'repertory-item';
+200: 
+The above content does NOT show the entire file contents. If you need to view any lines of the file which were not shown to complete your task, call this tool again to view those lines.
+

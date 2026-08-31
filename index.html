@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Correção de Redações</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="bancas.js"></script>
+    <script src="prompt.js"></script>
+    <script src="repertories.js"></script>
+    <script src="grammar_exercises.js"></script>
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header class="header">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h1>Simulador de Redação</h1>
+            </div>
+            <p>Escreva na folha oficial e receba a correção interativa da Inteligência Artificial.</p>
+            <div class="selectors-container"
+                style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+                <div class="banca-selector-container">
+                    <label for="banca-select" style="font-weight: 500;">Banca Examinadora:</label>
+                    <select id="banca-select"
+                        style="padding: 0.5rem; border-radius: 4px; border: 1px solid var(--panel-border); background: var(--panel-bg); color: var(--text-color); margin-left: 0.5rem; font-family: 'Inter', sans-serif;">
+                        <option value="ENEM">ENEM</option>
+                        <option value="UEMA">UEMA (PAES)</option>
+                        <option value="EXATO_DISSERTATIVO">Exato (UFT/UFNT) - Dissertativo</option>
+                        <option value="EXATO_CARTA">Exato (UFT/UFNT) - Carta Argumentativa</option>
+                        <option value="UFG">UFG (Instituto Verbena)</option>
+                        <option value="UNITINS">UNITINS</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navegação de Modos -->
+        <div class="mode-toggle">
+            <div>
+                <button class="mode-btn active" id="btn-mode-full">Simulado Oficial</button>
+                <button class="mode-btn" id="btn-mode-training">Treino por Partes</button>
+                <button class="mode-btn" id="btn-mode-repertory">Treino de Repertório</button>
+                <button class="mode-btn" id="btn-mode-grammar">Treino Gramatical</button>
+                <button class="mode-btn" id="btn-mode-model">Meu Modelo</button>
+            </div>
+            <button class="btn btn-secondary btn-sm" id="btn-reset-page"
+                style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"
+                    style="margin-right: 4px; display: inline-block; vertical-align: middle;">
+                    <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"></path>
+                    <path d="M3 3v5h5"></path>
+                </svg>
+                Reiniciar Tela
+            </button>
+        </div>
+
+        <!-- View de Escrita Completa -->
+        <div class="app-layout" id="write-view">
+            <section class="paper-section">
+                <div class="mode-valendo-container"
+                    style="display: flex; justify-content: center; gap: 1rem; align-items: center; margin-bottom: 1.5rem;">
+                    <button class="btn btn-secondary active" id="btn-free-mode"
+                        style="background: var(--primary); color: #fff; border-color: var(--primary);">Modo
+                        Livre</button>
+                    <button class="btn btn-secondary" id="btn-timer-mode"
+                        style="border-color: var(--danger); color: var(--danger);">Modo Valendo (1h 30m)</button>
+                    <div id="simulado-timer-display"
+                        style="display: none; font-size: 1.5rem; font-weight: bold; color: var(--danger); font-variant-numeric: tabular-nums;">
+                        01:30:00</div>
+                    <button class="btn btn-primary" id="btn-start-simulado"
+                        style="display: none; background-color: var(--danger); border-color: var(--danger);">Iniciar
+                        Simulado</button>
+                </div>
+                <div class="paper-wrapper">
+                    <div class="paper-header">
+                        <h2>Folha de Redação</h2>
+                        <div class="actions">
+                            <button class="btn btn-secondary" id="clear-btn">Nova Redação</button>
+                        </div>
+                    </div>
+
+                    <div class="theme-field-container">
+                        <label for="theme">Tema da Redação:</label>
+                        <input type="text" id="theme" placeholder="Digite o tema proposto aqui...">
+                    </div>
+                    <div class="theme-field-container title-field-container" id="title-container"
+                        style="margin-top: 0.5rem;">
+                        <label for="essay-title">Título <span id="title-status"
+                                style="font-size: 0.8em; color: var(--text-muted);">(Opcional)</span>:</label>
+                        <input type="text" id="essay-title"
+                            placeholder="Digite o título da redação (se a banca exigir)...">
+                    </div>
+
+                    <div class="resumo-pratico-container" id="resumo-pratico-container"
+                        style="margin: 1rem 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--primary); border-radius: 4px; font-size: 0.9rem;">
+                        <strong>Resumo Estratégico:</strong> <span id="resumo-pratico-text">Priorize a construção de
+                            propostas de intervenção detalhadas e repertórios coringa legítimos focados em Meio
+                            Ambiente, Tecnologia e Inclusão Social.</span>
+                    </div>
+
+                    <div class="paper-container">
+                        <div class="paper-margin"></div>
+                        <div class="paper-lines-container">
+                            <div class="textarea-wrapper">
+                                <div class="line-numbers" id="line-numbers"></div>
+                                <textarea id="essay" placeholder="Escreva sua redação aqui..."
+                                    spellcheck="false"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-area">
+                    <div class="word-count">Palavras: <span id="word-count-val">0</span></div>
+                    <button class="btn btn-secondary" id="copy-prompt-btn"
+                        style="border-color: var(--primary); color: var(--primary); display: flex; align-items: center; gap: 0.5rem; width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">
+                        <span>Modo Copiador Inteligente (Grátis via Advanced)</span>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- View de Treinamento por Partes -->
+        <div class="app-layout hidden" id="training-view">
+            <section class="training-section">
+
+                <div class="mode-toggle-container"
+                    style="margin-bottom: 1rem; display: flex; justify-content: center; gap: 1rem;">
+                    <button class="btn btn-secondary active" id="btn-mode-avaliacao"
+                        style="background: var(--primary); color: #fff; border-color: var(--primary);">Modo
+                        Avaliação</button>
+                    <button class="btn btn-secondary" id="btn-mode-tutorial">Modo Tutorial (Passo a Passo)</button>
+                </div>
+
+                <!-- AVALIAÇÃO COMPLETA -->
+                <div id="training-avaliacao-container">
+                    <div class="training-cards">
+                        <!-- Introdução -->
+                        <div class="training-card">
+                            <div class="card-header"
+                                style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 id="train-title-1">1. Introdução</h3>
+                                    <span class="hint" id="train-hint-1">Apresente o tema e sua tese (ponto de
+                                        vista).</span>
+                                </div>
+                                <div class="part-timer" style="text-align: right;">
+                                    <div style="font-size: 1.1rem; font-weight: bold; color: var(--warning); font-variant-numeric: tabular-nums;"
+                                        id="timer-display-1" data-duration="900">15:00</div>
+                                </div>
+                            </div>
+                            <textarea class="training-textarea" id="textarea-part-1"
+                                placeholder="Escreva sua introdução aqui..."></textarea>
+                            <button class="btn btn-secondary btn-analyze-part" data-part="1"
+                                style="width: 100%; border-radius: 0 0 4px 4px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid var(--primary); border-top: none;">
+                                <span>Copiador Inteligente: Avaliar Introdução</span>
+                            </button>
+                            <div id="feedback-part-1"></div>
+                        </div>
+
+                        <!-- Desenvolvimento 1 -->
+                        <div class="training-card">
+                            <div class="card-header"
+                                style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 id="train-title-2">2. Desenvolvimento 1</h3>
+                                    <span class="hint" id="train-hint-2">Apresente o primeiro argumento e repertório
+                                        sociocultural.</span>
+                                </div>
+                                <div class="part-timer" style="text-align: right;">
+                                    <div style="font-size: 1.1rem; font-weight: bold; color: var(--warning); font-variant-numeric: tabular-nums;"
+                                        id="timer-display-2" data-duration="1200">20:00</div>
+                                </div>
+                            </div>
+                            <textarea class="training-textarea" id="textarea-part-2"
+                                placeholder="Escreva seu primeiro desenvolvimento aqui..."></textarea>
+                            <button class="btn btn-secondary btn-analyze-part" data-part="2"
+                                style="width: 100%; border-radius: 0 0 4px 4px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid var(--primary); border-top: none;">
+                                <span>Copiador Inteligente: Avaliar Desenv. 1</span>
+                            </button>
+                            <div id="feedback-part-2"></div>
+                        </div>
+
+                        <!-- Desenvolvimento 2 -->
+                        <div class="training-card">
+                            <div class="card-header"
+                                style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 id="train-title-3">3. Desenvolvimento 2</h3>
+                                    <span class="hint" id="train-hint-3">Apresente o segundo argumento e aprofunde a
+                                        discussão.</span>
+                                </div>
+                                <div class="part-timer" style="text-align: right;">
+                                    <div style="font-size: 1.1rem; font-weight: bold; color: var(--warning); font-variant-numeric: tabular-nums;"
+                                        id="timer-display-3" data-duration="1200">20:00</div>
+                                </div>
+                            </div>
+                            <textarea class="training-textarea" id="textarea-part-3"
+                                placeholder="Escreva seu segundo desenvolvimento aqui..."></textarea>
+                            <button class="btn btn-secondary btn-analyze-part" data-part="3"
+                                style="width: 100%; border-radius: 0 0 4px 4px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid var(--primary); border-top: none;">
+                                <span>Copiador Inteligente: Avaliar Desenv. 2</span>
+                            </button>
+                            <div id="feedback-part-3"></div>
+                        </div>
+
+                        <!-- Conclusão -->
+                        <div class="training-card">
+                            <div class="card-header"
+                                style="display: flex; justify-content: space-between; align-items: flex-start;">
+                                <div>
+                                    <h3 id="train-title-4">4. Conclusão</h3>
+                                    <span class="hint" id="train-hint-4">Retome a tese e elabore a proposta de
+                                        intervenção.</span>
+                                </div>
+                                <div class="part-timer" style="text-align: right;">
+                                    <div style="font-size: 1.1rem; font-weight: bold; color: var(--warning); font-variant-numeric: tabular-nums;"
+                                        id="timer-display-4" data-duration="900">15:00</div>
+                                </div>
+                            </div>
+                            <textarea class="training-textarea" id="textarea-part-4"
+                                placeholder="Escreva sua conclusão aqui..."></textarea>
+                            <button class="btn btn-secondary btn-analyze-part" data-part="4"
+                                style="width: 100%; border-radius: 0 0 4px 4px; background: rgba(59, 130, 246, 0.1); color: var(--primary); border: 1px solid var(--primary); border-top: none;">
+                                <span>Copiador Inteligente: Avaliar Conclusão</span>
+                            </button>
+                            <div id="feedback-part-4"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TUTORIAL PASSO A PASSO -->
+                <div id="training-tutorial-container" class="hidden">
+                    <div class="training-card" style="margin-bottom: 2rem;">
+                        <div class="card-header">
+                            <h3>Foco do Treino</h3>
+                        </div>
+                        <div style="padding: 1rem; background: rgba(0,0,0,0.2);">
+                            <select id="tutorial-paragraph-select" class="theme-input"
+                                style="width: 100%; border: none;">
+                                <option value="intro">Introdução (3 Frases)</option>
+                                <option value="d1">Desenvolvimento 1 (4 Frases)</option>
+                                <option value="d2">Desenvolvimento 2 (4 Frases)</option>
+                                <option value="conclusao">Conclusão (3 Frases)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="tutorial-chat-area"
+                        style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+                        <!-- Progress is inserted here dynamically -->
+                    </div>
+
+                    <div class="training-card" id="tutorial-input-card">
+                        <div class="card-header"
+                            style="background: rgba(var(--primary-rgb), 0.1); border-left: 4px solid var(--primary); display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <h3 id="tutorial-step-title">Frase 1</h3>
+                                <span class="hint" id="tutorial-step-hint"
+                                    style="color: var(--primary); font-weight: 500;">Carregando instrução...</span>
+                            </div>
+                            <div class="part-timer" style="text-align: right;">
+                                <div style="font-size: 1.1rem; font-weight: bold; color: var(--warning); font-variant-numeric: tabular-nums;"
+                                    id="timer-display-tutorial">00:00</div>
+                            </div>
+                        </div>
+                        <textarea class="training-textarea" id="tutorial-textarea"
+                            placeholder="Escreva o período aqui..." style="min-height: 120px;"></textarea>
+                    </div>
+
+                    <div class="submit-area" style="margin-top: 1rem;">
+                        <button class="btn btn-secondary" id="tutorial-submit-btn"
+                            style="border-color: var(--primary); color: var(--primary);">
+                            <span>Copiador Inteligente: Avaliar e Continuar</span>
+                        </button>
+                        <button class="btn btn-secondary hidden" id="tutorial-restart-btn" style="margin-left: 1rem;">
+                            <span>Reiniciar Parágrafo</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- View de Treino de Repertório -->
+        <div class="app-layout hidden" id="repertory-view">
+            <section class="training-section panel">
+                <div class="panel-header">
+                    <h2>Treinamento de Repertório Sociocultural</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Pratique a aplicação de
+                        repertórios divididos por Eixos Temáticos.</p>
+                </div>
+
+                <div class="repertory-axes">
+                    <div class="axis-selector" id="axis-selector">
+                        <!-- Botões de eixos injetados via JS -->
+                    </div>
+
+                    <div class="axis-content" id="axis-content">
+                        <h3 id="current-axis-title">Selecione um eixo</h3>
+
+                        <!-- Tabs de Modo de Repertório -->
+                        <div class="repertory-tabs">
+                            <button class="btn btn-secondary active" id="btn-rep-pratica"
+                                style="background: var(--primary); color: #fff; border-color: var(--primary);">Praticar
+                                Redação</button>
+                            <button class="btn btn-secondary" id="btn-rep-flashcards"
+                                style="border-color: var(--warning); color: var(--warning);">Flashcards
+                                (Memorização)</button>
+                        </div>
+
+                        <!-- Lista de Repertórios do Eixo (Modo Prática) -->
+                        <div id="repertory-practice-container">
+                            <div class="filter-bar"
+                                style="display:flex; gap:10px; justify-content:center; margin-bottom:15px;">
+                                <button class="btn btn-secondary active" id="btn-filter-all"
+                                    style="padding: 5px 15px; font-size: 0.9em;">Todos</button>
+                                <button class="btn btn-secondary" id="btn-filter-favs"
+                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px;"><svg
+                                        viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <polygon
+                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                        </polygon>
+                                    </svg> Favoritos</button>
+                                <button class="btn btn-secondary" id="btn-filter-intro"
+                                    style="padding: 5px 15px; font-size: 0.9em;">Só Introdução</button>
+                            </div>
+                            <div class="repertory-list" id="repertory-list">
+                                <!-- Injetado via JS -->
+                            </div>
+
+                            <!-- Área de Prática -->
+                            <div class="training-card" style="margin-top: 2rem;">
+                                <div class="card-header">
+                                    <h3>Pratique a Conexão</h3>
+                                    <span class="hint">Escreva um parágrafo conectando os pontos acima a um
+                                        problema.</span>
+                                </div>
+                                <textarea id="repertory-practice-textarea" class="training-textarea"
+                                    placeholder="Ex: De maneira análoga, no contexto atual..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Flashcards Container (Escondido por Padrão) -->
+                        <div id="flashcards-container" class="flashcards-section hidden">
+                            <div class="flashcard-wrapper">
+                                <div class="flashcard" id="flashcard-element">
+                                    <button id="fc-favorite-btn" class="favorite-btn" aria-label="Favoritar Repertório">
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                            stroke-linecap="round" stroke-linejoin="round" class="feather feather-star">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                            </polygon>
+                                        </svg>
+                                    </button>
+                                    <div class="flashcard-face flashcard-front">
+                                        <h3 class="flashcard-title" id="fc-obra">Obra</h3>
+                                        <p class="flashcard-author" id="fc-autor">Autor</p>
+                                        <div class="flip-hint">
+                                            <span>Clique para girar</span>
+                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                                                stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                                stroke-linejoin="round">
+                                                <path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.59-10.33l5.67-5.67" />
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="flashcard-face flashcard-back">
+                                        <h3 class="flashcard-title">Resumo & Aplicação</h3>
+                                        <p class="flashcard-content" id="fc-resumo">Resumo detalhado</p>
+                                        <p class="flashcard-usage" id="fc-uso">Uso sugerido</p>
+                                        <div class="flashcard-frase-box hidden" id="fc-frase-box">
+                                            <strong>Frase-Modelo:</strong>
+                                            <p id="fc-frase"></p>
+                                        </div>
+                                        <div class="flashcard-actions">
+                                            <button class="btn-spaced-rep btn-errei" id="btn-fc-errei">Errei
+                                                (Revisar)</button>
+                                            <button class="btn-spaced-rep btn-acertei"
+                                                id="btn-fc-acertei">Acertei</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flashcards-controls">
+                                <button class="btn-flashcard" id="btn-fc-prev">← Anterior</button>
+                                <span class="flashcard-counter" id="fc-counter">1 / 3</span>
+                                <button class="btn-flashcard" id="btn-fc-next">Próximo →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submit-area">
+                    <button class="btn btn-secondary" id="btn-evaluate-repertory"
+                        style="border-color: var(--primary); color: var(--primary);">
+                        <span>Copiador Inteligente: Avaliar Repertório</span>
+                    </button>
+                </div>
+            </section>
+        </div>
+
+        <!-- View de Treino Gramatical -->
+        <div class="app-layout hidden" id="grammar-view">
+            <section class="training-section panel">
+                <div class="panel-header">
+                    <h2>Treinamento Gramatical (Microestruturas)</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Exercícios práticos de
+                        coesão, concordância, crase e pontuação.</p>
+                </div>
+
+                <div class="training-cards">
+                    <div class="training-card" id="grammar-tutor-card">
+                        <div class="card-header"
+                            style="background: rgba(var(--danger-rgb), 0.1); border-left: 4px solid var(--danger);">
+                            <h3>Tutor de Dúvidas Gramaticais</h3>
+                            <span class="hint">Pergunte ao Prof. Lino sobre qualquer erro ou dúvida gramatical.</span>
+                        </div>
+                        <textarea class="training-textarea" id="grammar-tutor-textarea" style="min-height: 120px;"
+                            placeholder="Ex: Professor, por que 'atualmente no século XXI' é pleonasmo?"></textarea>
+                    </div>
+
+                    <div class="submit-area" style="margin-bottom: 2rem;">
+                        <button class="btn btn-secondary" id="grammar-tutor-submit"
+                            style="border-color: var(--primary); color: var(--primary);">
+                            <span>Copiador Inteligente: Perguntar ao Professor</span>
+                        </button>
+                    </div>
+
+                    <!-- Div para resposta do Tutor Gramatical -->
+                    <div id="grammar-tutor-response" style="margin-bottom: 2rem;"></div>
+
+                    <!-- Arena de Micro-Treinos -->
+                    <div class="training-card"
+                        style="border: 2px solid var(--primary); background: rgba(59, 130, 246, 0.05);">
+                        <div class="card-header"
+                            style="display: flex; justify-content: space-between; align-items: flex-start;">
+                            <div>
+                                <h3 style="color: var(--primary);">Arena de Micro-Treinos ⚡</h3>
+                                <span class="hint">Resolva exercícios rápidos para fixar Crase, Vírgula e Conectivos
+                                    (Mão na Massa).</span>
+                            </div>
+                            <!-- Turbo Timer Display -->
+                            <div id="turbo-timer-container" class="hidden"
+                                style="text-align: right; background: var(--danger); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-variant-numeric: tabular-nums;">
+                                ⏱ <span id="turbo-timer-display">60</span>s
+                            </div>
+                        </div>
+
+                        <div
+                            style="margin-top: 1rem; margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                            <button class="btn btn-secondary btn-sm drill-category-btn active"
+                                data-category="Crase">Crase</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Vírgula">Vírgula</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Conectivos e Regência">Conectivos e Regência</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="PontosFracos"
+                                style="border-color: var(--warning); color: var(--warning);">Meus Pontos Fracos</button>
+                            <button class="btn btn-secondary btn-sm" id="btn-turbo-mode"
+                                style="background: var(--danger); color: white; border-color: var(--danger);">Modo Turbo
+                                (60s) 🚀</button>
+                        </div>
+
+                        <div id="drill-container"
+                            style="background: rgba(30, 41, 59, 0.8); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.5rem; text-align: center;">
+                            <div
+                                style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
+                                <span>Questão <span id="drill-counter">1</span></span>
+                                <span>Acertos: <span id="drill-score"
+                                        style="color: var(--success); font-weight: bold;">0</span></span>
+                            </div>
+
+                            <h4 id="drill-question"
+                                style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 1.5rem; font-weight: 500;">
+                                O combate ___ desigualdade deve ser prioridade.
+                            </h4>
+
+                            <div id="drill-options"
+                                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
+                                <!-- Botões de opção serão gerados aqui -->
+                            </div>
+
+                            <div id="drill-feedback" class="hidden"
+                                style="padding: 1rem; border-radius: 4px; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1rem; text-align: left;">
+                                <!-- Mensagem de feedback (acertou/errou) e explicação -->
+                            </div>
+
+                            <button class="btn btn-primary hidden" id="btn-next-drill" style="margin: 0 auto;">Próxima
+                                Questão ➔</button>
+                        </div>
+                    </div>
+
+                    <!-- 1. Gerar Desafio -->
+                    <div class="training-card">
+                        <div class="card-header">
+                            <h3>1. Desafio Gramatical Dinâmico</h3>
+                            <span class="hint">Copie o prompt e deixe o Prof. Lino gerar um parágrafo cheio de erros
+                                fatais.</span>
+                        </div>
+                        <div class="submit-area" style="margin-top: 1rem;">
+                            <button class="btn btn-secondary" id="btn-copy-grammar-challenge"
+                                style="border-color: var(--primary); color: var(--primary); width: 100%;">
+                                <span>Copiar Prompt: Gerar Desafio</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- 2. Importar e Fazer o Desafio -->
+                    <div class="training-card">
+                        <div class="card-header">
+                            <h3>2. Importar e Resolver</h3>
+                            <span class="hint">Cole o JSON gerado pelo Gemini e tente corrigir o parágrafo
+                                problemático.</span>
+                        </div>
+                        <textarea class="training-textarea" id="grammar-challenge-input"
+                            style="min-height: 80px; margin-top: 1rem;"
+                            placeholder="Cole o JSON do Desafio aqui..."></textarea>
+
+                        <div id="grammar-challenge-display" class="hidden" style="margin-top: 1.5rem;">
+                            <div
+                                style="padding: 1rem 1.5rem; background: rgba(var(--danger-rgb), 0.1); border-left: 4px solid var(--danger); border-radius: 4px; margin-bottom: 1rem;">
+                                <h4
+                                    style="color: var(--danger); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600;">
+                                    ENCONTRE OS ERROS E REESCREVA:</h4>
+                                <p id="grammar-challenge-text"
+                                    style="font-family: monospace; line-height: 1.6; color: var(--text-main); font-size: 1.05rem;">
+                                </p>
+                                <p id="grammar-challenge-hint"
+                                    style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--warning);"></p>
+                            </div>
+
+                            <textarea class="training-textarea" id="grammar-challenge-rewrite"
+                                style="min-height: 120px;"
+                                placeholder="Reescreva o parágrafo corrigindo todos os erros gramaticais e de coesão..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- 3. Avaliar Desafio -->
+                    <div class="submit-area" style="margin-bottom: 2rem;">
+                        <button class="btn btn-secondary" id="btn-evaluate-grammar-challenge"
+                            style="border-color: var(--primary); color: var(--primary); display: none;">
+                            <span>Copiador Inteligente: Corrigir Desafio</span>
+                        </button>
+                    </div>
+
+                    <!-- Resposta da Correção -->
+                    <div id="grammar-challenge-response"></div>
+                </div> <!-- Closing training-cards -->
+            </section>
+        </div>
+
+        <!-- View de Meu Modelo -->
+        <div class="app-layout hidden" id="model-view">
+            <section class="training-section panel">
+                <div class="panel-header">
+                    <h2>Meu Modelo (Esqueleto Estratégico)</h2>
+                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Crie um esqueleto de
+                        redação com termos genéricos e conectivos baseados em um tema gerado por IA.</p>
+                </div>
+
+                <div class="training-cards">
+                    <!-- Gerador -->
+                    <div class="training-card">
+                        <div class="card-header">
+                            <h3>1. Gerador de Redação</h3>
+                            <span class="hint">Digite um tema e copie o prompt para o Gemini gerar a redação
+                                base.</span>
+                        </div>
+                        <div class="theme-field-container" style="margin-top: 1rem;">
+                            <label for="model-theme-input">Tema para o Molde:</label>
+                            <input type="text" id="model-theme-input"
+                                placeholder="Ex: O impacto da inteligência artificial na sociedade...">
+                        </div>
+                        <div class="submit-area" style="margin-top: 1rem;">
+                            <button class="btn btn-secondary" id="btn-copy-model-prompt"
+                                style="border-color: var(--primary); color: var(--primary); width: 100%;">
+                                <span>Copiar Prompt do Molde</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Cola -->
+                    <div class="training-card">
+                        <div class="card-header">
+                            <h3>2. Importar Resposta</h3>
+                            <span class="hint">Cole aqui o código JSON retornado pelo Gemini.</span>
+                        </div>
+                        <textarea class="training-textarea" id="model-json-input"
+                            style="min-height: 120px; font-family: monospace;"
+                            placeholder="Cole o JSON retornado pelo Gemini..."></textarea>
+                        <div class="submit-area" style="margin-top: 1rem;">
+                            <button class="btn btn-primary" id="btn-analyze-model" style="width: 100%;">
+                                <span>Analisar Texto e Extrair Esqueleto</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Resultado da Análise -->
+                <div id="model-analysis-container" class="hidden" style="margin-top: 2rem;">
+                    <!-- Dissecação do Texto -->
+                    <div class="training-card" style="margin-bottom: 2rem;">
+                        <div class="card-header">
+                            <h3>3. Texto Analisado</h3>
+                            <span class="hint">Redação gerada com os elementos-chave destacados. Passe o mouse sobre os
+                                destaques.</span>
+                        </div>
+                        <div id="model-analyzed-text"
+                            style="padding: 1rem; line-height: 1.8; background: var(--bg-color); border: 1px solid var(--panel-border); border-radius: 4px; color: var(--text-color);">
+                            <!-- Texto destacado injetado via JS -->
+                        </div>
+                    </div>
+
+                    <!-- Esqueleto (Folha em Branco) -->
+                    <div class="training-card">
+                        <div class="card-header"
+                            style="background: rgba(var(--success-rgb), 0.1); border-left: 4px solid var(--success);">
+                            <h3>4. Meu Esqueleto (Molde Salvo)</h3>
+                            <span class="hint">Estes são os conectivos e estruturas genéricas extraídas da redação,
+                                organizadas nos respectivos parágrafos para uso futuro.</span>
+                        </div>
+
+                        <div id="model-skeleton-area"
+                            style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1rem;">
+                            <!-- Introdução -->
+                            <div class="skeleton-paragraph">
+                                <h4>Introdução</h4>
+                                <div class="skeleton-content" id="skeleton-intro"
+                                    style="min-height: 60px; padding: 1rem; background: var(--bg-color); border: 1px dashed var(--panel-border); border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                                    <span style="color: var(--text-muted); font-style: italic;">Aguardando
+                                        extração...</span>
+                                </div>
+                            </div>
+
+                            <!-- D1 -->
+                            <div class="skeleton-paragraph">
+                                <h4>Desenvolvimento 1</h4>
+                                <div class="skeleton-content" id="skeleton-d1"
+                                    style="min-height: 60px; padding: 1rem; background: var(--bg-color); border: 1px dashed var(--panel-border); border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                                    <span style="color: var(--text-muted); font-style: italic;">Aguardando
+                                        extração...</span>
+                                </div>
+                            </div>
+
+                            <!-- D2 -->
+                            <div class="skeleton-paragraph">
+                                <h4>Desenvolvimento 2</h4>
+                                <div class="skeleton-content" id="skeleton-d2"
+                                    style="min-height: 60px; padding: 1rem; background: var(--bg-color); border: 1px dashed var(--panel-border); border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                                    <span style="color: var(--text-muted); font-style: italic;">Aguardando
+                                        extração...</span>
+                                </div>
+                            </div>
+
+                            <!-- Conclusão -->
+                            <div class="skeleton-paragraph">
+                                <h4>Conclusão</h4>
+                                <div class="skeleton-content" id="skeleton-conclusao"
+                                    style="min-height: 60px; padding: 1rem; background: var(--bg-color); border: 1px dashed var(--panel-border); border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+                                    <span style="color: var(--text-muted); font-style: italic;">Aguardando
+                                        extração...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+
+        <!-- View de Resultados -->
+        <div class="app-layout hidden" id="result-view">
+            <section class="paper-section">
+                <div class="paper-wrapper">
+                    <div class="paper-header">
+                        <h2>Folha Corrigida</h2>
+                        <div class="actions">
+                            <button class="btn btn-secondary" id="back-btn">← Voltar</button>
+                        </div>
+                    </div>
+
+                    <div class="theme-field-container">
+                        <span class="theme-label">Tema da Redação:</span>
+                        <div class="theme-display" id="theme-display">TEMA NÃO INFORMADO</div>
+                    </div>
+
+                    <div class="paper-container">
+                        <div class="paper-margin"></div>
+                        <div class="paper-lines-container">
+                            <div class="corrected-text-wrapper">
+                                <div id="result-line-numbers" class="line-numbers"></div>
+                                <div id="corrected-text" class="essay-display" style="padding-left: 0.5rem;">
+                                    <!-- O texto corrigido será injetado aqui -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="feedback-section panel">
+                <div class="panel-header">
+                    <h2>Avaliação Final</h2>
+                </div>
+
+                <div class="results-content">
+                    <div class="score-card">
+                        <div class="score-circle">
+                            <span class="score-value" id="final-score-value">--</span>
+                            <span class="score-max" id="final-score-max">/1000</span>
+                        </div>
+                        <div class="score-details">
+                            <h3>Nota Estimada</h3>
+                            <p>Desempenho calculado pela Inteligência Artificial. Passe o mouse nos destaques da folha
+                                para ver os erros apontados.</p>
+                        </div>
+                    </div>
+
+                    <div class="competencies" id="competencies-container">
+                        <!-- Critérios serão injetados aqui dinamicamente pelo JavaScript -->
+                    </div>
+
+                    <!-- CAIXAS DE FEEDBACK DA IA -->
+                    <div id="ai-feedback-container"
+                        style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1.5rem;">
+                        <div class="ai-box"
+                            style="background: var(--bg-color); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.5rem;">
+                            <h3
+                                style="color: var(--primary); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🧠</span> Diagnóstico do Projeto de Texto
+                            </h3>
+                            <div id="ai-diagnostico"
+                                style="line-height: 1.6; white-space: pre-wrap; color: var(--text-color);">
+                                <!-- Diagnóstico via Gemini entra aqui -->
+                            </div>
+                        </div>
+
+                        <div class="ai-box"
+                            style="background: var(--bg-color); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.5rem;">
+                            <h3
+                                style="color: var(--success); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>✨</span> Reescrita Cirúrgica Completa
+                            </h3>
+                            <div id="ai-reescrita"
+                                style="line-height: 1.6; white-space: pre-wrap; color: var(--text-color);">
+                                <!-- Reescrita via Gemini entra aqui -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tooltip Element -->
+    <div class="tooltip" id="error-tooltip">
+        <div class="tooltip-header">Erro de Gramática</div>
+        <div class="tooltip-body">
+            <p><strong>Original:</strong> <span id="tooltip-original"></span></p>
+            <p><strong>Sugestão:</strong> <span id="tooltip-suggestion" class="suggestion"></span></p>
+            <div id="tooltip-explanation" class="tooltip-explanation">Explicação do erro...</div>
+        </div>
+    </div>
+
+    <!-- MODAL DO COPIADOR INTELIGENTE -->
+    <div id="copiador-modal" class="modal-overlay hidden"
+        style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; z-index: 1000;">
+        <div class="modal-content"
+            style="background: var(--panel-bg); padding: 2rem; border-radius: 8px; width: 90%; max-width: 600px; box-shadow: 0 10px 25px rgba(0,0,0,0.2);">
+            <h2 style="margin-bottom: 1rem; color: var(--primary);">Passo a Passo: Copiador Inteligente</h2>
+            <ol
+                style="margin-bottom: 1.5rem; padding-left: 1.5rem; font-size: 0.95rem; color: var(--text-color); line-height: 1.5;">
+                <li style="margin-bottom: 0.5rem;">O prompt completo já foi <strong>copiado para a sua área de
+                        transferência</strong>.</li>
+                <li style="margin-bottom: 0.5rem;">Abra o <a href="https://gemini.google.com" target="_blank"
+                        style="color: var(--primary); font-weight: bold; text-decoration: underline;">Gemini
+                        Advanced</a> em uma nova aba.</li>
+                <li style="margin-bottom: 0.5rem;">Cole (Ctrl+V) o texto no chat e envie.</li>
+                <li style="margin-bottom: 0.5rem;">Aguarde o Gemini gerar a resposta (ele fará um bloco de código JSON).
+                    No canto do bloco gerado, clique em <strong>Copiar</strong>.</li>
+                <li>Volte aqui e cole o resultado copiado na caixa abaixo:</li>
+            </ol>
+
+            <textarea id="json-paste-area" placeholder="Cole o código JSON retornado pelo Gemini aqui..."
+                style="width: 100%; height: 150px; padding: 0.75rem; border: 1px solid var(--panel-border); border-radius: 4px; background: var(--bg-color); color: var(--text-color); margin-bottom: 1.5rem; font-family: monospace; resize: vertical;"></textarea>
+
+            <div style="display: flex; gap: 1rem; justify-content: flex-end;">
+                <button id="btn-close-copiador" class="btn btn-secondary">Cancelar</button>
+                <button id="btn-render-copiador" class="btn btn-primary">Renderizar Correção</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

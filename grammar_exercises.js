@@ -1,4 +1,4 @@
-﻿const grammarExercises = [
+const grammarExercises = [
     // CRASE
     {
         category: "Crase",
@@ -245,5 +245,51 @@
         wrongSide: "'Do que' é vício de linguagem oral. Colocar 'prefere isso do que aquilo' na redação é penalizado diretamente.",
         concept: "Norma Padrão Culta",
         conceptExplanation: "É o conjunto de regras oficiais da língua portuguesa (gramática). O Enem exige estrito seguimento dessa norma, distanciando o texto da forma como falamos livremente no dia a dia."
+    },
+    // USO DOS PORQUÊS
+    {
+        category: "Uso dos Porquês",
+        question: "A mídia não explica ___ a violência urbana continua crescendo.",
+        options: ["por que", "porque"],
+        correctOptionIndex: 0,
+        explanation: "Usa-se 'por que' (separado e sem acento) em perguntas diretas ou indiretas, quando puder ser substituído por 'por qual motivo' ou 'pelo qual'.",
+        correctSide: "Correto, pois pode ser substituído por 'por qual motivo' (A mídia não explica por qual motivo...).",
+        wrongSide: "Usar 'porque' (junto) indicaria uma resposta ou causa, o que não faz sentido sintático na frase.",
+        concept: "Interrogativa Indireta",
+        conceptExplanation: "É uma pergunta embutida dentro de uma frase declarativa. Não termina com ponto de interrogação, mas pede uma explicação ou motivo."
+    },
+    {
+        category: "Uso dos Porquês",
+        question: "O saneamento básico é fundamental ___ previne diversas doenças.",
+        options: ["por que", "porque"],
+        correctOptionIndex: 1,
+        explanation: "Usa-se 'porque' (junto e sem acento) para introduzir uma explicação ou causa.",
+        correctSide: "Correto, pois equivale a 'pois' ou 'já que'. A oração seguinte explica o motivo do saneamento ser fundamental.",
+        wrongSide: "Usar 'por que' separado aqui é um erro gramatical que desestabiliza a coesão sequencial do texto.",
+        concept: "Conjunção Explicativa",
+        conceptExplanation: "Palavra que liga duas orações mostrando que a segunda explica a primeira."
+    },
+    // COLOCAÇÃO PRONOMINAL
+    {
+        category: "Colocação Pronominal",
+        question: "Não ___ a gravidade do problema habitacional nas metrópoles.",
+        options: ["se compreende", "compreende-se"],
+        correctOptionIndex: 0,
+        explanation: "A palavra 'Não' é um advérbio de negação, que atrai o pronome para antes do verbo (Próclise).",
+        correctSide: "O uso da Próclise é obrigatório devido à presença da palavra atrativa negativa 'Não'.",
+        wrongSide: "A ênclise (depois do verbo) está incorreta aqui porque a palavra negativa age como um ímã puxando o pronome para perto dela.",
+        concept: "Próclise (Palavra Atrativa)",
+        conceptExplanation: "A regra de colocação pronominal em que o pronome oblíquo fica antes do verbo. Advérbios (não, nunca) e pronomes relativos (que) atraem o pronome."
+    },
+    {
+        category: "Colocação Pronominal",
+        question: "A constituição assegura os direitos sociais, tornando-___ dever do Estado.",
+        options: ["os", "los"],
+        correctOptionIndex: 0,
+        explanation: "O verbo 'tornar' (na forma tornando) não termina em r, s ou z, portanto não sofre a modificação para '-los'. O gerúndio pede ênclise normal: tornando-os.",
+        correctSide: "A ênclise está correta e a forma pronominal 'os' foi mantida pois o verbo termina em vogal.",
+        wrongSide: "Utilizar 'los' só é permitido quando o verbo termina em R, S ou Z (ex: torná-los).",
+        concept: "Gerúndio e Ênclise",
+        conceptExplanation: "O gerúndio (verbos terminados em -ndo) exige que o pronome venha após o verbo, desde que não haja palavra atrativa antes."
     }
 ];

@@ -330,22 +330,22 @@
                         <!-- Lista de Repertórios do Eixo (Modo Prática) -->
                         <div id="repertory-practice-container">
                             <div class="filter-bar" id="repertory-filter-bar"
-                                style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap: wrap;">
+                                style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap: wrap; align-items: center;">
                                 <input type="text" id="repertory-search" placeholder="Pesquisar repertório..." style="flex: 1; min-width: 200px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); color: var(--text-color); font-family: 'Inter', sans-serif;">
-                                <button class="btn btn-secondary active" id="btn-filter-all"
-                                    style="padding: 5px 15px; font-size: 0.9em;">Todos</button>
+                                
+                                <div class="toggle-switch" style="display: flex; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 4px; border: 1px solid var(--panel-border);">
+                                    <button class="toggle-btn active" id="btn-toggle-intro" style="padding: 6px 16px; border-radius: 16px; border: none; background: var(--primary); color: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Introdução</button>
+                                    <button class="toggle-btn" id="btn-toggle-dev" style="padding: 6px 16px; border-radius: 16px; border: none; background: transparent; color: var(--text-main); cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Desenvolvimento</button>
+                                </div>
+
                                 <button class="btn btn-secondary" id="btn-filter-favs"
-                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px;"><svg
+                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px;"><svg
                                         viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
                                         stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
                                         <polygon
                                             points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
                                         </polygon>
                                     </svg> Favoritos</button>
-                                <button class="btn btn-secondary" id="btn-filter-intro"
-                                    style="padding: 5px 15px; font-size: 0.9em;">Introdução</button>
-                                <button class="btn btn-secondary" id="btn-filter-dev"
-                                    style="padding: 5px 15px; font-size: 0.9em;">Desenvolvimento</button>
                             </div>
                             <div class="repertory-list" id="repertory-list">
                                 <!-- Injetado via JS -->

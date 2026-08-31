@@ -1,10 +1,16 @@
+let currentRepertoryFilter = 'intro';
+let showFavoritesOnly = false;
+let currentRepertorySearch = '';
+
 document.addEventListener('DOMContentLoaded', () => {
-    let currentRepertoryFilter = 'all';
-    let currentRepertorySearch = '';
-    const btnFilterAll = document.getElementById('btn-filter-all');
+    // --- Navigation & Core Elements ---
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const appLayouts = document.querySelectorAll('.app-layout');
+    
+    // --- Repertory Filter UI ---
+    const btnToggleIntro = document.getElementById('btn-toggle-intro');
+    const btnToggleDev = document.getElementById('btn-toggle-dev');
     const btnFilterFavs = document.getElementById('btn-filter-favs');
-    const btnFilterIntro = document.getElementById('btn-filter-intro');
-    const btnFilterDev = document.getElementById('btn-filter-dev');
     const inputSearchRep = document.getElementById('repertory-search');
     const filterBar = document.getElementById('repertory-filter-bar');
 
@@ -18,33 +24,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function updateFilterBtns() {
-        if (!btnFilterAll) return;
-        [btnFilterAll, btnFilterFavs, btnFilterIntro, btnFilterDev].forEach(b => {
-            if (b) {
-                b.classList.remove('active');
-                b.style.background = 'transparent';
-                b.style.color = 'var(--text-main)';
-                b.style.borderColor = 'var(--panel-border)';
-            }
-        });
-
-        let activeBtn = currentRepertoryFilter === 'all' ? btnFilterAll :
-            currentRepertoryFilter === 'favs' ? btnFilterFavs : 
-            currentRepertoryFilter === 'intro' ? btnFilterIntro : btnFilterDev;
+        if (!btnToggleIntro) return;
+        
+        // Update Toggle Switch
+        if (currentRepertoryFilter === 'intro') {
+            btnToggleIntro.classList.add('active');
+            btnToggleIntro.style.background = 'var(--primary)';
+            btnToggleIntro.style.color = 'white';
             
-        if (activeBtn) {
-            activeBtn.classList.add('active');
-            activeBtn.style.background = 'var(--primary)';
-            activeBtn.style.color = '#fff';
-            activeBtn.style.borderColor = 'var(--primary)';
+            btnToggleDev.classList.remove('active');
+            btnToggleDev.style.background = 'transparent';
+            btnToggleDev.style.color = 'var(--text-main)';
+        } else {
+            btnToggleDev.classList.add('active');
+            btnToggleDev.style.background = 'var(--primary)';
+            btnToggleDev.style.color = 'white';
+            
+            btnToggleIntro.classList.remove('active');
+            btnToggleIntro.style.background = 'transparent';
+            btnToggleIntro.style.color = 'var(--text-main)';
+        }
+
+        // Update Favorites Button
+        if (showFavoritesOnly) {
+            btnFilterFavs.classList.add('active');
+            btnFilterFavs.style.background = 'var(--warning)';
+            btnFilterFavs.style.color = '#fff';
+            btnFilterFavs.style.borderColor = 'var(--warning)';
+        } else {
+            btnFilterFavs.classList.remove('active');
+            btnFilterFavs.style.background = 'transparent';
+            btnFilterFavs.style.color = 'var(--text-main)';
+            btnFilterFavs.style.borderColor = 'var(--panel-border)';
         }
     }
 
-    if (btnFilterAll) {
-        btnFilterAll.addEventListener('click', () => { currentRepertoryFilter = 'all'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
-        btnFilterFavs.addEventListener('click', () => { currentRepertoryFilter = 'favs'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
-        btnFilterIntro.addEventListener('click', () => { currentRepertoryFilter = 'intro'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
-        if (btnFilterDev) btnFilterDev.addEventListener('click', () => { currentRepertoryFilter = 'dev'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
+    if (btnToggleIntro) {
+        btnToggleIntro.addEventListener('click', () => { currentRepertoryFilter = 'intro'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
+        btnToggleDev.addEventListener('click', () => { currentRepertoryFilter = 'dev'; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
+        btnFilterFavs.addEventListener('click', () => { showFavoritesOnly = !showFavoritesOnly; updateFilterBtns(); if (currentBanca.eixosTematicos[currentEixoIndex]) mostrarEixo(currentBanca.eixosTematicos[currentEixoIndex]); });
         updateFilterBtns();
     }
     const essayInput = document.getElementById('essay');
@@ -256,7 +274,8 @@ document.addEventListener('DOMContentLoaded', () => {
             let repsToRender = eixo.repertorios.filter(rep => {
                 const introKeywords = ['INTRODUÇÃO', 'CINEMA', 'SÉRIE', 'ANIMAÇÃO', 'DOCUMENTÁRIO', 'FILME', 'MÚSICA', 'FICÇÃO', 'ROMANCE'];
                 const isIntro = (rep.obra && introKeywords.some(k => rep.obra.toUpperCase().includes(k))) || (rep.uso && rep.uso.includes('Introdução'));
-                if (currentRepertoryFilter === 'favs' && !favs.includes(rep.obra)) return false;
+                
+                if (showFavoritesOnly && !favs.includes(rep.obra)) return false;
                 if (currentRepertoryFilter === 'intro' && !isIntro) return false;
                 if (currentRepertoryFilter === 'dev' && isIntro) return false;
                 

@@ -192,6 +192,9 @@ export async function renderArenaAnalytics(containerSelector = null) {
                 return;
             }
 
+            // Calculate total for each metric
+            metrics.forEach(m => m.total = (m.acertos || 0) + (m.erros || 0));
+
             // Ordenar por total (mais praticados primeiro)
             metrics.sort((a, b) => b.total - a.total);
 

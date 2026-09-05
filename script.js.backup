@@ -589,8 +589,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const maxLines = currentBanca.limiteLinhas.max;
         const maxHeight = maxLines * 32;
 
-        // Prevent exceeding max lines (added 5px tolerance for sub-pixel rendering)
-        if (essayInput.scrollHeight > maxHeight + 5) {
+        // Prevent exceeding max lines
+        if (essayInput.scrollHeight > maxHeight) {
             // Revert last change by trimming the text
             essayInput.value = essayInput.value.slice(0, -1);
             // Flash red background momentarily to indicate limit
@@ -609,10 +609,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const maxLines = currentBanca.limiteLinhas.max;
             const maxHeight = maxLines * 32;
 
-            if (essayInput.scrollHeight > maxHeight + 5) {
+            if (essayInput.scrollHeight > maxHeight) {
                 alert(`O texto colado excede o limite de ${maxLines} linhas da banca ${currentBanca.nome}.`);
                 // Revert to fit
-                while (essayInput.scrollHeight > maxHeight + 5 && essayInput.value.length > 0) {
+                while (essayInput.scrollHeight > maxHeight && essayInput.value.length > 0) {
                     essayInput.value = essayInput.value.slice(0, -10);
                 }
             }
@@ -667,23 +667,14 @@ document.addEventListener('DOMContentLoaded', () => {
         copyPromptBtn.addEventListener('click', () => {
             const rawText = essayInput.value.trim();
 
-            // Radar de Conformidade Pré-Envio (Validador Modularizado)
-            if (window.redacaoApp && typeof window.redacaoApp.validateEssay === 'function') {
-                const validationError = window.redacaoApp.validateEssay(rawText, currentBanca, essayTitle.value.trim());
-                if (validationError) {
-                    alert(validationError);
-                    return;
-                }
-            } else {
-                // Fallback caso o módulo falhe ao carregar
-                if (currentBanca.exigeTitulo && essayTitle.value.trim() === '') {
-                    alert(`A banca ${currentBanca.nome} exige um título. Por favor, preencha o campo de título.`);
-                    return;
-                }
-                if (rawText.length < 50) {
-                    alert("Por favor, digite uma redação mais longa para análise.");
-                    return;
-                }
+            if (currentBanca.exigeTitulo && essayTitle.value.trim() === '') {
+                alert(`A banca ${currentBanca.nome} exige um título. Por favor, preencha o campo de título.`);
+                return;
+            }
+
+            if (rawText.length < 50) {
+                alert("Por favor, digite uma redação mais longa para análise.");
+                return;
             }
 
             copiadorRawText = rawText;
@@ -834,11 +825,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Diagnóstico e Reescrita
         const diagnosticoDiv = document.getElementById('ai-diagnostico');
-        const resumoDiv = document.getElementById('ai-resumo');
         const reescritaDiv = document.getElementById('ai-reescrita');
 
         if (diagnosticoDiv) diagnosticoDiv.textContent = resultObj.diagnostico || "Diagnóstico não disponível.";
-        if (resumoDiv) resumoDiv.textContent = resultObj.resumoPratico || "Resumo Prático não gerado.";
         if (reescritaDiv) reescritaDiv.textContent = resultObj.reescrita || "Reescrita não disponível.";
 
         // Destaques de Erros (Marcações) no Texto
@@ -875,7 +864,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentDrillExercises = [];
     let currentDrillIndex = 0;
     let drillScore = 0;
-    let drillErrors = 0;
 
     // Turbo Mode Variables
     let isTurboMode = false;
@@ -889,8 +877,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnNextDrill = document.getElementById('btn-next-drill');
     const drillCounterDisplay = document.getElementById('drill-counter');
     const drillScoreDisplay = document.getElementById('drill-score');
-    const drillErrorsDisplay = document.getElementById('drill-errors');
-    
+
     // UI elements for Turbo Mode
     const btnTurboMode = document.getElementById('btn-turbo-mode');
     const turboTimerContainer = document.getElementById('turbo-timer-container');
@@ -923,9 +910,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDrillExercises.sort(() => Math.random() - 0.5);
         currentDrillIndex = 0;
         drillScore = 0;
-        drillErrors = 0;
         drillScoreDisplay.textContent = '0';
-        if(drillErrorsDisplay) drillErrorsDisplay.textContent = '0';
 
         if (currentDrillExercises.length > 0) {
             renderCurrentDrill();
@@ -1020,15 +1005,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorage.setItem('redacao_wrong_drills', JSON.stringify(wrongAnswers));
             }
 
-            // Gamificação: se acertar, reduz a fraqueza
-            try {
-                let weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
-                if (weaknesses[drill.category] > 0) {
-                    weaknesses[drill.category]--;
-                    localStorage.setItem('redacao_weaknesses', JSON.stringify(weaknesses));
-                }
-            } catch(e) {}
-
             drillFeedbackDisplay.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
             drillFeedbackDisplay.style.borderLeft = '4px solid var(--success)';
             drillFeedbackDisplay.innerHTML = `<strong style="color:var(--success)">✅ Acertou!</strong><br><span style="color:var(--text-main)">${drill.explanation}</span>${extraFeedback}${conceptBox}<br><br><em style="color:var(--primary); font-size:0.9rem;">${finalTip}</em>`;
@@ -1036,17 +1012,6 @@ document.addEventListener('DOMContentLoaded', () => {
             clickedBtn.style.backgroundColor = 'var(--danger)';
             clickedBtn.style.color = '#fff';
             clickedBtn.style.borderColor = 'var(--danger)';
-
-            // Incrementa erros
-            drillErrors++;
-            if (drillErrorsDisplay) drillErrorsDisplay.textContent = drillErrors;
-
-            // Gamificação: se errar, aumenta a fraqueza na categoria
-            try {
-                let weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
-                weaknesses[drill.category] = (weaknesses[drill.category] || 0) + 1;
-                localStorage.setItem('redacao_weaknesses', JSON.stringify(weaknesses));
-            } catch(e) {}
 
             // Destaca a correta
             drillOptionsContainer.children[drill.correctOptionIndex].style.borderColor = 'var(--success)';
@@ -1132,9 +1097,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDrillExercises = [...grammarExercises].sort(() => Math.random() - 0.5);
         currentDrillIndex = 0;
         drillScore = 0;
-        drillErrors = 0;
         drillScoreDisplay.textContent = '0';
-        if(drillErrorsDisplay) drillErrorsDisplay.textContent = '0';
 
         turboTimerContainer.classList.remove('hidden');
         turboTimerDisplay.textContent = turboTimeLeft;
@@ -2322,7 +2285,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createConnPiece(word) {
         const piece = document.createElement('div');
         piece.className = 'builder-piece conn-piece';
-        piece.style.cssText = 'display:flex; align-items:center; width:auto; flex-shrink:0; background:rgba(79,70,229,0.08); border-left:4px solid #4f46e5; border-radius:4px; padding:6px 12px; color:#3b3b9a; font-weight:600; font-size:0.95rem; box-sizing:border-box; cursor:grab; gap:8px;';
+        piece.style.cssText = 'display:flex; align-items:center; width:100%; background:rgba(79,70,229,0.08); border-left:4px solid #4f46e5; border-radius:4px; padding:6px 12px; color:#3b3b9a; font-weight:600; font-size:0.95rem; box-sizing:border-box; cursor:grab; gap:8px;';
         const grip = document.createElement('span');
         grip.innerHTML = '&#8942;&#8942;';
         grip.style.cssText = 'color:#a5b4fc; font-size:0.75rem; letter-spacing:-4px; flex-shrink:0;';
@@ -2339,7 +2302,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createTextPiece(initialText) {
         const piece = document.createElement('div');
         piece.className = 'builder-piece text-piece';
-        piece.style.cssText = 'display:flex; align-items:flex-start; flex: 1 1 300px; max-width: 100%; gap:8px; padding:4px 0; box-sizing:border-box; cursor:grab;';
+        piece.style.cssText = 'display:flex; align-items:flex-start; width:100%; gap:8px; padding:4px 0; box-sizing:border-box; cursor:grab;';
 
         const grip = document.createElement('span');
         grip.innerHTML = '&#8942;&#8942;';
@@ -2349,7 +2312,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ta = document.createElement('textarea');
         ta.placeholder = 'Escreva aqui seu trecho, argumento ou parágrafo...';
         ta.value = initialText || '';
-        ta.style.cssText = 'flex:1; resize:both; min-width: 100px; min-height:2rem; background:transparent; border:none; border-bottom:1px solid #e2e8f0; outline:none; font-family:Georgia,serif; font-size:1rem; color:#111; line-height:2rem; padding:0; overflow:hidden;';
+        ta.style.cssText = 'flex:1; resize:none; min-height:2rem; background:transparent; border:none; border-bottom:1px solid #e2e8f0; outline:none; font-family:Georgia,serif; font-size:1rem; color:#111; line-height:2rem; padding:0; overflow:hidden;';
         // Auto-expand
         const autoResize = () => {
             ta.style.height = 'auto';

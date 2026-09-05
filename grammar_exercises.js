@@ -1,295 +1,168 @@
 const grammarExercises = [
-    // CRASE
+    // --- CRASE ---
     {
         category: "Crase",
-        question: "O governo deve garantir o acesso ___ educação básica para todos.",
+        question: "A juíza não é favorável ___ revogação da prisão preventiva.",
         options: ["a", "à"],
         correctOptionIndex: 1,
-        explanation: "Quem garante acesso, garante acesso A algo. 'Educação' é feminino e aceita o artigo A. Ocorre fusão (a + a = à).",
-        correctSide: "O uso de 'à' está correto porque há a fusão da preposição 'a' exigida por 'acesso' com o artigo feminino 'a' de 'educação'.",
-        wrongSide: "Usar apenas 'a' sem crase seria um erro de regência, pois omitiria o artigo definido exigido pelo substantivo específico 'educação' ou a preposição exigida por 'acesso'.",
-        concept: "Regência Nominal",
-        conceptExplanation: "É a relação de dependência entre um nome (substantivo, adjetivo ou advérbio) e o seu complemento. Exemplo: quem tem 'acesso', tem acesso **a** alguma coisa. O nome 'acesso' pede a preposição 'a'."
+        explanation: "REGRA DE OURO DA CRASE: A crase só ocorre quando há a fusão da preposição 'a' com o artigo definido feminino 'a'. \n\n1. O termo regente (favorável) exige preposição? Sim! Quem é favorável, é favorável 'a' alguma coisa.\n2. O termo regido (revogação) admite o artigo 'a'? Sim, 'revogação' é substantivo feminino.\n\nLogo: a (preposição) + a (artigo) = à."
     },
     {
         category: "Crase",
-        question: "O combate ___ desigualdade deve ser tratado como prioridade pelo Estado.",
-        options: ["a", "à"],
+        question: "O governo repassou verbas ___ instituições carentes.",
+        options: ["a", "às", "as"],
         correctOptionIndex: 1,
-        explanation: "O termo 'combate' exige preposição 'a', e 'desigualdade' é palavra feminina que aceita o artigo 'a'. Ocorre fusão (à).",
-        correctSide: "É correto porque 'combate a' (preposição) se junta com 'a desigualdade' (artigo feminino).",
-        wrongSide: "A falta da crase ignora a presença do artigo definido 'a' que acompanha o substantivo 'desigualdade', configurando erro sintático grave.",
-        concept: "Artigo Definido",
-        conceptExplanation: "Palavra que vem antes do substantivo para determiná-lo de forma precisa (o, a, os, as). A crase só acontece se a palavra seguinte aceitar o artigo 'a' (feminino)."
+        explanation: "1. O verbo 'repassou' (no sentido de transferir) exige preposição 'a' (repassou algo A alguém).\n2. O substantivo feminino plural 'instituições' admite o artigo plural 'as'.\n\nLogo: a (preposição) + as (artigo plural) = às. Lembre-se: 'a' no singular antes de palavra no plural NÃO leva crase. Aqui, como usamos 'às', a crase é obrigatória!"
     },
     {
         category: "Crase",
-        question: "Devido ___ falta de investimentos, a educação sofre graves prejuízos.",
-        options: ["a", "à"],
-        correctOptionIndex: 1,
-        explanation: "A locução 'Devido a' exige preposição 'a'. 'Falta' é substantivo feminino que aceita artigo. Método Cachorrão: Devido AO problema (se deu 'ao', tem crase).",
-        correctSide: "Correto, pois há preposição exigida por 'devido' e artigo feminino acompanhando 'falta'.",
-        wrongSide: "Sem crase, você comete erro de regência nominal (não atende à regência de 'devido').",
-        concept: "Locução Prepositiva",
-        conceptExplanation: "Conjunto de duas ou mais palavras que têm o mesmo valor de uma preposição. Ex: 'devido a', 'em frente a', 'graças a'."
-    },
-    {
-        category: "Crase",
-        question: "A população começa ___ sofrer os impactos das mudanças climáticas.",
+        question: "O projeto de lei está vinculado ___ partir de uma nova perspectiva.",
         options: ["a", "à"],
         correctOptionIndex: 0,
-        explanation: "Nunca ocorre crase antes de verbos no infinitivo. 'Sofrer' é verbo.",
-        correctSide: "Usar apenas 'a' (preposição) está correto porque verbos não aceitam artigo feminino antes deles.",
-        wrongSide: "Colocar crase ('à') antes de verbo é considerado um erro primário, já que verbos não são acompanhados por artigos.",
-        concept: "Verbo no Infinitivo",
-        conceptExplanation: "É o verbo em seu estado natural, sem conjugação, terminado em -AR, -ER, ou -IR (ex: sofrer, amar, partir). Verbos não têm gênero (masculino/feminino), logo não aceitam artigo 'a', tornando impossível a crase."
+        explanation: "NUNCA USE CRASE ANTES DE VERBO! A palavra 'partir' é um verbo no infinitivo. Como verbos não admitem artigo feminino ('a'), o 'a' que aparece antes deles é exclusivamente uma preposição. Assim, não existe a fusão que forma a crase."
     },
     {
         category: "Crase",
-        question: "Medidas devem ser tomadas, ___ fim de mitigar o problema.",
-        options: ["a", "à"],
-        correctOptionIndex: 0,
-        explanation: "'Fim' é uma palavra masculina. Não há crase antes de palavras masculinas em regras gerais.",
-        correctSide: "O correto é 'a fim', pois 'fim' é um substantivo masculino e só admite artigo masculino 'o'.",
-        wrongSide: "Crase antes de palavra masculina é erro grave, indicando desconhecimento da regra fundamental (crase é a+a, não a+o).",
-        concept: "Substantivo Masculino",
-        conceptExplanation: "Palavras que aceitam o artigo 'o' (o fim, o amor, o homem). Como a crase é a fusão de preposição 'a' + artigo feminino 'a', ela nunca acontece antes de palavras masculinas."
-    },
-    {
-        category: "Crase",
-        question: "O investimento em segurança pública deve chegar ___ todas as regiões.",
-        options: ["a", "à"],
-        correctOptionIndex: 0,
-        explanation: "'Todas' é um pronome indefinido que repele o artigo. Logo, o 'a' é apenas preposição.",
-        correctSide: "A preposição pura 'a' está correta pois pronomes indefinidos (como 'todas', 'alguma', 'nenhuma') não admitem artigo feminino antes.",
-        wrongSide: "Colocar crase aqui ('à todas') é um erro clássico, punido duramente pela banca, pois o artigo feminino plural seria 'as', não 'a'.",
-        concept: "Pronome Indefinido",
-        conceptExplanation: "Palavras que se referem a algo ou alguém de forma vaga, imprecisa (todas, algumas, nenhuma, ninguém, qualquer). A maioria deles recusa o uso do artigo feminino 'a' antes deles."
-    },
-    {
-        category: "Crase",
-        question: "O projeto é semelhante ___ que foi aprovado no ano passado.",
-        options: ["a", "ao"],
-        correctOptionIndex: 1,
-        explanation: "Semelhante exige preposição 'a'. Como o pronome demonstrativo oculto é 'aquilo' ou o pronome 'o' (masculino), a fusão é 'ao'.",
-        correctSide: "O uso de 'ao' está correto, pois temos a preposição 'a' e o pronome demonstrativo 'o' (=aquele).",
-        wrongSide: "Escrever 'semelhante a' omitindo o 'o' deixa a frase incompleta e com erro de paralelismo pronominal.",
-        concept: "Pronome Demonstrativo",
-        conceptExplanation: "Neste caso, o 'o/a' e 'os/as' funcionam como pronomes demonstrativos quando podem ser substituídos por 'aquele', 'aquela' ou 'aquilo'. Ex: 'semelhante a(quilo) que'."
-    },
-    {
-        category: "Crase",
-        question: "As políticas públicas visam ___ inclusão de minorias.",
+        question: "A proposta é idêntica ___ que foi apresentada ontem.",
         options: ["a", "à"],
         correctOptionIndex: 1,
-        explanation: "O verbo 'visar' (no sentido de objetivar) exige preposição 'a'. 'Inclusão' é feminino. Ocorre crase.",
-        correctSide: "O correto é 'à inclusão', pois quem visa (objetiva), visa A alguma coisa. 'Inclusão' aceita artigo A.",
-        wrongSide: "A falta da crase transforma o verbo 'visar' em transitivo direto (sentido de assinar/mirar), o que muda o sentido e gera erro de regência na redação.",
-        concept: "Verbo Transitivo Indireto",
-        conceptExplanation: "É o verbo que precisa de um complemento ligado a ele obrigatoriamente por uma preposição. O verbo 'visar' (desejar) exige a preposição 'a'."
+        explanation: "CRASE ANTES DE PRONOME DEMONSTRATIVO: O 'que' aqui equivale a 'aquela' (A proposta é idêntica 'àquela' que foi apresentada). O termo regente 'idêntica' exige a preposição 'a'. O pronome demonstrativo 'a' (aquela) aceita a fusão. Logo: a (preposição) + a (pronome) = à."
     },
-
-    // VÍRGULA
+    // --- VÍRGULA ---
     {
         category: "Vírgula",
-        question: "Atualmente, no Brasil ___ o preconceito ainda é um desafio.",
-        options: ["(sem vírgula)", ","],
+        question: "Os estudantes ___ que estudaram muito ___ foram aprovados.",
+        options: ["sem vírgulas", "com vírgulas"],
         correctOptionIndex: 1,
-        explanation: "'Atualmente' e 'no Brasil' são adjuntos adverbiais deslocados (tempo e lugar). Devem ser isolados.",
-        correctSide: "O uso da vírgula após 'no Brasil' isola o grande bloco adverbial deslocado para o início da frase, garantindo clareza sintática.",
-        wrongSide: "A ausência da vírgula deixa o adjunto adverbial grudado no sujeito ('o preconceito'), prejudicando o ritmo da leitura e violando a regra de pontuação para adjuntos longos.",
-        concept: "Adjunto Adverbial Deslocado",
-        conceptExplanation: "O adjunto adverbial é um termo que indica circunstância (tempo, lugar, modo, causa). A ordem natural dele na frase é no final. Quando ele é 'deslocado' para o início ou meio da frase, deve ser isolado por vírgulas. Exemplo: 'No Brasil (lugar), isso acontece'."
+        explanation: "Essa é uma Oração Subordinada Adjetiva Explicativa (com vírgulas). Significa que *todos* os estudantes (naquele contexto) estudaram muito e foram aprovados. A vírgula serve para 'explicar' o termo anterior. Se fosse sem vírgula (Restritiva), significaria que *apenas uma parte do grupo* (aqueles que estudaram muito) foi aprovada."
     },
     {
         category: "Vírgula",
-        question: "O Ministério da Educação órgão responsável pelo ensino no país ___ deve intervir.",
-        options: ["(sem vírgula)", ","],
+        question: "No Brasil colonial ___ a economia era baseada na exportação de açúcar.",
+        options: ["obrigatoriamente com vírgula", "facultativo", "proibido vírgula"],
+        correctOptionIndex: 0,
+        explanation: "O uso da vírgula aqui é OBRIGATÓRIO. 'No Brasil colonial' é um adjunto adverbial de tempo/lugar deslocado para o início da oração (ordem indireta). Como ele é 'longo' (3 ou mais palavras, segundo as bancas mais rígidas, como o CESPE e ENEM), a vírgula para marcá-lo é obrigatória."
+    },
+    {
+        category: "Vírgula",
+        question: "O relator do processo, decidiu arquivar a denúncia.",
+        options: ["correto", "incorreto"],
         correctOptionIndex: 1,
-        explanation: "A expressão é um aposto explicativo e deve estar entre vírgulas. Faltava a segunda vírgula.",
-        correctSide: "A vírgula fechando o aposto explicativo garante que a explicação termine e a frase retome seu fluxo para o verbo ('deve').",
-        wrongSide: "Sem a vírgula de fechamento, você comete o erro da 'Vírgula Suicida': separa o sujeito ('Ministério da Educação') do seu verbo ('deve'), o que tira muito ponto na C1.",
-        concept: "Aposto Explicativo",
-        conceptExplanation: "É um termo que explica, esclarece ou detalha um substantivo dito anteriormente. Na redação, é muito usado para apresentar quem é um filósofo ou o que é um órgão público. Ex: 'Paulo Freire, grande educador brasileiro, disse que...'. Deve sempre vir entre duas vírgulas."
+        explanation: "INCORRETO! Você acaba de separar o SUJEITO ('O relator do processo') do VERBO ('decidiu'). A regra número 1 da pontuação em português é: NUNCA se separa por vírgula o sujeito e o verbo, nem o verbo de seus complementos diretos. Se quiser adicionar algo, tem que ser entre duas vírgulas (ex: O relator, ontem, decidiu)."
     },
+    // --- CONCORDÂNCIA E REGÊNCIA ---
     {
-        category: "Vírgula",
-        question: "Muitos cidadãos, que não têm acesso à internet, sofrem com a exclusão digital.",
-        options: ["Correto", "Incorreto"],
+        category: "Concordância",
+        question: "Faz ou Fazem dois anos que a lei foi aprovada?",
+        options: ["Faz", "Fazem"],
         correctOptionIndex: 0,
-        explanation: "Correto. As vírgulas isolam uma oração subordinada adjetiva explicativa, indicando que todos os cidadãos em questão sofrem disso.",
-        correctSide: "A vírgula dupla isola a explicação, fazendo sentido lógico e sintático na construção do argumento.",
-        wrongSide: "Se retirássemos as vírgulas, a oração viraria 'restritiva', dando a entender que existem alguns cidadãos que não têm internet e outros que têm.",
-        concept: "Oração Subordinada Adjetiva Explicativa",
-        conceptExplanation: "É uma frase inteira (que contém verbo) que serve para dar uma explicação genérica sobre o sujeito, agindo como um grande adjetivo. Por ser explicativa, precisa estar isolada por vírgulas. Sem vírgulas, vira 'restritiva' (limitando o sentido apenas a um grupo específico)."
+        explanation: "VERBO FAZER (indicando tempo decorrido): É um verbo impessoal! Isso significa que ele não possui um sujeito com quem concordar. Por isso, DEVE ficar sempre cristalizado na 3ª pessoa do singular, independentemente de o tempo (dois anos) estar no plural."
     },
     {
-        category: "Vírgula",
-        question: "No cenário atual ___ observa-se que as redes sociais influenciam comportamentos.",
-        options: ["(sem vírgula)", ","],
+        category: "Concordância",
+        question: "Houve ou Houveram muitos problemas na gestão?",
+        options: ["Houve", "Houveram"],
+        correctOptionIndex: 0,
+        explanation: "VERBO HAVER (no sentido de existir, ocorrer ou acontecer): É impessoal! Exatamente como o verbo 'fazer' indicando tempo, o 'haver' fica travado na 3ª pessoa do singular. A palavra 'problemas' funciona como objeto direto, e não como sujeito da oração."
+    },
+    {
+        category: "Regência",
+        question: "Assistir o filme ou Assistir ao filme?",
+        options: ["Assistir o filme", "Assistir ao filme"],
         correctOptionIndex: 1,
-        explanation: "Adjunto adverbial deslocado (No cenário atual) com três palavras. A vírgula é altamente recomendada/obrigatória.",
-        correctSide: "A vírgula separa o adjunto adverbial deslocado do resto da oração, organizando a leitura.",
-        wrongSide: "Ignorar a vírgula em adjuntos com três ou mais palavras é considerado erro pelo Enem e vestibulares.",
-        concept: "Extensão do Adjunto Adverbial",
-        conceptExplanation: "A gramática diz que se o adjunto adverbial deslocado for 'curto' (1 ou 2 palavras, ex: 'Hoje,'), a vírgula é opcional. Mas se for longo (3 ou mais palavras, ex: 'No cenário atual,'), a vírgula passa a ser obrigatória para não confundir o leitor."
+        explanation: "REGÊNCIA VERBAL: O verbo ASSISTIR no sentido de VER/PRESENCIAR é transitivo indireto e exige a preposição 'a'. Você assiste 'a' algo. Portanto, o correto é 'assistir ao filme'. A forma 'assistir o filme' estaria correta apenas se o sentido fosse de prestar assistência/ajudar."
     },
     {
-        category: "Vírgula",
-        question: "A escola, portanto, precisa ser um ambiente acolhedor.",
-        options: ["Correto", "Incorreto"],
-        correctOptionIndex: 0,
-        explanation: "Correto. O conectivo 'portanto' está deslocado (entre o sujeito e o verbo), logo, deve ficar entre vírgulas.",
-        correctSide: "Conectivos conclusivos/adversativos deslocados devem OBRIGATORIAMENTE ser isolados por duas vírgulas.",
-        wrongSide: "Colocar apenas uma vírgula (antes ou depois) seria a famosa 'Vírgula Suicida', separando sujeito do verbo indevidamente.",
-        concept: "Conectivo Deslocado",
-        conceptExplanation: "Os conectivos (porém, portanto, logo) costumam vir no início da frase ('Portanto, a escola...'). Quando o autor decide colocá-los no meio da frase, depois do sujeito, eles devem vir presos entre duas vírgulas."
-    },
-    {
-        category: "Vírgula",
-        question: "É imperativo que, o Ministério da Saúde crie novas políticas de assistência.",
-        options: ["Correto", "Incorreto"],
+        category: "Regência",
+        question: "A medida implica ___ novas contratações.",
+        options: ["em", "∅ (nada)"],
         correctOptionIndex: 1,
-        explanation: "Incorreto. Não se separa a conjunção integrante ('que') da oração subordinada que ela introduz, a menos que haja um elemento intercalado.",
-        correctSide: "O correto seria 'É imperativo que o Ministério...'. A frase corre fluida e a sintaxe é preservada.",
-        wrongSide: "A vírgula logo após o 'que' quebra violentamente a relação de subordinação (oração principal com a subjetiva). É um erro gravíssimo.",
-        concept: "Conjunção Integrante",
-        conceptExplanation: "Palavras como 'que' ou 'se' introduzem uma oração subordinada substantiva (ex: 'É necessário QUE você estude'). Separar o 'que' do resto da oração com vírgula quebra a frase no meio."
+        explanation: "O verbo IMPLICAR (no sentido de acarretar, trazer como consequência) é TRANSITIVO DIRETO. Isso significa que ele não pede preposição (em). O correto é 'A medida implica novas contratações'. Dizer 'implica em' é um vício de linguagem comum, mas penalizado em redações."
+    },
+    // --- CONECTIVOS ---
+    {
+        category: "Conectivos",
+        question: "Qual conectivo usar para introduzir uma ideia de concessão (uma exceção que não anula a regra)?",
+        options: ["Porquanto", "Conquanto", "Por conseguinte", "Destarte"],
+        correctOptionIndex: 1,
+        explanation: "'Conquanto' é um conectivo concessivo (sinônimo de 'embora', 'mesmo que', 'ainda que'). A concessão apresenta uma oposição que não é forte o suficiente para anular a ideia principal. \nEx: 'Conquanto houvesse leis (oposição menor), o crime persistia (ideia principal)'.\n'Porquanto' = causa/explicação.\n'Destarte' = conclusão."
     },
     {
-        category: "Vírgula",
-        question: "Segundo Zygmunt Bauman, a modernidade é líquida.",
-        options: ["Correto", "Incorreto"],
+        category: "Conectivos",
+        question: "O conectivo 'Outrossim' tem valor semântico de:",
+        options: ["Oposição", "Conclusão", "Adição", "Causa"],
+        correctOptionIndex: 2,
+        explanation: "'Outrossim' é um conectivo de ADIÇÃO, funcionando de forma semelhante a 'igualmente', 'do mesmo modo', 'além disso'. É um termo clássico e elegante para iniciar um segundo argumento no desenvolvimento da sua redação (D2)."
+    },
+    {
+        category: "Conectivos",
+        question: "Qual conectivo usar para indicar uma oposição forte a um argumento anterior?",
+        options: ["Ademais", "Por conseguinte", "Entretanto", "Nesse sentido"],
+        correctOptionIndex: 2,
+        explanation: "O conectivo 'Entretanto' é um operador argumentativo de OPOSIÇÃO (adversativo). Ele quebra a expectativa do que foi dito antes. \n- 'Ademais' soma argumentos (adição).\n- 'Por conseguinte' indica consequência/conclusão.\n- 'Nesse sentido' indica continuação/conformidade."
+    },
+    // --- USO DO INFINITIVO E OUTROS ---
+    {
+        category: "Uso do Infinitivo",
+        question: "É correto dizer: 'Para mim fazer o trabalho' ou 'Para eu fazer o trabalho'?",
+        options: ["Para mim fazer", "Para eu fazer"],
+        correctOptionIndex: 1,
+        explanation: "MIM NÃO CONJUGA VERBO! 'Mim' é pronome oblíquo tônico e, sintaticamente, costuma atuar como complemento. Ele não pode ser sujeito de uma ação. O verbo no infinitivo ('fazer') exige um sujeito no caso reto. Logo, quem faz a ação sou 'EU' (Para eu fazer)."
+    },
+    {
+        category: "Uso do Infinitivo",
+        question: "Devem existir ou Deve existir casos isolados?",
+        options: ["Devem existir", "Deve existir"],
         correctOptionIndex: 0,
-        explanation: "Correto. Orações ou expressões conformativas deslocadas (Segundo fulano, Conforme ciclano) exigem vírgula.",
-        correctSide: "A vírgula após a citação marca o fim da expressão conformativa deslocada.",
-        wrongSide: "Sem a vírgula, a leitura ficaria confusa, fundindo o autor com o sujeito da oração principal.",
-        concept: "Expressão Conformativa",
-        conceptExplanation: "Indica conformidade com o que alguém disse (Segundo..., Conforme..., De acordo com...). Muito usada na introdução de repertórios na redação. Quando aparece no início da frase, exige vírgula."
+        explanation: "O verbo 'existir' NÃO É IMPESSOAL (ao contrário de 'haver'). Ele possui sujeito, e o sujeito aqui é 'casos isolados'. Em uma locução verbal ('devem existir'), o verbo auxiliar ('devem') concorda com o sujeito da oração. Logo, como 'casos' está no plural, o correto é 'Devem existir casos'."
     },
-
-    // CONECTIVOS E REGÊNCIA
     {
-        category: "Conectivos e Regência",
-        question: "O autor não concorda ___ visão otimista sobre a globalização.",
-        options: ["com a", "a"],
+        category: "Uso do Infinitivo",
+        question: "A equipe está disposta ___ contribuir com o projeto.",
+        options: ["a", "à"],
         correctOptionIndex: 0,
-        explanation: "Quem concorda, concorda COM algo ou alguém. Regência do verbo concordar.",
-        correctSide: "O uso da preposição 'com' atende à transitividade indireta do verbo concordar.",
-        wrongSide: "Usar apenas o artigo 'a' transforma 'concordar' em transitivo direto, o que na norma padrão do português constitui erro crasso.",
-        concept: "Regência Verbal",
-        conceptExplanation: "Regência verbal é a relação entre o verbo e seus complementos. Cada verbo 'pede' (rege) uma preposição específica. Por exemplo, quem 'gosta', gosta DE. Quem 'concorda', concorda COM."
+        explanation: "NUNCA USE CRASE ANTES DE VERBO NO INFINITIVO. 'Contribuir' é verbo. A palavra 'disposta' exige a preposição 'a' (disposto a algo), mas como não existe artigo feminino antes de verbo, temos apenas a preposição 'a'. Sem artigo, sem crase."
     },
     {
-        category: "Conectivos e Regência",
-        question: "Nesse sentido, medidas são necessárias, ___ a conscientização da população.",
-        options: ["destacando-se", "sendo que"],
+        category: "Uso do Infinitivo",
+        question: "Eles foram obrigados a ___ (recuar / recuarem) diante da crise.",
+        options: ["recuar (Infinitivo impessoal)", "recuarem (Infinitivo pessoal flexionado)"],
         correctOptionIndex: 0,
-        explanation: "'Destacando-se' é mais polido. 'Sendo que' é uma expressão coloquial e malvista em redações nota 1000.",
-        correctSide: "A oração reduzida de gerúndio ('destacando-se') atua de forma elegante e correta para especificar uma das medidas.",
-        wrongSide: "O uso de 'sendo que' é vício de linguagem coloquial, o que tira nota na Competência 1 e empobrece a coesão.",
-        concept: "Coloquialismo",
-        conceptExplanation: "Marcas de oralidade (jeito falado) que não devem ser usadas na escrita formal dissertativa. 'Sendo que', 'tipo assim', 'né' são exemplos que descontam ponto na C1."
+        explanation: "Quando o verbo no infinitivo forma uma locução com um verbo auxiliar ou está precedido de preposição formando uma oração reduzida que se refere ao MESMO sujeito da oração principal ('Eles'), o uso do infinitivo impessoal (sem flexão, 'recuar') é a forma recomendada e mais elegante. Flexionar ('recuarem') não é estritamente errado aqui, mas soa redundante."
     },
     {
-        category: "Conectivos e Regência",
-        question: "O Estado assiste ___ pessoas em situação de vulnerabilidade?",
+        category: "Regência",
+        question: "O diretor visava ___ lucro máximo para a empresa.",
+        options: ["o", "ao"],
+        correctOptionIndex: 1,
+        explanation: "O verbo 'visar' com sentido de 'ter como objetivo / almejar' é transitivo INDIreto, exigindo a preposição 'a'. Quem visa (almeja), visa 'a' alguma coisa. Portanto: visa + a (preposição) + o (artigo de lucro) = visava ao lucro."
+    },
+    {
+        category: "Regência",
+        question: "Ele sempre obedeceu ___ regras da escola.",
         options: ["as", "às"],
-        correctOptionIndex: 0,
-        explanation: "No sentido de dar assistência (ajudar), o verbo 'assistir' aceita transitividade direta (as) e indireta, mas recomenda-se a direta para evitar ambiguidades com o sentido de 'ver' (às).",
-        correctSide: "Ambas as formas são aceitas gramaticalmente, mas 'as' evita confusão na leitura rápida do corretor.",
-        wrongSide: "Se usar 'às', o corretor pode interpretar pelo viés comum de 'assistir a um filme' (sentido de presenciar) e marcar como erro de coesão.",
-        concept: "Ambiguidade Sintática",
-        conceptExplanation: "Quando uma estrutura gramatical permite duas interpretações. O verbo 'assistir' pode ser transitivo direto (ajudar) ou transitivo indireto (ver). Usar a regência certa define o sentido."
-    },
-    {
-        category: "Conectivos e Regência",
-        question: "O filme retrata a desigualdade, ___ é um problema histórico.",
-        options: ["onde", "o qual"],
         correctOptionIndex: 1,
-        explanation: "'Onde' só pode ser usado para indicar LUGAR físico. 'A desigualdade' não é um lugar.",
-        correctSide: "Usar 'o qual' (ou que) retoma perfeitamente o termo anterior sem desviar o sentido.",
-        wrongSide: "Usar 'onde' para situações, épocas ou conceitos abstratos é o famoso 'queísmo de lugar' (erro gravíssimo de coesão).",
-        concept: "Pronome Relativo",
-        conceptExplanation: "Pronomes que retomam um termo anterior (antecedente) para não repeti-lo na frase seguinte (que, o qual, onde, cujo). Cada um tem uma regra de uso específica."
+        explanation: "O verbo 'obedecer' é transitivo indireto (quem obedece, obedece 'A' alguém ou 'A' algo). Como a palavra 'regras' é feminina plural, aceita o artigo 'as'. Logo, preposição 'a' + artigo 'as' = 'às' (com crase obrigatória)."
     },
     {
-        category: "Conectivos e Regência",
-        question: "A desinformação prolifera rápido, ___ prejudica o debate público.",
-        options: ["fator que", "o que"],
+        category: "Conectivos",
+        question: "Na redação, qual a diferença prática entre 'Portanto' e 'Todavia'?",
+        options: ["'Portanto' conclui uma ideia; 'Todavia' introduz uma quebra de expectativa (oposição).", "'Portanto' adiciona um argumento; 'Todavia' explica uma causa."],
         correctOptionIndex: 0,
-        explanation: "'Fator que' ou 'situação que' são retomadas pronominais de alta performance.",
-        correctSide: "'Fator que' funciona como um elemento coesivo forte e vocabulário erudito, garantindo pontos na C4.",
-        wrongSide: "Usar apenas 'o que' soa mais oral e simples, empobrecendo a elegância estrutural do texto.",
-        concept: "Coesão Referencial de Retomada",
-        conceptExplanation: "Técnica de reescrever ou retomar uma ideia dita anteriormente usando um substantivo abstrato (fator, cenário, contexto) em vez de apenas pronomes simples, demonstrando amplo vocabulário."
+        explanation: "'Portanto' é clássico para iniciar o parágrafo de Conclusão, pois amarra logicamente tudo o que foi dito e anuncia o fim do raciocínio. 'Todavia' tem exatamente a mesma força do 'Mas / Porém', servindo para quebrar o argumento anterior e apresentar um obstáculo."
     },
     {
-        category: "Conectivos e Regência",
-        question: "Portanto, o Governo deve agir, ___ o MEC promova palestras.",
-        options: ["a fim de que", "para"],
-        correctOptionIndex: 0,
-        explanation: "Com o verbo no subjuntivo ('promova'), deve-se usar a locução conjuntiva 'a fim de que'.",
-        correctSide: "A locução 'a fim de que' introduz uma oração adverbial final com verbo no subjuntivo (promova).",
-        wrongSide: "Escrever 'para o MEC promova' cria uma anomalia sintática grotesca. Mistura o uso de preposição simples com o verbo conjugado de forma incompatível.",
-        concept: "Oração Subordinada Adverbial Final",
-        conceptExplanation: "Frase que indica a finalidade/objetivo da ação principal. Muito usada no detalhamento e finalidade da proposta de intervenção. Pode ser construída com 'para' + Infinitivo (para promover) ou 'a fim de que' + Subjuntivo (a fim de que promova)."
+        category: "Conectivos",
+        question: "Para iniciar o Desenvolvimento 1 (D1), qual desses conectivos é mais estratégico?",
+        options: ["Em suma", "Sob esse viés", "Diante desse cenário"],
+        correctOptionIndex: 2,
+        explanation: "'Diante desse cenário' (ou 'Nesse contexto', 'A priori') é ideal para o D1 porque ele conecta a sua Tese (deixada na introdução) com o início do seu primeiro argumento. 'Em suma' só serve para a conclusão. 'Sob esse viés' é ótimo para o D2 (pois puxa o viés discutido no D1)."
     },
     {
-        category: "Conectivos e Regência",
-        question: "A população prefere entretenimento ___ informação de qualidade.",
-        options: ["a", "do que"],
-        correctOptionIndex: 0,
-        explanation: "O verbo 'preferir' exige a preposição 'a' (preferir X a Y). Nunca use 'preferir X do que Y' na norma culta.",
-        correctSide: "O uso da preposição 'a' está perfeitamente alinhado com a norma-padrão (prefiro uma coisa A outra).",
-        wrongSide: "'Do que' é vício de linguagem oral. Colocar 'prefere isso do que aquilo' na redação é penalizado diretamente.",
-        concept: "Norma Padrão Culta",
-        conceptExplanation: "É o conjunto de regras oficiais da língua portuguesa (gramática). O Enem exige estrito seguimento dessa norma, distanciando o texto da forma como falamos livremente no dia a dia."
-    },
-    // USO DOS PORQUÊS
-    {
-        category: "Uso dos Porquês",
-        question: "A mídia não explica ___ a violência urbana continua crescendo.",
-        options: ["por que", "porque"],
-        correctOptionIndex: 0,
-        explanation: "Usa-se 'por que' (separado e sem acento) em perguntas diretas ou indiretas, quando puder ser substituído por 'por qual motivo' ou 'pelo qual'.",
-        correctSide: "Correto, pois pode ser substituído por 'por qual motivo' (A mídia não explica por qual motivo...).",
-        wrongSide: "Usar 'porque' (junto) indicaria uma resposta ou causa, o que não faz sentido sintático na frase.",
-        concept: "Interrogativa Indireta",
-        conceptExplanation: "É uma pergunta embutida dentro de uma frase declarativa. Não termina com ponto de interrogação, mas pede uma explicação ou motivo."
-    },
-    {
-        category: "Uso dos Porquês",
-        question: "O saneamento básico é fundamental ___ previne diversas doenças.",
-        options: ["por que", "porque"],
-        correctOptionIndex: 1,
-        explanation: "Usa-se 'porque' (junto e sem acento) para introduzir uma explicação ou causa.",
-        correctSide: "Correto, pois equivale a 'pois' ou 'já que'. A oração seguinte explica o motivo do saneamento ser fundamental.",
-        wrongSide: "Usar 'por que' separado aqui é um erro gramatical que desestabiliza a coesão sequencial do texto.",
-        concept: "Conjunção Explicativa",
-        conceptExplanation: "Palavra que liga duas orações mostrando que a segunda explica a primeira."
-    },
-    // COLOCAÇÃO PRONOMINAL
-    {
-        category: "Colocação Pronominal",
-        question: "Não ___ a gravidade do problema habitacional nas metrópoles.",
-        options: ["se compreende", "compreende-se"],
-        correctOptionIndex: 0,
-        explanation: "A palavra 'Não' é um advérbio de negação, que atrai o pronome para antes do verbo (Próclise).",
-        correctSide: "O uso da Próclise é obrigatório devido à presença da palavra atrativa negativa 'Não'.",
-        wrongSide: "A ênclise (depois do verbo) está incorreta aqui porque a palavra negativa age como um ímã puxando o pronome para perto dela.",
-        concept: "Próclise (Palavra Atrativa)",
-        conceptExplanation: "A regra de colocação pronominal em que o pronome oblíquo fica antes do verbo. Advérbios (não, nunca) e pronomes relativos (que) atraem o pronome."
-    },
-    {
-        category: "Colocação Pronominal",
-        question: "A constituição assegura os direitos sociais, tornando-___ dever do Estado.",
-        options: ["os", "los"],
-        correctOptionIndex: 0,
-        explanation: "O verbo 'tornar' (na forma tornando) não termina em r, s ou z, portanto não sofre a modificação para '-los'. O gerúndio pede ênclise normal: tornando-os.",
-        correctSide: "A ênclise está correta e a forma pronominal 'os' foi mantida pois o verbo termina em vogal.",
-        wrongSide: "Utilizar 'los' só é permitido quando o verbo termina em R, S ou Z (ex: torná-los).",
-        concept: "Gerúndio e Ênclise",
-        conceptExplanation: "O gerúndio (verbos terminados em -ndo) exige que o pronome venha após o verbo, desde que não haja palavra atrativa antes."
+        category: "Concordância",
+        question: "A maior parte dos brasileiros ___ (acredita / acreditam) na melhora econômica.",
+        options: ["apenas 'acredita'", "apenas 'acreditam'", "ambas estão corretas"],
+        correctOptionIndex: 2,
+        explanation: "Expressões partitivas ('a maior parte de', 'a maioria de', 'grande número de') acompanhadas de um plural ('brasileiros') aceitam DUAS concordâncias: a lógica, que concorda com o partitivo singular ('A maior parte... acredita'), ou a atrativa, que concorda com o termo mais próximo plural ('...brasileiros acreditam'). Ambas são gramaticalmente irretocáveis na redação."
     }
 ];

@@ -172,6 +172,7 @@ Você deve retornar a sua avaliação EXCLUSIVAMENTE em formato JSON estruturado
     "c5": 200
   },
   "diagnostico": "Aqui vai o diagnóstico completo sobre o projeto de texto, teses, avaliação de repertórios e estilo do aluno. Formate com quebras de linha (\\n) para separar parágrafos.",
+  "resumoPratico": "Resumo prático (bullet points) com as 3 ações mais importantes que o aluno deve tomar para melhorar a redação na próxima vez. Use quebras de linha (\\n).",
   "erros": [
     {
       "trecho_original": "ajudando",

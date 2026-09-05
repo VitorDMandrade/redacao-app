@@ -146,21 +146,65 @@ const BANCAS = {
         eixosTematicos: EIXOS_MESTRES
     },
     "EXATO_CARTA": {
-        nome: "Processo Seletivo Exato (UFT/UFNT) - Carta Argumentativa",
+        nome: "Processo Seletivo Exato (UFT/UFNT) - Carta do Leitor",
         notaMaxima: 100.0,
         exigeTitulo: false,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['carta'],
         criterios: [
-            { id: "c1", nome: "Domínio da Norma Culta da Língua Portuguesa", pontuacao: 20, desc: "Fidelidade às convenções gramaticais, precisão vocabular e construção sintática." },
-            { id: "c2", nome: "Adequação ao Gênero Epistolar (Carta)", pontuacao: 20, desc: "Presença de local/data, vocativo, corpo argumentativo, despedida e assinatura correta." },
-            { id: "c3", nome: "Argumentação e Interlocução", pontuacao: 20, desc: "Capacidade de argumentar com fatos voltados especificamente ao interlocutor/veículo." },
-            { id: "c4", nome: "Mecanismos Linguísticos de Coesão", pontuacao: 20, desc: "Estruturação inter e intraparágrafos e progressão fluida das ideias." },
-            { id: "c5", nome: "Encaminhamentos e Adequação Social", pontuacao: 20, desc: "Proposta de intervenção ou reflexão adaptada à realidade do interlocutor (viável e respeitosa)." }
+            { id: "c1", nome: "Domínio da Norma Culta da Língua Portuguesa", pontuacao: 20, desc: "Fidelidade às convenções gramaticais, precisão vocabular e construção sintática correta." },
+            { id: "c2", nome: "Adequação ao Gênero Epistolar (Carta do Leitor)", pontuacao: 20, desc: "Presença obrigatória de vocativo, corpo argumentativo (Opinião + Argumentação), fechamento e assinatura fictícia. NÃO é carta pessoal." },
+            { id: "c3", nome: "Argumentação e Interlocução", pontuacao: 20, desc: "Capacidade de argumentar diretamente com o destinatário (ex: 'Prezados editores') com fatos e exemplos. O autor participa de uma discussão pública, não conta sua vida." },
+            { id: "c4", nome: "Mecanismos Linguísticos de Coesão", pontuacao: 20, desc: "Estruturação inter e intraparágrafos, progressão fluida das ideias com conectivos adequados." },
+            { id: "c5", nome: "Encaminhamentos e Adequação Social", pontuacao: 20, desc: "Encaminhamento de reflexão ou possível solução adaptada à realidade do interlocutor. Proposta de intervenção NÃO é obrigatória (mas pode ser sugerida como possível solução)." }
         ],
-        orientacoes: "Nota mínima exigida é 30,0 pontos. Estruture como carta rigorosamente (não assine seu nome real).",
-        resumoPratico: "O candidato deve convencer o destinatário. A linguagem deve ser persuasiva, e a intervenção deve soar como um pedido formal ou sugestão ao interlocutor.",
-        eixosTematicos: EIXOS_MESTRES
+        orientacoes: `📌 CARTA DO LEITOR ≠ CARTA PESSOAL!
+— É um gênero argumentativo voltado para discussão pública.
+— O autor se manifesta sobre uma notícia, reportagem ou artigo publicado.
+— Antes de escrever, faça 3 perguntas: (1) Qual meu papel nessa situação comunicativa? (2) Para quem estou escrevendo? (3) Qual é o assunto?
+— O tema será sempre um dos 3 eixos da prova (Meio Ambiente / Tecnologia / Diversidade Cultural).
+— Evite introduções genéricas como "Desde o início dos tempos...". Vá direto ao tema com seu posicionamento.
+— Não assine seu nome real.`,
+        resumoPratico: `ESTRUTURA OBRIGATÓRIA:
+I. Introdução → Interlocução + assunto + posicionamento (sua opinião)
+II. Desenvolvimento 1 → Argumento + explicação + exemplo/repertório + relação com o tema
+III. Desenvolvimento 2 → Segundo argumento + explicação + exemplo/repertório + relação com o tema
+IV. Fechamento → Retomada da posição + conclusão/reflexão (ou sugestão de solução)
+V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Palmas")
+
+🧩 MODELO DE PARÁGRAFO DE DESENVOLVIMENTO (4 partes):
+→ Parte 1 (Argumento): "Um dos obstáculos à inclusão digital dos idosos é a falta de formação adequada."
+→ Parte 2 (Explicação): "Muitas pessoas idosas que não tiveram contato frequente com tecnologias ao longo da vida encontram dificuldades para compreender interfaces e procedimentos digitais."
+→ Parte 3 (Exemplo/Repertório): "Isso pode ser observado, por exemplo, na dificuldade enfrentada por parte da população idosa para utilizar aplicativos bancários e serviços públicos digitais."
+→ Parte 4 (Amarração): Relate o argumento com o tema e com o posicionamento da introdução.
+
+💡 EXEMPLO DE INTRODUÇÃO REAL:
+"Prezados editores, a discussão sobre o acesso da população à tecnologia precisa considerar também as desigualdades sociais que dificultam a inclusão digital."`,
+        eixosTematicos: [
+            {
+                nome: "Eixo 1: Meio ambiente, sustentabilidade, clima e meios de produção",
+                repertorios: [
+                    { obra: "Agenda 2030 (ONU)", autor: "ONU", resumo: "17 Objetivos de Desenvolvimento Sustentável para erradicar a pobreza e proteger o planeta até 2030.", uso: "Qualquer argumento ambiental que envolva ação global ou políticas públicas." },
+                    { obra: "Constituição Federal de 1988", autor: "Assembleia Constituinte", resumo: "Art. 225: todos têm direito ao meio ambiente ecologicamente equilibrado.", uso: "Embasamento jurídico para temas ambientais." },
+                    { obra: "Ailton Krenak / Chico Mendes / Milton Santos", autor: "Referências", resumo: "Pensadores brasileiros sobre território, natureza e sustentabilidade.", uso: "Humanização do argumento ambiental com perspectiva nacional." }
+                ]
+            },
+            {
+                nome: "Eixo 2: Tecnologia e inovação na sociedade contemporânea",
+                repertorios: [
+                    { obra: "Pierre Lévy / Castells", autor: "Teóricos", resumo: "Análise da sociedade em rede e do ciberespaço como espaço de participação e exclusão digital.", uso: "Inclusão/exclusão digital, hiperconectividade, algoritmos." },
+                    { obra: "Byung-Chul Han / Admirável Mundo Novo", autor: "Referências", resumo: "Crítica à sociedade do desempenho, controle algorítmico e perda da privacidade.", uso: "IA, vigilância digital, vício em telas, desinformação." }
+                ]
+            },
+            {
+                nome: "Eixo 3: Diversidade cultural, território, povos originários e comunidades tradicionais",
+                repertorios: [
+                    { obra: "Ailton Krenak / Darcy Ribeiro", autor: "Autores Brasileiros", resumo: "Defesa da cultura indígena, saberes tradicionais e crítica ao apagamento cultural.", uso: "Povos indígenas, quilombolas, identidade, patrimônio cultural." },
+                    { obra: "Convenção 169 da OIT / Constituição Federal (Art. 231)", autor: "Legislação", resumo: "Garantia de direitos territoriais e culturais dos povos originários.", uso: "Base jurídica para argumentos sobre povos indígenas e quilombolas." },
+                    { obra: "Estatuto da Igualdade Racial / Estatuto do Índio", autor: "Legislação Brasileira", resumo: "Instrumentos legais de proteção às culturas e identidades de grupos vulneráveis.", uso: "Conflitos fundiários, apagamento cultural, preservação dos modos de vida." }
+                ]
+            }
+        ]
     },
     "UFG": {
         nome: "UFG (Instituto Verbena)",

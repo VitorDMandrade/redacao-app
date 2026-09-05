@@ -15,6 +15,7 @@
     <script src="prompt.js"></script>
     <script src="repertories.js"></script>
     <script src="grammar_exercises.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
     <script src="script.js" defer></script>
 </head>
 
@@ -28,9 +29,24 @@
         <header class="header">
             <div style="display: flex; justify-content: space-between; align-items: center;">
                 <h1>Simulador de Redação</h1>
-                <button id="dark-mode-toggle" class="btn btn-secondary btn-sm" style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border-color: var(--panel-border);">
-                    <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-                    <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+                <button id="dark-mode-toggle" class="btn btn-secondary btn-sm"
+                    style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border-color: var(--panel-border);">
+                    <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
                 </button>
             </div>
             <p>Escreva na folha oficial e receba a correção interativa da Inteligência Artificial.</p>
@@ -117,7 +133,13 @@
                     </div>
 
                     <div class="paper-container">
+                        <!-- Co-piloto de Redação (Live Feedback) -->
+                        <div id="live-feedback-panel" style="display: none; background: rgba(239, 68, 68, 0.1); border-left: 4px solid var(--danger); padding: 0.8rem; margin: 0.5rem 1.5rem 1rem 1.5rem; font-size: 0.85rem; color: var(--danger); border-radius: 4px;">
+                            <strong>Aviso:</strong> <span id="live-feedback-msg"></span>
+                        </div>
+
                         <div class="paper-margin"></div>
+
                         <div class="paper-lines-container">
                             <div class="textarea-wrapper">
                                 <div class="line-numbers" id="line-numbers"></div>
@@ -250,6 +272,15 @@
                             <div id="feedback-part-4"></div>
                         </div>
                     </div>
+
+                    <!-- Montar Redação Final -->
+                    <div class="submit-area" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" id="btn-montar-redacao"
+                            style="width: 100%; font-size: 1.1rem; padding: 1rem;">
+                            <span>Montar Redação Final Completa</span>
+                        </button>
+                    </div>
+
                 </div>
 
                 <!-- TUTORIAL PASSO A PASSO -->
@@ -335,11 +366,15 @@
                         <div id="repertory-practice-container">
                             <div class="filter-bar" id="repertory-filter-bar"
                                 style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap: wrap; align-items: center;">
-                                <input type="text" id="repertory-search" placeholder="Pesquisar repertório..." style="flex: 1; min-width: 200px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); color: var(--text-color); font-family: 'Inter', sans-serif;">
-                                
-                                <div class="toggle-switch" style="display: flex; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 4px; border: 1px solid var(--panel-border);">
-                                    <button class="toggle-btn active" id="btn-toggle-intro" style="padding: 6px 16px; border-radius: 16px; border: none; background: var(--primary); color: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Introdução</button>
-                                    <button class="toggle-btn" id="btn-toggle-dev" style="padding: 6px 16px; border-radius: 16px; border: none; background: transparent; color: var(--text-main); cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Desenvolvimento</button>
+                                <input type="text" id="repertory-search" placeholder="Pesquisar repertório..."
+                                    style="flex: 1; min-width: 200px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); color: var(--text-color); font-family: 'Inter', sans-serif;">
+
+                                <div class="toggle-switch"
+                                    style="display: flex; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 4px; border: 1px solid var(--panel-border);">
+                                    <button class="toggle-btn active" id="btn-toggle-intro"
+                                        style="padding: 6px 16px; border-radius: 16px; border: none; background: var(--primary); color: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Introdução</button>
+                                    <button class="toggle-btn" id="btn-toggle-dev"
+                                        style="padding: 6px 16px; border-radius: 16px; border: none; background: transparent; color: var(--text-main); cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Desenvolvimento</button>
                                 </div>
 
                                 <button class="btn btn-secondary" id="btn-filter-favs"
@@ -353,13 +388,28 @@
 
                                 <button class="btn btn-secondary" id="btn-shuffle-reps"
                                     style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px; border-color: var(--warning); color: var(--warning);">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"></polyline><line x1="4" y1="20" x2="21" y2="3"></line><polyline points="21 16 21 21 16 21"></polyline><line x1="15" y1="15" x2="21" y2="21"></line><line x1="4" y1="4" x2="9" y2="9"></line></svg>
+                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <polyline points="16 3 21 3 21 8"></polyline>
+                                        <line x1="4" y1="20" x2="21" y2="3"></line>
+                                        <polyline points="21 16 21 21 16 21"></polyline>
+                                        <line x1="15" y1="15" x2="21" y2="21"></line>
+                                        <line x1="4" y1="4" x2="9" y2="9"></line>
+                                    </svg>
                                     Embaralhar
                                 </button>
 
+                                <button class="btn btn-secondary" id="btn-add-custom-rep"
+                                    style="padding: 5px 15px; font-size: 0.9em; border-radius: 20px; border-color: var(--primary); color: var(--primary);">+
+                                    Meu Repertório</button>
                                 <button class="btn btn-secondary" id="btn-export-pdf"
                                     style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px; border-color: var(--success); color: var(--success);">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
                                     Revisão PDF
                                 </button>
                             </div>
@@ -474,7 +524,7 @@
                         <div class="card-header"
                             style="display: flex; justify-content: space-between; align-items: flex-start;">
                             <div>
-                                <h3 style="color: var(--primary);">Arena de Micro-Treinos ⚡</h3>
+                                <h3 style="color: var(--primary);">Arena de Micro-Treinos ⚡ <span id="arena-question-counter" style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal; margin-left: 10px;"></span></h3>
                                 <span class="hint">Resolva exercícios rápidos para fixar Crase, Vírgula e Conectivos
                                     (Mão na Massa).</span>
                             </div>
@@ -492,7 +542,13 @@
                             <button class="btn btn-secondary btn-sm drill-category-btn"
                                 data-category="Vírgula">Vírgula</button>
                             <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Conectivos e Regência">Conectivos e Regência</button>
+                                data-category="Concordância">Concordância</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Regência">Regência</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Conectivos">Conectivos</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Uso do Infinitivo">Infinitivo</button>
                             <button class="btn btn-secondary btn-sm drill-category-btn" data-category="PontosFracos"
                                 style="border-color: var(--warning); color: var(--warning);">Meus Pontos Fracos</button>
                             <button class="btn btn-secondary btn-sm" id="btn-turbo-mode"
@@ -505,8 +561,10 @@
                             <div
                                 style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
                                 <span>Questão <span id="drill-counter">1</span></span>
-                                <span>Acertos: <span id="drill-score"
-                                        style="color: var(--success); font-weight: bold;">0</span></span>
+                                <span>
+                                    <span style="margin-right: 15px;">Acertos: <span id="drill-score" style="color: var(--success); font-weight: bold;">0</span></span>
+                                    <span>Erros: <span id="drill-errors" style="color: var(--danger); font-weight: bold;">0</span></span>
+                                </span>
                             </div>
 
                             <h4 id="drill-question"
@@ -642,7 +700,6 @@
                     </div>
                 </div>
 
-                <!-- Resultado da Análise -->
                 <div id="model-analysis-container" class="hidden" style="margin-top: 2rem;">
                     <!-- Dissecação do Texto -->
                     <div class="training-card" style="margin-bottom: 2rem;">
@@ -661,6 +718,8 @@
                     <div class="training-card">
                         <div class="card-header"
                             style="background: rgba(var(--success-rgb), 0.1); border-left: 4px solid var(--success);">
+                            <button class="btn btn-sm btn-secondary" id="btn-save-model" style="float: right;">💾 Salvar
+                                Molde</button>
                             <h3>4. Meu Esqueleto (Molde Salvo)</h3>
                             <span class="hint">Estes são os conectivos e estruturas genéricas extraídas da redação,
                                 organizadas nos respectivos parágrafos para uso futuro.</span>
@@ -705,6 +764,33 @@
                                     style="min-height: 60px; padding: 1rem; background: var(--bg-color); border: 1px dashed var(--panel-border); border-radius: 4px; display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
                                     <span style="color: var(--text-muted); font-style: italic;">Aguardando
                                         extração...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ======================================================= -->
+                <!-- CONSTRUTOR LIVRE: sempre visível, sem depender da análise -->
+                <!-- ======================================================= -->
+                <div class="training-card" style="margin-top: 2rem;">
+                    <div class="card-header"
+                        style="background: rgba(var(--warning-rgb), 0.1); border-left: 4px solid var(--warning);">
+                        <div style="float: right; display: flex; gap: 0.5rem;">
+                            <button class="btn btn-sm btn-secondary" id="btn-add-text-piece">✍️ Texto Livre</button>
+                            <button class="btn btn-sm btn-secondary" id="btn-export-builder" style="border-color: var(--primary); color: var(--primary);">📤 Enviar p/ Redação</button>
+                            <button class="btn btn-sm btn-secondary" id="btn-clear-builder" style="border-color: var(--danger); color: var(--danger);">🧹 Limpar Folha</button>
+                        </div>
+                        <h3>Construtor Livre — Minha Folha em Branco</h3>
+                        <span class="hint">Abra o <strong>Dicionário 📖</strong> e clique nas palavras para adicioná-las como blocos. Arraste para reordenar. Use "Texto Livre" para escrever trechos completos.</span>
+                    </div>
+
+                    <div class="paper-wrapper" style="margin-top: 1.5rem;">
+                        <div class="paper-container" style="height: auto; min-height: 500px;">
+                            <div class="paper-margin"></div>
+                            <div class="paper-lines-container">
+                                <div id="free-builder-area"
+                                    style="padding: 1.5rem 1rem; min-height: 500px; display: flex; flex-direction: row; flex-wrap: wrap; align-items: flex-start; align-content: flex-start; gap: 6px; position: relative; z-index: 2; font-family: 'Georgia', serif; font-size: 1rem; color: #111; line-height: 2rem;">
                                 </div>
                             </div>
                         </div>
@@ -779,6 +865,19 @@
                                 style="line-height: 1.6; white-space: pre-wrap; color: var(--text-color);">
                                 <!-- Diagnóstico via Gemini entra aqui -->
                             </div>
+                            </div>
+                        </div>
+
+                        <div class="ai-box"
+                            style="background: var(--bg-color); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.5rem;">
+                            <h3
+                                style="color: var(--warning); margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;">
+                                <span>🎯</span> Resumo Prático de Ações
+                            </h3>
+                            <div id="ai-resumo"
+                                style="line-height: 1.6; white-space: pre-wrap; color: var(--text-color);">
+                                <!-- Resumo via Gemini entra aqui -->
+                            </div>
                         </div>
 
                         <div class="ai-box"
@@ -836,6 +935,44 @@
             </div>
         </div>
     </div>
-</body>
 
+    <!-- Ferramenta: Dicionário de Conectivos (Flutuante) -->
+    <div id="connectives-widget" class="connectives-widget hidden">
+        <div class="connectives-header">
+            <h4>Dicionário de Conectivos</h4>
+            <button id="btn-close-connectives">&times;</button>
+        </div>
+        <div class="connectives-categories" style="display: flex; gap: 5px; flex-wrap: wrap;">
+            <button class="conn-cat-btn active" data-cat="adicao">Adição</button>
+            <button class="conn-cat-btn" data-cat="oposicao">Oposição</button>
+            <button class="conn-cat-btn" data-cat="causa">Causa / Efeito</button>
+            <button class="conn-cat-btn" data-cat="conclusao">Conclusão</button>
+            <button class="conn-cat-btn" data-cat="operadores">Operadores Arg.</button>
+            <button class="conn-cat-btn" data-cat="referencial">Coesão Ref.</button>
+            <button class="conn-cat-btn" data-cat="detalhamento">Detalhamento</button>
+            <button class="conn-cat-btn" data-cat="meus" style="color: var(--primary); border-color: var(--primary);">Meus</button>
+        </div>
+        <div class="connectives-list" id="connectives-list">
+            <!-- Injetado via JS -->
+        </div>
+        <div id="add-custom-conn-area" class="hidden" style="margin-top: 10px; display: flex; gap: 5px; padding: 0 10px;">
+            <input type="text" id="custom-conn-input" placeholder="Novo conectivo..." style="flex: 1; padding: 4px 8px; font-size: 0.85rem; border: 1px solid var(--panel-border); border-radius: 4px; outline: none; background: var(--bg-color); color: var(--text-color);">
+            <button id="btn-add-custom-conn" class="btn btn-secondary btn-sm" style="padding: 4px 10px;">+</button>
+        </div>
+        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">Clique em um conectivo para colar no Construtor Livre ou Copiar.</p>
+    </div>
+    <button id="btn-open-connectives" class="floating-btn connectives-btn" title="Dicionário de Conectivos" style="position: fixed; bottom: 20px; right: 20px; z-index: 100; font-size: 1.5rem; width: 50px; height: 50px; border-radius: 50%; background: var(--primary); border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer;">📖</button>
+
+    <script src="script.js"></script>
+
+    <!-- Ponte de Módulos (Legacy Bridge) -->
+    <script type="module">
+        import { validateEssay } from './js/validator.js';
+        window.redacaoApp = window.redacaoApp || {};
+        window.redacaoApp.validateEssay = validateEssay;
+    </script>
+
+    <!-- Módulo Isolado: Feedback em Tempo Real -->
+    <script type="module" src="js/feedback-realtime.js"></script>
+</body>
 </html>

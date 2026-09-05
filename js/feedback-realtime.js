@@ -43,25 +43,60 @@ function ensureTelemetryHud() {
 
     hud = document.createElement('div');
     hud.id = 'telemetria-caligrafica-hud';
-    hud.className = 'telemetria-hud';
+    hud.className = 'telemetria-container';
     hud.innerHTML = `
-        <div class="telemetria-section telemetria-lines-section">
-            <span class="telemetria-label">Folha:</span>
-            <span id="telemetria-lines-val" class="telemetria-lines-badge status-under">0 / 30 linhas estimadas</span>
-        </div>
-        <div class="telemetria-section telemetria-badges-section" id="telemetria-paragraphs-badges">
-            <span class="telemetria-p-badge" title="Introdução">Intro: 0/7L</span>
-            <span class="telemetria-p-badge" title="Desenvolvimento 1">Desenv 1: 0/8L</span>
-            <span class="telemetria-p-badge" title="Desenvolvimento 2">Desenv 2: 0/8L</span>
-            <span class="telemetria-p-badge" title="Conclusão">Conclusão: 0/7L</span>
-        </div>
-        <div class="telemetria-section telemetria-density-section">
-            <span class="telemetria-chars-text" id="telemetria-chars-val">0 / 2.820 carac.</span>
-            <div class="telemetria-progress-track">
-                <div class="telemetria-progress-fill fill-under" id="telemetria-progress-fill" style="width: 0%;"></div>
+        <div class="telemetria-global-stats">
+            <div class="telemetria-chip telemetria-chip-lines" id="telemetria-lines-chip">
+                <span class="telemetria-chip-label">Folha</span>
+                <strong class="telemetria-chip-value">0 / 30 linhas</strong>
+            </div>
+            <div class="telemetria-chip telemetria-chip-chars">
+                <span class="telemetria-chip-label">Caracteres</span>
+                <strong class="telemetria-chip-value" id="telemetria-chars-val">0 / 2.820</strong>
             </div>
         </div>
+        <div class="telemetria-paragraphs-pills" id="telemetria-paragraphs-badges" role="toolbar" aria-label="Navegação por parágrafos">
+        </div>
     `;
+
+    // Delegação de eventos para os botões interativos
+    hud.addEventListener('click', (e) => {
+        const btn = /** @type {HTMLElement} */ (e.target).closest('.telemetria-pill');
+        if (!btn) return;
+        
+        const pidxStr = btn.getAttribute('data-pidx');
+        if (!pidxStr) return;
+        const targetPIdx = parseInt(pidxStr, 10);
+        
+        const textarea = /** @type {HTMLTextAreaElement} */ (document.getElementById('essay'));
+        if (!textarea) return;
+        
+        const text = textarea.value;
+        const lines = text.split('\n');
+        
+        let start = 0;
+        let end = 0;
+        let currentP = 0;
+        
+        for (let i = 0; i < lines.length; i++) {
+            const lineLength = lines[i].length;
+            if (lines[i].trim().length > 0) {
+                if (currentP === targetPIdx) {
+                    end = start + lineLength;
+                    break;
+                }
+                currentP++;
+            }
+            start += lineLength + 1; // +1 for the '\n'
+        }
+        
+        textarea.focus();
+        textarea.setSelectionRange(start, end);
+        
+        // Feedback visual
+        document.querySelectorAll('.telemetria-pill').forEach(p => p.classList.remove('is-focused'));
+        btn.classList.add('is-focused');
+    });
 
     // Posiciona logo antes do .paper-container (ou acima do feedback panel)
     const paperContainer = document.querySelector('.paper-container');
@@ -87,46 +122,35 @@ function ensureTelemetryHud() {
 function updateTelemetryHud(hud, rawText) {
     if (!hud) return;
 
-    const linesValEl = hud.querySelector('#telemetria-lines-val');
+    const linesChip = hud.querySelector('#telemetria-lines-chip');
+    const linesValEl = hud.querySelector('.telemetria-chip-lines .telemetria-chip-value');
     const badgesContainer = hud.querySelector('#telemetria-paragraphs-badges');
     const charsValEl = hud.querySelector('#telemetria-chars-val');
-    const progressFill = /** @type {HTMLElement|null} */ (hud.querySelector('#telemetria-progress-fill'));
 
     // Estado zerado gracioso
     if (!rawText || rawText.trim().length === 0) {
-        if (linesValEl) {
-            linesValEl.textContent = '0 / 30 linhas estimadas';
-            linesValEl.className = 'telemetria-lines-badge status-under';
-        }
+        if (linesChip) linesChip.setAttribute('data-status', 'UNDER_LIMIT');
+        if (linesValEl) linesValEl.textContent = '0 / 30 linhas';
         if (badgesContainer) {
             badgesContainer.innerHTML = `
-                <span class="telemetria-p-badge" title="Introdução">Intro: 0/7L</span>
-                <span class="telemetria-p-badge" title="Desenvolvimento 1">Desenv 1: 0/8L</span>
-                <span class="telemetria-p-badge" title="Desenvolvimento 2">Desenv 2: 0/8L</span>
-                <span class="telemetria-p-badge" title="Conclusão">Conclusão: 0/7L</span>
+                <button type="button" class="telemetria-pill" data-pidx="0"><span class="pill-label">Intro</span><span class="pill-count">0/7L</span></button>
+                <button type="button" class="telemetria-pill" data-pidx="1"><span class="pill-label">Desenv 1</span><span class="pill-count">0/8L</span></button>
+                <button type="button" class="telemetria-pill" data-pidx="2"><span class="pill-label">Desenv 2</span><span class="pill-count">0/8L</span></button>
+                <button type="button" class="telemetria-pill" data-pidx="3"><span class="pill-label">Conclusão</span><span class="pill-count">0/7L</span></button>
             `;
         }
-        if (charsValEl) charsValEl.textContent = '0 / 2.820 carac.';
-        if (progressFill) {
-            progressFill.style.width = '0%';
-            progressFill.className = 'telemetria-progress-fill fill-under';
-        }
+        if (charsValEl) charsValEl.textContent = '0 / 2.820';
         return;
     }
 
     const metrics = analyzeEssayText(rawText);
 
     // 1. Linhas Totais Físicas
+    if (linesChip) {
+        linesChip.setAttribute('data-status', metrics.status);
+    }
     if (linesValEl) {
-        linesValEl.textContent = `${metrics.totalEstimatedLines} / 30 linhas estimadas`;
-        linesValEl.className = 'telemetria-lines-badge';
-        if (metrics.status === 'IDEAL') {
-            linesValEl.classList.add('status-ideal');
-        } else if (metrics.status === 'OVER_LIMIT') {
-            linesValEl.classList.add('status-over');
-        } else {
-            linesValEl.classList.add('status-under');
-        }
+        linesValEl.textContent = `${metrics.totalEstimatedLines} / 30 linhas`;
     }
 
     // 2. Micro-Badges por Parágrafo
@@ -141,37 +165,25 @@ function updateTelemetryHud(hud, rawText) {
             const target = p ? p.targetLines : (defaultTargets[i] || 7);
             const estimated = p ? p.estimatedLines : 0;
             const isOver = p ? p.isOverflown : false;
-            const isActive = estimated > 0;
 
-            let badgeClass = 'telemetria-p-badge';
+            let badgeClass = 'telemetria-pill';
             if (isOver) {
-                badgeClass += ' telemetria-p-overflow';
-            } else if (isActive) {
-                badgeClass += ' telemetria-p-active';
+                badgeClass += ' is-overflown';
             }
-
-            const title = p ? p.label : abbr;
-            badgesHtml.push(`<span class="${badgeClass}" title="${title}">${abbr}: ${estimated}/${target}L</span>`);
+            
+            badgesHtml.push(`
+                <button type="button" class="${badgeClass}" data-pidx="${i}">
+                    <span class="pill-label">${abbr}</span>
+                    <span class="pill-count">${estimated}/${target}L</span>
+                </button>
+            `);
         }
         badgesContainer.innerHTML = badgesHtml.join('');
     }
 
-    // 3. Densidade de Caracteres e Barra de Progresso Semântica
+    // 3. Densidade de Caracteres
     if (charsValEl) {
-        charsValEl.textContent = `${metrics.totalCharsWithSpaces.toLocaleString('pt-BR')} / 2.820 carac.`;
-    }
-
-    if (progressFill) {
-        const percent = Math.min(100, Math.round((metrics.totalCharsWithSpaces / TARGET_TOTAL_CHARS) * 100));
-        progressFill.style.width = `${percent}%`;
-        progressFill.className = 'telemetria-progress-fill';
-        if (metrics.status === 'IDEAL') {
-            progressFill.classList.add('fill-ideal');
-        } else if (metrics.status === 'OVER_LIMIT') {
-            progressFill.classList.add('fill-over');
-        } else {
-            progressFill.classList.add('fill-under');
-        }
+        charsValEl.textContent = `${metrics.totalCharsWithSpaces.toLocaleString('pt-BR')} / 2.820`;
     }
 }
 

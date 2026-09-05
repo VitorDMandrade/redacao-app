@@ -164,5 +164,76 @@ const grammarExercises = [
         options: ["apenas 'acredita'", "apenas 'acreditam'", "ambas estão corretas"],
         correctOptionIndex: 2,
         explanation: "Expressões partitivas ('a maior parte de', 'a maioria de', 'grande número de') acompanhadas de um plural ('brasileiros') aceitam DUAS concordâncias: a lógica, que concorda com o partitivo singular ('A maior parte... acredita'), ou a atrativa, que concorda com o termo mais próximo plural ('...brasileiros acreditam'). Ambas são gramaticalmente irretocáveis na redação."
+    },
+    // --- NOVAS QUESTÕES ---
+    {
+        category: "Crase",
+        question: "Fui ___ Bahia nas férias e depois retornei ___ Roma.",
+        options: ["a / a", "à / à", "à / a", "a / à"],
+        correctOptionIndex: 2,
+        explanation: "DICA INFALÍVEL: 'Vou A, volto DA = crase há! Vou A, volto DE = crase pra quê?'\nVolto DA Bahia (logo, 'à Bahia').\nVolto DE Roma (logo, 'a Roma')."
+    },
+    {
+        category: "Crase",
+        question: "O pagamento do veículo foi feito ___ vista, mas o financiamento ___ prazo foi recusado.",
+        options: ["a / a", "à / a", "à / à"],
+        correctOptionIndex: 1,
+        explanation: "Locuções adverbiais femininas ('à vista', 'às pressas', 'à medida que') levam crase OBRIGATÓRIA. Já locuções com palavras masculinas ('a prazo', 'a pé', 'a cavalo') NÃO aceitam crase, pois não há artigo feminino envolvido."
+    },
+    {
+        category: "Vírgula",
+        question: "Goiânia ___ 15 de abril de 2024.",
+        options: ["com vírgula", "sem vírgula"],
+        correctOptionIndex: 0,
+        explanation: "Em datas (cabeçalhos de documentos e cartas), a vírgula é OBRIGATÓRIA para separar o nome do lugar da data."
+    },
+    {
+        category: "Vírgula",
+        question: "O candidato estudou muito ___ logo, foi aprovado com louvor.",
+        options: [", (vírgula)", "sem vírgula"],
+        correctOptionIndex: 0,
+        explanation: "A vírgula é OBRIGATÓRIA antes de conjunções conclusivas (logo, portanto, por conseguinte) que introduzem uma oração coordenada."
+    },
+    {
+        category: "Concordância",
+        question: "___ -se casas elegantes neste bairro.",
+        options: ["Aluga", "Alugam"],
+        correctOptionIndex: 1,
+        explanation: "O 'se' atua como Partícula Apassivadora. A frase equivale a 'Casas elegantes SÃO ALUGADAS'. Como 'casas' é o sujeito (paciente) e está no plural, o verbo DEVE ir para o plural ('Alugam-se')."
+    },
+    {
+        category: "Concordância",
+        question: "Mais de um candidato ___ (recorreu / recorreram) da decisão da banca.",
+        options: ["recorreu", "recorreram"],
+        correctOptionIndex: 0,
+        explanation: "A expressão 'mais de um' faz o verbo concordar SEMPRE no singular (concorda com o numeral 'um'). A exceção é apenas se houver ideia de reciprocidade (ex: Mais de um aluno se abraçaram)."
+    },
+    {
+        category: "Regência",
+        question: "Muitos jovens preferem as redes sociais ___ ler um livro clássico.",
+        options: ["do que", "a"],
+        correctOptionIndex: 1,
+        explanation: "A regência clássica e exigida pelas bancas para o verbo PREFERIR é 'Preferir uma coisa A outra', e nunca 'do que' ou 'mais que'. O correto é: 'preferem as redes sociais A ler um livro'."
+    },
+    {
+        category: "Regência",
+        question: "A aprovação na prova custou ___ muito esforço e dedicação.",
+        options: ["o aluno", "ao aluno"],
+        correctOptionIndex: 1,
+        explanation: "No sentido de 'dar trabalho' ou 'exigir', o verbo CUSTAR tem como sujeito a coisa (A aprovação custou) e como objeto indireto a pessoa que sofre o trabalho (ao aluno). Logo, 'A aprovação custou AO aluno (a + o) muito esforço'."
+    },
+    {
+        category: "Conectivos",
+        question: "___ a chuva forte, decidimos manter o cronograma de estudos.",
+        options: ["Malgrado", "Consoante", "Por conseguinte"],
+        correctOptionIndex: 0,
+        explanation: "'Malgrado' é um conectivo CONCESSIVO, sendo sinônimo perfeito de 'Apesar de', 'Embora', 'A despeito de'. 'Consoante' indica conformidade (segundo/conforme) e 'Por conseguinte' indica conclusão."
+    },
+    {
+        category: "Conectivos",
+        question: "Qual conectivo é adequado para introduzir uma ideia de FINALIDADE (propósito) no parágrafo de Proposta de Intervenção (Enem)?",
+        options: ["Na medida em que", "À medida que", "A fim de que"],
+        correctOptionIndex: 2,
+        explanation: "'A fim de que' introduz finalidade/objetivo. 'Na medida em que' expressa causa (porque/visto que). E 'À medida que' expressa proporção (à proporção que)."
     }
 ];

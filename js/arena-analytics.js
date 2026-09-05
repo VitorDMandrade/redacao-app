@@ -177,7 +177,18 @@ export async function renderArenaAnalytics(containerSelector = null) {
             const metrics = request.result;
             
             if (!metrics || metrics.length === 0) {
-                contentArea.innerHTML = '<div class="arena-analytics-empty">Nenhum exercício resolvido ainda. Treine na Arena!</div>';
+                contentArea.innerHTML = `
+                    <div class="metric-card" style="text-align: center; padding: 2rem 1rem;">
+                        <div style="font-size: 2.5rem; margin-bottom: 1rem;">🎯</div>
+                        <h3 style="margin-bottom: 1rem; color: var(--text-color, #fff);">Nenhum micro-treino registrado ainda.</h3>
+                        <p style="color: var(--text-muted, #9ca3af); margin-bottom: 1.5rem; line-height: 1.5;">
+                            Pratique na Arena para mapear suas proficiências gramaticais!
+                        </p>
+                        <button class="btn btn-primary" style="padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; background: var(--primary, #3b82f6); color: white;" onclick="document.getElementById('close-arena-analytics').click(); window.scrollTo({top: document.querySelector('.training-card') ? document.querySelector('.training-card').offsetTop - 50 : 0, behavior: 'smooth'});">
+                            Iniciar Treino Agora
+                        </button>
+                    </div>
+                `;
                 return;
             }
 

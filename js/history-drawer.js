@@ -5,7 +5,7 @@
  * Padrão Estrangulador: Injeta sua própria UI e estilos sem poluir o monólito.
  */
 
-import { getCorrectionHistory, getLatestDraft } from './database.js';
+import { getCorrectionHistory, getLatestDraft, exportFullDatabaseBackup, importFullDatabaseBackup } from './database.js';
 
 const DRAWER_HTML = `
   <div id="history-drawer-overlay" class="history-drawer-overlay"></div>
@@ -31,6 +31,12 @@ const DRAWER_HTML = `
           <div class="history-empty">Nenhum rascunho encontrado.</div>
         </div>
       </div>
+    </div>
+    
+    <div class="history-drawer-footer" style="padding: 1rem; border-top: 1px solid var(--panel-border, #333); display: flex; gap: 0.5rem; justify-content: center;">
+      <button id="btn-backup-download" class="btn btn-secondary btn-sm" style="flex: 1;">Baixar Backup (.json)</button>
+      <button id="btn-backup-restore" class="btn btn-secondary btn-sm" style="flex: 1;">Restaurar Dados</button>
+      <input type="file" id="backup-file-input" accept=".json" style="display: none;" />
     </div>
   </aside>
 `;
@@ -348,6 +354,62 @@ function bindEvents() {
             if (content) content.classList.add('active');
         });
     });
+
+    // Backup
+    const btnBackupDownload = document.getElementById('btn-backup-download');
+    if (btnBackupDownload) {
+        btnBackupDownload.addEventListener('click', async () => {
+            try {
+                const backupData = await exportFullDatabaseBackup();
+                const jsonStr = JSON.stringify(backupData, null, 2);
+                const blob = new Blob([jsonStr], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `backup-redacoes-${new Date().toISOString().split('T')[0]}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            } catch (err) {
+                console.error('Erro ao exportar backup:', err);
+                alert('Erro ao exportar backup.');
+            }
+        });
+    }
+
+    const btnBackupRestore = document.getElementById('btn-backup-restore');
+    const backupFileInput = /** @type {HTMLInputElement} */ (document.getElementById('backup-file-input'));
+    
+    if (btnBackupRestore && backupFileInput) {
+        btnBackupRestore.addEventListener('click', () => {
+            backupFileInput.click();
+        });
+        
+        backupFileInput.addEventListener('change', async (e) => {
+            const target = /** @type {HTMLInputElement} */ (e.target);
+            const file = target.files ? target.files[0] : null;
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = async (evt) => {
+                try {
+                    const content = /** @type {string} */ (evt.target?.result);
+                    const backupObj = JSON.parse(content);
+                    await importFullDatabaseBackup(backupObj);
+                    alert('Backup restaurado com sucesso!');
+                    renderCorrecoes();
+                    renderRascunhos();
+                } catch (err) {
+                    console.error('Erro ao restaurar backup:', err);
+                    alert('Erro ao restaurar backup. Verifique o formato do arquivo.');
+                } finally {
+                    backupFileInput.value = ''; // Reset
+                }
+            };
+            reader.readAsText(file);
+        });
+    }
 }
 
 /**

@@ -794,7 +794,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fachada de Compatibilidade (Strangler Pattern)
     window.__REDACAO_BRIDGE__ = Object.freeze({
-        renderResults: (dados) => renderGeminiResults(dados),
+        renderResults: (dados) => {
+            renderGeminiResults(dados);
+            
+            // Switch Views
+            if(btnModeResult) {
+                btnModeResult.classList.remove('hidden');
+                btnModeResult.click();
+            }
+
+            // Reset progress bars for animation
+            const progressBars = document.querySelectorAll('.progress');
+            progressBars.forEach(bar => {
+                const width = bar.style.width;
+                bar.style.width = '0%';
+                setTimeout(() => { bar.style.width = width; }, 50);
+            });
+        },
     });
 
     // Render Results from Gemini JSON

@@ -214,3 +214,82 @@ export async function updateGrammarMetric(categoria, acerto) {
     getReq.onerror = () => reject(getReq.error);
   });
 }
+
+// ─────────────────────────────────────────
+//   BACKUP & RESTORE
+// ─────────────────────────────────────────
+
+/**
+ * Lê todas as object stores e retorna um objeto de backup completo.
+ * @returns {Promise<Object>}
+ */
+export async function exportFullDatabaseBackup() {
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const backup = {
+      timestamp: new Date().toISOString(),
+      version: DB_VERSION,
+      redacoes_rascunhos: [],
+      correcoes_historico: [],
+      arena_analytics: []
+    };
+
+    const tx = db.transaction(['redacoes_rascunhos', 'correcoes_historico', 'arena_analytics'], 'readonly');
+
+    const readStore = (storeName) => {
+      return new Promise((res, rej) => {
+        const req = tx.objectStore(storeName).getAll();
+        req.onsuccess = () => { backup[storeName] = req.result; res(); };
+        req.onerror = () => rej(req.error);
+      });
+    };
+
+    Promise.all([
+      readStore('redacoes_rascunhos'),
+      readStore('correcoes_historico'),
+      readStore('arena_analytics')
+    ])
+    .then(() => resolve(backup))
+    .catch(reject);
+  });
+}
+
+/**
+ * Importa um objeto de backup para the IndexedDB em uma única transação.
+ * @param {Object} backupObj 
+ * @returns {Promise<void>}
+ */
+export async function importFullDatabaseBackup(backupObj) {
+  if (!backupObj || !backupObj.timestamp || !backupObj.version) {
+    throw new Error('Formato de backup inválido.');
+  }
+
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction(['redacoes_rascunhos', 'correcoes_historico', 'arena_analytics'], 'readwrite');
+    let errorOccurred = false;
+
+    tx.oncomplete = () => { if (!errorOccurred) resolve(); };
+    tx.onerror = (e) => { errorOccurred = true; reject(tx.error || e); };
+    tx.onabort = () => { errorOccurred = true; reject(new Error('Transação abortada.')); };
+
+    const writeStore = (storeName, dataList) => {
+      if (!dataList || !Array.isArray(dataList)) return;
+      const store = tx.objectStore(storeName);
+      store.clear(); // Limpa os dados existentes para restaurar completamente
+      dataList.forEach(item => {
+        store.put(item);
+      });
+    };
+
+    try {
+      writeStore('redacoes_rascunhos', backupObj.redacoes_rascunhos);
+      writeStore('correcoes_historico', backupObj.correcoes_historico);
+      writeStore('arena_analytics', backupObj.arena_analytics);
+    } catch (e) {
+      errorOccurred = true;
+      tx.abort();
+      reject(e);
+    }
+  });
+}

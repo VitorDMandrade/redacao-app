@@ -278,7 +278,7 @@ async function renderRascunhos() {
 
 /**
  * Recicla a tela de resultado (#result-view) sem precisar recarregar a página.
- * Aciona um evento customizado que o script.js pode escutar (ou usamos window dispatch).
+ * Usa a Fachada de Compatibilidade legada para conversar com o monólito script.js.
  */
 function loadCorrectionIntoView(item) {
     if (!item || !item.dados) return;
@@ -293,19 +293,11 @@ function loadCorrectionIntoView(item) {
     // Fecha o drawer
     closeDrawer();
 
-    // Como renderGeminiResults está encasulado em script.js e não é global, 
-    // precisamos usar um CustomEvent ou recarregar a lógica via hack.
-    // Melhor approach sem alterar script.js: colocar o JSON no textarea do modal de copia/cola 
-    // e disparar o clique de envio.
-    const jsonPasteArea = /** @type {HTMLTextAreaElement} */ (document.getElementById('json-paste-area'));
-    const btnSubmitJson = document.getElementById('btn-submit-json');
-    
-    if (jsonPasteArea && btnSubmitJson) {
-        // Formata como JSON válido para o safeParseLLMJson
-        jsonPasteArea.value = JSON.stringify(item.dados);
-        btnSubmitJson.click();
+    if (window.__REDACAO_BRIDGE__?.renderResults) {
+        window.__REDACAO_BRIDGE__.renderResults(item.dados);
     } else {
-        alert("Não foi possível carregar a visualização (Modal não encontrado).");
+        console.error('[History] Falha na ponte com renderizador do monólito.');
+        alert('Erro ao carregar correção. Renderizador inacessível.');
     }
 }
 

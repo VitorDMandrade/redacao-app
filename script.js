@@ -792,6 +792,11 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Fachada de Compatibilidade (Strangler Pattern)
+    window.__REDACAO_BRIDGE__ = Object.freeze({
+        renderResults: (dados) => renderGeminiResults(dados),
+    });
+
     // Render Results from Gemini JSON
     function renderGeminiResults(resultObj, rawText) {
         // Atualiza nota final
@@ -1022,21 +1027,6 @@ document.addEventListener('DOMContentLoaded', () => {
             drillScore++;
             drillScoreDisplay.textContent = drillScore;
 
-            // Remove dos pontos fracos se estava lá
-            if (wrongAnswers.includes(drill.question)) {
-                wrongAnswers = wrongAnswers.filter(q => q !== drill.question);
-                localStorage.setItem('redacao_wrong_drills', JSON.stringify(wrongAnswers));
-            }
-
-            // Gamificação: se acertar, reduz a fraqueza
-            try {
-                let weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
-                if (weaknesses[drill.category] > 0) {
-                    weaknesses[drill.category]--;
-                    localStorage.setItem('redacao_weaknesses', JSON.stringify(weaknesses));
-                }
-            } catch(e) {}
-
             drillFeedbackDisplay.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
             drillFeedbackDisplay.style.borderLeft = '4px solid var(--success)';
             drillFeedbackDisplay.innerHTML = `<strong style="color:var(--success)">✅ Acertou!</strong><br><span style="color:var(--text-main)">${drill.explanation}</span>${extraFeedback}${conceptBox}<br><br><em style="color:var(--primary); font-size:0.9rem;">${finalTip}</em>`;
@@ -1049,22 +1039,9 @@ document.addEventListener('DOMContentLoaded', () => {
             drillErrors++;
             if (drillErrorsDisplay) drillErrorsDisplay.textContent = drillErrors;
 
-            // Gamificação: se errar, aumenta a fraqueza na categoria
-            try {
-                let weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
-                weaknesses[drill.category] = (weaknesses[drill.category] || 0) + 1;
-                localStorage.setItem('redacao_weaknesses', JSON.stringify(weaknesses));
-            } catch(e) {}
-
             // Destaca a correta
             drillOptionsContainer.children[drill.correctOptionIndex].style.borderColor = 'var(--success)';
             drillOptionsContainer.children[drill.correctOptionIndex].style.borderWidth = '2px';
-
-            // Adiciona aos pontos fracos
-            if (!wrongAnswers.includes(drill.question)) {
-                wrongAnswers.push(drill.question);
-                localStorage.setItem('redacao_wrong_drills', JSON.stringify(wrongAnswers));
-            }
 
             drillFeedbackDisplay.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
             drillFeedbackDisplay.style.borderLeft = '4px solid var(--danger)';
@@ -1072,6 +1049,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         drillFeedbackDisplay.classList.remove('hidden');
+
+        // ADR-15: Grava no IndexedDB de forma transacional e assíncrona
+        import('./js/database.js').then(db => {
+            db.updateGrammarMetric(drill.category || 'Geral', isCorrect);
+        }).catch(err => console.warn('[Analytics] Erro ao gravar métrica da arena:', err));
 
         if (!isTurboMode) {
             btnNextDrill.classList.remove('hidden');

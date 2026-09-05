@@ -3,11 +3,23 @@
 /**
  * Módulo de Feedback em Tempo Real & HUD de Telemetria Caligráfica
  * Atua como um co-piloto silencioso que projeta o consumo físico da folha e monitora regras textuais.
+ * ADR-12: Autosave assíncrono integrado via import dinâmico de js/database.js
  */
 
 import { analyzeEssayText } from '../src/utils/essay-metrics.js';
 
 const PARAGRAPH_ABBR = ['Intro', 'Desenv 1', 'Desenv 2', 'Conclusão'];
+
+/** Referência ao último texto salvo para cálculo de diff mínimo */
+let _lastSavedText = '';
+
+/** Promise resolvida com a função saveDraft após o import dinâmico */
+let _saveDraftFn = null;
+
+// Carrega o módulo de banco de dados de forma assíncrona e silenciosa
+import('./database.js')
+  .then((db) => { _saveDraftFn = db.saveDraft; })
+  .catch((e) => console.warn('[Autosave] Módulo database.js não pôde ser carregado:', e));
 const TARGET_TOTAL_CHARS = 2820;
 
 /**
@@ -200,9 +212,32 @@ export function initLiveFeedback() {
         console.warn("Web Workers não puderam ser inicializados:", e);
     }
 
+    // ─── Autosave debounced (5s de inatividade) ────────────────────────────
+    const triggerAutosave = debounce((/** @type {string} */ text) => {
+        if (!_saveDraftFn) return; // módulo ainda não carregou
+        if (Math.abs(text.length - _lastSavedText.length) < 10) return; // diff mínimo
+
+        const temaEl = /** @type {HTMLInputElement|null} */ (document.getElementById('theme'));
+        const bancaEl = /** @type {HTMLSelectElement|null} */ (document.getElementById('banca-select'));
+        const wordCountEl = document.getElementById('word-count-val');
+
+        const draft = {
+            texto: text,
+            tema: temaEl ? temaEl.value : '',
+            banca: bancaEl ? bancaEl.value : 'ENEM',
+            totalPalavras: wordCountEl ? parseInt(wordCountEl.textContent || '0', 10) : 0,
+            linhasEstimadas: Math.ceil(text.length / 94), // estimativa média de 94 chars/linha
+        };
+
+        _saveDraftFn(draft)
+            .then(() => { _lastSavedText = text; })
+            .catch((e) => console.warn('[Autosave] Falha ao gravar rascunho:', e));
+    }, 5000);
+
     // Debounce de 350ms para evitar reflows desnecessários na digitação
     const onInputDebounced = debounce((/** @type {string} */ text) => {
         updateTelemetryHud(hud, text);
+        triggerAutosave(text);
 
         if (panel && msgElement && copilotWorker) {
             copilotWorker.onmessage = (event) => {

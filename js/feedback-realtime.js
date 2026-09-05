@@ -215,6 +215,7 @@ export function initLiveFeedback() {
                 essayTextarea.value = rascunho.texto;
                 _lastSavedText = rascunho.texto; // sincroniza o diff para não regravá-lo imediatamente
                 updateTelemetryHud(hud, rascunho.texto); // atualiza HUD de imediato
+                essayTextarea.dispatchEvent(new Event('input', { bubbles: true })); // Notifica o Web Worker e listeners
             }
         } catch (err) {
             console.warn('[Storage] Falha ao hidratar rascunho do IndexedDB:', err);

@@ -763,15 +763,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 const m = await import('./js/json-repair.js');
                 const resultObj = m.safeParseLLMJson(pastedText);
 
-                // ADR-13: Persiste o payload da correção de forma assíncrona e silenciosa
+                // ADR-13 & ADR-14: Persiste o payload da correção enriquecido de forma assíncrona
                 import('./js/database.js').then(db => {
-                    const temaEl = /** @type {HTMLInputElement|null} */ (document.getElementById('theme'));
-                    const bancaEl = /** @type {HTMLSelectElement|null} */ (document.getElementById('banca-select'));
+                    const temaAtivo = document.getElementById('theme')?.value || document.querySelector('.theme-title')?.textContent || 'Tema Livre';
+                    const bancaAtiva = document.getElementById('banca-select')?.value || 'ENEM';
+                    const textoEnviado = document.getElementById('essay')?.value || '';
+                    
                     db.saveCorrectionPayload({
-                        dados: resultObj,
-                        tema: temaEl ? temaEl.value : '',
-                        banca: bancaEl ? bancaEl.value : currentBanca?.nome || 'ENEM',
-                        textoOriginal: document.getElementById('essay')?.value || '',
+                        timestamp: new Date().toISOString(),
+                        tema: temaAtivo.trim(),
+                        banca: bancaAtiva.toUpperCase().trim(),
+                        textoOriginal: textoEnviado,
+                        dados: resultObj
                     }).catch(err => console.warn('[Storage] Erro ao salvar histórico de correção:', err));
                 }).catch(() => {}); // módulo opcional; falha silenciosa se não carregar
 

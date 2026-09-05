@@ -7,16 +7,6 @@
 
 import { analyzeEssayText } from '../src/utils/essay-metrics.js';
 
-const stopWords = new Set([
-    'a', 'o', 'e', 'é', 'de', 'do', 'da', 'dos', 'das',
-    'em', 'no', 'na', 'nos', 'nas',
-    'por', 'para', 'com', 'sem',
-    'um', 'uma', 'uns', 'umas',
-    'que', 'se', 'como', 'mais', 'mas', 'ou',
-    'sua', 'seu', 'suas', 'seus',
-    'ao', 'aos', 'à', 'às', 'pelo', 'pela'
-]);
-
 const PARAGRAPH_ABBR = ['Intro', 'Desenv 1', 'Desenv 2', 'Conclusão'];
 const TARGET_TOTAL_CHARS = 2820;
 
@@ -201,19 +191,62 @@ export function initLiveFeedback() {
     }
 
     const hud = ensureTelemetryHud();
+    
+    // Instancia o worker nativo off-thread
+    let copilotWorker;
+    try {
+        copilotWorker = new Worker(new URL('./workers/copilot.worker.js', import.meta.url), { type: 'module' });
+    } catch (e) {
+        console.warn("Web Workers não puderam ser inicializados:", e);
+    }
 
     // Debounce de 350ms para evitar reflows desnecessários na digitação
     const onInputDebounced = debounce((/** @type {string} */ text) => {
         updateTelemetryHud(hud, text);
 
-        if (panel && msgElement) {
-            const feedback = analyzeText(text);
-            if (feedback) {
-                msgElement.textContent = feedback;
-                panel.style.display = 'flex';
-            } else {
-                panel.style.display = 'none';
-            }
+        if (panel && msgElement && copilotWorker) {
+            copilotWorker.onmessage = (event) => {
+                const { feedback } = event.data;
+                let finalFeedback = feedback;
+
+                // Conexão Arena ↔ Co-piloto (Lê fraquezas salvas da thread principal)
+                if (!finalFeedback) {
+                    try {
+                        const weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
+                        let dominantWeakness = null;
+                        let maxErrors = 0;
+                        
+                        for (const [category, errors] of Object.entries(weaknesses)) {
+                            // @ts-ignore
+                            if (errors > 2 && errors > maxErrors) {
+                                // @ts-ignore
+                                maxErrors = errors;
+                                dominantWeakness = category;
+                            }
+                        }
+
+                        if (dominantWeakness) {
+                            finalFeedback = `⚠️ Atenção: Na Arena você identificou fragilidade em "${dominantWeakness}". Fique atento a isso nesta redação!`;
+                        }
+                    } catch(e) {
+                        console.warn('Erro ao ler fraquezas', e);
+                    }
+                }
+
+                if (finalFeedback) {
+                    msgElement.textContent = finalFeedback;
+                    panel.style.display = 'flex';
+                } else {
+                    panel.style.display = 'none';
+                }
+            };
+            
+            copilotWorker.onerror = (error) => {
+                console.warn('Erro no worker do co-piloto:', error);
+            };
+
+            // Delega o processamento pesado de tokenização e frequências para o worker
+            copilotWorker.postMessage({ rawText: text });
         }
     }, 350);
 
@@ -225,66 +258,6 @@ export function initLiveFeedback() {
 
     // Estado inicial síncrono
     updateTelemetryHud(hud, essayTextarea.value || '');
-}
-
-/**
- * Análise de regras textuais rápidas (repetição, tamanho bruto)
- * @param {string} text 
- * @returns {string | null}
- */
-function analyzeText(text) {
-    if (!text || text.trim().length === 0) return null;
-
-    // 1. Checagem de Repetição de Palavras
-    const words = text.toLowerCase()
-        .replace(/[.,/#!$%^&*;:{}=\-_`~()]/g, "")
-        .split(/\s+/)
-        .filter(w => w.length > 2 && !stopWords.has(w));
-
-    /** @type {Record<string, number>} */
-    const wordCounts = {};
-    for (const w of words) {
-        wordCounts[w] = (wordCounts[w] || 0) + 1;
-    }
-
-    for (const [word, count] of Object.entries(wordCounts)) {
-        if (count > 4) {
-            return `A palavra "${word.toUpperCase()}" já foi repetida ${count} vezes. Tente usar um sinônimo!`;
-        }
-    }
-
-    // 2. Checagem de parágrafos muito longos (> 80 palavras)
-    const paragraphs = text.split('\n').filter(p => p.trim().length > 0);
-    for (let i = 0; i < paragraphs.length; i++) {
-        const pLength = paragraphs[i].split(/\s+/).length;
-        if (pLength > 80) {
-            return `O parágrafo ${i + 1} está muito longo (mais de 80 palavras). Considere dividi-lo com ponto final.`;
-        }
-    }
-
-    // 3. Conexão Arena ↔ Co-piloto (Lê fraquezas salvas)
-    try {
-        const weaknesses = JSON.parse(localStorage.getItem('redacao_weaknesses') || '{}');
-        let dominantWeakness = null;
-        let maxErrors = 0;
-        
-        for (const [category, errors] of Object.entries(weaknesses)) {
-            // @ts-ignore
-            if (errors > 2 && errors > maxErrors) {
-                // @ts-ignore
-                maxErrors = errors;
-                dominantWeakness = category;
-            }
-        }
-
-        if (dominantWeakness) {
-            return `⚠️ Atenção: Na Arena você identificou fragilidade em "${dominantWeakness}". Fique atento a isso nesta redação!`;
-        }
-    } catch(e) {
-        console.warn('Erro ao ler fraquezas', e);
-    }
-
-    return null;
 }
 
 // Inicializa automaticamente quando o módulo ESM carrega

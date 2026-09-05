@@ -119,6 +119,21 @@ export async function getLatestDraft() {
   });
 }
 
+/**
+ * Exclui um rascunho do histórico pelo ID.
+ * @param {number} id
+ * @returns {Promise<void>}
+ */
+export async function deleteDraft(id) {
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('redacoes_rascunhos', 'readwrite');
+    const req = tx.objectStore('redacoes_rascunhos').delete(id);
+    req.onsuccess = () => resolve();
+    req.onerror = () => reject(req.error);
+  });
+}
+
 // ─────────────────────────────────────────
 //   HISTÓRICO DE CORREÇÕES
 // ─────────────────────────────────────────
@@ -172,6 +187,21 @@ export async function getCorrectionHistory(limit = 10) {
         resolve(results);
       }
     };
+    req.onerror = () => reject(req.error);
+  });
+}
+
+/**
+ * Exclui uma correção do histórico pelo ID.
+ * @param {number} id
+ * @returns {Promise<void>}
+ */
+export async function deleteCorrection(id) {
+  const db = await getDB();
+  return new Promise((resolve, reject) => {
+    const tx = db.transaction('correcoes_historico', 'readwrite');
+    const req = tx.objectStore('correcoes_historico').delete(id);
+    req.onsuccess = () => resolve();
     req.onerror = () => reject(req.error);
   });
 }

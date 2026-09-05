@@ -4,9 +4,7 @@
  * @fileoverview Componente de Gaveta Lateral de Histórico de Redações (ADR-14)
  * Padrão Estrangulador: Injeta sua própria UI e estilos sem poluir o monólito.
  */
-
-import { getCorrectionHistory, getLatestDraft, exportFullDatabaseBackup, importFullDatabaseBackup } from './database.js';
-
+import { getCorrectionHistory, getLatestDraft, exportFullDatabaseBackup, importFullDatabaseBackup, deleteCorrection, deleteDraft } from './database.js';
 const DRAWER_HTML = `
   <div id="history-drawer-overlay" class="history-drawer-overlay"></div>
   <aside id="history-drawer" class="history-drawer" aria-hidden="true">
@@ -218,11 +216,14 @@ async function renderCorrecoes() {
                 </div>
                 <div class="history-card-theme">${item.tema || 'Tema Livre'}</div>
                 <div class="history-card-score">Nota: ${calculateScore(item.dados?.notas)}</div>
-                <button class="btn btn-secondary btn-sm btn-load-history" data-payload="${encodeURIComponent(JSON.stringify(item))}" style="width: 100%;">Visualizar</button>
+                <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                    <button class="btn btn-secondary btn-sm btn-load-history" data-payload="${encodeURIComponent(JSON.stringify(item))}" style="flex: 1;">Visualizar</button>
+                    <button class="btn btn-sm btn-delete-history" data-id="${item.id}" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer;" title="Apagar Correção">🗑️</button>
+                </div>
             </div>
         `).join('');
 
-        // Bind clicks
+        // Bind clicks for visualize
         list.querySelectorAll('.btn-load-history').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const btnEl = /** @type {HTMLElement} */ (e.currentTarget);
@@ -230,6 +231,24 @@ async function renderCorrecoes() {
                 if (payloadStr) {
                     const item = JSON.parse(decodeURIComponent(payloadStr));
                     loadCorrectionIntoView(item);
+                }
+            });
+        });
+
+        // Bind clicks for delete
+        list.querySelectorAll('.btn-delete-history').forEach(btn => {
+            btn.addEventListener('click', async (e) => {
+                if (!confirm('Tem certeza que deseja apagar esta correção do histórico?')) return;
+                const btnEl = /** @type {HTMLElement} */ (e.currentTarget);
+                const id = Number(btnEl.getAttribute('data-id'));
+                if (id) {
+                    try {
+                        await deleteCorrection(id);
+                        await renderCorrecoes(); // Re-render list
+                    } catch (err) {
+                        console.error('[History] Erro ao apagar correção:', err);
+                        alert('Erro ao apagar correção.');
+                    }
                 }
             });
         });
@@ -261,7 +280,10 @@ async function renderRascunhos() {
                 <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
                     ${draft.totalPalavras || 0} palavras &bull; ~${draft.linhasEstimadas || 0} linhas
                 </div>
-                <button class="btn btn-primary btn-sm" id="btn-load-draft" style="width: 100%;">Restaurar Rascunho</button>
+                <div style="display: flex; gap: 0.5rem;">
+                    <button class="btn btn-primary btn-sm" id="btn-load-draft" style="flex: 1;">Restaurar Rascunho</button>
+                    <button class="btn btn-sm" id="btn-delete-draft" data-id="${draft.id}" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer;" title="Apagar Rascunho">🗑️</button>
+                </div>
             </div>
         `;
 
@@ -273,6 +295,23 @@ async function renderRascunhos() {
                     textarea.value = draft.texto || '';
                     textarea.dispatchEvent(new Event('input', { bubbles: true }));
                     closeDrawer();
+                }
+            });
+        }
+
+        const btnDeleteDraft = document.getElementById('btn-delete-draft');
+        if (btnDeleteDraft) {
+            btnDeleteDraft.addEventListener('click', async (e) => {
+                if (!confirm('Tem certeza que deseja descartar este rascunho?')) return;
+                const id = Number(btnDeleteDraft.getAttribute('data-id'));
+                if (id) {
+                    try {
+                        await deleteDraft(id);
+                        await renderRascunhos(); // Re-render list
+                    } catch (err) {
+                        console.error('[History] Erro ao apagar rascunho:', err);
+                        alert('Erro ao apagar rascunho.');
+                    }
                 }
             });
         }

@@ -1,15 +1,30 @@
 @media print {
-  /* 1. Reset Global de Canvas e Neutralização de Dark Mode */
+  /* 1. Reset Global de Canvas e Sobrescrita Forçada de Variáveis CSS */
   :root,
   html,
   body,
-  body.dark-mode {
+  body.dark-mode,
+  #result-view,
+  #result-view * {
+    --bg-color: #ffffff !important;
+    --bg-primary: #ffffff !important;
+    --bg-secondary: #ffffff !important;
+    --panel-bg: #ffffff !important;
+    --card-bg: #ffffff !important;
+    --text-color: #111827 !important;
+    --text-primary: #111827 !important;
+    --text-secondary: #374151 !important;
+    --border-color: #e2e8f0 !important;
+    --panel-border: #e2e8f0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  body {
     background: #ffffff !important;
     color: #111827 !important;
     margin: 0 !important;
     padding: 0 !important;
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
   }
 
   @page {
@@ -17,7 +32,7 @@
     margin: 12mm 15mm;
   }
 
-  /* 2. Ocultação Estrutural Baseada em Árvore de Nós (Zero Visibility Hacks) */
+  /* 2. Ocultação Estrutural Baseada em Árvore de Nós */
   body > :not(main),
   main > :not(#result-view),
   .actions,
@@ -30,7 +45,7 @@
     display: none !important;
   }
 
-  /* 3. Manutenção do Fluxo Natural para Paginação Perfeita */
+  /* 3. Manutenção do Fluxo de Bloco Estático para Paginação A4 */
   main {
     margin: 0 !important;
     padding: 0 !important;
@@ -50,7 +65,7 @@
     border: none !important;
   }
 
-  /* 4. Esterilização de Efeitos Visuais de Tela (Fim das manchas pretas) */
+  /* 4. Esterilização de Efeitos Visuais de Tela */
   #result-view * {
     box-shadow: none !important;
     text-shadow: none !important;
@@ -58,15 +73,16 @@
     -webkit-backdrop-filter: none !important;
   }
 
-  /* 5. Cartões, Tabelas e Quebras de Linha A4 */
+  /* 5. Alvos Reais do DOM: Painéis, Seções de Feedback e Caixas de IA */
   .paper-wrapper,
-  .feedback-card,
-  .diagnostic-card,
-  .rewrite-card,
+  .feedback-section,
+  .panel,
+  .ai-box,
   .score-card,
   table,
   tr {
     background: #ffffff !important;
+    background-color: #ffffff !important;
     color: #111827 !important;
     border: 1px solid #e2e8f0 !important;
     border-radius: 6px !important;
@@ -76,7 +92,18 @@
     page-break-inside: avoid !important;
   }
 
-  /* 6. Garantia de Tipografia e Pautas Visíveis */
+  /* 6. Neutralização de Textos e Elementos Internos com Cores Inline */
+  .ai-box > div,
+  .ai-box h3,
+  .panel-header h2,
+  .score-details p,
+  .competencies,
+  .competencies * {
+    color: #111827 !important;
+    background: transparent !important;
+    background-color: transparent !important;
+  }
+
   h1, h2, h3, h4, p, span, strong, td, th {
     color: #111827 !important;
   }

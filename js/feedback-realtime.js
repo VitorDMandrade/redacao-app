@@ -17,7 +17,7 @@ const stopWords = new Set([
     'ao', 'aos', 'à', 'às', 'pelo', 'pela'
 ]);
 
-const PARAGRAPH_ABBR = ['I', 'D1', 'D2', 'C'];
+const PARAGRAPH_ABBR = ['Intro', 'Desenv 1', 'Desenv 2', 'Conclusão'];
 const TARGET_TOTAL_CHARS = 2820;
 
 /**
@@ -50,10 +50,10 @@ function ensureTelemetryHud() {
             <span id="telemetria-lines-val" class="telemetria-lines-badge status-under">0 / 30 linhas estimadas</span>
         </div>
         <div class="telemetria-section telemetria-badges-section" id="telemetria-paragraphs-badges">
-            <span class="telemetria-p-badge" title="Introdução">I: 0/7L</span>
-            <span class="telemetria-p-badge" title="Desenvolvimento 1">D1: 0/8L</span>
-            <span class="telemetria-p-badge" title="Desenvolvimento 2">D2: 0/8L</span>
-            <span class="telemetria-p-badge" title="Conclusão">C: 0/7L</span>
+            <span class="telemetria-p-badge" title="Introdução">Intro: 0/7L</span>
+            <span class="telemetria-p-badge" title="Desenvolvimento 1">Desenv 1: 0/8L</span>
+            <span class="telemetria-p-badge" title="Desenvolvimento 2">Desenv 2: 0/8L</span>
+            <span class="telemetria-p-badge" title="Conclusão">Conclusão: 0/7L</span>
         </div>
         <div class="telemetria-section telemetria-density-section">
             <span class="telemetria-chars-text" id="telemetria-chars-val">0 / 2.820 carac.</span>
@@ -100,10 +100,10 @@ function updateTelemetryHud(hud, rawText) {
         }
         if (badgesContainer) {
             badgesContainer.innerHTML = `
-                <span class="telemetria-p-badge" title="Introdução">I: 0/7L</span>
-                <span class="telemetria-p-badge" title="Desenvolvimento 1">D1: 0/8L</span>
-                <span class="telemetria-p-badge" title="Desenvolvimento 2">D2: 0/8L</span>
-                <span class="telemetria-p-badge" title="Conclusão">C: 0/7L</span>
+                <span class="telemetria-p-badge" title="Introdução">Intro: 0/7L</span>
+                <span class="telemetria-p-badge" title="Desenvolvimento 1">Desenv 1: 0/8L</span>
+                <span class="telemetria-p-badge" title="Desenvolvimento 2">Desenv 2: 0/8L</span>
+                <span class="telemetria-p-badge" title="Conclusão">Conclusão: 0/7L</span>
             `;
         }
         if (charsValEl) charsValEl.textContent = '0 / 2.820 carac.';

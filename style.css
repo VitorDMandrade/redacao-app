@@ -202,6 +202,7 @@ body {
     overflow: hidden;
     color: var(--paper-text);
     border: 1px solid rgba(255, 255, 255, 0.1);
+    resize: horizontal; /* Permits user to adjust width */
 }
 
 .paper-header {
@@ -397,7 +398,7 @@ body {
     background: transparent;
     border: none;
     outline: none;
-    resize: vertical;
+    resize: both;
     padding: 1.5rem;
     font-family: 'Inter', sans-serif;
     font-size: 1.05rem;
@@ -1381,48 +1382,54 @@ body {
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: 0.75rem;
-    padding: 0.55rem 1.1rem;
-    margin: 0.5rem 1.5rem 0.4rem 1.5rem;
-    background: rgba(30, 41, 59, 0.04);
-    border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 8px;
-    font-size: 0.82rem;
+    gap: 1rem;
+    padding: 0.75rem 1.25rem;
+    margin: 0.5rem 1.5rem 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    font-size: 0.85rem;
     color: var(--paper-text);
-    box-sizing: border-box;
-    transition: all 0.2s ease;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
 }
 
 .dark-mode .telemetria-hud {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: var(--panel-border);
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
     color: var(--text-main);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2), 0 2px 4px -1px rgba(0, 0, 0, 0.1);
 }
 
 .telemetria-section {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0.6rem;
 }
 
 .telemetria-label {
     font-weight: 600;
     color: var(--text-muted);
-    font-size: 0.78rem;
+    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.05em;
 }
 
 .telemetria-lines-badge {
     font-weight: 700;
-    padding: 0.2rem 0.6rem;
-    border-radius: 9999px;
-    font-size: 0.82rem;
-    transition: background-color 0.2s, color 0.2s;
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    transition: background-color 0.3s, color 0.3s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .telemetria-lines-badge.status-under {
-    background: rgba(245, 158, 11, 0.12);
+    background: rgba(245, 158, 11, 0.15);
     color: #b45309;
 }
 
@@ -1432,7 +1439,7 @@ body {
 }
 
 .telemetria-lines-badge.status-ideal {
-    background: rgba(16, 185, 129, 0.12);
+    background: rgba(16, 185, 129, 0.15);
     color: #047857;
 }
 
@@ -1444,7 +1451,7 @@ body {
 .telemetria-lines-badge.status-over {
     background: rgba(244, 63, 94, 0.15);
     color: #be123c;
-    animation: telemetria-pulse 1.5s infinite;
+    animation: telemetria-pulse 2s infinite;
 }
 
 .dark-mode .telemetria-lines-badge.status-over {
@@ -1455,66 +1462,80 @@ body {
 .telemetria-badges-section {
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
 }
 
 .telemetria-p-badge {
     font-size: 0.75rem;
     font-weight: 600;
-    padding: 0.15rem 0.45rem;
-    border-radius: 4px;
-    background: rgba(100, 116, 139, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 6px;
+    background: rgba(148, 163, 184, 0.15);
     color: #475569;
-    border: 1px solid rgba(100, 116, 139, 0.2);
-    transition: all 0.2s ease;
+    border: 1px solid transparent;
+    transition: all 0.3s ease;
 }
 
 .dark-mode .telemetria-p-badge {
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(255, 255, 255, 0.05);
     color: var(--text-muted);
-    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .telemetria-p-badge.telemetria-p-active {
-    border-color: var(--primary);
+    background: rgba(99, 102, 241, 0.1);
     color: var(--primary);
-    background: rgba(99, 102, 241, 0.08);
+    border-color: rgba(99, 102, 241, 0.3);
+}
+
+.dark-mode .telemetria-p-badge.telemetria-p-active {
+    background: rgba(99, 102, 241, 0.15);
+    color: #818cf8;
+    border-color: rgba(99, 102, 241, 0.4);
 }
 
 .telemetria-p-badge.telemetria-p-overflow {
-    border-color: var(--danger);
-    background: rgba(244, 63, 94, 0.12);
+    background: rgba(244, 63, 94, 0.1);
+    border-color: rgba(244, 63, 94, 0.3);
     color: var(--danger);
-    font-weight: 700;
+}
+
+.dark-mode .telemetria-p-badge.telemetria-p-overflow {
+    background: rgba(244, 63, 94, 0.2);
+    border-color: rgba(244, 63, 94, 0.4);
+    color: #fda4af;
 }
 
 .telemetria-density-section {
     display: flex;
     align-items: center;
-    gap: 0.6rem;
+    gap: 0.75rem;
 }
 
 .telemetria-chars-text {
-    font-size: 0.78rem;
-    font-weight: 500;
+    font-size: 0.8rem;
+    font-weight: 600;
     color: var(--text-muted);
     white-space: nowrap;
 }
 
 .telemetria-progress-track {
-    width: 80px;
+    width: 100px;
     height: 6px;
     background: rgba(148, 163, 184, 0.2);
     border-radius: 9999px;
     overflow: hidden;
 }
 
+.dark-mode .telemetria-progress-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
 .telemetria-progress-fill {
     height: 100%;
     border-radius: 9999px;
     background: var(--primary);
-    transition: width 0.3s ease, background-color 0.3s ease;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s ease;
 }
 
 .telemetria-progress-fill.fill-under {
@@ -1531,6 +1552,6 @@ body {
 
 @keyframes telemetria-pulse {
     0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.03); }
+    50% { transform: scale(1.05); }
 }
 

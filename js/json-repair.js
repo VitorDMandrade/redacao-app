@@ -2,7 +2,8 @@
 
 /**
  * Higieniza e repara strings JSON malformadas geradas por LLMs contendo
- * quebras de linha literais, aspas duplas internas não escapadas e trailing commas.
+ * quebras de linha literais, aspas duplas internas não escapadas, arrays de strings
+ * e trailing commas.
  * 
  * @param {string} raw - Texto bruto contendo ou representando o JSON.
  * @returns {any} Objeto JavaScript parsed com sucesso.
@@ -35,28 +36,49 @@ export function safeParseLLMJson(raw) {
     clean = clean.slice(startIdx, endIdx + 1);
   }
 
-  // 3. Máquina de Estados: Sanitização de aspas internas e quebras de linha
+  // 3. Máquina de Estados com Context Stack (diferencia Object de Array)
   const out = [];
   const n = clean.length;
   let inString = false;
-  let isKey = false;
+  /** @type {('OBJECT' | 'ARRAY')[]} */
+  const contextStack = [];
+  let expectingKey = false;
+  let currentIsKey = false;
   let i = 0;
 
   while (i < n) {
     const c = clean[i];
 
     if (!inString) {
-      if (c === '"') {
-        inString = true;
-        // Identifica se a aspa inicia uma chave (precedida por { ou ,)
-        let prevChar = null;
-        for (let k = out.length - 1; k >= 0; k--) {
-          if (!/\s/.test(out[k])) {
-            prevChar = out[k];
-            break;
-          }
+      if (c === '{') {
+        contextStack.push('OBJECT');
+        expectingKey = true;
+        out.push(c);
+      } else if (c === '[') {
+        contextStack.push('ARRAY');
+        out.push(c);
+      } else if (c === '}') {
+        if (contextStack.length > 0 && contextStack[contextStack.length - 1] === 'OBJECT') {
+          contextStack.pop();
         }
-        isKey = prevChar === '{' || prevChar === ',';
+        expectingKey = false;
+        out.push(c);
+      } else if (c === ']') {
+        if (contextStack.length > 0 && contextStack[contextStack.length - 1] === 'ARRAY') {
+          contextStack.pop();
+        }
+        out.push(c);
+      } else if (c === ':') {
+        expectingKey = false;
+        out.push(c);
+      } else if (c === ',') {
+        if (contextStack.length > 0 && contextStack[contextStack.length - 1] === 'OBJECT') {
+          expectingKey = true;
+        }
+        out.push(c);
+      } else if (c === '"') {
+        inString = true;
+        currentIsKey = (contextStack.length > 0 && contextStack[contextStack.length - 1] === 'OBJECT' && expectingKey);
         out.push(c);
       } else {
         out.push(c);
@@ -65,7 +87,6 @@ export function safeParseLLMJson(raw) {
     } else {
       // Dentro de uma string
       if (c === '\\') {
-        // Caractere com escape preservado
         out.push(c);
         if (i + 1 < n) {
           out.push(clean[i + 1]);
@@ -74,7 +95,6 @@ export function safeParseLLMJson(raw) {
           i++;
         }
       } else if (c === '\n' || c === '\r') {
-        // Quebra de linha literal dentro da string: substitui por \n
         if (c === '\r' && i + 1 < n && clean[i + 1] === '\n') {
           i++;
         }
@@ -84,7 +104,7 @@ export function safeParseLLMJson(raw) {
         out.push('\\t');
         i++;
       } else if (c === '"') {
-        // Lookahead: verifica se é fechamento legítimo da string
+        // Lookahead para determinar se a aspa é fechamento real ou aspa interna de citação
         let j = i + 1;
         while (j < n && /\s/.test(clean[j])) {
           j++;
@@ -92,29 +112,55 @@ export function safeParseLLMJson(raw) {
         const nextChar = j < n ? clean[j] : '';
 
         let isClosing = false;
-        if (isKey) {
-          // A chave fecha obrigatoriamente antes dos dois pontos (:)
-          isClosing = nextChar === ':';
+        if (currentIsKey) {
+          // Chave de objeto encerra obrigatoriamente antes de ':'
+          isClosing = (nextChar === ':');
         } else {
-          // O valor fecha antes de vírgula, chaves ou colchetes
-          if (nextChar === '}' || nextChar === ']' || nextChar === '') {
-            isClosing = true;
-          } else if (nextChar === ',') {
-            // Valida se após a vírgula há um próximo token válido de JSON
-            let k = j + 1;
-            while (k < n && /\s/.test(clean[k])) {
-              k++;
+          const currentContext = contextStack.length > 0 ? contextStack[contextStack.length - 1] : null;
+
+          if (currentContext === 'ARRAY') {
+            // Em array, valor de string fecha antes de ']' ou ',' seguido de novo item/colchete
+            if (nextChar === ']' || nextChar === '') {
+              isClosing = true;
+            } else if (nextChar === ',') {
+              let k = j + 1;
+              while (k < n && /\s/.test(clean[k])) {
+                k++;
+              }
+              const afterComma = k < n ? clean[k] : '';
+              isClosing = /["{\[\}\]\-\dtfn]/.test(afterComma);
             }
-            const afterComma = k < n ? clean[k] : '';
-            isClosing = /["{\[\}\]\-\dtfn]/.test(afterComma);
+          } else if (currentContext === 'OBJECT') {
+            // Em objeto, valor fecha antes de '}' ou ',' seguido da PRÓXIMA chave válida ("chave":)
+            if (nextChar === '}' || nextChar === '') {
+              isClosing = true;
+            } else if (nextChar === ',') {
+              let k = j + 1;
+              while (k < n && /\s/.test(clean[k])) {
+                k++;
+              }
+              const rest = clean.slice(k);
+              // Valida se o que segue a vírgula é outra chave com dois-pontos ou fechamento de bloco
+              if (rest.startsWith('}')) {
+                isClosing = true;
+              } else if (rest.startsWith('"')) {
+                // Regex para checar se é "nome_propriedade":
+                isClosing = /^"[^"\\\r\n]+":/.test(rest);
+              } else {
+                isClosing = false;
+              }
+            }
+          } else {
+            isClosing = (nextChar === ',' || nextChar === '}' || nextChar === ']' || nextChar === '');
           }
         }
 
         if (isClosing) {
           inString = false;
+          currentIsKey = false;
           out.push('"');
         } else {
-          // Aspa interna desprotegida: aplica escape
+          // Aspa interna solta: aplica escape cirúrgico
           out.push('\\"');
         }
         i++;
@@ -125,7 +171,7 @@ export function safeParseLLMJson(raw) {
     }
   }
 
-  // 4. Remoção de trailing commas antes de fechamento de objetos/arrays (falha comum de LLM)
+  // 4. Limpeza de trailing commas antes de } ou ]
   const repairedJson = out.join('').replace(/,\s*([\}\]])/g, '$1');
 
   // 5. Execução do parse nativo

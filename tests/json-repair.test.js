@@ -1,9 +1,6 @@
 const test = require('node:test');
 const assert = require('node:assert');
 
-// We have to import the ESM module or require if it's commonjs. Since we used `export function`, it's an ES module.
-// But the project might not be using type: "module" in package.json.
-// Let's use dynamic import.
 test('JSON Repair Module', async (t) => {
   const { safeParseLLMJson } = await import('../js/json-repair.js');
 
@@ -52,5 +49,45 @@ difusão das tradições locais.",
     assert.strictEqual(parsed.nota, 920);
     assert.strictEqual(parsed.comentario, 'O aluno utilizou a palavra "alienação" de maneira assertiva, mas faltou repertório');
     assert.ok(parsed.reescrita.includes('nacionais de\ndifusão das'));
+  });
+
+  await t.test('Caso real extremo - Arrays de Strings e Aspas Duplas (ADR-06)', () => {
+    const raw = `
+{
+  "erros": [
+    {
+      "trecho_original": "Sob esse viés",
+      "sugestao": [
+        "Nesse contexto",
+        "Sob esse prisma analítico",
+        "Nessa perspectiva teórica"
+      ],
+      "explicacao": "Amplie a variedade de operadores.",
+      "tipo": "Coesão"
+    },
+    {
+      "trecho_original": "Filósofo françes Guy Debord, em sua obra "A sociedade do espetáculo" ,visa a perda",
+      "sugestao": "filósofo francês Guy Debord, em sua obra "A Sociedade do Espetáculo", visa à perda",
+      "explicacao": "Erro de crase e letra minúscula.",
+      "tipo": "Gramática"
+    }
+  ]
+}
+    `;
+    const parsed = safeParseLLMJson(raw);
+    
+    assert.strictEqual(Array.isArray(parsed.erros), true);
+    assert.strictEqual(parsed.erros.length, 2);
+    
+    // Arrays devem ser parseados como listas corretamente, e não destruídos pelas aspas
+    assert.deepStrictEqual(parsed.erros[0].sugestao, [
+      "Nesse contexto",
+      "Sob esse prisma analítico",
+      "Nessa perspectiva teórica"
+    ]);
+
+    // Aspas no meio de citações de livros devem ser devidamente tratadas
+    assert.strictEqual(parsed.erros[1].trecho_original, 'Filósofo françes Guy Debord, em sua obra "A sociedade do espetáculo" ,visa a perda');
+    assert.strictEqual(parsed.erros[1].sugestao, 'filósofo francês Guy Debord, em sua obra "A Sociedade do Espetáculo", visa à perda');
   });
 });

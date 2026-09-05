@@ -203,6 +203,23 @@ export function initLiveFeedback() {
     }
 
     const hud = ensureTelemetryHud();
+
+    // ─── Hidratação Inicial: restaura rascunho do IndexedDB (ADR-13) ────────
+    // Executado de forma assíncrona e silenciosa; não bloqueia o editor.
+    (async function hidratarRascunhoSeNecessario() {
+        if (essayTextarea.value.trim().length > 0) return; // editor já tem conteúdo
+        try {
+            const { getLatestDraft } = await import('./database.js');
+            const rascunho = await getLatestDraft();
+            if (rascunho && rascunho.texto && essayTextarea.value.trim().length === 0) {
+                essayTextarea.value = rascunho.texto;
+                _lastSavedText = rascunho.texto; // sincroniza o diff para não regravá-lo imediatamente
+                updateTelemetryHud(hud, rascunho.texto); // atualiza HUD de imediato
+            }
+        } catch (err) {
+            console.warn('[Storage] Falha ao hidratar rascunho do IndexedDB:', err);
+        }
+    })();
     
     // Instancia o worker nativo off-thread
     let copilotWorker;
@@ -291,7 +308,7 @@ export function initLiveFeedback() {
         onInputDebounced(text);
     });
 
-    // Estado inicial síncrono
+    // Estado inicial síncrono (antes da hidratação assíncrona — pode mostrar 0/30 por um frame)
     updateTelemetryHud(hud, essayTextarea.value || '');
 }
 

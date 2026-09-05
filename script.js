@@ -763,6 +763,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 const m = await import('./js/json-repair.js');
                 const resultObj = m.safeParseLLMJson(pastedText);
 
+                // ADR-13: Persiste o payload da correção de forma assíncrona e silenciosa
+                import('./js/database.js').then(db => {
+                    const temaEl = /** @type {HTMLInputElement|null} */ (document.getElementById('theme'));
+                    const bancaEl = /** @type {HTMLSelectElement|null} */ (document.getElementById('banca-select'));
+                    db.saveCorrectionPayload({
+                        dados: resultObj,
+                        tema: temaEl ? temaEl.value : '',
+                        banca: bancaEl ? bancaEl.value : currentBanca?.nome || 'ENEM',
+                        textoOriginal: document.getElementById('essay')?.value || '',
+                    }).catch(err => console.warn('[Storage] Erro ao salvar histórico de correção:', err));
+                }).catch(() => {}); // módulo opcional; falha silenciosa se não carregar
+
+
                 if (onCopiadorSubmit) {
                     onCopiadorSubmit(JSON.stringify(resultObj));
                 }

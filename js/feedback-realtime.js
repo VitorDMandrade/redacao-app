@@ -34,7 +34,7 @@ export function initLiveFeedback() {
         
         if (feedback) {
             msgElement.textContent = feedback;
-            panel.style.display = 'block';
+            panel.style.display = 'flex';
         } else {
             panel.style.display = 'none';
         }

@@ -2339,7 +2339,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function createTextPiece(initialText) {
         const piece = document.createElement('div');
         piece.className = 'builder-piece text-piece';
-        piece.style.cssText = 'display:flex; align-items:flex-start; flex: 1 1 300px; max-width: 100%; gap:8px; padding:4px 0; box-sizing:border-box; cursor:grab;';
+        piece.style.cssText = 'display:flex; align-items:flex-start; flex: 0 0 auto; max-width: 100%; gap:8px; padding:4px 0; box-sizing:border-box; cursor:grab;';
 
         const grip = document.createElement('span');
         grip.innerHTML = '&#8942;&#8942;';
@@ -2349,7 +2349,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ta = document.createElement('textarea');
         ta.placeholder = 'Escreva aqui seu trecho, argumento ou parágrafo...';
         ta.value = initialText || '';
-        ta.style.cssText = 'flex:1; resize:both; min-width: 100px; min-height:2rem; background:transparent; border:none; border-bottom:1px solid #e2e8f0; outline:none; font-family:Georgia,serif; font-size:1rem; color:#111; line-height:2rem; padding:0; overflow:hidden;';
+        ta.style.cssText = 'resize:both; width: 300px; max-width: 100%; min-width: 100px; min-height:2rem; background:transparent; border:none; border-bottom:1px solid #e2e8f0; outline:none; font-family:Georgia,serif; font-size:1rem; color:#111; line-height:2rem; padding:0; overflow:hidden;';
         // Auto-expand
         const autoResize = () => {
             ta.style.height = 'auto';

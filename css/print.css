@@ -113,3 +113,14 @@
     background-color: #ffffff !important;
   }
 }
+
+/* Modo Confronto (Diff) Impressão */
+.diff-removed {
+  text-decoration: line-through !important;
+  color: #000 !important;
+}
+.diff-added {
+  text-decoration: underline !important;
+  font-weight: bold !important;
+  color: #000 !important;
+}

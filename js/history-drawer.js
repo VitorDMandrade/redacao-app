@@ -300,7 +300,7 @@ function loadCorrectionIntoView(item) {
     closeDrawer();
 
     if (window.__REDACAO_BRIDGE__?.renderResults) {
-        window.__REDACAO_BRIDGE__.renderResults(item.dados);
+        window.__REDACAO_BRIDGE__.renderResults(item.dados, item.textoOriginal);
     } else {
         console.error('[History] Falha na ponte com renderizador do monólito.');
         alert('Erro ao carregar correção. Renderizador inacessível.');

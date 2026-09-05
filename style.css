@@ -1462,3 +1462,33 @@ body {
   background: rgba(255, 255, 255, 0.1);
 }
 
+
+/* Diff Viewer */
+.diff-container {
+  line-height: 1.8;
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+.diff-removed {
+  background-color: rgba(239, 68, 68, 0.18);
+  color: #b91c1c;
+  text-decoration: line-through;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.dark-mode .diff-removed {
+  background-color: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+.diff-added {
+  background-color: rgba(16, 185, 129, 0.18);
+  color: #047857;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+.dark-mode .diff-added {
+  background-color: rgba(16, 185, 129, 0.25);
+  color: #34d399;
+}

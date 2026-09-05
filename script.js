@@ -794,8 +794,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Fachada de Compatibilidade (Strangler Pattern)
     window.__REDACAO_BRIDGE__ = Object.freeze({
-        renderResults: (dados) => {
-            renderGeminiResults(dados);
+        renderResults: (dados, rawText) => {
+            renderGeminiResults(dados, rawText || editor.value);
             
             // Switch Views
             if(btnModeResult) {
@@ -868,7 +868,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (diagnosticoDiv) diagnosticoDiv.textContent = resultObj.diagnostico || "Diagnóstico não disponível.";
         if (resumoDiv) resumoDiv.textContent = resultObj.resumoPratico || "Resumo Prático não gerado.";
-        if (reescritaDiv) reescritaDiv.textContent = resultObj.reescrita || "Reescrita não disponível.";
+        
+        if (reescritaDiv) {
+            // @ts-ignore
+            if (window.redacaoApp && window.redacaoApp.initDiffViewer) {
+                // @ts-ignore
+                window.redacaoApp.initDiffViewer(reescritaDiv, rawText, resultObj.reescrita || "Reescrita não disponível.");
+            } else {
+                reescritaDiv.textContent = resultObj.reescrita || "Reescrita não disponível.";
+            }
+        }
 
         // Destaques de Erros (Marcações) no Texto
         if (resultObj.erros && Array.isArray(resultObj.erros) && resultObj.erros.length > 0) {

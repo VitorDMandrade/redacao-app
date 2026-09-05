@@ -747,7 +747,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (btnRenderCopiador) {
-        btnRenderCopiador.addEventListener('click', () => {
+        btnRenderCopiador.addEventListener('click', async () => {
             const pastedText = jsonPasteArea.value.trim();
             if (!pastedText) {
                 alert('Por favor, cole o resultado JSON do Gemini.');
@@ -755,24 +755,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             try {
-                // Tenta extrair o JSON caso o usuário tenha copiado com ```json ... ```
-                let jsonStr = pastedText;
-                const match = jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/i);
-                if (match) {
-                    jsonStr = match[1];
-                }
-                jsonStr = jsonStr.trim();
-
-                // Tratar virgulas sobrando no final de objetos/arrays (hallucination do Gemini)
-                jsonStr = jsonStr.replace(/,\s*([}\]])/g, '$1');
-
-                // Tratar quebras de linha não escapadas dentro de strings
-                jsonStr = jsonStr.replace(/"([^"\\]*(?:\\.[^"\\]*)*)"/g, function (match) {
-                    return match.replace(/\r?\n/g, '\\n');
-                });
+                // Tenta extrair o JSON e fazer parse seguro
+                const m = await import('./js/json-repair.js');
+                const resultObj = m.safeParseLLMJson(pastedText);
 
                 if (onCopiadorSubmit) {
-                    onCopiadorSubmit(jsonStr);
+                    onCopiadorSubmit(JSON.stringify(resultObj));
                 }
 
                 // Fecha modal
@@ -1200,7 +1188,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     if (grammarChallengeInput) {
-        grammarChallengeInput.addEventListener('input', () => {
+        grammarChallengeInput.addEventListener('input', async () => {
             const val = grammarChallengeInput.value.trim();
             if (!val) {
                 grammarChallengeDisplay.classList.add('hidden');
@@ -1208,9 +1196,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
             try {
-                // Remove possivel markdown de codigo
-                const cleanJson = val.replace(/^```json\s*/i, '').replace(/```\s*$/, '').trim();
-                const obj = JSON.parse(cleanJson);
+                const m = await import('./js/json-repair.js');
+                const obj = m.safeParseLLMJson(val);
 
                 if (obj.texto_problematico) {
                     currentGrammarChallenge = obj.texto_problematico;

@@ -1,69 +1,88 @@
 @media print {
-  /* 1. Configuração da Página Física A4 */
+  /* 1. Reset Global de Canvas e Neutralização de Dark Mode */
+  :root,
+  html,
+  body,
+  body.dark-mode {
+    background: #ffffff !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   @page {
     size: A4 portrait;
     margin: 12mm 15mm;
   }
 
-  /* 2. Ocultar tudo que não seja o relatório da redação (Flow-based Print) */
-  body > :not(main) {
-    display: none !important;
-  }
-  main > :not(#result-view) {
+  /* 2. Ocultação Estrutural Baseada em Árvore de Nós (Zero Visibility Hacks) */
+  body > :not(main),
+  main > :not(#result-view),
+  .actions,
+  .btn,
+  #telemetria-caligrafica-hud,
+  .no-print,
+  header,
+  nav,
+  footer {
     display: none !important;
   }
 
-  /* Garante que o result-view retorne ao fluxo normal para permitir paginação correta */
+  /* 3. Manutenção do Fluxo Natural para Paginação Perfeita */
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    display: block !important;
+    width: 100% !important;
+  }
+
   #result-view {
     display: block !important;
-    position: relative !important;
+    position: static !important;
     width: 100% !important;
-    background: #ffffff !important;
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    box-shadow: none !important;
+    margin: 0 !important;
     padding: 0 !important;
-  }
-  
-  /* Resetar cores e backgrounds no modo escuro para impressão */
-  .paper-wrapper, 
-  .feedback-card, 
-  .diagnostic-card, 
-  .rewrite-card,
-  .metric-box,
-  .card-header,
-  .tips-list li {
     background: #ffffff !important;
-    background-color: #ffffff !important;
-    color: #000000 !important;
-    border-color: #dddddd !important;
+    color: #111827 !important;
     box-shadow: none !important;
+    border: none !important;
   }
 
-  /* 3. Ocultar botões, barras de navegação e controles de tela */
-  .actions, 
-  .btn, 
-  #telemetria-caligrafica-hud, 
-  .no-print,
-  #btn-export-pdf,
-  header,
-  nav {
-    display: none !important;
+  /* 4. Esterilização de Efeitos Visuais de Tela (Fim das manchas pretas) */
+  #result-view * {
+    box-shadow: none !important;
+    text-shadow: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
   }
 
-  /* 4. Prevenção de corte arbitrário de texto entre páginas */
+  /* 5. Cartões, Tabelas e Quebras de Linha A4 */
   .paper-wrapper,
   .feedback-card,
   .diagnostic-card,
   .rewrite-card,
-  table {
-    break-inside: avoid;
-    page-break-inside: avoid;
+  .score-card,
+  table,
+  tr {
+    background: #ffffff !important;
+    color: #111827 !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 6px !important;
+    margin-bottom: 12px !important;
+    padding: 12px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
   }
 
-  /* 5. Forçar contraste e fidelidade gráfica das pautas e bordas */
-  * {
-    -webkit-print-color-adjust: exact !important;
-    print-color-adjust: exact !important;
+  /* 6. Garantia de Tipografia e Pautas Visíveis */
+  h1, h2, h3, h4, p, span, strong, td, th {
+    color: #111827 !important;
+  }
+
+  .paper-lines,
+  .lined-paper {
+    background-color: #ffffff !important;
   }
 }

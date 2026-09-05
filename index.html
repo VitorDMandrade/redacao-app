@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistema de Correção de Redações</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/print.css" media="print">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -75,6 +76,7 @@
                 <button class="mode-btn" id="btn-mode-repertory">Treino de Repertório</button>
                 <button class="mode-btn" id="btn-mode-grammar">Treino Gramatical</button>
                 <button class="mode-btn" id="btn-mode-model">Meu Modelo</button>
+                <button class="mode-btn hidden" id="btn-mode-result" style="color: var(--success); border-color: var(--success);">Correção</button>
             </div>
             <button class="btn btn-secondary btn-sm" id="btn-reset-page"
                 style="border-color: var(--danger); color: var(--danger); font-size: 0.8rem; padding: 0.4rem 0.8rem;">
@@ -973,5 +975,8 @@
 
     <!-- Módulo Isolado: Feedback em Tempo Real -->
     <script type="module" src="js/feedback-realtime.js"></script>
+
+    <!-- Módulo de Exportação PDF Nativa -->
+    <script type="module" src="./js/pdf-export.js"></script>
 </body>
 </html>

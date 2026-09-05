@@ -200,6 +200,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnModeRepertory = document.getElementById('btn-mode-repertory');
     const btnModeGrammar = document.getElementById('btn-mode-grammar');
     const btnModeModel = document.getElementById('btn-mode-model');
+    const btnModeResult = document.getElementById('btn-mode-result');
 
     const trainingView = document.getElementById('training-view');
     const repertoryView = document.getElementById('repertory-view');
@@ -212,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function switchMode(activeBtn, activeView) {
         if (!activeBtn) return;
-        [btnModeFull, btnModeTraining, btnModeRepertory, btnModeGrammar, btnModeModel].forEach(btn => btn && btn.classList.remove('active'));
+        [btnModeFull, btnModeTraining, btnModeRepertory, btnModeGrammar, btnModeModel, btnModeResult].forEach(btn => btn && btn.classList.remove('active'));
         [writeView, trainingView, repertoryView, grammarView, modelView, resultView].forEach(view => view && view.classList.add('hidden'));
 
         activeBtn.classList.add('active');
@@ -225,6 +226,7 @@ document.addEventListener('DOMContentLoaded', () => {
     btnModeRepertory.addEventListener('click', () => switchMode(btnModeRepertory, repertoryView));
     btnModeGrammar.addEventListener('click', () => switchMode(btnModeGrammar, grammarView));
     if (btnModeModel) btnModeModel.addEventListener('click', () => switchMode(btnModeModel, modelView));
+    if (btnModeResult) btnModeResult.addEventListener('click', () => switchMode(btnModeResult, resultView));
 
     // Reiniciar Página
     const btnResetPage = document.getElementById('btn-reset-page');
@@ -718,8 +720,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderGeminiResults(resultObj, copiadorRawText);
 
                     // Switch Views
-                    writeView.classList.add('hidden');
-                    resultView.classList.remove('hidden');
+                    if(btnModeResult) {
+                        btnModeResult.classList.remove('hidden');
+                        btnModeResult.click();
+                    }
 
                     // Reset progress bars for animation
                     const progressBars = document.querySelectorAll('.progress');

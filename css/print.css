@@ -1,0 +1,69 @@
+@media print {
+  /* 1. Configuração da Página Física A4 */
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm;
+  }
+
+  /* 2. Ocultar tudo que não seja o relatório da redação (Flow-based Print) */
+  body > :not(main) {
+    display: none !important;
+  }
+  main > :not(#result-view) {
+    display: none !important;
+  }
+
+  /* Garante que o result-view retorne ao fluxo normal para permitir paginação correta */
+  #result-view {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+  
+  /* Resetar cores e backgrounds no modo escuro para impressão */
+  .paper-wrapper, 
+  .feedback-card, 
+  .diagnostic-card, 
+  .rewrite-card,
+  .metric-box,
+  .card-header,
+  .tips-list li {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #000000 !important;
+    border-color: #dddddd !important;
+    box-shadow: none !important;
+  }
+
+  /* 3. Ocultar botões, barras de navegação e controles de tela */
+  .actions, 
+  .btn, 
+  #telemetria-caligrafica-hud, 
+  .no-print,
+  #btn-export-pdf,
+  header,
+  nav {
+    display: none !important;
+  }
+
+  /* 4. Prevenção de corte arbitrário de texto entre páginas */
+  .paper-wrapper,
+  .feedback-card,
+  .diagnostic-card,
+  .rewrite-card,
+  table {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* 5. Forçar contraste e fidelidade gráfica das pautas e bordas */
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}

@@ -1372,3 +1372,165 @@ body {
     background: var(--panel-border);
     border: 1px dashed var(--text-muted);
 }
+
+/* ========================================================
+   HUD de Telemetria Caligráfica (Padrão Estrangulador)
+   ======================================================== */
+.telemetria-hud {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding: 0.55rem 1.1rem;
+    margin: 0.5rem 1.5rem 0.4rem 1.5rem;
+    background: rgba(30, 41, 59, 0.04);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    font-size: 0.82rem;
+    color: var(--paper-text);
+    box-sizing: border-box;
+    transition: all 0.2s ease;
+}
+
+.dark-mode .telemetria-hud {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: var(--panel-border);
+    color: var(--text-main);
+}
+
+.telemetria-section {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.telemetria-label {
+    font-weight: 600;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.telemetria-lines-badge {
+    font-weight: 700;
+    padding: 0.2rem 0.6rem;
+    border-radius: 9999px;
+    font-size: 0.82rem;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.telemetria-lines-badge.status-under {
+    background: rgba(245, 158, 11, 0.12);
+    color: #b45309;
+}
+
+.dark-mode .telemetria-lines-badge.status-under {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+}
+
+.telemetria-lines-badge.status-ideal {
+    background: rgba(16, 185, 129, 0.12);
+    color: #047857;
+}
+
+.dark-mode .telemetria-lines-badge.status-ideal {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+}
+
+.telemetria-lines-badge.status-over {
+    background: rgba(244, 63, 94, 0.15);
+    color: #be123c;
+    animation: telemetria-pulse 1.5s infinite;
+}
+
+.dark-mode .telemetria-lines-badge.status-over {
+    background: rgba(244, 63, 94, 0.25);
+    color: #fda4af;
+}
+
+.telemetria-badges-section {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    flex-wrap: wrap;
+}
+
+.telemetria-p-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 4px;
+    background: rgba(100, 116, 139, 0.1);
+    color: #475569;
+    border: 1px solid rgba(100, 116, 139, 0.2);
+    transition: all 0.2s ease;
+}
+
+.dark-mode .telemetria-p-badge {
+    background: rgba(255, 255, 255, 0.06);
+    color: var(--text-muted);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.telemetria-p-badge.telemetria-p-active {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: rgba(99, 102, 241, 0.08);
+}
+
+.telemetria-p-badge.telemetria-p-overflow {
+    border-color: var(--danger);
+    background: rgba(244, 63, 94, 0.12);
+    color: var(--danger);
+    font-weight: 700;
+}
+
+.telemetria-density-section {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.telemetria-chars-text {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.telemetria-progress-track {
+    width: 80px;
+    height: 6px;
+    background: rgba(148, 163, 184, 0.2);
+    border-radius: 9999px;
+    overflow: hidden;
+}
+
+.telemetria-progress-fill {
+    height: 100%;
+    border-radius: 9999px;
+    background: var(--primary);
+    transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.telemetria-progress-fill.fill-under {
+    background: var(--warning);
+}
+
+.telemetria-progress-fill.fill-ideal {
+    background: var(--success);
+}
+
+.telemetria-progress-fill.fill-over {
+    background: var(--danger);
+}
+
+@keyframes telemetria-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.03); }
+}
+

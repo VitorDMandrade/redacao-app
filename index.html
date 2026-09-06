@@ -9,6 +9,8 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Redação Medicina — Correção com IA</title>
+    <link rel="manifest" href="manifest.webmanifest">
+    <link rel="icon" type="image/svg+xml" href="icons/icon-192.svg">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="css/print.css" media="print">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -997,5 +999,16 @@
 
     <!-- Módulo de Exportação PDF Nativa -->
     <script type="module" src="./js/pdf-export.js"></script>
+
+    <!-- Registro do Service Worker (PWA — ADR-19) -->
+    <script type="module">
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('./sw.js')
+            .then(reg => console.log('[PWA] Service Worker registrado no escopo:', reg.scope))
+            .catch(err => console.warn('[PWA] Falha ao registrar Service Worker:', err));
+        });
+      }
+    </script>
 </body>
 </html>

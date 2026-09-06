@@ -1492,3 +1492,175 @@ body {
   background-color: rgba(16, 185, 129, 0.25);
   color: #34d399;
 }
+
+/* =========================================================
+   TOUCH-FIRST PATCH (ADR-18) — Mobile & Tablet
+   ========================================================= */
+
+/* 1. Alvos mínimos de toque 44x44px (WCAG + Apple HIG) */
+@media (hover: none) and (pointer: coarse) {
+  button,
+  .btn,
+  .tab-btn,
+  .telemetria-pill,
+  .history-tab,
+  .btn-load-history,
+  .btn-delete-history,
+  .diff-toggle,
+  [id^='btn-'] {
+    min-height: 44px;
+    min-width: 44px;
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(96, 165, 250, 0.2);
+  }
+
+  /* Evita seleção de texto acidental em tap */
+  .btn, button {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* 2. Adaptações Mobile (<= 768px) */
+@media (max-width: 768px) {
+  /* Layout raiz sem overflow horizontal */
+  html, body {
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  body {
+    padding: 6px;
+  }
+
+  /* Containers globais */
+  .app-container,
+  .main-container,
+  #main-app,
+  #editor-view,
+  #result-view,
+  #training-view,
+  #arena-view {
+    width: 100% !important;
+    max-width: 100vw !important;
+    margin: 0 !important;
+    box-sizing: border-box;
+  }
+
+  /* Folha Pautada — contenção elástica com scroll horizontal suave */
+  .paper-wrapper {
+    width: 100% !important;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    resize: none !important; /* Remove resize no mobile, não faz sentido com dedo */
+  }
+
+  .paper-container {
+    min-width: 300px; /* Permite scroll horizontal se necessário */
+  }
+
+  /* Textarea: 16px previne auto-zoom no iOS Safari */
+  textarea,
+  .training-textarea,
+  #essay {
+    font-size: 16px !important;
+    line-height: 28px !important;
+    box-sizing: border-box;
+    width: 100% !important;
+  }
+
+  /* HUD de Telemetria — empilha verticalmente em telas estreitas */
+  .telemetria-container {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .telemetria-global-stats,
+  .telemetria-paragraphs-pills {
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+
+  /* Pilar/painel de conectivos — sai do posicionamento fixed/absolute */
+  .connectives-panel,
+  .builder-sidebar,
+  #connectives-panel,
+  #connectives-modal {
+    position: static !important;
+    width: 100% !important;
+    margin-bottom: 12px;
+    max-height: 40vh;
+    overflow-y: auto;
+  }
+
+  /* Botão flutuante de conectivos — mover para bottom-right com area maior */
+  #btn-open-connectives {
+    bottom: 16px !important;
+    right: 16px !important;
+    width: 54px !important;
+    height: 54px !important;
+  }
+
+  /* Gaveta de histórico — largura mais natural */
+  .history-drawer {
+    width: 90vw !important;
+    max-width: 90vw !important;
+  }
+
+  /* Diff Controls — pills em row adaptável */
+  .diff-controls {
+    flex-wrap: wrap;
+  }
+
+  /* Training cards — sem padding lateral excessivo */
+  .training-card {
+    padding: 0.75rem;
+  }
+}
+
+/* 3. Adaptações Tablet (<= 1024px e > 768px) */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .paper-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Botões de ação maiores para toque com dedo */
+  .btn {
+    padding: 10px 18px;
+  }
+}
+
+/* Correções de overflow identificadas via DevTools (ADR-18) */
+@media (max-width: 768px) {
+  main.container,
+  .container {
+    padding: 12px !important;
+    box-sizing: border-box;
+  }
+
+  /* Barra de tabs: scroll horizontal suave em vez de overflow */
+  .mode-toggle {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    flex-wrap: nowrap;
+    gap: 4px;
+    padding-bottom: 4px;
+    scrollbar-width: none; /* Firefox */
+  }
+  .mode-toggle::-webkit-scrollbar {
+    display: none; /* Safari/Chrome */
+  }
+
+  .tab-btn, .mode-btn {
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* Background decorativo não deve vazart */
+  .background-elements {
+    overflow: hidden !important;
+    width: 100% !important;
+  }
+}

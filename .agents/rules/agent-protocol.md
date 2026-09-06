@@ -121,3 +121,25 @@ Quando instruído a utilizar o DevTools MCP na aba ativa (`http://localhost:8000
    - Ao concluir com sucesso todos os itens do `[CRITÉRIOS DE ACEITE (DoD)]` e obter aprovação na auto-verificação, formalize a entrega com um commit semântico atômico:
      `git commit -m "tipo(escopo): mensagem concisa"`
      (Tipos permitidos: `feat`, `fix`, `refactor`, `test`, `chore`).
+
+---
+
+# 9. INTEGRAÇÃO ENTRE MÓDULOS: NUNCA SIMULE INTERAÇÕES HUMANAS
+
+- **Proibido** usar `element.click()`, `element.dispatchEvent(new MouseEvent(...))` ou sintetizar qualquer evento de UI para acionar código de outro módulo.
+- **Correto:** expor uma função pura na fachada global imutável e chamá-la diretamente:
+  ```js
+  // Monólito expõe:
+  window.__APP_BRIDGE__ = Object.freeze({ renderResults, showView });
+  // Módulo satélite consome:
+  window.__APP_BRIDGE__.renderResults(dados, textoOriginal);
+  ```
+- A fachada deve ser `Object.freeze()` — imutável após criação para evitar monkey-patching acidental.
+
+---
+
+# 10. EXCLUSÃO DE DADOS DO USUÁRIO: CONFIRMAÇÃO OBRIGATÓRIA
+
+- Qualquer operação que destrua dados persistidos (IndexedDB, localStorage, arquivos) **deve** ser precedida de um `confirm()` nativo ou modal de confirmação.
+- A lista de itens deve ser re-renderizada automaticamente após a exclusão, sem reload da página.
+- Nunca exponha um botão de delete sem um mecanismo de `undo` ou pelo menos a confirmação dialógica.

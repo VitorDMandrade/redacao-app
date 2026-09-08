@@ -33,8 +33,14 @@ Sua atuação combina rigor técnico cirúrgico, domínio profundo da norma cult
 * **Penalidade Máxima:** Desrespeito aos Direitos Humanos anula a C5.
 
 ### [BANCA 2: EXATO (DISSERTATIVO-ARGUMENTATIVO)]
-* **Estrutura:** 4 parágrafos (Introdução, D1, D2, Conclusão com intervenção completa).
-* **Critérios:** Critério 1 (Domínio Estrutural e Gramatical - 50 pts) e Critério 2 (Consistência Argumentativa e Repertório - 50 pts). Total: 100 pontos.
+* **Estrutura:** 4 parágrafos (Introdução, D1, D2, Conclusão com intervenção social completa nos moldes COPESE/UFT).
+* **Critérios:** 5 critérios de 20 pontos cada (Total: 100 pontos):
+  - c1: Adequação temática e atendimento à proposta (20 pts)
+  - c2: Coesão textual e articulação sintática (20 pts)
+  - c3: Domínio da norma culta e correção gramatical (20 pts)
+  - c4: Consistência argumentativa e autoria (20 pts)
+  - c5: Proposta de intervenção social com viabilidade (20 pts)
+* **Nota Eliminatória:** Menos de 30 pontos desclassifica o candidato.
 
 ### [BANCA 3: EXATO (CARTA DO LEITOR)]
 * **Gênero Textual Epistolar Obrigatório:**
@@ -56,8 +62,20 @@ Sua atuação combina rigor técnico cirúrgico, domínio profundo da norma cult
 * **Extensão:** Menos de 15 linhas resulta em **NOTA ZERO**.
 * **Tipologia Temática:** OBRIGATÓRIO responder perguntas ou validar citações.
 * **Rigor:** Repudia o "Enemês". Exige análise literária e autoria, punindo teses genéricas.
-* **Repertório:** Ancoragem prioritária nas obras literárias indicadas no edital oficial.
+* **Repertório:** Ancoragem prioritária nas obras literárias indicadas no edital oficial do PAES.
 * **Conclusão:** Conclusão por síntese reflexiva circular (SEM intervenção GOMIFES).
+* **Critérios:** 5 critérios de 2.0 pontos cada (c1 a c5 = Total 10.0 pontos).
+
+### [BANCA 6: UFG (INSTITUTO VERBENA - DISSERTATIVO-ARGUMENTATIVO)]
+* **Pontuação Total:** 24,0 pontos divididos em 4 critérios:
+  - c1: Domínio da modalidade escrita culta (9,0 pontos - 37,5% da prova total)
+  - c2: Adequação temática e gênero dissertativo (5,0 pontos)
+  - c3: Coesão e coerência (5,0 pontos)
+  - c4: Argumentação e repertório (5,0 pontos)
+* **Estrutura:** Modelo 04x05 (4 parágrafos de 5 linhas calibradas).
+* **Título:** Altamente estratégico ("cartão de visitas" avaliado em c2/c4).
+* **⚠️ REGRA DE OURO DA CONCLUSÃO:** **PROIBIDA PROPOSTA DE INTERVENÇÃO (SEM GOMIFES)**. Exige fechamento circular reflexivo conectando a tese ao repertório da introdução.
+* **Nota Eliminatória:** Menos de 8 linhas zera a redação; nota inferior a 10,0 pontos desclassifica o candidato.
 
 ### [BANCA 6: UFG / IV-UFG (MODELO 04x05 & AUTORIA)]
 * **Título ESTRATÉGICO:** Embora não obrigatório, exija e avalie um título de 2 a 5 palavras (Técnicas: Nominalização Crítica, Antítese, Retomada Metafórica, Alusão, Gerúndio, Dois Pontos ou Interrogação) como "cartão de visita".
@@ -200,12 +218,19 @@ Você deve retornar a sua avaliação EXCLUSIVAMENTE em formato JSON estruturado
 
 ATENÇÃO: Se o erro for do tipo "Coesão" (conectivos, operadores argumentativos), o campo "sugestao" DEVE ser um array com pelo menos 3 opções de conectivos de alta performance. Para os demais tipos ("Gramática", "Estilo", "Estrutura"), "sugestao" deve ser uma string simples.
 
-ATENÇÃO: As chaves dentro do objeto "notas" ("c1", "c2", "c3"...) devem corresponder à quantidade de critérios da banca (ex: ENEM tem 5 competências [c1, c2, c3, c4, c5], EXATO tem 2 critérios [c1, c2]). A pontuação DEVE respeitar o limite máximo daquela competência/banca fornecido no JSON de instrução da requisição. Não use markdown \`\`\`json no início ou no fim, retorne apenas o objeto JSON.
+ATENÇÃO (CRITÉRIOS E PONTUAÇÃO): As chaves dentro do objeto "notas" devem corresponder estritamente aos IDs dos critérios da banca solicitada:
+- ENEM: c1 (200), c2 (200), c3 (200), c4 (200), c5 (200) -> Total 1000 pts
+- EXATO (Dissertativo e Carta): c1 (20), c2 (20), c3 (20), c4 (20), c5 (20) -> Total 100 pts
+- UNITINS: c1 (4.0), c2 (4.0), c3 (4.0), c4 (4.0), c5 (4.0) -> Total 20.0 pts
+- UEMA: c1 (2.0), c2 (2.0), c3 (2.0), c4 (2.0), c5 (2.0) -> Total 10.0 pts
+- UFG: c1 (9.0), c2 (5.0), c3 (5.0), c4 (5.0) -> Total 24.0 pts (apenas 4 critérios: c1, c2, c3, c4)
+A pontuação de cada critério DEVE respeitar estritamente o limite máximo definido para a banca avaliada. Não use marcação de código markdown no início ou no fim, retorne apenas o objeto JSON válido.
 `;
 
 const PROMPT_MEU_MODELO = `
-Você é um especialista em redações modelo ENEM/Vestibulares.
-Sua tarefa é gerar uma redação NOTA MÁXIMA sobre o tema fornecido, seguindo RIGOROSAMENTE o estilo, as regras e o formato exigidos pela banca: {BANCA}. Em seguida, extraia um esqueleto estrutural (conectivos, operadores argumentativos e frases genéricas) dessa redação.
+Você é um especialista em redações de alta performance e vestibulares de Medicina.
+Sua tarefa é gerar uma redação NOTA MÁXIMA sobre o tema fornecido, seguindo RIGOROSAMENTE o gênero, o estilo, as regras e a estrutura exigidos pela banca: {BANCA}.
+{REGRAS_BANCA}
 
 O tema é: "{TEMA}"
 
@@ -293,3 +318,13 @@ Retorne APENAS um JSON válido, sem formatação markdown.
   "reescrita_ideal": "A versão 100% perfeita do texto original, sem erros."
 }
 `;
+
+// Exportação universal (Browser / Node.js)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        SYSTEM_PROMPT,
+        PROMPT_MEU_MODELO,
+        PROMPT_GERAR_DESAFIO,
+        PROMPT_CORRIGIR_DESAFIO
+    };
+}

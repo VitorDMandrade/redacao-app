@@ -148,16 +148,49 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('train-title-3').textContent = "3. Aprofundamento Crítico";
             document.getElementById('train-hint-3').textContent = "Traga uma consequência ou repertório produtivo e posicione-se criticamente.";
             document.getElementById('train-title-4').textContent = "4. Conclusão, Despedida e Assinatura";
-            document.getElementById('train-hint-4').textContent = "Reflexão final, despedida formal e assinatura neutra (Ex: Um(a) leitor(a)).";
+            document.getElementById('train-hint-4').textContent = "Reflexão final, despedida formal e assinatura neutra (Ex: Um(a) leitor(a)). NUNCA assine com nome real!";
         } else {
             document.getElementById('train-title-1').textContent = "1. Introdução";
-            document.getElementById('train-hint-1').textContent = "Apresente o tema e sua tese (ponto de vista).";
+            document.getElementById('train-hint-1').textContent = "Apresente o tema, contextualização/repertório e sua tese com dois argumentos.";
             document.getElementById('train-title-2').textContent = "2. Desenvolvimento 1";
-            document.getElementById('train-hint-2').textContent = "Apresente o primeiro argumento e repertório sociocultural.";
+            document.getElementById('train-hint-2').textContent = "Apresente o primeiro argumento com causa, repertório legitimado e reflexão crítica.";
             document.getElementById('train-title-3').textContent = "3. Desenvolvimento 2";
-            document.getElementById('train-hint-3').textContent = "Apresente o segundo argumento e aprofunde a discussão.";
+            document.getElementById('train-hint-3').textContent = "Apresente o segundo argumento aprofundando o debate e a consequência social.";
             document.getElementById('train-title-4').textContent = "4. Conclusão";
-            document.getElementById('train-hint-4').textContent = "Retome a tese e elabore a proposta de intervenção ou síntese conclusiva.";
+
+            // Diferenciação entre bancas de Intervenção (ENEM / EXATO) e Síntese Reflexiva (UEMA / UFG / UNITINS)
+            const isGomifesBanca = currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO';
+            if (isGomifesBanca) {
+                document.getElementById('train-hint-4').textContent = "Retome a tese e elabore a proposta de intervenção social com os 5 elementos (GOMIFES: Agente, Ação, Meio/Modo, Efeito e Detalhamento).";
+            } else {
+                document.getElementById('train-hint-4').textContent = "Retome a tese e construa uma síntese circular reflexiva e crítica profunda. (ATENÇÃO: Proibido modelo de proposta GOMIFES nesta banca!).";
+            }
+        }
+
+        // Sincroniza as opções do seletor do Modo Tutorial conforme gênero da banca
+        const tutorialParagraphSelect = document.getElementById('tutorial-paragraph-select');
+        if (tutorialParagraphSelect) {
+            const currentVal = tutorialParagraphSelect.value;
+            if (selectedGenero === 'carta') {
+                tutorialParagraphSelect.innerHTML = `
+                    <option value="intro">1. Cabeçalho, Vocativo e Introdução (3 Frases)</option>
+                    <option value="d1">2. Argumentação e Diálogo (4 Frases)</option>
+                    <option value="d2">3. Aprofundamento Crítico (4 Frases)</option>
+                    <option value="conclusao">4. Conclusão, Despedida e Assinatura (3 Frases)</option>
+                `;
+            } else {
+                const isGomifes = currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO';
+                const conclusaoLabel = isGomifes ? "Conclusão com Intervenção GOMIFES (3 Frases)" : "Conclusão com Síntese Circular (3 Frases)";
+                tutorialParagraphSelect.innerHTML = `
+                    <option value="intro">Introdução (3 Frases)</option>
+                    <option value="d1">Desenvolvimento 1 (4 Frases)</option>
+                    <option value="d2">Desenvolvimento 2 (4 Frases)</option>
+                    <option value="conclusao">${conclusaoLabel}</option>
+                `;
+            }
+            if (['intro', 'd1', 'd2', 'conclusao'].includes(currentVal)) {
+                tutorialParagraphSelect.value = currentVal;
+            }
         }
 
         // Renderiza Eixos Temáticos
@@ -707,8 +740,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
             promptUser += `\nRedação:\n${rawText}`;
 
-            // Monta o prompt completo (Sistema + Usuário)
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : 'Você é um avaliador de redações rigoroso.'}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\n${promptUser}`;
+            // Monta schema dinâmico de notas para os critérios da banca selecionada
+            const schemaNotas = {};
+            if (currentBanca.criterios) {
+                currentBanca.criterios.forEach(c => {
+                    schemaNotas[c.id] = `nota de 0 a ${c.pontuacao}`;
+                });
+            }
+            const jsonSchemaExemplo = JSON.stringify({
+                notas: schemaNotas,
+                erros: [
+                    { trecho_original: "trecho exato com desvio", sugestao: "correção sugerida", explicacao: "explicação pedagógica clara", tipo: "Gramática, Coesão ou Estrutura" }
+                ],
+                diagnostico: "Diagnóstico aprofundado parágrafo a parágrafo considerando as especificidades da banca...",
+                resumoPratico: "Resumo acionável dos pontos mais urgentes para o aluno evoluir...",
+                reescrita: "Reescrita cirúrgica modelo nota máxima..."
+            }, null, 2);
+
+            const systemPromptBase = typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : 'Você é um avaliador de redações rigoroso e experiente.';
+
+            // Monta o prompt completo com instrução de saída JSON estrita e chaves da banca
+            const fullPrompt = `${systemPromptBase}\n\n` +
+                `INSTRUÇÃO CRÍTICA DE FORMATAÇÃO JSON:\n` +
+                `Responda APENAS E EXCLUSIVAMENTE com o objeto JSON solicitado, sem blocos markdown externos (sem \`\`\`json) e sem explicações antes ou depois.\n` +
+                `O campo "notas" DEVE utilizar OBRIGATORIAMENTE as seguintes chaves de critérios e respeitar o limite máximo de cada um:\n` +
+                `${jsonSchemaExemplo}\n\n` +
+                `---\n\n${promptUser}`;
 
             // Copia para a área de transferência
             navigator.clipboard.writeText(fullPrompt).then(() => {
@@ -792,10 +849,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Função auxiliar para mapear notas com tolerância a variações de chave (c1, C1, criterio1, competencia1)
+    function getCriterionScore(notasObj, critId) {
+        if (!notasObj || typeof notasObj !== 'object') return 0;
+        if (notasObj[critId] !== undefined) return Number(notasObj[critId]) || 0;
+        const lowerCritId = critId.toLowerCase();
+        for (const [k, v] of Object.entries(notasObj)) {
+            const lk = k.toLowerCase().replace(/[\s_-]/g, '');
+            if (lk === lowerCritId) return Number(v) || 0;
+            const num = critId.replace(/\D/g, '');
+            if (num && (lk === `c${num}` || lk === `criterio${num}` || lk === `critério${num}` || lk === `competencia${num}` || lk === `competência${num}`)) {
+                return Number(v) || 0;
+            }
+        }
+        return 0;
+    }
+
     // Fachada de Compatibilidade (Strangler Pattern)
     window.__REDACAO_BRIDGE__ = Object.freeze({
-        renderResults: (dados, rawText) => {
-            renderGeminiResults(dados, rawText || editor.value);
+        renderResults: (dados, rawText, bancaKey) => {
+            if (bancaKey && typeof BANCAS !== 'undefined' && BANCAS[bancaKey]) {
+                if (bancaSelect) bancaSelect.value = bancaKey;
+                currentBanca = BANCAS[bancaKey];
+                updateBancaUI();
+            }
+            renderGeminiResults(dados, rawText || essayInput.value);
             
             // Switch Views
             if(btnModeResult) {
@@ -815,30 +893,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Render Results from Gemini JSON
     function renderGeminiResults(resultObj, rawText) {
-        // Atualiza nota final
+        // Atualiza nota final da banca
         finalScoreMax.textContent = `/${currentBanca.notaMaxima}`;
 
         let scoreObtida = 0;
-        if (resultObj.notas) {
-            scoreObtida = Object.values(resultObj.notas).reduce((acc, curr) => acc + (Number(curr) || 0), 0);
+        if (resultObj.notas && currentBanca.criterios) {
+            // Soma estritamente apenas os critérios pertencentes à banca ativa
+            currentBanca.criterios.forEach(crit => {
+                scoreObtida += getCriterionScore(resultObj.notas, crit.id);
+            });
         }
 
-        if (currentBanca.notaMaxima <= 10 || currentBanca.notaMaxima === 24) {
+        // Formatação decimal dinâmica: bancas com nota máxima <= 30 (UEMA: 10.0, UNITINS: 20.0, UFG: 24.0)
+        const isDecimalBanca = Number(currentBanca.notaMaxima) <= 30;
+        if (isDecimalBanca) {
             finalScoreValue.textContent = scoreObtida.toFixed(1);
         } else {
-            finalScoreValue.textContent = Math.round(scoreObtida);
+            finalScoreValue.textContent = Math.round(scoreObtida).toString();
         }
 
         // Critérios/Competências
         competenciesContainer.innerHTML = '';
-        if (resultObj.notas) {
+        if (resultObj.notas && currentBanca.criterios) {
             currentBanca.criterios.forEach((crit) => {
-                const max = crit.pontuacao || 1;
-                const obt = resultObj.notas[crit.id] || 0;
-                const perc = max > 0 ? (obt / max) : 0;
+                const max = Number(crit.pontuacao) || 1;
+                const obt = getCriterionScore(resultObj.notas, crit.id);
+                const perc = max > 0 ? Math.min(Math.max(obt / max, 0), 1) : 0;
 
-                let displayObtida = max <= 10 ? obt.toFixed(1) : Math.round(obt);
-                let displayMax = max <= 10 ? max.toFixed(1) : Math.round(max);
+                const isCritDecimal = max <= 10;
+                let displayObtida = isCritDecimal ? obt.toFixed(1) : Math.round(obt).toString();
+                let displayMax = isCritDecimal ? max.toFixed(1) : Math.round(max).toString();
 
                 const html = `
                     <div class="competency-item">
@@ -846,7 +930,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <h4>${crit.nome}</h4>
                             <span>${displayObtida}/${displayMax}</span>
                         </div>
-                        <div class="progress-bar"><div class="progress" style="width: ${perc * 100}%"></div></div>
+                        <div class="progress-bar"><div class="progress" style="width: ${(perc * 100).toFixed(1)}%"></div></div>
                         <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem;">${crit.desc}</p>
                     </div>
                 `;
@@ -1431,10 +1515,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     return;
                 }
 
-                const partNames = ["Introdução", "Desenvolvimento 1", "Desenvolvimento 2", "Conclusão"];
+                const isCarta = currentBanca.generosPermitidos && currentBanca.generosPermitidos[0] === 'carta';
+                const partNamesDissertativo = ["Introdução", "Desenvolvimento 1", "Desenvolvimento 2", "Conclusão"];
+                const partNamesCarta = ["Cabeçalho, Vocativo e Introdução", "Argumentação e Diálogo", "Aprofundamento Crítico", "Conclusão, Despedida e Assinatura"];
+                const partNames = isCarta ? partNamesCarta : partNamesDissertativo;
                 const partName = partNames[part - 1] || "Bloco";
 
-                const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\nREGRAS DE JSON:\n1. NÃO pule linhas (Enter) dentro das strings. Use \\n.\n2. NÃO use aspas duplas dentro das strings. Use aspas simples (') ou escape (\\").\n\n---\n\nAnalise o seguinte parágrafo isolado de redação (${partName}). Focando em diagnosticar a estrutura, apresentar os erros e dar uma reescrita cirúrgica para este bloco fornecido. Retorne usando a mesma estrutura JSON do sistema de Treino (chave diagnostico e reescrita).\n\nBanca Alvo: ${currentBanca.nome}\nTema: ${theme || 'Não informado'}\nBloco (${partName}):\n${text}`;
+                let instrucaoBancaBloco = `\nBanca Alvo: ${currentBanca.nome}\nGênero: ${isCarta ? 'Carta do Leitor' : 'Dissertativo-Argumentativo'}\nTema: ${theme || 'Não informado'}\nBloco (${partName}):\n${text}\n`;
+
+                if (!isCarta && (currentBanca.id === 'UEMA' || currentBanca.id === 'UFG' || currentBanca.id === 'UNITINS') && String(part) === '4') {
+                    instrucaoBancaBloco += `\nATENÇÃO RIGOROSA: Esta banca (${currentBanca.nome}) NÃO utiliza proposta de intervenção social com 5 elementos (GOMIFES). A conclusão DEVE ser uma síntese circular reflexiva e crítica profunda. Não cobre agente, ação, meio ou detalhamento.\n`;
+                } else if (!isCarta && (currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO') && String(part) === '4') {
+                    instrucaoBancaBloco += `\nATENÇÃO: A conclusão deve conter proposta de intervenção social completa com os 5 elementos (Agente, Ação, Meio/Modo, Efeito e Detalhamento).\n`;
+                } else if (isCarta) {
+                    instrucaoBancaBloco += `\nATENÇÃO RIGOROSA: Gênero Carta do Leitor. Linguagem dialógica com o interlocutor/veículo e PROIBIÇÃO ABSOLUTA de identificação com nome real.\n`;
+                }
+
+                const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\nREGRAS DE JSON:\n1. NÃO pule linhas (Enter) dentro das strings. Use \\n.\n2. NÃO use aspas duplas dentro das strings. Use aspas simples (') ou escape (\\").\n\n---\n\nAnalise o seguinte parágrafo isolado (${partName}), diagnosticando a estrutura, conformidade com a banca, desvios gramaticais e oferecendo uma reescrita cirúrgica de excelência. Retorne no formato JSON com as chaves "diagnostico" e "reescrita".\n${instrucaoBancaBloco}`;
 
                 navigator.clipboard.writeText(fullPrompt).then(() => {
                     onCopiadorSubmit = (jsonStr) => {
@@ -1502,42 +1599,99 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Lógica do Modo Tutorial (Treino Guiado Passo a Passo)
-    const TUTORIAL_CONFIG = {
-        intro: {
-            title: "Introdução",
-            periods: [
-                { id: 1, name: "Frase 1", hint: "Tópico Frasal c/ Repertório e dupla identificação." },
-                { id: 2, name: "Frase 2", hint: "Ponte Temática c/ palavras-chave conectando o repertório ao tema." },
-                { id: 3, name: "Frase 3", hint: "Tese Dupla (apresentação dos dois argumentos/problemas)." }
-            ]
-        },
-        d1: {
-            title: "Desenvolvimento 1",
-            periods: [
-                { id: 1, name: "Frase 1", hint: "Tópico Frasal (Retomada do Argumento 1)." },
-                { id: 2, name: "Frase 2", hint: "Progressão Causal / Explicação do problema." },
-                { id: 3, name: "Frase 3", hint: "Encaixe de Repertório produtivo." },
-                { id: 4, name: "Frase 4", hint: "Fechamento Crítico (Consequência ou reflexão)." }
-            ]
-        },
-        d2: {
-            title: "Desenvolvimento 2",
-            periods: [
-                { id: 1, name: "Frase 1", hint: "Tópico Frasal (Retomada do Argumento 2)." },
-                { id: 2, name: "Frase 2", hint: "Progressão Causal / Explicação do problema." },
-                { id: 3, name: "Frase 3", hint: "Encaixe de Repertório produtivo." },
-                { id: 4, name: "Frase 4", hint: "Fechamento Crítico (Consequência ou reflexão)." }
-            ]
-        },
-        conclusao: {
-            title: "Conclusão",
-            periods: [
-                { id: 1, name: "Frase 1", hint: "Retomada da Tese (Confirmação do problema)." },
-                { id: 2, name: "Frase 2", hint: "Proposta de Intervenção (GOMIFES) ou Síntese Circular." },
-                { id: 3, name: "Frase 3", hint: "Fechamento final (Retomando o repertório da introdução)." }
-            ]
+    function getTutorialConfig(banca) {
+        const genero = banca && banca.generosPermitidos ? banca.generosPermitidos[0] : 'dissertativo';
+        const isIntervencao = banca && (banca.id === 'ENEM' || banca.id === 'EXATO_DISSERTATIVO');
+
+        if (genero === 'carta') {
+            return {
+                intro: {
+                    title: "Cabeçalho, Vocativo e Introdução",
+                    periods: [
+                        { id: 1, name: "Frase 1", hint: "Local, data e vocativo formal adequado ao destinatário/editor." },
+                        { id: 2, name: "Frase 2", hint: "Apresentação da matéria/assunto de referência e objetivo da carta." },
+                        { id: 3, name: "Frase 3", hint: "Ponto de vista central do leitor sobre o tema abordado." }
+                    ]
+                },
+                d1: {
+                    title: "Argumentação (Diálogo com Veículo)",
+                    periods: [
+                        { id: 1, name: "Frase 1", hint: "Apresentação do primeiro argumento dialogando com o veículo." },
+                        { id: 2, name: "Frase 2", hint: "Desenvolvimento crítico com marcas de interlocução (ex: 'como vocês apontaram')." },
+                        { id: 3, name: "Frase 3", hint: "Fato ou exemplo concreto que sustenta sua posição." },
+                        { id: 4, name: "Frase 4", hint: "Conclusão parcial do ponto com apelo reflexivo ao editor." }
+                    ]
+                },
+                d2: {
+                    title: "Aprofundamento Crítico",
+                    periods: [
+                        { id: 1, name: "Frase 1", hint: "Segundo aspecto crítico ou impacto social da discussão." },
+                        { id: 2, name: "Frase 2", hint: "Explicação das causas e consequências para os leitores/cidadãos." },
+                        { id: 3, name: "Frase 3", hint: "Repertório ou contraponto à matéria original." },
+                        { id: 4, name: "Frase 4", hint: "Fechamento incisivo cobrando reflexão da publicação." }
+                    ]
+                },
+                conclusao: {
+                    title: "Conclusão, Despedida e Assinatura",
+                    periods: [
+                        { id: 1, name: "Frase 1", hint: "Síntese das reivindicações ou posicionamento final do leitor." },
+                        { id: 2, name: "Frase 2", hint: "Chamamento final de ação ou reflexão aos editores/leitores." },
+                        { id: 3, name: "Frase 3", hint: "Despedida formal respeitosa e assinatura neutra (NUNCA assine com nome real!)." }
+                    ]
+                }
+            };
         }
-    };
+
+        // Dissertativo
+        return {
+            intro: {
+                title: "Introdução",
+                periods: [
+                    { id: 1, name: "Frase 1", hint: "Tópico Frasal c/ Repertório e contextualização temática." },
+                    { id: 2, name: "Frase 2", hint: "Ponte Temática conectando o repertório ao tema com clareza." },
+                    { id: 3, name: "Frase 3", hint: "Tese Dupla apresentando os dois problemas/argumentos centrais." }
+                ]
+            },
+            d1: {
+                title: "Desenvolvimento 1",
+                periods: [
+                    { id: 1, name: "Frase 1", hint: "Tópico Frasal (retomada direta do primeiro argumento)." },
+                    { id: 2, name: "Frase 2", hint: "Progressão Causal explicando a raiz e o impacto do problema." },
+                    { id: 3, name: "Frase 3", hint: "Repertório sociocultural legitimado e produtivo." },
+                    { id: 4, name: "Frase 4", hint: "Fechamento Crítico com reflexão reflexiva incisiva." }
+                ]
+            },
+            d2: {
+                title: "Desenvolvimento 2",
+                periods: [
+                    { id: 1, name: "Frase 1", hint: "Tópico Frasal (retomada direta do segundo argumento)." },
+                    { id: 2, name: "Frase 2", hint: "Progressão Causal explicando a causa e consequência social." },
+                    { id: 3, name: "Frase 3", hint: "Repertório sociocultural legitimado e produtivo." },
+                    { id: 4, name: "Frase 4", hint: "Fechamento Crítico com reflexão conclusiva do bloco." }
+                ]
+            },
+            conclusao: {
+                title: "Conclusão",
+                periods: [
+                    { id: 1, name: "Frase 1", hint: "Retomada formal da Tese com conectivo conclusivo adequado." },
+                    { 
+                        id: 2, 
+                        name: "Frase 2", 
+                        hint: isIntervencao 
+                            ? "Proposta de Intervenção completa (Agente, Ação, Meio/Modo, Efeito e Detalhamento)." 
+                            : "Síntese Circular reflexiva e aprofundamento crítico (Proibido modelo GOMIFES!)." 
+                    },
+                    { 
+                        id: 3, 
+                        name: "Frase 3", 
+                        hint: isIntervencao 
+                            ? "Fechamento conclusivo conectando ao repertório inicial e detalhando efeito." 
+                            : "Fechamento reflexivo circular conectando ao repertório da introdução." 
+                    }
+                ]
+            }
+        };
+    }
 
     let currentTutorialPara = 'intro';
     let currentTutorialPeriod = 1;
@@ -1568,7 +1722,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (tutorialRestartBtn) tutorialRestartBtn.addEventListener('click', initTutorial);
 
     function updateTutorialUI() {
-        const config = TUTORIAL_CONFIG[currentTutorialPara];
+        const tutorialConfig = getTutorialConfig(currentBanca);
+        const config = tutorialConfig[currentTutorialPara] || tutorialConfig['intro'];
         if (currentTutorialPeriod <= config.periods.length) {
             const periodConfig = config.periods[currentTutorialPeriod - 1];
             tutorialStepTitle.textContent = periodConfig.name;
@@ -1594,7 +1749,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-            const config = TUTORIAL_CONFIG[currentTutorialPara];
+            const tutorialConfig = getTutorialConfig(currentBanca);
+            const config = tutorialConfig[currentTutorialPara] || tutorialConfig['intro'];
             const periodConfig = config.periods[currentTutorialPeriod - 1];
 
             let historyText = tutorialHistory.length > 0 ? "O aluno já escreveu os seguintes períodos deste parágrafo:\\n" + tutorialHistory.map(h => `Frase ${h.period}: ${h.text}`).join('\\n') + "\\n\\n" : "";
@@ -1633,7 +1789,7 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
   ]
 }`;
 
-            const fullPrompt = `${systemPromptTutorial}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAvalie a frase e me retorne os erros e sugestões.`;
+            const fullPrompt = `${systemPromptTutorial}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAvalie a frase e me retorne os erros e sugestões.`;
 
             navigator.clipboard.writeText(fullPrompt).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
@@ -1735,7 +1891,7 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nBanca Alvo: ${currentBanca.nome}\nEixo: ${axisTitle}\nTrecho de Repertório a avaliar:\n"${text}"\n\nAvalie a PRODUTIVIDADE (Improdutivo, Mediano, Produtivo) deste repertório e se atende às regras (dupla informação e costura causal). Retorne apenas no formato JSON estruturado do sistema.`;
+            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nBanca Alvo: ${currentBanca.nome}\nEixo: ${axisTitle}\nTrecho de Repertório a avaliar:\n"${text}"\n\nAvalie a PRODUTIVIDADE (Improdutivo, Mediano, Produtivo) deste repertório e se atende às regras (dupla informação e costura causal). Retorne apenas no formato JSON estruturado do sistema.`;
 
             navigator.clipboard.writeText(fullPrompt).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
@@ -1916,7 +2072,7 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `INSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAja como o Prof. Daniel Lino. O aluno perguntou: "${question}". \nResponda sendo claro, didático e direto, focando na dúvida gramatical ou estrutural. Seja rigoroso quanto à norma culta (sem gerundismo, sem queísmo), mas mostre encorajamento. Leve em consideração que o aluno está treinando para a banca: ${currentBanca.nome}.\n\nSUA TAREFA:\nRetorne EXCLUSIVAMENTE um JSON neste formato:\n{\n  "resposta_html": "<p>Sua resposta formatada em tags HTML <strong>aqui</strong>.</p>"\n}`;
+            const fullPrompt = `INSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAja como o Prof. Daniel Lino. O aluno perguntou: "${question}". \nResponda sendo claro, didático e direto, focando na dúvida gramatical ou estrutural. Seja rigoroso quanto à norma culta (sem gerundismo, sem queísmo), mas mostre encorajamento. Leve em consideração que o aluno está treinando para a banca: ${currentBanca.nome}.\n\nSUA TAREFA:\nRetorne EXCLUSIVAMENTE um JSON neste formato:\n{\n  "resposta_html": "<p>Sua resposta formatada em tags HTML <strong>aqui</strong>.</p>"\n}`;
 
             const tutorPromptFinal = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${fullPrompt}`;
             navigator.clipboard.writeText(tutorPromptFinal).then(() => {
@@ -1959,7 +2115,7 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÃƒÂTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAnalise o seguinte parágrafo de aplicação de repertório sociocultural. Focando em diagnosticar a estrutura, pertinência ao eixo temático, uso gramatical e apresentar uma reescrita mais sofisticada e produtiva. Retorne usando a mesma estrutura JSON do sistema de Treino, ou seja: \n{"diagnostico": "seu texto", "reescrita": "seu texto"}\n\nBanca Alvo: ${currentBanca.nome}\nEixo Temático: ${themeOrAxis}\nParágrafo de Repertório:\n${text}`;
+            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAnalise o seguinte parágrafo de aplicação de repertório sociocultural. Focando em diagnosticar a estrutura, pertinência ao eixo temático, uso gramatical e apresentar uma reescrita mais sofisticada e produtiva. Retorne usando a mesma estrutura JSON do sistema de Treino, ou seja: \n{"diagnostico": "seu texto", "reescrita": "seu texto"}\n\nBanca Alvo: ${currentBanca.nome}\nEixo Temático: ${themeOrAxis}\nParágrafo de Repertório:\n${text}`;
 
             navigator.clipboard.writeText(fullPrompt).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
@@ -2018,9 +2174,12 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
+            const regrasBancaTexto = `- Gênero exigido: ${currentBanca.generosPermitidos ? currentBanca.generosPermitidos[0] : 'dissertativo'}\n- Exigência de título: ${currentBanca.exigeTitulo ? 'SIM (Obrigatório)' : 'NÃO (Opcional ou Proibido)'}\n- Extensão: ${currentBanca.limiteLinhas ? currentBanca.limiteLinhas.min + ' a ' + currentBanca.limiteLinhas.max : '8 a 30'} linhas\n- Orientações da banca: ${currentBanca.orientacoes || currentBanca.resumoPratico || ''}`;
+
             const promptFinal = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${PROMPT_MEU_MODELO}`
                 .replace("{TEMA}", tema)
-                .replace("{BANCA}", currentBanca.nome);
+                .replace("{BANCA}", currentBanca.nome)
+                .replace("{REGRAS_BANCA}", regrasBancaTexto);
 
             navigator.clipboard.writeText(promptFinal).then(() => {
                 const originalText = btnCopyModelPrompt.innerHTML;

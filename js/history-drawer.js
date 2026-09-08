@@ -192,9 +192,12 @@ function formatDate(isoString) {
     return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute:'2-digit' });
 }
 
-function calculateScore(notas) {
-    if (!notas) return 0;
-    return Object.values(notas).reduce((acc, curr) => acc + (Number(curr) || 0), 0);
+function calculateScore(notas, banca) {
+    if (!notas) return '0';
+    const sum = Object.values(notas).reduce((acc, curr) => acc + (Number(curr) || 0), 0);
+    const bStr = (banca || '').toUpperCase();
+    const isDecimal = bStr.includes('UEMA') || bStr.includes('UFG') || bStr.includes('UNITINS') || sum % 1 !== 0;
+    return isDecimal ? sum.toFixed(1) : Math.round(sum).toString();
 }
 
 async function renderCorrecoes() {
@@ -215,7 +218,7 @@ async function renderCorrecoes() {
                     <span class="history-card-badge">${item.banca || 'ENEM'}</span>
                 </div>
                 <div class="history-card-theme">${item.tema || 'Tema Livre'}</div>
-                <div class="history-card-score">Nota: ${calculateScore(item.dados?.notas)}</div>
+                <div class="history-card-score">Nota: ${calculateScore(item.dados?.notas, item.banca)}</div>
                 <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
                     <button class="btn btn-secondary btn-sm btn-load-history" data-payload="${encodeURIComponent(JSON.stringify(item))}" style="flex: 1;">Visualizar</button>
                     <button class="btn btn-sm btn-delete-history" data-id="${item.id}" style="background: rgba(239, 68, 68, 0.1); color: #ef4444; border: 1px solid #ef4444; border-radius: 4px; cursor: pointer;" title="Apagar Correção">🗑️</button>
@@ -335,11 +338,28 @@ function loadCorrectionIntoView(item) {
         textarea.dispatchEvent(new Event('input', { bubbles: true }));
     }
 
+    // Sincroniza a banca ativa com a banca salva no histórico
+    if (item.banca) {
+        const bancaSelect = /** @type {HTMLSelectElement|null} */ (document.getElementById('banca-select'));
+        if (bancaSelect) {
+            const targetBanca = item.banca.toUpperCase();
+            for (let i = 0; i < bancaSelect.options.length; i++) {
+                const optVal = bancaSelect.options[i].value.toUpperCase();
+                const optText = bancaSelect.options[i].text.toUpperCase();
+                if (optVal === targetBanca || optVal.includes(targetBanca) || targetBanca.includes(optVal) || optText.includes(targetBanca)) {
+                    bancaSelect.selectedIndex = i;
+                    bancaSelect.dispatchEvent(new Event('change', { bubbles: true }));
+                    break;
+                }
+            }
+        }
+    }
+
     // Fecha o drawer
     closeDrawer();
 
     if (window.__REDACAO_BRIDGE__?.renderResults) {
-        window.__REDACAO_BRIDGE__.renderResults(item.dados, item.textoOriginal);
+        window.__REDACAO_BRIDGE__.renderResults(item.dados, item.textoOriginal, item.banca);
     } else {
         console.error('[History] Falha na ponte com renderizador do monólito.');
         alert('Erro ao carregar correção. Renderizador inacessível.');

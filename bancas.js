@@ -74,11 +74,14 @@ const EIXOS_MESTRES = [
 
 const BANCAS = {
     "ENEM": {
+        id: "ENEM",
         nome: "ENEM",
         notaMaxima: 1000,
         exigeTitulo: false,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['dissertativo'],
+        labelTreino: "Treino por Partes",
+        labelFolha: "Folha Oficial ENEM",
         criterios: [
             { id: "c1", nome: "Domínio da Modalidade Escrita Formal", pontuacao: 200, desc: "Avalia a estrutura sintática e os desvios gramaticais/convenções da escrita." },
             { id: "c2", nome: "Compreensão da Proposta e Repertório", pontuacao: 200, desc: "Compreender o tema, adequar-se ao tipo textual e mobilizar repertório sociocultural legitimado e produtivo." },
@@ -86,16 +89,19 @@ const BANCAS = {
             { id: "c4", nome: "Conhecimento dos Mecanismos Linguísticos", pontuacao: 200, desc: "Coesão interparágrafos e intraparágrafos, uso de conectivos e adequação vocabular." },
             { id: "c5", nome: "Elaboração de Proposta de Intervenção", pontuacao: 200, desc: "Elaborar proposta com Agente, Ação, Meio/Modo, Efeito/Finalidade e Detalhamento, respeitando os direitos humanos." }
         ],
-        orientacoes: "A redação zera se tiver menos de 8 linhas ou fugir totalmente ao tema. Proposta de intervenção completa é obrigatória.",
-        resumoPratico: "Priorize a construção de propostas de intervenção detalhadas (5 elementos) e repertórios coringas legitimados. Modelo interventivo-holístico.",
+        orientacoes: "A redação zera se tiver menos de 8 linhas ou fugir totalmente ao tema. Proposta de intervenção completa com os 5 elementos (GOMIFES) é obrigatória.",
+        resumoPratico: "Priorize a construção de propostas de intervenção detalhadas (5 elementos: Agente, Ação, Meio/Modo, Detalhamento, Efeito) e repertórios coringas legitimados. Modelo interventivo-holístico.",
         eixosTematicos: EIXOS_MESTRES
     },
     "UEMA": {
+        id: "UEMA",
         nome: "UEMA (PAES)",
         notaMaxima: 10.0,
         exigeTitulo: true,
         limiteLinhas: { min: 15, max: 30 },
         generosPermitidos: ['dissertativo'],
+        labelTreino: "Treino por Partes",
+        labelFolha: "Folha Oficial UEMA",
         criterios: [
             { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 2.0, desc: "Mede a fidelidade ao recorte temático, punindo abordagens superficiais." },
             { id: "c2", nome: "Atendimento ao Tipo de Texto Proposto", pontuacao: 2.0, desc: "Construção do texto dissertativo-argumentativo e sustentação autoral." },
@@ -103,37 +109,60 @@ const BANCAS = {
             { id: "c4", nome: "Coesão entre as Partes do Texto", pontuacao: 2.0, desc: "Mecanismos linguísticos de referenciação e sequenciação." },
             { id: "c5", nome: "Domínio do Padrão Culto Escrito da Língua", pontuacao: 2.0, desc: "Correção sintática, ortográfica, pontuação, regência e concordância." }
         ],
-        orientacoes: "Foque na obra literária indicada no edital para embasamento. É essencial fugir de 'repertórios coringas' e 'modelos prontos'. A intervenção social nos moldes do ENEM NÃO é exigida.",
-        resumoPratico: "A UEMA é uma banca tradicional que repudia o 'Enemês'. Exige a utilização autoral dos dilemas das obras de leitura obrigatória. O fechamento deve ser uma síntese reflexiva ou crítica, sem propostas de intervenção padronizadas.",
+        orientacoes: "Foque na obra literária indicada no edital para embasamento. É essencial fugir de 'repertórios coringas' e 'modelos prontos'. Menos de 15 linhas resulta em NOTA ZERO. Título é obrigatório na Linha 1. A intervenção social nos moldes do ENEM NÃO é exigida (conclusão por síntese reflexiva).",
+        resumoPratico: "A UEMA é uma banca tradicional que repudia o 'Enemês'. Exige a utilização autoral dos dilemas das obras de leitura obrigatória. O fechamento deve ser uma síntese reflexiva ou crítica, sem propostas de intervenção padronizadas. Título obrigatório na linha 1.",
         eixosTematicos: [
             {
                 nome: "Filosofia, Existencialismo e Relações Humanas",
-                topicos: ["Dilemas como 'viver na igualdade x solidariedade'", "o diálogo nas relações", "conceito de cidadania."]
+                topicos: ["Dilemas como 'viver na igualdade x solidariedade'", "o diálogo nas relações", "conceito de cidadania."],
+                repertorios: [
+                    { obra: "Memórias Póstumas de Brás Cubas (Livro)", autor: "Machado de Assis", resumo: "Retrata a hipocrisia das relações sociais burguesas e a primazia do interesse pessoal sobre a solidariedade humana.", uso: "Egoísmo social, fragilidade dos laços humanos e crítica à moral de aparências." },
+                    { obra: "Modernidade Líquida (Livro)", autor: "Zygmunt Bauman", resumo: "As relações tornam-se fluidas e mercantilizadas, corroendo a solidariedade e o senso de comunidade.", uso: "Crise do diálogo, solidão moderna e efemeridade das relações afetivas." }
+                ]
             },
             {
                 nome: "Identidade Cultural e Sociedade",
-                topicos: ["Construção da identidade do brasileiro", "o papel do brincar no desenvolvimento humano", "perigos da exposição nas redes virtuais."]
+                topicos: ["Construção da identidade do brasileiro", "o papel do brincar no desenvolvimento humano", "perigos da exposição nas redes virtuais."],
+                repertorios: [
+                    { obra: "O Povo Brasileiro (Livro)", autor: "Darcy Ribeiro", resumo: "Analisa a gestação étnica e cultural singular do brasileiro a partir do encontro e conflito de matrizes culturais.", uso: "Identidade nacional, miscigenação cultural e diversidade brasileira." },
+                    { obra: "Casa-Grande & Senzala (Leitura Crítica)", autor: "Gilberto Freyre", resumo: "Mostra a formação das tradições culturais e as raízes da sociabilidade brasileira a partir do sincretismo.", uso: "Tradições populares, patrimônio cultural e herança histórica." }
+                ]
             },
             {
                 nome: "Memória e Formação da Identidade",
-                topicos: ["Revisitando lembranças do passado para compreender o presente", "apagamento histórico de grupos vulneráveis."]
+                topicos: ["Revisitando lembranças do passado para compreender o presente", "apagamento histórico de grupos vulneráveis."],
+                repertorios: [
+                    { obra: "Recordações do Escrivão Isaías Caminha (Livro)", autor: "Lima Barreto", resumo: "Evidencia os entraves ao reconhecimento social e o preconceito velado contra intelectuais negros e marginalizados.", uso: "Memória histórica, apagamento de vozes periféricas e racismo velado." },
+                    { obra: "Quarto de Despejo (Livro)", autor: "Carolina Maria de Jesus", resumo: "Diário de resistência da mulher favelada, denunciando a fome e a invisibilidade sob uma perspectiva de quem viveu a dor.", uso: "Vozes silenciadas, memória social das periferias e desigualdade crônica." }
+                ]
             },
             {
                 nome: "Práticas Autoritaristas e Educação",
-                topicos: ["Impactos do autoritarismo e da violência na formação", "contrapondo o medo à construção de autonomia."]
+                topicos: ["Impactos do autoritarismo e da violência na formação", "contrapondo o medo à construção de autonomia."],
+                repertorios: [
+                    { obra: "Pedagogia da Autonomia (Livro)", autor: "Paulo Freire", resumo: "Ensina que a autoridade pedagógica genuína estimula a liberdade e o pensamento crítico, em oposição ao autoritarismo repressivo.", uso: "Educação emancipadora, combate ao medo e formação da autonomia cidadã." },
+                    { obra: "Vidas Secas (Livro)", autor: "Graciliano Ramos", resumo: "A incapacidade de expressar seus direitos condena a família sertaneja à submissão perante o autoritarismo das instituições.", uso: "Autoritarismo policial/estatal, desumanização e privação de voz social." }
+                ]
             },
             {
                 nome: "Cultura Popular e Tradições Regionais",
-                topicos: ["Preservação dos saberes e manifestações populares do Nordeste e do Maranhão diante da era digital."]
+                topicos: ["Preservação dos saberes e manifestações populares do Nordeste e do Maranhão diante da era digital."],
+                repertorios: [
+                    { obra: "Manifestações Populares e Resistência Maranhense", autor: "Patrimônio Cultural Imaterial", resumo: "O Bumba Meu Boi e o Tambor de Crioula articulam fé, arte e memória afro-indígena como resistência comunitária viva.", uso: "Preservação da cultura popular, tradições regionais e valorização da memória maranhense." },
+                    { obra: "A Chave do Tamanho (Livro)", autor: "Monteiro Lobato", resumo: "Metáfora sobre a fragilidade humana e a necessidade de reexaminar tradições e saberes diante das transformações do mundo.", uso: "Identidade cultural, infância, preservação do brincar e tradição regional." }
+                ]
             }
         ]
     },
     "EXATO_DISSERTATIVO": {
+        id: "EXATO_DISSERTATIVO",
         nome: "Processo Seletivo Exato (UFT/UFNT) - Dissertativo",
         notaMaxima: 100.0,
         exigeTitulo: false,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['dissertativo'],
+        labelTreino: "Treino por Partes",
+        labelFolha: "Folha Oficial Exato",
         criterios: [
             { id: "c1", nome: "Domínio da Norma Culta da Língua Portuguesa", pontuacao: 20, desc: "Fidelidade às convenções gramaticais, precisão vocabular e construção sintática." },
             { id: "c2", nome: "Compreensão do Tema e Estrutura Dissertativa", pontuacao: 20, desc: "Entendimento do tema e cumprimento do gênero discursivo em prosa." },
@@ -146,11 +175,14 @@ const BANCAS = {
         eixosTematicos: EIXOS_MESTRES
     },
     "EXATO_CARTA": {
+        id: "EXATO_CARTA",
         nome: "Processo Seletivo Exato (UFT/UFNT) - Carta do Leitor",
         notaMaxima: 100.0,
         exigeTitulo: false,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['carta'],
+        labelTreino: "Treino de Carta",
+        labelFolha: "Folha de Carta Exato",
         criterios: [
             { id: "c1", nome: "Domínio da Norma Culta da Língua Portuguesa", pontuacao: 20, desc: "Fidelidade às convenções gramaticais, precisão vocabular e construção sintática correta." },
             { id: "c2", nome: "Adequação ao Gênero Epistolar (Carta do Leitor)", pontuacao: 20, desc: "Presença obrigatória de vocativo, corpo argumentativo (Opinião + Argumentação), fechamento e assinatura fictícia. NÃO é carta pessoal." },
@@ -164,7 +196,7 @@ const BANCAS = {
 — Antes de escrever, faça 3 perguntas: (1) Qual meu papel nessa situação comunicativa? (2) Para quem estou escrevendo? (3) Qual é o assunto?
 — O tema será sempre um dos 3 eixos da prova (Meio Ambiente / Tecnologia / Diversidade Cultural).
 — Evite introduções genéricas como "Desde o início dos tempos...". Vá direto ao tema com seu posicionamento.
-— Não assine seu nome real.`,
+— Não assine seu nome real. Não utilize título.`,
         resumoPratico: `ESTRUTURA OBRIGATÓRIA:
 I. Introdução → Interlocução + assunto + posicionamento (sua opinião)
 II. Desenvolvimento 1 → Argumento + explicação + exemplo/repertório + relação com o tema
@@ -207,27 +239,33 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
         ]
     },
     "UFG": {
+        id: "UFG",
         nome: "UFG (Instituto Verbena)",
         notaMaxima: 24.0,
         exigeTitulo: false,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['dissertativo'],
+        labelTreino: "Treino Modelo 04x05",
+        labelFolha: "Folha Oficial UFG",
         criterios: [
             { id: "c1", nome: "Adequação ao Tema", pontuacao: 9.0, desc: "Apreensão completa do tema e profundidade crítica da discussão, sem tangenciamento." },
             { id: "c2", nome: "Adequação ao Gênero Textual", pontuacao: 5.0, desc: "Domínio da estrutura dissertativo-argumentativa, clareza da tese e articulação dos parágrafos." },
             { id: "c3", nome: "Adequação à Modalidade Escrita", pontuacao: 5.0, desc: "Exame da norma-padrão (correção gramatical, concordância, ortografia)." },
             { id: "c4", nome: "Coesão e Coerência", pontuacao: 5.0, desc: "Continuidade temática, encadeamento lógico e uso correto de articuladores textuais." }
         ],
-        orientacoes: "O tema representa 37,5% da nota. Zera-se com nota inferior a 10,0. Rompa com a 'estrutura ENEM': abandone repertórios de bolso, teses prontas e a proposta de intervenção.",
-        resumoPratico: "A UFG exige redação madura, autoral e técnica. O desenvolvimento deve seguir o modelo 4/5 (Tópico frasal forte, progressão sociológica, repertório conectado e fechamento crítico). Conclusão deve ser síntese cíclica/reflexiva. O rigor gramatical é o diferencial. Um título criativo e nominalizado atua como um excelente cartão de visitas (2 a 5 palavras).",
+        orientacoes: "O tema representa 37,5% da nota (9,0 pontos). Zera-se com nota total inferior a 10,0. Rompa com a 'estrutura ENEM': abandone repertórios de bolso, teses prontas e a proposta de intervenção. Conclusão por síntese circular reflexiva. Um título criativo e nominalizado atua como excelente cartão de visitas.",
+        resumoPratico: "A UFG exige redação madura, autoral e técnica. O desenvolvimento deve seguir o modelo 4/5 (Tópico frasal forte, progressão sociológica, repertório conectado e fechamento crítico). Conclusão deve ser síntese cíclica/reflexiva (PROIBIDO GOMIFES). O rigor gramatical é o diferencial. Um título criativo e nominalizado atua como um excelente cartão de visitas (2 a 5 palavras).",
         eixosTematicos: EIXOS_MESTRES
     },
     "UNITINS": {
+        id: "UNITINS",
         nome: "UNITINS",
         notaMaxima: 20.0,
-        exigeTitulo: true, // Though strictly PDF says 'indicar expressamente a opção do tema demarcado', treating as title/marker requirement is safe
+        exigeTitulo: true, // Demarcar expressamente a opção de tema/título
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['dissertativo'],
+        labelTreino: "Treino por Partes",
+        labelFolha: "Folha Oficial UNITINS",
         criterios: [
             { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 4.0, desc: "O texto responde a um dos dois temas propostos, evitando tangenciamento." },
             { id: "c2", nome: "Estruturação do Texto e Repertório", pontuacao: 4.0, desc: "Domínio da estrutura em prosa e mobilização de repertório sociocultural pertinente." },
@@ -235,8 +273,17 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
             { id: "c4", nome: "Coesão Textual", pontuacao: 4.0, desc: "Uso adequado de conectores e pronomes na transição de parágrafos e frases." },
             { id: "c5", nome: "Domínio da Modalidade Escrita Padrão", pontuacao: 4.0, desc: "Ortografia, regência, concordância, descontando rasuras e ilegibilidade." }
         ],
-        orientacoes: "Você DEVE marcar o tema escolhido entre as 2 opções da prova. Textos com 7 linhas ou menos são zerados. Evite teses genéricas (ex: negligência estatal) e repertórios de bolso.",
-        resumoPratico: "Banca acadêmico-analítica: intervenção não obrigatória. Indique o tema escolhido. Demanda altíssimo rigor com a norma culta, autoria na argumentação e um fechamento crítico ao invés da tradicional proposta do ENEM.",
+        orientacoes: "Você DEVE marcar o tema escolhido no campo de título. Textos com 7 linhas ou menos são zerados. Evite teses genéricas (ex: negligência estatal) e repertórios de bolso. Conclusão reflexiva (SEM intervenção GOMIFES).",
+        resumoPratico: "Banca acadêmico-analítica: intervenção não obrigatória (dispensada/proibida). Indique o tema escolhido no título. Demanda altíssimo rigor com a norma culta, autoria na argumentação e um fechamento crítico ao invés da tradicional proposta do ENEM.",
         eixosTematicos: EIXOS_MESTRES
     }
 };
+
+// Exportação universal: Navegador (window) e Node.js (module.exports)
+if (typeof window !== 'undefined') {
+    window.BANCAS = BANCAS;
+    window.EIXOS_MESTRES = EIXOS_MESTRES;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = Object.assign(BANCAS, { BANCAS, EIXOS_MESTRES });
+}

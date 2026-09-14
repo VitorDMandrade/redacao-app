@@ -144,5 +144,34 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(htmlContent.includes('data-cat="opiniao_carta"'), 'index.html deve conter botão para opiniao_carta');
         assert.ok(htmlContent.includes('data-cat="interlocucao_carta"'), 'index.html deve conter botão para interlocucao_carta');
     });
+
+    test('9. Calibração Razoável e Justa para Todos os Modos e 6 Bancas', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const scriptContent = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
+        const { PROMPT_CORRIGIR_DESAFIO, PROMPT_MEU_MODELO } = require('../prompt.js');
+
+        // Valida que o SYSTEM_PROMPT tem diretriz de calibração para as 6 bancas
+        assert.ok(SYSTEM_PROMPT.includes('Calibração Razoável da Nota'), 'SYSTEM_PROMPT deve conter seção de Calibração Razoável da Nota');
+        assert.ok(SYSTEM_PROMPT.includes('REGRA DE OURO DA CALIBRAÇÃO DE NOTAS'), 'SYSTEM_PROMPT deve conter REGRA DE OURO DA CALIBRAÇÃO');
+        assert.ok(SYSTEM_PROMPT.includes('Sem Penalização por Vocabulário Simples'), 'SYSTEM_PROMPT não deve penalizar vocabulário simples');
+
+        // Valida presença de calibração para cada uma das 6 bancas no SYSTEM_PROMPT
+        EXPECTED_BANCAS.forEach(b => {
+            const regexBanca = new RegExp(b.id.replace('_', '[\\s\\S]*?'), 'i');
+            assert.ok(regexBanca.test(SYSTEM_PROMPT), `SYSTEM_PROMPT deve referenciar ${b.id}`);
+        });
+
+        // Valida diretrizes nos modos em script.js
+        assert.ok(scriptContent.includes('DIRETRIZ DE CALIBRAÇÃO (AVALIAÇÃO RAZOÁVEL E JUSTA)'), 'script.js Modo Redação Completa deve ter calibração');
+        assert.ok(scriptContent.includes('DIRETRIZ DE AVALIAÇÃO RAZOÁVEL E JUSTA'), 'script.js Modo Treino por Partes e Repertório devem ter calibração');
+        assert.ok(scriptContent.includes('DIRETRIZ DE AVALIAÇÃO RAZOÁVEL E ENCORAJADORA'), 'script.js Modo Tutorial deve ter calibração');
+        assert.ok(scriptContent.includes('sem pedantismo ou erudição artificial'), 'script.js Modo Tutor Gramatical deve instruir resposta sem pedantismo');
+
+        // Valida Meu Modelo e Desafio de Gramática
+        assert.ok(PROMPT_MEU_MODELO.includes('sem pedantismo nem termos arcaicos'), 'PROMPT_MEU_MODELO deve orientar modelo sem pedantismo');
+        assert.ok(PROMPT_CORRIGIR_DESAFIO.includes('Seja justo e razoável'), 'PROMPT_CORRIGIR_DESAFIO deve orientar avaliação justa e razoável');
+    });
 });
+
 

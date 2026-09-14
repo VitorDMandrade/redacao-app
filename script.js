@@ -732,6 +732,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (essayTitleText) promptUser += `Título: ${essayTitleText}\n`;
 
             let bancaInstructions = `\nREGRAS DA BANCA SELECIONADA (${currentBanca.nome}):\n- ${currentBanca.resumoPratico || ''}\n` +
+                (currentBanca.orientacoes ? `- Orientações oficiais: ${currentBanca.orientacoes}\n` : '') +
                 `DIRETRIZ DE CALIBRAÇÃO (AVALIAÇÃO RAZOÁVEL E JUSTA):\n` +
                 `- Seja razoável e equilibrado na pontuação. O aluno NÃO precisa de erudição forçada ou 'palavras incríveis' para tirar uma nota boa/máxima.\n` +
                 `- Se o texto cumprir o tema, respeitar a estrutura da banca, tiver argumentos coerentes e correção gramatical padrão, ATRIBUA UMA NOTA ALTA E MERECIDA.\n` +
@@ -1537,7 +1538,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     instrucaoBancaBloco += `\nATENÇÃO RIGOROSA: Gênero Carta do Leitor. Linguagem dialógica com o interlocutor/veículo e PROIBIÇÃO ABSOLUTA de identificação com nome real.\n`;
                 }
 
-                const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\nREGRAS DE JSON:\n1. NÃO pule linhas (Enter) dentro das strings. Use \\n.\n2. NÃO use aspas duplas dentro das strings. Use aspas simples (') ou escape (\\").\n\n---\n\nAnalise o seguinte parágrafo isolado (${partName}), diagnosticando a estrutura, conformidade com a banca, desvios gramaticais e oferecendo uma reescrita cirúrgica de excelência. Retorne no formato JSON com as chaves "diagnostico" e "reescrita".\n${instrucaoBancaBloco}`;
+                instrucaoBancaBloco += `\nDIRETRIZ DE AVALIAÇÃO RAZOÁVEL E JUSTA:\n- Seja encorajador e equilibrado. O aluno NÃO precisa de palavras rebuscadas ou erudição forçada.\n- Avalie se o bloco cumpre sua função com clareza, coerência e correção gramatical padrão.\n- Não penalize vocabulário simples e correto. Ofereça uma reescrita lapidada e clara preservando a voz e autenticidade do aluno.\n`;
+
+                const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\nREGRAS DE JSON:\n1. NÃO pule linhas (Enter) dentro das strings. Use \\n.\n2. NÃO use aspas duplas dentro das strings. Use aspas simples (') ou escape (\\").\n\n---\n\nAnalise o seguinte parágrafo isolado (${partName}), diagnosticando a estrutura, conformidade com a banca, desvios gramaticais e oferecendo uma reescrita lapidada e clara preservando a voz do aluno. Retorne no formato JSON com as chaves "diagnostico" e "reescrita".\n${instrucaoBancaBloco}`;
 
                 navigator.clipboard.writeText(fullPrompt).then(() => {
                     onCopiadorSubmit = (jsonStr) => {
@@ -1761,20 +1764,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
             let historyText = tutorialHistory.length > 0 ? "O aluno já escreveu os seguintes períodos deste parágrafo:\\n" + tutorialHistory.map(h => `Frase ${h.period}: ${h.text}`).join('\\n') + "\\n\\n" : "";
 
-            const currentBanca = document.getElementById('banca-select').value;
-            const bancaRules = typeof BANCAS !== 'undefined' ? BANCAS[currentBanca] : null;
+            const selectedBancaId = document.getElementById('banca-select') ? document.getElementById('banca-select').value : 'ENEM';
+            const bancaRules = typeof BANCAS !== 'undefined' ? BANCAS[selectedBancaId] : currentBanca;
 
             let bancaInstructions = '';
             if (bancaRules) {
-                bancaInstructions = `\nREGRAS DA BANCA SELECIONADA (${bancaRules.nome}):\n- ${bancaRules.resumoPratico}\n`;
+                bancaInstructions = `\nREGRAS DA BANCA SELECIONADA (${bancaRules.nome}):\n- ${bancaRules.resumoPratico || ''}\n` +
+                    (bancaRules.orientacoes ? `- Orientações: ${bancaRules.orientacoes}\n` : '');
             }
 
             const systemPromptTutorial = `
 Você é o Prof. Daniel Lino AI, atuando no MODO TUTORIAL PASSO A PASSO.
 O aluno está construindo um parágrafo da redação (Tema: ${theme || "Não informado"}).
+Banca Alvo: ${bancaRules ? bancaRules.nome : 'Banca Oficial'}.
 Parágrafo alvo: ${config.title}.
 O aluno está na ${periodConfig.name}. A missão desta frase era: "${periodConfig.hint}".
 ${bancaInstructions}
+
+DIRETRIZ DE AVALIAÇÃO RAZOÁVEL E ENCORAJADORA:
+- O aluno NÃO precisa de palavras rebuscadas ou erudição forçada. Se a frase cumprir a missão proposta com clareza e respeito à norma padrão, APROVE A FRASE (aprovado: true).
+- Não reprove frases por vocabulário simples. Ofereça sugestões de estilo de forma didática e positiva, mantendo a voz e a autenticidade do aluno.
 
 ${historyText}
 Texto que o aluno acabou de submeter para a ${periodConfig.name}:
@@ -1897,7 +1906,8 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nBanca Alvo: ${currentBanca.nome}\nEixo: ${axisTitle}\nTrecho de Repertório a avaliar:\n"${text}"\n\nAvalie a PRODUTIVIDADE (Improdutivo, Mediano, Produtivo) deste repertório e se atende às regras (dupla informação e costura causal). Retorne apenas no formato JSON estruturado do sistema.`;
+            const orientacaoBanca = currentBanca && currentBanca.orientacoes ? `\nOrientações da Banca: ${currentBanca.orientacoes}` : '';
+            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nBanca Alvo: ${currentBanca.nome}${orientacaoBanca}\nEixo Temático: ${axisTitle}\nTrecho de Repertório a avaliar:\n"${text}"\n\nDIRETRIZ DE AVALIAÇÃO RAZOÁVEL E JUSTA:\nAvalie a PRODUTIVIDADE e PERTINÊNCIA deste repertório de forma equilibrada e encorajadora. O aluno não precisa usar vocabulário rebuscado ou erudição artificial; avalie se o repertório é legítimo, pertinente ao eixo e articulado com clareza ao tema. No campo "diagnostico", aponte os acertos e oportunidades de melhoria com acolhimento. No campo "reescrita", forneça uma versão clara, fluida e produtiva, acessível e natural. Retorne apenas no formato JSON estruturado do sistema: {"diagnostico": "...", "reescrita": "..."};
 
             navigator.clipboard.writeText(fullPrompt).then(() => {
                 onCopiadorSubmit = (jsonStr) => {
@@ -2078,7 +2088,8 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `INSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAja como o Prof. Daniel Lino. O aluno perguntou: "${question}". \nResponda sendo claro, didático e direto, focando na dúvida gramatical ou estrutural. Seja rigoroso quanto à norma culta (sem gerundismo, sem queísmo), mas mostre encorajamento. Leve em consideração que o aluno está treinando para a banca: ${currentBanca.nome}.\n\nSUA TAREFA:\nRetorne EXCLUSIVAMENTE um JSON neste formato:\n{\n  "resposta_html": "<p>Sua resposta formatada em tags HTML <strong>aqui</strong>.</p>"\n}`;
+            const orientacaoBanca = currentBanca && currentBanca.orientacoes ? `\nOrientações da Banca: ${currentBanca.orientacoes}` : '';
+            const fullPrompt = `INSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAja como o Prof. Daniel Lino. O aluno perguntou: "${question}". \nResponda sendo claro, didático, acolhedor e encorajador. Explique as regras da norma culta com precisão prática e sem pedantismo ou erudição artificial (lembre-se: o aluno precisa de clareza, fluidez e adequação aos critérios da banca, sem afetação vocabular). Leve em consideração que o aluno está treinando para a banca: ${currentBanca.nome}.${orientacaoBanca}\n\nSUA TAREFA:\nRetorne EXCLUSIVAMENTE um JSON neste formato:\n{\n  "resposta_html": "<p>Sua resposta formatada em tags HTML <strong>aqui</strong>.</p>"\n}`;
 
             const tutorPromptFinal = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\n${fullPrompt}`;
             navigator.clipboard.writeText(tutorPromptFinal).then(() => {
@@ -2121,7 +2132,8 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
                 return;
             }
 
-            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAnalise o seguinte parágrafo de aplicação de repertório sociocultural. Focando em diagnosticar a estrutura, pertinência ao eixo temático, uso gramatical e apresentar uma reescrita mais sofisticada e produtiva. Retorne usando a mesma estrutura JSON do sistema de Treino, ou seja: \n{"diagnostico": "seu texto", "reescrita": "seu texto"}\n\nBanca Alvo: ${currentBanca.nome}\nEixo Temático: ${themeOrAxis}\nParágrafo de Repertório:\n${text}`;
+            const orientacaoBanca = currentBanca && currentBanca.orientacoes ? `\nOrientações da Banca: ${currentBanca.orientacoes}` : '';
+            const fullPrompt = `${typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : ''}\n\nINSTRUÇÃO CRÍTICA FINAL: Responda APENAS E EXCLUSIVAMENTE com um bloco de código contendo o objeto JSON solicitado, sem markdown em volta do json ou explicações adicionais antes ou depois.\n\n---\n\nAnalise o seguinte parágrafo de aplicação de repertório sociocultural.\nBanca Alvo: ${currentBanca.nome}${orientacaoBanca}\nEixo Temático: ${themeOrAxis}\nParágrafo de Repertório:\n${text}\n\nDIRETRIZ DE AVALIAÇÃO RAZOÁVEL E JUSTA:\nAvalie a estrutura, legitimidade, pertinência ao tema e produtividade argumentativa de forma justa e sem preciosismo vocabular. O aluno não precisa usar termos arcaicos ou palavras rebuscadas para pontuar bem. No campo "diagnostico", traga uma análise construtiva e acolhedora. No campo "reescrita", apresente uma sugestão clara, fluida e produtiva, acessível e natural para o estudante.\n\nRetorne EXCLUSIVAMENTE um JSON no formato:\n{"diagnostico": "seu texto", "reescrita": "seu texto"}`;
 
             navigator.clipboard.writeText(fullPrompt).then(() => {
                 onCopiadorSubmit = (jsonStr) => {

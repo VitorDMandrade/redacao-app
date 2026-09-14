@@ -172,6 +172,35 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(PROMPT_MEU_MODELO.includes('sem pedantismo nem termos arcaicos'), 'PROMPT_MEU_MODELO deve orientar modelo sem pedantismo');
         assert.ok(PROMPT_CORRIGIR_DESAFIO.includes('Seja justo e razoável'), 'PROMPT_CORRIGIR_DESAFIO deve orientar avaliação justa e razoável');
     });
+
+    test('10. Integridade Sintática: todos os arquivos .js do projeto devem compilar sem erros de sintaxe', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const { execFileSync } = require('child_process');
+
+        const files = [
+            'script.js',
+            'prompt.js',
+            'bancas.js',
+            'grammar_exercises.js',
+            'repertories.js',
+            'sw.js',
+            'auditoria.js',
+            'js/validator.js',
+            'js/json-repair.js',
+            'js/essay-metrics.js',
+            'js/theme-manager.js'
+        ];
+
+        files.forEach(file => {
+            const filePath = path.join(__dirname, '..', file);
+            if (fs.existsSync(filePath)) {
+                assert.doesNotThrow(() => {
+                    execFileSync(process.execPath, ['-c', filePath], { stdio: 'pipe' });
+                }, `Arquivo ${file} deve ser sintaticamente válido.`);
+            }
+        });
+    });
 });
 
 

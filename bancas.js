@@ -285,5 +285,6 @@ if (typeof window !== 'undefined') {
     window.EIXOS_MESTRES = EIXOS_MESTRES;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = Object.assign(BANCAS, { BANCAS, EIXOS_MESTRES });
+    module.exports = { BANCAS, EIXOS_MESTRES };
+
 }

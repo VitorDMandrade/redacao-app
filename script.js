@@ -110,6 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Flashcard variables
     let currentFlashcards = [];
     let flashcardIndex = 0;
+    let currentEixoIndex = 0; // eixo ativo no painel de repertório
 
     function updateBancaUI() {
         currentBanca = BANCAS[bancaSelect.value];
@@ -621,7 +622,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update word count and limit lines
     essayInput.addEventListener('input', (e) => {
-        const maxLines = currentBanca.limiteLinhas.max;
+        const maxLines = currentBanca.limiteLinhas?.max ?? 30;
         const maxHeight = maxLines * 32;
 
         // Prevent exceeding max lines (added 5px tolerance for sub-pixel rendering)
@@ -641,7 +642,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Also prevent paste that exceeds the limit
     essayInput.addEventListener('paste', (e) => {
         setTimeout(() => {
-            const maxLines = currentBanca.limiteLinhas.max;
+            const maxLines = currentBanca.limiteLinhas?.max ?? 30;
             const maxHeight = maxLines * 32;
 
             if (essayInput.scrollHeight > maxHeight + 5) {

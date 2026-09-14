@@ -731,7 +731,12 @@ document.addEventListener('DOMContentLoaded', () => {
             let promptUser = `Gênero: ${genero}\nBanca: ${banca}\nTema: ${essayTheme}\n`;
             if (essayTitleText) promptUser += `Título: ${essayTitleText}\n`;
 
-            let bancaInstructions = `\nREGRAS DA BANCA SELECIONADA (${currentBanca.nome}):\n- ${currentBanca.resumoPratico || ''}\nCritérios que você DEVE avaliar e pontuar rigorosamente:\n`;
+            let bancaInstructions = `\nREGRAS DA BANCA SELECIONADA (${currentBanca.nome}):\n- ${currentBanca.resumoPratico || ''}\n` +
+                `DIRETRIZ DE CALIBRAÇÃO (AVALIAÇÃO RAZOÁVEL E JUSTA):\n` +
+                `- Seja razoável e equilibrado na pontuação. O aluno NÃO precisa de erudição forçada ou 'palavras incríveis' para tirar uma nota boa/máxima.\n` +
+                `- Se o texto cumprir o tema, respeitar a estrutura da banca, tiver argumentos coerentes e correção gramatical padrão, ATRIBUA UMA NOTA ALTA E MERECIDA.\n` +
+                `- Não desconte pontos por vocabulário simples e correto. Diferencie erros gramaticais reais de meras sugestões opcionais de estilo.\n` +
+                `Critérios a avaliar e pontuar:\n`;
             if (currentBanca.criterios) {
                 currentBanca.criterios.forEach(c => {
                     bancaInstructions += `- ${c.nome} (Máx: ${c.pontuacao}): ${c.desc}\n`;
@@ -755,7 +760,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ],
                 diagnostico: "Diagnóstico aprofundado parágrafo a parágrafo considerando as especificidades da banca...",
                 resumoPratico: "Resumo acionável dos pontos mais urgentes para o aluno evoluir...",
-                reescrita: "Reescrita cirúrgica modelo nota máxima..."
+                reescrita: "Reescrita lapidada modelo nota máxima, preservando as ideias e a simplicidade clara do aluno..."
             }, null, 2);
 
             const systemPromptBase = typeof SYSTEM_PROMPT !== 'undefined' ? SYSTEM_PROMPT : 'Você é um avaliador de redações rigoroso e experiente.';

@@ -261,7 +261,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
         id: "UNITINS",
         nome: "UNITINS",
         notaMaxima: 20.0,
-        exigeTitulo: true, // Demarcar expressamente a opção de tema/título
+        exigeTitulo: true,
         limiteLinhas: { min: 8, max: 30 },
         generosPermitidos: ['dissertativo'],
         labelTreino: "Treino por Partes",
@@ -285,6 +285,7 @@ if (typeof window !== 'undefined') {
     window.EIXOS_MESTRES = EIXOS_MESTRES;
 }
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { BANCAS, EIXOS_MESTRES };
-
+    module.exports = BANCAS;
+    module.exports.BANCAS = BANCAS;
+    module.exports.EIXOS_MESTRES = EIXOS_MESTRES;
 }

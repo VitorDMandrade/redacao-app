@@ -127,4 +127,22 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
             assert.equal(isDecimal, b.decimal, `Banca ${b.id} tem flag decimal esperado: ${b.decimal}`);
         });
     });
+
+    test('8. Dicionário de Conectivos: conectivos para Carta do Leitor', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const scriptContent = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
+        const htmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+
+        // Valida no script.js
+        assert.ok(scriptContent.includes('opiniao_carta'), 'script.js deve conter a categoria opiniao_carta');
+        assert.ok(scriptContent.includes('interlocucao_carta'), 'script.js deve conter a categoria interlocucao_carta');
+        assert.ok(scriptContent.includes('Considero') && scriptContent.includes('Defendo') && scriptContent.includes('Vejo'), 'script.js deve conter verbos de opinião em 1ª pessoa');
+        assert.ok(scriptContent.includes('Veja bem') && scriptContent.includes('senhor(a) há de concordar') && scriptContent.includes('Pensemos'), 'script.js deve conter chamadas de interlocução');
+
+        // Valida no index.html
+        assert.ok(htmlContent.includes('data-cat="opiniao_carta"'), 'index.html deve conter botão para opiniao_carta');
+        assert.ok(htmlContent.includes('data-cat="interlocucao_carta"'), 'index.html deve conter botão para interlocucao_carta');
+    });
 });
+

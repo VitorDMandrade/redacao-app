@@ -2336,6 +2336,8 @@ const conectivosData = {
     operadores: ["Nesse viés", "Sob essa ótica", "Nessa perspectiva", "A partir desse contexto", "Sob esse viés", "De maneira análoga", "Nesse cenário", "Nesse ínterim"],
     referencial: ["Este", "Esse", "Aquele", "O qual", "Cujo", "Onde", "No qual", "A que", "Tal", "Dessa forma", "O mesmo"],
     detalhamento: ["Isso ocorre porque", "Isso é evidenciado por", "Notadamente", "Principalmente", "Em especial", "A exemplo de", "Como é o caso de", "Na medida em que"],
+    opiniao_carta: ["Considero", "Creio", "Entendo", "Defendo", "Constato", "Observo", "Vejo"],
+    interlocucao_carta: ["Veja bem", "Note", "Entenda", "O(a) senhor(a) há de concordar", "Pensemos"],
     meus: []
 };
 

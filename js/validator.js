@@ -26,7 +26,7 @@ export function validateEssay(text, currentBanca, title = '') {
     if (currentBanca.exigeTitulo && cleanTitle === '') {
         // Mensagem específica para UNITINS (o 'título' é a marcação do tema proposto)
         if (currentBanca.id === 'UNITINS') {
-            return `⚠️ Radar de Conformidade: A banca ${currentBanca.nome} exige que você identifique o tema proposto no campo de título (ex: marque o enunciado do tema ou escreva o número/título da proposta). Esse campo não é um título criativo, mas a indicação obrigatória do tema escolhido.`;
+            return `⚠️ Radar de Conformidade: A banca ${currentBanca.nome} exige um título obrigatório como marcação temática (indique o tema proposto no campo de título, não um título criativo).`;
         }
         return `⚠️ Radar de Conformidade: A banca ${currentBanca.nome} exige um título obrigatório (Linha 1/marcação temática). Por favor, preencha o campo de título antes de enviar.`;
     }
@@ -64,8 +64,8 @@ export function validateEssay(text, currentBanca, title = '') {
             return `⚠️ Radar de Conformidade: Não identificamos um Vocativo formal na sua Carta do Leitor (${currentBanca.nome}). Toda carta de discussão pública exige vocativo inicial (ex: "Prezados editores,", "Prezada editoria da Revista,").`;
         }
 
-        // Checar despedida formal ("Atenciosamente", "Cordialmente" ou "Respeitosamente") e assinatura fictícia separadamente
-        const hasDespedidaFormal = /atenciosamente|cordialmente|respeitosamente/i.test(text);
+        // Checar despedida formal ("Atenciosamente", "Cordialmente", "Respeitosamente", "Com estima", etc.) e assinatura fictícia separadamente
+        const hasDespedidaFormal = /atenciosamente|cordialmente|respeitosamente|com estima|com consideração|saudações/i.test(text);
         const hasAssinaturaFicticia = /leitor|leitora|cidad[aã]o|cidad[aã]|estudante|assinante|interessad[ao]/i.test(text);
 
         if (!hasDespedidaFormal) {

@@ -253,8 +253,8 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
             { id: "c3", nome: "Adequação à Modalidade Escrita", pontuacao: 5.0, desc: "Exame da norma-padrão (correção gramatical, concordância, ortografia)." },
             { id: "c4", nome: "Coesão e Coerência", pontuacao: 5.0, desc: "Continuidade temática, encadeamento lógico e uso correto de articuladores textuais." }
         ],
-        orientacoes: "O tema representa 37,5% da nota (9,0 pontos). Zera-se com nota total inferior a 10,0. Rompa com a 'estrutura ENEM': abandone repertórios de bolso, teses prontas e a proposta de intervenção. Conclusão por síntese circular reflexiva. Um título criativo e nominalizado atua como excelente cartão de visitas.",
-        resumoPratico: "A UFG exige redação madura, autoral e técnica. O desenvolvimento deve seguir o modelo 4/5 (Tópico frasal forte, progressão sociológica, repertório conectado e fechamento crítico). Conclusão deve ser síntese cíclica/reflexiva (PROIBIDO GOMIFES). O rigor gramatical é o diferencial. Um título criativo e nominalizado atua como um excelente cartão de visitas (2 a 5 palavras).",
+        orientacoes: "O critério de maior peso é Adequação ao Tema (c1 = 9,0 pts / 37,5% da nota). Zera-se com menos de 8 linhas escritas. Desclassificado com nota total inferior a 10,0 pts. Rompa com a 'estrutura ENEM': abandone repertórios de bolso, teses prontas e a proposta de intervenção. Conclusão por síntese circular reflexiva. Um título criativo e nominalizado atua como excelente cartão de visitas.",
+        resumoPratico: "A UFG exige redação madura, autoral e técnica. Priorize a profundidade crítica do tema (c1 = 37,5%). O desenvolvimento deve seguir o modelo 4/5 (Tópico frasal forte, progressão sociológica, repertório conectado e fechamento crítico). Conclusão deve ser síntese cíclica/reflexiva (PROIBIDO GOMIFES). Um título criativo e nominalizado atua como um excelente cartão de visitas (2 a 5 palavras).",
         eixosTematicos: EIXOS_MESTRES
     },
     "UNITINS": {
@@ -267,7 +267,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
         labelTreino: "Treino por Partes",
         labelFolha: "Folha Oficial UNITINS",
         criterios: [
-            { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 4.0, desc: "O texto responde a um dos dois temas propostos, evitando tangenciamento." },
+            { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 4.0, desc: "O texto responde ao tema proposto, evitando tangenciamento." },
             { id: "c2", nome: "Estruturação do Texto e Repertório", pontuacao: 4.0, desc: "Domínio da estrutura em prosa e mobilização de repertório sociocultural pertinente." },
             { id: "c3", nome: "Coerência", pontuacao: 4.0, desc: "Articulação conceitual, consistência lógica da tese e ausência de contradições." },
             { id: "c4", nome: "Coesão Textual", pontuacao: 4.0, desc: "Uso adequado de conectores e pronomes na transição de parágrafos e frases." },

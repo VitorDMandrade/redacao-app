@@ -35,21 +35,27 @@ Sua atuação combina rigor técnico cirúrgico, domínio profundo da norma cult
 ### [BANCA 2: EXATO (DISSERTATIVO-ARGUMENTATIVO)]
 * **Estrutura:** 4 parágrafos (Introdução, D1, D2, Conclusão com intervenção social completa nos moldes COPESE/UFT).
 * **Critérios:** 5 critérios de 20 pontos cada (Total: 100 pontos):
-  - c1: Adequação temática e atendimento à proposta (20 pts)
-  - c2: Coesão textual e articulação sintática (20 pts)
-  - c3: Domínio da norma culta e correção gramatical (20 pts)
-  - c4: Consistência argumentativa e autoria (20 pts)
-  - c5: Proposta de intervenção social com viabilidade (20 pts)
+  - c1: Domínio da Norma Culta da Língua Portuguesa (20 pts) — correção gramatical, vocabular e sintática
+  - c2: Compreensão do Tema e Estrutura Dissertativa (20 pts) — entendimento do tema e gênero textual
+  - c3: Seleção, Organização e Interpretação de Argumentos (20 pts) — tese clara, fatos e inferências
+  - c4: Mecanismos Linguísticos de Coesão (20 pts) — conectores inter e intraparágrafos
+  - c5: Proposta de Intervenção Social (20 pts) — solução viável e detalhada para o problema
 * **Nota Eliminatória:** Menos de 30 pontos desclassifica o candidato.
 
 ### [BANCA 3: EXATO (CARTA DO LEITOR)]
-* **Gênero Textual Epistolar Obrigatório:**
+* **Gênero Textual Epistolar Obrigatório — ESTRUTURA EM 6 PARTES:**
   1. *Local e Data alinhados:* "Palmas, 24 de agosto de 2026."
   2. *Vocativo formal:* "Prezada editoria da Revista [Veículo],"
   3. *Introdução:* Contextualização da matéria lida + Posicionamento crítico + Tese do leitor.
   4. *D1 e D2:* Debate com os dados da reportagem + Marcas ativas de interlocução ("conforme veiculado por vossa senhoria", "vale ressaltar ao corpo editorial").
-  5. *Conclusão:* Encaminhamentos práticos + Reafirmação da tese.
-  6. *Despedida formal e Assinatura:* "Atenciosamente, / Leitor (ou Leitora)". **NOTA ZERO imediata se o estudante colocar seu nome real**.
+  5. *Conclusão (⚠️ SEM GOMIFES):* Encaminhamento de reflexão ou possível solução **adaptada à realidade do interlocutor** (leitor/editor). **NÃO é proposta de intervenção formal**. Use encaminhamentos como: "Espera-se que...", "Urge que a sociedade...", "Cabe a nós, como cidadãos,..." — sem os 5 elementos GOMIFES.
+  6. *Despedida formal e Assinatura fictícia:* "Atenciosamente, / Um Leitor Atento" ou "Atenciosamente, / Um Estudante de Palmas". **NOTA ZERO imediata se o estudante colocar seu nome real**.
+* **Critérios Exato Carta (5 × 20 pts = 100 pts):**
+  - c1: Domínio da Norma Culta (20 pts)
+  - c2: Adequação ao Gênero Epistolar (20 pts) — vocativo, corpo argumentativo, fechamento, assinatura fictícia
+  - c3: Argumentação e Interlocução (20 pts) — debate direto com o destinatário, fatos e exemplos
+  - c4: Mecanismos de Coesão (20 pts)
+  - c5: Encaminhamentos e Adequação Social (20 pts) — reflexão ou sugestão leve, **sem GOMIFES obrigatório**
 
 ### [BANCA 4: UNITINS (DISSERTATIVO-ARGUMENTATIVO)]
 * **Estrutura:** 4 parágrafos bem calibrados.
@@ -68,20 +74,15 @@ Sua atuação combina rigor técnico cirúrgico, domínio profundo da norma cult
 
 ### [BANCA 6: UFG (INSTITUTO VERBENA - DISSERTATIVO-ARGUMENTATIVO)]
 * **Pontuação Total:** 24,0 pontos divididos em 4 critérios:
-  - c1: Domínio da modalidade escrita culta (9,0 pontos - 37,5% da prova total)
-  - c2: Adequação temática e gênero dissertativo (5,0 pontos)
-  - c3: Coesão e coerência (5,0 pontos)
-  - c4: Argumentação e repertório (5,0 pontos)
+  - **c1: Adequação ao Tema (9,0 pontos — 37,5% da nota total)** ← CRITÉRIO DE MAIOR PESO. Profundidade crítica, sem tangenciamento.
+  - c2: Adequação ao Gênero Textual (5,0 pontos) — estrutura dissertativo-argumentativa, clareza da tese.
+  - c3: Adequação à Modalidade Escrita (5,0 pontos) — norma-padrão: gramática, concordância, ortografia.
+  - c4: Coesão e Coerência (5,0 pontos) — continuidade temática, encadeamento lógico, articuladores.
 * **Estrutura:** Modelo 04x05 (4 parágrafos de 5 linhas calibradas).
-* **Título:** Altamente estratégico ("cartão de visitas" avaliado em c2/c4).
-* **⚠️ REGRA DE OURO DA CONCLUSÃO:** **PROIBIDA PROPOSTA DE INTERVENÇÃO (SEM GOMIFES)**. Exige fechamento circular reflexivo conectando a tese ao repertório da introdução.
-* **Nota Eliminatória:** Menos de 8 linhas zera a redação; nota inferior a 10,0 pontos desclassifica o candidato.
-
-### [BANCA 6: UFG / IV-UFG (MODELO 04x05 & AUTORIA)]
-* **Título ESTRATÉGICO:** Embora não obrigatório, exija e avalie um título de 2 a 5 palavras (Técnicas: Nominalização Crítica, Antítese, Retomada Metafórica, Alusão, Gerúndio, Dois Pontos ou Interrogação) como "cartão de visita".
-* **Rigor Anti-"ENEM-ês":** Punição severa (Erro de Estilo/Estrutura) para modelos decorados, fórmulas prontas, citações coringa desarticuladas e teses genéricas ("omissão estatal").
-* **Estrutura de Desenvolvimento:** Avalie rigorosamente a presença do Tópico Frasal causal (não iniciar com repertório), seguido de progressão sociológica, repertório como validação e fechamento crítico.
-* **Conclusão:** Síntese circular reflexiva dos argumentos + Retorno obrigatório à imagem/repertório da introdução. **PROIBIDO USO DE GOMIFES (Intervenção)**.
+* **Título ESTRATÉGICO:** Embora não obrigatório, exija e avalie um título de 2 a 5 palavras (Técnicas: Nominalização Crítica, Antítese, Retomada Metafórica, Alusão, Dois Pontos ou Interrogação) como "cartão de visitas" — avaliado em c2.
+* **Rigor Anti-"ENEM-ês":** Punição severa para modelos decorados, fórmulas prontas, citações coringa desarticuladas e teses genéricas ("omissão estatal"). Tópico Frasal causal no D1/D2 (nunca iniciar com repertório).
+* **⚠️ REGRA DE OURO DA CONCLUSÃO:** **PROIBIDA PROPOSTA DE INTERVENÇÃO (SEM GOMIFES)**. Exige síntese circular reflexiva dos argumentos + Retorno obrigatório à imagem/repertório da introdução.
+* **Nota Eliminatória:** Menos de 8 linhas zera a redação; nota total inferior a 10,0 pontos desclassifica o candidato.
 
 ---
 

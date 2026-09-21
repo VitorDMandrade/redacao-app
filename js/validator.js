@@ -52,9 +52,8 @@ export function validateEssay(text, currentBanca, title = '') {
             return `⚠️ Radar de Conformidade: A banca ${currentBanca.nome} exige no mínimo ${minLines} linhas (sua redação possui cerca de ${estimatedLines} linhas). Textos com menos de ${minLines} linhas recebem nota zero.`;
         }
 
-        if (estimatedLines > maxLines) {
-            return `⚠️ Radar de Conformidade: Sua redação possui cerca de ${estimatedLines} linhas e ultrapassa o limite máximo de ${maxLines} linhas da folha oficial. Ajuste a extensão para caber no espaço da prova.`;
-        }
+        // Nota: O excesso de linhas (> maxLines) não bloqueia mais o envio da redação.
+        // O aviso é emitido de forma não impeditiva pela função checkLineLimitWarning.
     }
 
     // 3. Validações Específicas para Gênero Carta do Leitor
@@ -98,3 +97,26 @@ export function validateEssay(text, currentBanca, title = '') {
     return null; // Tudo em total conformidade
 }
 
+/**
+ * Alerta de Limite Máximo de Linhas (Não Bloqueante)
+ * Informa ao estudante caso a redação ultrapasse a extensão permitida da banca,
+ * alertando que provavelmente não caberia na folha de redação tradicional, mas sem impedir o envio.
+ * 
+ * @param {string} text O texto da redação
+ * @param {Object} currentBanca O objeto contendo as regras da banca atual
+ * @returns {string | null} Mensagem de aviso se exceder o limite, ou null se estiver dentro do limite.
+ */
+export function checkLineLimitWarning(text, currentBanca) {
+    if (!text || !currentBanca || !currentBanca.limiteLinhas) return null;
+    const rawParagraphs = text.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+    const estimatedLines = rawParagraphs.reduce((acc, p) => {
+        return acc + Math.max(1, Math.ceil(p.length / 94));
+    }, 0);
+    const maxLines = currentBanca.limiteLinhas.max || 30;
+
+    if (estimatedLines > maxLines) {
+        return `⚠️ Radar de Conformidade: Sua redação possui cerca de ${estimatedLines} linhas e ultrapassa o limite permitido de ${maxLines} linhas da banca ${currentBanca.nome}. Provavelmente ela não caberia na folha de redação tradicional, mas estamos enviando para análise de qualquer jeito!`;
+    }
+
+    return null;
+}

@@ -3,7 +3,7 @@ const assert = require('node:assert/strict');
 
 // Importa os módulos principais
 const BANCAS = require('../bancas.js');
-const { validateEssay, estimateLines } = require('../js/validator.js');
+const { validateEssay, checkLineLimitWarning } = require('../js/validator.js');
 const { SYSTEM_PROMPT, PROMPT_MEU_MODELO } = require('../prompt.js');
 
 describe('Sincronização das 6 Bancas Examinadoras', () => {
@@ -200,6 +200,29 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
                 }, `Arquivo ${file} deve ser sintaticamente válido.`);
             }
         });
+    });
+
+    test('11. Comportamento Não Bloqueante para Redações Longas (>30 linhas)', () => {
+        // Redação com 34 linhas estimadas (4 parágrafos longos)
+        const paragrafoLongo = 'A'.repeat(800); // cerca de 9 linhas cada
+        const textoLongo = `${paragrafoLongo}\n\n${paragrafoLongo}\n\n${paragrafoLongo}\n\n${paragrafoLongo}`; // ~36 linhas
+
+        // 1. validateEssay NÃO deve bloquear nem retornar erro
+        const erroValidacao = validateEssay(textoLongo, BANCAS['ENEM']);
+        assert.equal(erroValidacao, null, 'validateEssay não deve bloquear redações com mais de 30 linhas.');
+
+        // 2. checkLineLimitWarning deve emitir aviso explicativo que ultrapassa a folha tradicional mas continua
+        const avisoLinhas = checkLineLimitWarning(textoLongo, BANCAS['ENEM']);
+        assert.ok(avisoLinhas, 'checkLineLimitWarning deve retornar mensagem de aviso.');
+        assert.ok(avisoLinhas.includes('ultrapassa o limite'), 'Aviso deve mencionar que ultrapassa o limite.');
+        assert.ok(avisoLinhas.includes('folha de redação tradicional'), 'Aviso deve alertar sobre a folha tradicional.');
+        assert.ok(avisoLinhas.includes('de qualquer jeito'), 'Aviso deve indicar que o envio continuará de qualquer jeito.');
+
+        // 3. Redação dentro do limite (ex: 25 linhas) não deve emitir aviso
+        const paragrafoNormal = 'A'.repeat(550); // ~6 linhas cada
+        const textoNormal = `${paragrafoNormal}\n\n${paragrafoNormal}\n\n${paragrafoNormal}\n\n${paragrafoNormal}`; // ~24 linhas
+        const avisoNormal = checkLineLimitWarning(textoNormal, BANCAS['ENEM']);
+        assert.equal(avisoNormal, null, 'Redação dentro de 30 linhas não deve emitir aviso de limite.');
     });
 });
 

@@ -989,10 +989,11 @@
 
     <!-- Ponte de Módulos (Legacy Bridge) -->
     <script type="module">
-        import { validateEssay } from './js/validator.js';
+        import { validateEssay, checkLineLimitWarning } from './js/validator.js';
         import { initDiffViewer } from './js/diff-viewer.js';
         window.redacaoApp = window.redacaoApp || {};
         window.redacaoApp.validateEssay = validateEssay;
+        window.redacaoApp.checkLineLimitWarning = checkLineLimitWarning;
         window.redacaoApp.initDiffViewer = initDiffViewer;
     </script>
 

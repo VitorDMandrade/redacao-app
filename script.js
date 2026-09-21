@@ -620,39 +620,16 @@ document.addEventListener('DOMContentLoaded', () => {
         return Math.floor(essayInput.scrollHeight / lineHeight);
     }
 
-    // Update word count and limit lines
+    // Update word count and limit lines (sem truncar o texto do aluno)
     essayInput.addEventListener('input', (e) => {
-        const maxLines = currentBanca.limiteLinhas?.max ?? 30;
-        const maxHeight = maxLines * 32;
-
-        // Prevent exceeding max lines (added 5px tolerance for sub-pixel rendering)
-        if (essayInput.scrollHeight > maxHeight + 5) {
-            // Revert last change by trimming the text
-            essayInput.value = essayInput.value.slice(0, -1);
-            // Flash red background momentarily to indicate limit
-            essayInput.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-            setTimeout(() => { essayInput.style.backgroundColor = 'transparent'; }, 200);
-        }
-
         const text = essayInput.value.trim();
         const words = text === '' ? 0 : text.split(/\s+/).length;
         wordCountVal.textContent = words;
     });
 
-    // Also prevent paste that exceeds the limit
+    // Also update word count on paste
     essayInput.addEventListener('paste', (e) => {
         setTimeout(() => {
-            const maxLines = currentBanca.limiteLinhas?.max ?? 30;
-            const maxHeight = maxLines * 32;
-
-            if (essayInput.scrollHeight > maxHeight + 5) {
-                alert(`O texto colado excede o limite de ${maxLines} linhas da banca ${currentBanca.nome}.`);
-                // Revert to fit
-                while (essayInput.scrollHeight > maxHeight + 5 && essayInput.value.length > 0) {
-                    essayInput.value = essayInput.value.slice(0, -10);
-                }
-            }
-            // Trigger input event to update word count
             essayInput.dispatchEvent(new Event('input'));
         }, 0);
     });
@@ -720,6 +697,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     alert("Por favor, digite uma redação mais longa para análise.");
                     return;
                 }
+            }
+
+            // Alerta não impeditivo se ultrapassar o limite de linhas permitido (envia de qualquer jeito)
+            let lineWarning = null;
+            if (window.redacaoApp && typeof window.redacaoApp.checkLineLimitWarning === 'function') {
+                lineWarning = window.redacaoApp.checkLineLimitWarning(rawText, currentBanca);
+            } else if (currentBanca && currentBanca.limiteLinhas) {
+                const rawParagraphs = rawText.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+                const estimatedLines = rawParagraphs.reduce((acc, p) => acc + Math.max(1, Math.ceil(p.length / 94)), 0);
+                const maxLines = currentBanca.limiteLinhas.max || 30;
+                if (estimatedLines > maxLines) {
+                    lineWarning = `⚠️ Radar de Conformidade: Sua redação possui cerca de ${estimatedLines} linhas e ultrapassa o limite permitido de ${maxLines} linhas da banca ${currentBanca.nome}. Provavelmente ela não caberia na folha de redação tradicional, mas o envio continuará de qualquer jeito!`;
+                }
+            }
+            if (lineWarning) {
+                alert(lineWarning);
+                // NOTA: Não damos return aqui! A redação continua e é enviada de qualquer jeito.
             }
 
             copiadorRawText = rawText;
@@ -2644,22 +2638,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-// ==========================================
-// LIMITADOR DE 30 LINHAS
-// ==========================================
-document.addEventListener('DOMContentLoaded', () => {
-    const essayTextarea = document.getElementById('essay');
-    if (essayTextarea) {
-        essayTextarea.addEventListener('input', function () {
-            const lines = this.value.split('\n');
-            if (lines.length > 30) {
-                // Remove extra lines
-                this.value = lines.slice(0, 30).join('\n');
-                alert("O limite máximo de uma redação é de 30 linhas!");
-            }
-        });
-    }
-});
 
 
 // ==========================================

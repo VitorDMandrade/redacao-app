@@ -3,7 +3,7 @@
 // Estratégia: Stale-While-Revalidate para assets locais estáticos.
 // BYPASS TOTAL para: métodos não-GET e origens externas (APIs de IA, CDNs, Fonts).
 
-const CACHE_NAME = 'redacao-med-static-v2';
+const CACHE_NAME = 'redacao-med-static-v3';
 
 /** @type {string[]} Lista exaustiva de assets locais para pré-cache */
 const STATIC_ASSETS = [

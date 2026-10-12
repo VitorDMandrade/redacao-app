@@ -418,5 +418,613 @@ const grammarExercises = [
         concept: "Distinção entre Porquanto e Portanto",
         conceptExplanation: "Conjunção subordinativa causal de registro culto. Estabelece a razão do fato enunciado na oração principal.",
         linoTip: "👨‍🏫 Lino Tip: PorQUANTO = causa (porquê). PorTANTO = conclusão (portanto)."
+    },
+
+    // --- NOVOS MICRO-TREINOS: PARALELISMO SINTÁTICO ---
+    {
+        category: "Paralelismo",
+        question: "Qual redação respeita o paralelismo sintático ao listar ações da proposta de intervenção?",
+        options: [
+            "Cabe ao Ministério da Educação investir em infraestrutura e garantindo a capacitação docente.",
+            "Cabe ao Ministério da Educação investir em infraestrutura e garantir a capacitação docente."
+        ],
+        correctOptionIndex: 1,
+        explanation: "As duas ações coordenadas dependem da mesma preposição/verbo auxiliar. Portanto, ambas devem conservar a mesma forma verbal no infinitivo: 'investir' e 'garantir'. Trocar para gerúndio ('garantindo') quebra a simetria gramatical.",
+        correctSide: "investir em infraestrutura e garantir...",
+        wrongSide: "investir em infraestrutura e garantindo...",
+        concept: "Simetria de Formas Nominais",
+        conceptExplanation: "Ações listadas em sequência na proposta de intervenção devem compartilhar a mesma classe gramatical e tempo verbal.",
+        linoTip: "Lino Tip: Se começou com verbo no infinitivo, termine com verbo no infinitivo!"
+    },
+    {
+        category: "Paralelismo",
+        question: "Em relação ao paralelismo de regência com verbos distintos, qual construção é gramaticalmente impecável?",
+        options: [
+            "O cidadão entrou e saiu da sessão plenária sem se manifestar.",
+            "O cidadão entrou na sessão plenária e saiu dela sem se manifestar."
+        ],
+        correctOptionIndex: 1,
+        explanation: "O verbo 'entrar' rege a preposição 'em' (entrar EM algo), enquanto 'sair' rege a preposição 'de' (sair DE algo). Atribuir um único complemento ('da sessão') a verbos de regências diferentes quebra o paralelismo sintático.",
+        correctSide: "entrou na sessão... e saiu dela...",
+        wrongSide: "entrou e saiu da sessão...",
+        concept: "Paralelismo de Regência Verbal",
+        conceptExplanation: "Verbos com preposições distintas exigem complementos próprios; não podem compartilhar o mesmo termo regido.",
+        linoTip: "Lino Tip: Cuidado ao juntar verbos que pedem preposições diferentes. Dê a cada um seu respectivo complemento!"
+    },
+    {
+        category: "Paralelismo",
+        question: "Identifique a sentença que preserva o paralelismo prepositivo em enumerações ternárias:",
+        options: [
+            "O país necessita de reformas estruturais, investimentos em saúde e que a população seja consciente.",
+            "O país necessita de reformas estruturais, de investimentos em saúde e de conscientização popular."
+        ],
+        correctOptionIndex: 1,
+        explanation: "Na enumeração regida pelo verbo 'necessitar', todos os núcleos devem manter a mesma estrutura preposicionada ('de reformas', 'de investimentos', 'de conscientização'). Misturar oração subordinada com substantivo quebra o ritmo do texto.",
+        correctSide: "de reformas, de investimentos e de conscientização...",
+        wrongSide: "de reformas, investimentos e que a população...",
+        concept: "Paralelismo Prepositivo Ternário",
+        conceptExplanation: "Se a preposição 'de' foi repetida no início de termos coordenados, deve manter o padrão em toda a cadeia de argumentos.",
+        linoTip: "Lino Tip: Mantenha a preposição em todos os elementos da lista para dar elegância rítmica ao D1 e D2."
+    },
+    {
+        category: "Paralelismo",
+        question: "No uso de conectivos correlativos 'tanto... quanto', qual frase mantém a simetria morfológica exata?",
+        options: [
+            "O entrave decorre tanto pela ausência de leis quanto o descaso das autoridades.",
+            "O entrave decorre tanto da ausência de leis quanto do descaso das autoridades."
+        ],
+        correctOptionIndex: 1,
+        explanation: "O verbo 'decorrer' rege a preposição 'de' (decorre DE algo). Ao usar 'tanto... quanto', a preposição 'de' contraída com o artigo deve figurar em ambas as pontas: 'tanto DA ausência... quanto DO descaso'.",
+        correctSide: "tanto da ausência... quanto do descaso...",
+        wrongSide: "tanto pela ausência... quanto o descaso...",
+        concept: "Correlação Bipolar Simétrica",
+        conceptExplanation: "Estruturas com conectivos bipolares ('tanto... quanto', 'não só... mas também') exigem rigorosa paridade morfológica.",
+        linoTip: "Lino Tip: 'Tanto DA...' exige 'quanto DO...'. Não misture 'pela' com 'o'!"
+    },
+    {
+        category: "Paralelismo",
+        question: "Qual alternativa respeita o paralelismo de orações subordinadas substantivas na tese da introdução?",
+        options: [
+            "Defende-se que as políticas públicas sejam ampliadas e a punição mais rigorosa aos infratores.",
+            "Defende-se que as políticas públicas sejam ampliadas e que a punição aos infratores seja mais rigorosa."
+        ],
+        correctOptionIndex: 1,
+        explanation: "A oração principal 'Defende-se' introduz orações subordinadas substantivas subjetivas coordenadas. Ambas devem manter a conjunção integrante 'que' e o verbo conjugado: 'que sejam ampliadas e que a punição seja mais rigorosa'.",
+        correctSide: "que as políticas sejam... e que a punição seja...",
+        wrongSide: "que as políticas sejam... e a punição mais rigorosa...",
+        concept: "Paralelismo de Orações Subordinadas",
+        conceptExplanation: "Coordenar uma oração desenvolvida com um sintagma nominal quebrado gera defeito de paralelismo severamente punido na C1 e C4 do ENEM.",
+        linoTip: "Lino Tip: Se colocou 'que [verbo]', repita 'e que [verbo]' na segunda parte da sua tese!"
+    },
+    {
+        category: "Paralelismo",
+        question: "Assinale a opção em que a correlação de tempo e modo verbal (paralelismo modal) é estritamente mantida:",
+        options: [
+            "Se o governo investisse na base escolar, o Brasil colheria frutos duradouros.",
+            "Se o governo investisse na base escolar, o Brasil colherá frutos duradouros."
+        ],
+        correctOptionIndex: 0,
+        explanation: "O pretérito imperfeito do subjuntivo ('investisse') correlaciona-se obrigatoriamente com o futuro do pretérito do indicativo ('colheria'). O futuro do presente ('colherá') só combinaria com o futuro do subjuntivo ('se investir').",
+        correctSide: "Se investisse... colheria...",
+        wrongSide: "Se investisse... colherá...",
+        concept: "Correlação Temporal e Modal",
+        conceptExplanation: "A harmonia entre hipótese no subjuntivo e consequência no indicativo é fundamental para a coerência lógica do argumento.",
+        linoTip: "Lino Tip: '-sse' combina com '-ria': 'Se fizesse, colheria'. 'Se fizer, colherá'."
+    },
+
+    // --- NOVOS MICRO-TREINOS: CRASE ---
+    {
+        category: "Crase",
+        question: "Qual frase exige acento indicativo de crase por conter locução conjuntiva proporcional feminina?",
+        options: [
+            "À medida que a tecnologia avança, novos dilemas éticos surgem.",
+            "A medida que a tecnologia avança, novos dilemas éticos surgem."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Locuções conjuntivas, prepositivas e adverbiais femininas ('à medida que', 'à proporção que', 'à luz de', 'à noite') levam crase obrigatória por convenção histórica da língua portuguesa.",
+        correctSide: "À medida que a tecnologia avança...",
+        wrongSide: "A medida que a tecnologia avança...",
+        concept: "Crase em Locuções Femininas",
+        conceptExplanation: "Todas as locuções formadas por núcleo substantivo feminino recebem o sinal grave indicativo de crase.",
+        linoTip: "Lino Tip: 'À medida que' e 'À proporção que' sempre começam com crase no início do período!"
+    },
+    {
+        category: "Crase",
+        question: "No trecho 'A diretriz ___ qual o autor se referiu no livro', a forma correta é:",
+        options: [
+            "a",
+            "à"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Quem se refere, refere-se A alguma coisa (preposição exigida pelo verbo). O pronome relativo 'a qual' possui o artigo feminino 'a'. A fusão da preposição 'a' com o artigo 'a' gera a crase: 'à qual'.",
+        correctSide: "a diretriz à qual o autor se referiu...",
+        wrongSide: "a diretriz a qual o autor se referiu...",
+        concept: "Crase Diante de Pronome Relativo 'A qual'",
+        conceptExplanation: "O verbo posposto 'referir-se' rege preposição 'a', fundindo-se com o artigo do pronome relativo antecedente.",
+        linoTip: "Lino Tip: Olhe o verbo depois do pronome: se ele pedir preposição 'a', use 'à qual'!"
+    },
+    {
+        category: "Crase",
+        question: "Em expressões com substantivos repetidos, como 'frente a frente', o uso da crase é:",
+        options: [
+            "Proibido ('frente a frente')",
+            "Obrigatório ('frente à frente')"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Em locuções com palavras repetidas ('frente a frente', 'cara a cara', 'gota a gota', 'dia a dia'), o 'a' intermediário é pura preposição; não há artigo definido feminino presente. Logo, a crase é proibida.",
+        correctSide: "frente a frente, cara a cara, dia a dia",
+        wrongSide: "frente à frente, cara à cara, dia à dia",
+        concept: "Proibição da Crase em Palavras Repetidas",
+        conceptExplanation: "Não existe artigo diante do segundo termo em expressões idênticas e simétricas.",
+        linoTip: "Lino Tip: Palavras gêmeas com 'a' no meio nunca levam crase! 'Dia a dia', 'gota a gota'."
+    },
+    {
+        category: "Crase",
+        question: "Em cartas ou textos dirigidos a autoridades ('Dirijo-me ___ Vossa Senhoria'), a crase é:",
+        options: [
+            "Proibida ('Dirijo-me a Vossa Senhoria')",
+            "Obrigatória ('Dirijo-me à Vossa Senhoria')"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Pronomes de tratamento em geral (Vossa Excelência, Vossa Senhoria, Você) rejeitam artigo definido feminino. Havendo apenas a preposição 'a', não ocorre a fusão que caracterizaria a crase. (Exceções: Senhora, Senhorita e Dona).",
+        correctSide: "Dirijo-me a Vossa Senhoria / a Vossa Excelência",
+        wrongSide: "Dirijo-me à Vossa Senhoria / à Vossa Excelência",
+        concept: "Crase com Pronomes de Tratamento",
+        conceptExplanation: "A imensa maioria dos pronomes de tratamento não aceita artigo; logo, não ocorre crase.",
+        linoTip: "Lino Tip: Na Carta do Leitor, 'Vossa Senhoria' e 'Vossa Excelência' nunca aceitam crase!"
+    },
+    {
+        category: "Crase",
+        question: "Diante de pronome possessivo feminino singular ('submeteu a proposta ___ sua equipe'), a crase é:",
+        options: [
+            "Obrigatória",
+            "Facultativa (tanto 'a sua equipe' quanto 'à sua equipe' estão corretos)"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Antes de pronomes possessivos femininos no singular ('minha', 'tua', 'sua', 'nossa'), o uso do artigo feminino é facultativo na língua portuguesa. Como o artigo é opcional, a crase também se torna facultativa.",
+        correctSide: "à sua equipe OU a sua equipe (ambos aceitos)",
+        wrongSide: "considerar uma delas erro em prova",
+        concept: "Casos Facultativos de Crase",
+        conceptExplanation: "Pronomes possessivos femininos singulares permitem o artigo opcional, tornando o acento grave facultativo.",
+        linoTip: "Lino Tip: Antes de 'minha', 'sua', 'nossa', você escolhe se coloca crase ou não!"
+    },
+    {
+        category: "Crase",
+        question: "Na oração 'O autor escreveu uma crônica ___ Machado de Assis', ocorre crase porque:",
+        options: [
+            "Não ocorre crase, pois 'Machado de Assis' é nome masculino.",
+            "Ocorre crase ('à Machado de Assis') porque está subentendida a expressão feminina 'à moda de'."
+        ],
+        correctOptionIndex: 1,
+        explanation: "Mesmo diante de nome masculino, se a expressão feminina 'à moda de' ou 'à maneira de' estiver elíptica (subentendida), a crase é obrigatória: 'escreveu à [moda de] Machado de Assis'.",
+        correctSide: "à Machado de Assis (= à moda de Machado)",
+        wrongSide: "a Machado de Assis (quando o sentido for o estilo/modo)",
+        concept: "Crase Elíptica 'À Moda de'",
+        conceptExplanation: "A elipse do termo feminino 'moda' justifica a presença do artigo e da preposição fundidos.",
+        linoTip: "Lino Tip: Expressões que significam 'no estilo de' levam crase mesmo antes de homem: 'à Machado', 'à Pelé'."
+    },
+
+    // --- NOVOS MICRO-TREINOS: VÍRGULA ---
+    {
+        category: "Vírgula",
+        question: "Na oração adjetiva restritiva 'Os médicos que atuam no interior recebem incentivos', as vírgulas são:",
+        options: [
+            "Proibidas, pois a oração restringe apenas uma parcela específica dos médicos.",
+            "Obrigatórias, pois toda oração adjetiva deve vir entre vírgulas."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Orações adjetivas restritivas delimitam o sentido do substantivo (apenas os médicos que atuam no interior, não todos os médicos). O uso de vírgulas transformaria a oração em explicativa, alterando o sentido lógico da frase.",
+        correctSide: "Os médicos que atuam no interior recebem... (restritiva, sem vírgula)",
+        wrongSide: "Os médicos, que atuam no interior, recebem... (explicativa, generalizando)",
+        concept: "Restritiva vs Explicativa na Pontuação",
+        conceptExplanation: "Com vírgulas = explica todos; sem vírgulas = restringe a um subgrupo. Mudar a pontuação altera o sentido argumentativo.",
+        linoTip: "Lino Tip: Se quiser falar de TODOS, use vírgulas. Se quiser falar de APENAS ALGUNS, corte as vírgulas!"
+    },
+    {
+        category: "Vírgula",
+        question: "Quando o conectivo aditivo 'e' une duas orações coordenadas com SUJEITOS DIFERENTES, a vírgula é:",
+        options: [
+            "Recomendada e elegante: 'O parlamento aprovou a proposta, e o presidente sancionou a lei.'",
+            "Proibida em qualquer circunstância antes da conjunção 'e'."
+        ],
+        correctOptionIndex: 0,
+        explanation: "A gramática normativa recomenda o uso de vírgula antes da conjunção 'e' quando as orações coordenadas possuem sujeitos distintos (Sujeito 1: 'O parlamento'; Sujeito 2: 'o presidente'), evitando confusão sintática para o leitor.",
+        correctSide: "O parlamento aprovou a proposta, e o presidente sancionou...",
+        wrongSide: "proibir a vírgula antes do 'e' com sujeitos diferentes",
+        concept: "Vírgula Antes do 'E' com Sujeitos Distintos",
+        conceptExplanation: "Sujeitos diferentes em orações aditivas pedem vírgula para clareza e demarcação sintática.",
+        linoTip: "Lino Tip: Sujeitos diferentes antes e depois do 'e'? Coloque vírgula antes do 'e' sem medo!"
+    },
+    {
+        category: "Vírgula",
+        question: "Na elipse ou omissão proposital de um verbo já citado no período anterior, utiliza-se:",
+        options: [
+            "Vírgula vicária: 'O primeiro argumento aborda as causas; o segundo, as consequências.'",
+            "Nenhum sinal de pontuação ou parênteses."
+        ],
+        correctOptionIndex: 0,
+        explanation: "A vírgula vicária (ou vírgula de zeugma) é empregada para marcar a elipse de um verbo anteriormente expresso, evitando repetição desnecessária e demonstrando altíssimo domínio sintático.",
+        correctSide: "O primeiro debate as causas; o segundo, as consequências.",
+        wrongSide: "O primeiro debate as causas; o segundo as consequências (sem vírgula).",
+        concept: "Vírgula Vicária (Zeugma)",
+        conceptExplanation: "Recurso de estilo da norma culta que substitui o verbo omitido para manter a concisão.",
+        linoTip: "Lino Tip: Omitiu o verbo para não repetir? Marque o lugar dele com uma vírgula elegante!"
+    },
+    {
+        category: "Vírgula",
+        question: "Em redações de vestibular do gênero Carta (ou em correspondências formais), o vocativo deve vir:",
+        options: [
+            "Obrigatoriamente isolado por vírgula: 'Prezados editores, venho manifestar meu ponto de vista...'",
+            "Sem qualquer pontuação após o chamamento."
+        ],
+        correctOptionIndex: 0,
+        explanation: "O vocativo é um termo sintático independente que expressa chamamento ou interpelação direta ao interlocutor. Deve vir SEMPRE isolado por vírgula no início, meio ou fim da frase.",
+        correctSide: "Prezados editores, venho manifestar...",
+        wrongSide: "Prezados editores venho manifestar...",
+        concept: "Pontuação Obrigatória do Vocativo",
+        conceptExplanation: "Vocativo sem vírgula é falha grave de convenção e desconta pontos de estrutura de gênero e norma culta.",
+        linoTip: "Lino Tip: Chamou alguém pelo nome ou cargo? Vírgula obrigatória logo após!"
+    },
+    {
+        category: "Vírgula",
+        question: "A frase 'O autor da célebre obra modernista, destacou as mazelas do sertão' cometeu qual erro?",
+        options: [
+            "Separou o sujeito ('O autor da célebre obra modernista') do predicado por vírgula.",
+            "Não cometeu erro; a vírgula é estilística para respirar."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Jamais se separa o sujeito do predicado por vírgula única, não importa quão longo seja o sujeito. Vírgula NÃO é pausa para respirar; é organizador de blocos sintáticos.",
+        correctSide: "O autor da célebre obra modernista destacou as mazelas...",
+        wrongSide: "O autor da célebre obra modernista, destacou as mazelas...",
+        concept: "Proibição da Separação Sujeito-Predicado",
+        conceptExplanation: "A ligação entre o agente e a ação principal não pode ser fraturada por vírgula isolada.",
+        linoTip: "Lino Tip: 'Vírgula do infarto' = colocar vírgula entre o sujeito e o verbo. Proibido!"
+    },
+    {
+        category: "Vírgula",
+        question: "Na frase 'A sociedade brasileira tem sede de justiça', colocar vírgula antes da preposição ('tem sede, de justiça') é:",
+        options: [
+            "Erro grave: é proibido separar o nome do seu complemento nominal por vírgula.",
+            "Recurso facultativo de ênfase estilística."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Termos ligados por dependência nominal imediata (substantivo e seu complemento nominal: 'sede' + 'de justiça') nunca podem ser separados por vírgula.",
+        correctSide: "tem sede de justiça (sem vírgula)",
+        wrongSide: "tem sede, de justiça",
+        concept: "Inseparabilidade do Complemento Nominal",
+        conceptExplanation: "O complemento nominal integra o significado do nome e deve permanecer adjacente a ele.",
+        linoTip: "Lino Tip: Nunca coloque vírgula antes do complemento que completa o sentido de um substantivo ou adjetivo."
+    },
+
+    // --- NOVOS MICRO-TREINOS: CONCORDÂNCIA ---
+    {
+        category: "Concordância",
+        question: "Com o verbo impessoal 'haver' no sentido de existir ou ocorrer, a concordância correta na oração é:",
+        options: [
+            "Havia muitas divergências entre os juristas sobre a constitucionalidade da matéria.",
+            "Haviam muitas divergências entre os juristas sobre a constitucionalidade da matéria."
+        ],
+        correctOptionIndex: 0,
+        explanation: "O verbo 'haver', quando tem sentido de 'existir' ou 'acontecer', é impessoal: não possui sujeito gramatical com quem concordar. Portanto, permanece estritamente na 3ª pessoa do singular ('Havia', 'Houve', 'Há').",
+        correctSide: "Havia muitas divergências...",
+        wrongSide: "Haviam muitas divergências...",
+        concept: "Impessoalidade do Verbo Haver",
+        conceptExplanation: "'Haver' com sentido existencial não flexiona para o plural. 'Muitas divergências' é objeto direto dele, não sujeito.",
+        linoTip: "Lino Tip: Troque por 'existir' na sua cabeça: 'Existiam problemas' = 'HAVIA problemas' (sempre singular!)."
+    },
+    {
+        category: "Concordância",
+        question: "Na expressão 'trata-se de', acompanhada de termo no plural, a forma correta na norma culta é:",
+        options: [
+            "Tratam-se de graves problemas estruturais.",
+            "Trata-se de graves problemas estruturais."
+        ],
+        correctOptionIndex: 1,
+        explanation: "O 'se' aqui é Índice de Indeterminação do Sujeito junto a verbo transitivo indireto (rege preposição 'de'). O verbo fica OBRIGATORIAMENTE na 3ª pessoa do singular. A forma 'tratam-se de' não existe na norma padrão.",
+        correctSide: "Trata-se de graves problemas...",
+        wrongSide: "Tratam-se de graves problemas...",
+        concept: "Índice de Indeterminação do Sujeito",
+        conceptExplanation: "Verbo transitivo indireto acompanhado de partícula apassivadora/indeterminadora 'se' permanece no singular.",
+        linoTip: "Lino Tip: Tem 'de' depois de 'trata-se'? Fica SEMPRE no singular: 'Trata-se de medidas urgentes'."
+    },
+    {
+        category: "Concordância",
+        question: "Com expressões partitivas seguidas de adjunto no plural ('A maioria dos jovens ___ do processo'), a regra aceita:",
+        options: [
+            "Apenas o singular ('participa').",
+            "Tanto o singular ('participa', concordando com 'a maioria') quanto o plural ('participam', concordando com 'jovens')."
+        ],
+        correctOptionIndex: 1,
+        explanation: "Diante de expressões partitivas ('a maioria de', 'grande parte de', 'uma parcela de') seguidas de termo no plural, a gramática normativa admite concordância lógica no singular (com o núcleo) ou atrativa no plural (com o adjunto).",
+        correctSide: "A maioria participa OU A maioria participam (ambas válidas)",
+        wrongSide: "penalizar uma das construções como incorreta",
+        concept: "Concordância com Expressões Partitivas",
+        conceptExplanation: "Flexibilidade sintática aceita pelas 6 bancas, desde que mantida a coerência no parágrafo.",
+        linoTip: "Lino Tip: Você pode escolher: concordar com 'a maioria' (singular) ou com 'dos jovens' (plural). Ambas tiram nota máxima!"
+    },
+    {
+        category: "Concordância",
+        question: "Quando o sujeito composto vem ANTES do verbo ('O ministro e o secretário ___ à solenidade'), o verbo deve:",
+        options: [
+            "Ficar obrigatoriamente no plural: 'compareceram'.",
+            "Concordar apenas com o termo mais próximo: 'compareceu'."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Sujeito composto anteposto ao verbo exige concordância estrita no plural ('O ministro e o secretário compareceram'). A concordância atrativa com o núcleo mais próximo só é permitida quando o verbo vem antes do sujeito.",
+        correctSide: "O ministro e o secretário compareceram...",
+        wrongSide: "O ministro e o secretário compareceu...",
+        concept: "Sujeito Composto Anteposto",
+        conceptExplanation: "A soma de dois ou mais agentes antes do predicado impõe a flexão plural obrigatória.",
+        linoTip: "Lino Tip: Dois sujeitos antes do verbo? O verbo vai para o plural sem exceção!"
+    },
+    {
+        category: "Concordância",
+        question: "Nas expressões 'é proibido' / 'é necessário', quando o substantivo vem DESACOMPANHADO de artigo, a forma correta é:",
+        options: [
+            "É proibido entrada de pessoas estranhas.",
+            "É proibida entrada de pessoas estranhas."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Sem artigo determinante, o adjetivo predicativo permanece invariável no masculino singular: 'É proibido entrada'. Se houvesse artigo feminino ('a entrada'), flexionaria para o feminino: 'É proibida A entrada'.",
+        correctSide: "É proibido entrada / É proibida a entrada",
+        wrongSide: "É proibida entrada (sem artigo)",
+        concept: "Invariabilidade de Expressões Predicativas",
+        conceptExplanation: "A presença ou ausência do artigo definido determina a concordância do adjetivo que compõe o predicado nominal.",
+        linoTip: "Lino Tip: Sem artigo = masculino singular ('É proibido entrada'). Com artigo = feminino ('É proibida A entrada')."
+    },
+    {
+        category: "Concordância",
+        question: "Na concordância com percentual seguido de especificador no singular ('30% da população ___ de saneamento básico'):",
+        options: [
+            "O verbo pode concordar tanto no singular ('carece') com o especificador quanto no plural ('carecem') com o numeral.",
+            "O verbo deve ficar obrigatoriamente no plural sempre."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Quando a porcentagem no plural é seguida de substantivo no singular ('da população'), o verbo pode concordar com o número ('carecem') ou por atração com o substantivo singular ('carece'). Ambas são formas cultas legítimas.",
+        correctSide: "30% da população carece OU carecem",
+        wrongSide: "reputar a concordância atrativa como errada",
+        concept: "Concordância com Numerais Percentuais",
+        conceptExplanation: "Dupla possibilidade de concordância facultada pela norma padrão em estruturas com partitivo percentual.",
+        linoTip: "Lino Tip: '30% da população carece' soa muito natural e elegante em redações dissertativas!"
+    },
+
+    // --- NOVOS MICRO-TREINOS: REGÊNCIA ---
+    {
+        category: "Regência",
+        question: "Qual a regência culta do verbo 'implicar' no sentido de acarretar/trazer como consequência?",
+        options: [
+            "A omissão estatal implicará em severos prejuízos à sociedade.",
+            "A omissão estatal implicará severos prejuízos à sociedade."
+        ],
+        correctOptionIndex: 1,
+        explanation: "No padrão culto, o verbo 'implicar' com sentido de 'acarretar' é Transitivo Direto: não admite a preposição 'em'. Dizer 'implicará em prejuízos' é vício comum penalizado na C1 do ENEM e bancas como UEMA e UFG.",
+        correctSide: "implicará severos prejuízos...",
+        wrongSide: "implicará em severos prejuízos...",
+        concept: "Transitividade Direta do Verbo Implicar",
+        conceptExplanation: "Verbo transitivo direto exige objeto direto sem preposição. Cortar a preposição 'em' é imperativo.",
+        linoTip: "Lino Tip: Delete o 'em' depois do verbo implicar! Diga 'implicará mudanças', nunca 'implicará em mudanças'."
+    },
+    {
+        category: "Regência",
+        question: "O verbo 'visar' no sentido de almejar/ter por objetivo rege:",
+        options: [
+            "Preposição 'a': 'As políticas públicas devem visar ao bem-estar coletivo.'",
+            "Sem preposição: 'As políticas públicas devem visar o bem-estar coletivo.'"
+        ],
+        correctOptionIndex: 0,
+        explanation: "'Visar' sem preposição significa mirar (com arma) ou apor visto (em documento). Quando significa 'almejar', 'ter como meta', é estritamente Transitivo Indireto e rege a preposição 'a' ('visar ao bem-estar').",
+        correctSide: "visar ao bem-estar coletivo...",
+        wrongSide: "visar o bem-estar coletivo...",
+        concept: "Regência Indireta do Verbo Visar",
+        conceptExplanation: "A mudança de regência acarreta alteração semântica profunda do verbo na norma culta.",
+        linoTip: "Lino Tip: Visar no sentido de ter como meta pede 'AO' ou 'À': 'visar ao sucesso', 'visar à igualdade'."
+    },
+    {
+        category: "Regência",
+        question: "Com o verbo 'assistir' no sentido de presenciar/ver, a forma padrão recomendada é:",
+        options: [
+            "A população assistiu o debate estarrecida.",
+            "A população assistiu ao debate estarrecida."
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Assistir o' significa prestar assistência/cuidar ('O médico assiste o paciente'). 'Assistir AO' significa presenciar/ver. Como a população viu o debate, a regência correta é com preposição 'a'.",
+        correctSide: "assistiu ao debate / assistiu ao filme",
+        wrongSide: "assistiu o debate / assistiu o filme",
+        concept: "Dupla Regência do Verbo Assistir",
+        conceptExplanation: "Distinção entre sentido de assistência médica (VTD) e sentido de contemplação visual (VTI).",
+        linoTip: "Lino Tip: Assistir no sentido de ver sempre pede 'ao' ou 'à': 'assistir ao documentário'."
+    },
+    {
+        category: "Regência",
+        question: "O verbo 'obedecer' e seu antônimo 'desobedecer' são classificados na norma culta como:",
+        options: [
+            "Transitivos indiretos: regem a preposição 'a' ('obedecer às leis', 'desobedecer ao regulamento').",
+            "Transitivos diretos: não admitem preposição ('obedecer as leis')."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Os verbos 'obedecer' e 'desobedecer' exigem obrigatoriamente a preposição 'a'. Portanto, com termos femininos, ocorre crase: 'obedecer às normas constitucionais'.",
+        correctSide: "obedecer às leis / desobedecer ao estatuto",
+        wrongSide: "obedecer as leis / desobedecer o estatuto",
+        concept: "Transitividade do Verbo Obedecer",
+        conceptExplanation: "Exige objeto indireto regido pela preposição 'a'. Seu uso como transitivo direto é erro gramatical.",
+        linoTip: "Lino Tip: Quem obedece, obedece A algo: 'obedecer às regras', 'obedecer aos princípios'."
+    },
+    {
+        category: "Regência",
+        question: "Na construção com o verbo 'preferir', qual alternativa obedece rigorosamente à norma padrão?",
+        options: [
+            "O jovem prefere mais as redes sociais do que a leitura de livros.",
+            "O jovem prefere as redes sociais à leitura de livros."
+        ],
+        correctOptionIndex: 1,
+        explanation: "O verbo 'preferir' já contém carga comparativa em si mesmo. Rejeita advérbios de intensidade ('mais', 'mil vezes') e conectivos comparativos ('do que'). Rege a preposição 'a': 'preferir X a Y'.",
+        correctSide: "prefere o diálogo ao confronto violento",
+        wrongSide: "prefere mais o diálogo do que o confronto",
+        concept: "Regência Pura do Verbo Preferir",
+        conceptExplanation: "Proíbe 'mais' e 'do que'. A correlação correta é 'preferir uma coisa A outra'.",
+        linoTip: "Lino Tip: Nunca diga 'prefiro mais... do que'. Diga: 'prefiro o estudo ao descanso'."
+    },
+    {
+        category: "Regência",
+        question: "Com o verbo 'aspirar' no sentido de desejar ardentemente/almejar, a construção correta é:",
+        options: [
+            "O cidadão aspira à justiça social plena.",
+            "O cidadão aspira a justiça social plena (sem crase)."
+        ],
+        correctOptionIndex: 0,
+        explanation: "'Aspirar o' significa sugar/inalar ('aspirar o ar puro'). 'Aspirar A' significa almejar/pretender ('aspirar ao cargo', 'aspirar à justiça'). Havendo palavra feminina com artigo, a crase é obrigatória.",
+        correctSide: "aspira à estabilidade / aspira ao cargo",
+        wrongSide: "aspira a estabilidade (sem crase, com sentido de almejar)",
+        concept: "Regência Semântica do Verbo Aspirar",
+        conceptExplanation: "A presença da preposição 'a' define o sentido de meta ou aspiração pessoal/social.",
+        linoTip: "Lino Tip: Aspirar no sentido de ter um sonho pede 'a': 'aspirar à vaga', 'aspirar ao progresso'."
+    },
+
+    // --- NOVOS MICRO-TREINOS: USO DO INFINITIVO ---
+    {
+        category: "Uso do Infinitivo",
+        question: "Quando o sujeito da oração reduzida de infinitivo for diferente do sujeito da principal ('O Estado criou bolsas para os jovens ___'), a flexão é:",
+        options: [
+            "Obrigatória: 'para os jovens estudarem'.",
+            "Proibida: 'para os jovens estudar'."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Quando o infinitivo possui sujeito próprio e explícito ('os jovens'), que não coincide com o sujeito da oração principal ('O Estado'), a flexão do infinitivo no plural é obrigatória para clareza sintática.",
+        correctSide: "para os jovens estudarem...",
+        wrongSide: "para os jovens estudar...",
+        concept: "Infinitivo com Sujeito Próprio Distinto",
+        conceptExplanation: "O infinitivo flexionado evidencia o agente da oração subordinada reduzida adverbial final.",
+        linoTip: "Lino Tip: Sujeito explícito no plural logo antes do infinitivo? Flexione o verbo: 'para eles entenderem'."
+    },
+    {
+        category: "Uso do Infinitivo",
+        question: "Diante de preposição regendo complemento de valor genérico ou substantivado ('O dever de ___ a fauna'), o infinitivo deve:",
+        options: [
+            "Permanecer no singular (não flexionado): 'O dever de proteger a fauna.'",
+            "Flexionar no plural: 'O dever de protegerem a fauna.'"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Quando o infinitivo é regido de preposição formando complemento de substantivo ('dever de', 'capacidade de') com sentido amplo e indeterminado, a regra culta prescreve o infinitivo não flexionado.",
+        correctSide: "o dever de proteger / o direito de participar",
+        wrongSide: "o dever de protegerem (em sentido geral)",
+        concept: "Infinitivo Impessoal Regido de Preposição",
+        conceptExplanation: "Em locuções com substantivos abstratos de sentido geral, o infinitivo atua como nome e não deve flexionar.",
+        linoTip: "Lino Tip: 'O dever de combater', 'a obrigação de agir': mantenha no singular neutro!"
+    },
+    {
+        category: "Uso do Infinitivo",
+        question: "Em locuções verbais compostas por verbo auxiliar + infinitivo ('Os órgãos competentes devem ___ a fiscalização'), a flexão ocorre em:",
+        options: [
+            "Apenas no verbo auxiliar: 'Os órgãos competentes devem intensificar a fiscalização.'",
+            "Em ambos os verbos: 'Os órgãos competentes devem intensificarem a fiscalização.'"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Em locuções verbais, apenas o verbo auxiliar flexiona em número e pessoa concordando com o sujeito ('devem'). O verbo principal permanece na sua forma nominal infinitiva neutra ('intensificar').",
+        correctSide: "devem intensificar / podem agir",
+        wrongSide: "devem intensificarem / podem agirem",
+        concept: "Locuções Verbais com Infinitivo",
+        conceptExplanation: "O verbo auxiliar carrega todas as marcas morfológicas de tempo, modo e pessoa da oração.",
+        linoTip: "Lino Tip: Nunca flexione o segundo verbo de uma locução: 'Eles devem agir', nunca 'devem agirem'!"
+    },
+    {
+        category: "Uso do Infinitivo",
+        question: "Nas orações com verbos causativos (mandar, deixar, fazer) e sensitivos (ver, ouvir) seguidos de pronome oblíquo ('Deixei-os ___'), a forma elegante é:",
+        options: [
+            "Infinitivo não flexionado: 'Deixei-os sair sem restrições.'",
+            "Infinitivo flexionado: 'Deixei-os saírem sem restrições.'"
+        ],
+        correctOptionIndex: 0,
+        explanation: "Com verbos causativos e sensitivos acompanhados de pronome oblíquo átono funcionando como sujeito acusativo ('os'), a tradição gramatical recomenda o infinitivo sem flexão ('Deixei-os sair', 'Vi-os passar').",
+        correctSide: "Deixei-os sair / Mandei-os entrar",
+        wrongSide: "Deixei-os saírem / Mandei-os entrarem",
+        concept: "Infinitivo com Verbos Causativos e Sensitivos",
+        conceptExplanation: "O pronome atua como sujeito da oração reduzida e o infinitivo permanece tradicionalmente invariável.",
+        linoTip: "Lino Tip: Depois de 'deixar', 'fazer', 'ver': 'Deixou-os falar', 'Fez-nos pensar'."
+    },
+
+    // --- NOVOS MICRO-TREINOS: CONECTIVOS & COESÃO ---
+    {
+        category: "Conectivos",
+        question: "O pronome relativo 'onde' só pode ser legitimamente empregado na redação quando seu antecedente for:",
+        options: [
+            "Lugar físico ou espacial concreto ('O hospital onde atua', 'O município onde reside').",
+            "Qualquer contexto conceitual ou abstrato ('A sociedade onde vivemos', 'A lei onde prevê igualdade')."
+        ],
+        correctOptionIndex: 0,
+        explanation: "O pronome 'onde' é de base exclusivamente espacial. Empregar 'onde' para retomar 'sociedade', 'filme', 'época', 'situação' ou 'lei' é considerado desvio coesivo grave pelas bancas (UFG, ENEM, UEMA). Use 'em que', 'no qual' ou 'na qual'.",
+        correctSide: "A sociedade em que vivemos / A lei na qual se prevê...",
+        wrongSide: "A sociedade onde vivemos / A lei onde prevê...",
+        concept: "Restrição Semântica do Pronome Onde",
+        conceptExplanation: "Pronome relativo que denota estritamente posição espacial concreta com endereço ou limites físicos.",
+        linoTip: "Lino Tip: Sociedade e lei não têm CEP no GPS! Troque 'onde' por 'em que' ou 'no qual'."
+    },
+    {
+        category: "Conectivos",
+        question: "A expressão argumentativa de reforço 'haja vista' apresenta qual comportamento na norma culta?",
+        options: [
+            "É invariável: 'Haja vista os inúmeros desafios contemporâneos.'",
+            "Flexiona obrigatoriamente para o plural: 'Hajam vistas aos desafios contemporâneos.'"
+        ],
+        correctOptionIndex: 0,
+        explanation: "A locução 'haja vista' tem valor adverbial/prepositivo e permanece invariavelmente no singular ('haja vista os problemas'). A flexão 'hajam vistas' é repudiada pela norma culta e penalizada em bancas rigorosas.",
+        correctSide: "Haja vista os desafios...",
+        wrongSide: "Hajam vistas aos desafios...",
+        concept: "Invariabilidade da Locução Haja Vista",
+        conceptExplanation: "Locução consagrada que opera como 'veja-se' ou 'considere-se', sem flexão de número.",
+        linoTip: "Lino Tip: 'Haja vista' nunca muda: nem 'hajam', nem 'vistas'. É sempre 'Haja vista'!"
+    },
+    {
+        category: "Conectivos",
+        question: "A locução clássica 'Posto que' possui qual valor sintático e semântico exato na redação?",
+        options: [
+            "Concessivo (sinônimo de 'embora', 'ainda que'), exigindo verbo no subjuntivo.",
+            "Causal (sinônimo de 'já que', 'porque'), exigindo verbo no indicativo."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Na tradição gramatical rigorosa (especialmente cobrada na UEMA e UFG), 'posto que' é estritamente CONCESSIVA ('Posto que existam leis, falta fiscalização'). Usá-la com sentido causal é um equívoco estilístico frequente.",
+        correctSide: "Posto que existam leis... (= embora existam)",
+        wrongSide: "Posto que faltou verba, o projeto parou (usado como 'já que')",
+        concept: "Valor Concessivo de Posto Que",
+        conceptExplanation: "Conjunção subordinativa concessiva de alta erudição que estabelece ressalva à oração principal.",
+        linoTip: "Lino Tip: 'Posto que' = 'Embora'. Rege sempre o modo subjuntivo!"
+    },
+    {
+        category: "Conectivos",
+        question: "Qual a diferença de sentido e uso entre 'ao invés de' e 'em vez de'?",
+        options: [
+            "'Ao invés de' expressa oposição absoluta (antônimos); 'em vez de' indica substituição geral.",
+            "São termos estritamente sinônimos e indiferentes em qualquer oração."
+        ],
+        correctOptionIndex: 0,
+        explanation: "'Ao invés de' significa 'ao contrário de' e só pode ser usado entre ideias diametralmente opostas ('Ao invés de subir, desceu'). Para simples substituição ou troca ('Em vez de estudar, dormiu'), a forma correta é 'em vez de'.",
+        correctSide: "Em vez de incentivar a leitura, cortou os investimentos.",
+        wrongSide: "Ao invés de incentivar a leitura, cortou os investimentos (não são opostos exatos).",
+        concept: "Distinção entre Ao Invés De e Em Vez De",
+        conceptExplanation: "'Ao invés de' = oposição vetorial. 'Em vez de' = substituição (cabe em todas as situações).",
+        linoTip: "Lino Tip: Na dúvida na redação, use sempre 'Em vez de'! Ele nunca erra."
+    },
+    {
+        category: "Conectivos",
+        question: "Para indicar que alguém está plenamente informado e ciente de uma questão na redação, a locução correta é:",
+        options: [
+            "Estar a par das demandas sociais.",
+            "Estar ao par das demandas sociais."
+        ],
+        correctOptionIndex: 0,
+        explanation: "'Estar a par' significa estar informado, ciente, atualizado. 'Estar ao par' é termo técnico financeiro/cambial que indica equivalência monetária (como o câmbio de moedas em paridade).",
+        correctSide: "O cidadão deve estar a par das leis...",
+        wrongSide: "O cidadão deve estar ao par das leis...",
+        concept: "Precisão Semântica em Locuções Idiomáticas",
+        conceptExplanation: "A seleção vocabular correta entre 'a par' e 'ao par' demonstra repertório linguístico refinado.",
+        linoTip: "Lino Tip: Estar informado = 'a par'. Trocar por 'ao par' soa artificial e errado!"
     }
 ];
+
+// Exportação universal: Navegador (window) e Node.js (module.exports)
+if (typeof window !== 'undefined') {
+    window.grammarExercises = grammarExercises;
+}
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = grammarExercises;
+    module.exports.grammarExercises = grammarExercises;
+}

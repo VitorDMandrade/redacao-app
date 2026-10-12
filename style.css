@@ -1951,6 +1951,166 @@ body {
     margin: 0;
 }
 
+.grammar-density-tabs-nav {
+    display: flex;
+    gap: 6px;
+    background: #1e293b;
+    padding: 4px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+
+.density-nav-btn {
+    background: transparent;
+    border: none;
+    color: #94a3b8;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-size: 0.84rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+}
+
+.density-nav-btn:hover {
+    color: #f1f5f9;
+}
+
+.density-nav-btn.active {
+    background: #4f46e5;
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+}
+
+.density-tab-pane {
+    animation: fadeIn 0.25s ease-in-out;
+}
+
+.density-tab-pane.hidden {
+    display: none !important;
+}
+
+.grammar-logic-intro {
+    background: #141e30;
+    border: 1px solid #283548;
+    border-left: 4px solid #38bdf8;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 1rem;
+}
+
+.grammar-logic-pills-nav {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    margin-bottom: 1rem;
+}
+
+.grammar-logic-pill {
+    background: #1e293b;
+    border: 1px solid #334155;
+    color: #94a3b8;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.15s;
+}
+
+.grammar-logic-pill:hover, .grammar-logic-pill.active {
+    background: #0284c7;
+    color: white;
+    border-color: #38bdf8;
+}
+
+.grammar-logic-card {
+    background: #0a0f1d;
+    border: 1px solid #1e293b;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.logic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #1e293b;
+    padding-bottom: 8px;
+}
+
+.logic-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #38bdf8;
+    margin: 0;
+}
+
+.logic-badge {
+    background: rgba(56, 189, 248, 0.12);
+    color: #38bdf8;
+    border: 1px solid rgba(56, 189, 248, 0.3);
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.logic-block {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.logic-block-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.logic-block-text {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.logic-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 10px;
+    margin-top: 6px;
+}
+
+.logic-compare-card {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.84rem;
+    line-height: 1.45;
+}
+
+.logic-compare-card.correct {
+    background: rgba(16, 185, 129, 0.08);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #6ee7b7;
+}
+
+.logic-compare-card.wrong {
+    background: rgba(239, 68, 68, 0.08);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+}
+
 .grammar-bancas-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));

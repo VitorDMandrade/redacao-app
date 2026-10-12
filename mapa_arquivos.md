@@ -65,8 +65,25 @@ Cada categoria possui um painel didático fixo contendo:
 
 ---
 
-## 4. Arena de Micro-Treinos Gramaticais & Densidade
+## 4. Arena de Micro-Treinos Gramaticais & Densidade 2.0
 
 - Localizada em `#grammar-view`.
-- Painel `#grammar-density-panel` apresenta o radar avaliativo das bancas com pílulas interativas de fixação rápida.
-- Exercícios em `grammar_exercises.js` com justificativas profundas (`concept`, `conceptExplanation`, `correctSide`, `wrongSide`, `linoTip`).
+- Painel `#grammar-density-panel` com sistema de abas duplas:
+  1. **🏛️ Radar das 6 Bancas (`#density-content-radar`)**: Matriz comparativa de rigor normativo e tolerância a desvios no ENEM, UEMA, UFG, UNITINS e EXATO.
+  2. **💡 A Lógica da Língua (`#density-content-logica`)**: Aba didática e leve ("explicando o português mesmo" sem decoreba), organizada em 9 tópicos essenciais:
+     - 🚂 A Vírgula e o Trem das Palavras (sujeito-verbo-objeto)
+     - 🧮 Crase: A Fusão Matemática (A + A = À)
+     - 🧬 Regência: O DNA do Significado (verbos nobres: implicar, visar, obedecer)
+     - ⚖️ Proporção vs Causa: As Balanças Lógicas ('À medida que' vs 'Na medida em que')
+     - 🪞 Paralelismo Sintático: A Simetria do Cérebro
+     - 📍 O Pronome 'Onde' Tem CEP Físico
+     - 🌫️ Concessão & O Modo da Dúvida (Subjuntivo)
+     - 👥 Sujeito Partitivo: A Lógica da Concordância de Grupo
+     - 🦎 O 'Pois' Camaleão (Causa vs Conclusão)
+  - Cada tópico didático possui: *Como a Língua Realmente Pensa*, *Por Que Corretores Cobram Esse Padrão*, *Teste Prático de 5 Segundos* e *Comparativo Certo vs Errado*.
+- **⚡ Pílulas Rápidas de Fixação (Regras de Ouro)**: 9 pílulas interativas com cards explicativos diretos.
+- **Arena de Micro-Treinos Expandida (`grammar_exercises.js`)**:
+  - Total de **84 exercícios práticos** baseados em temas de vestibulares.
+  - Distribuição: Crase (12), Vírgula (12), Concordância (11), Regência (12), Conectivos (22), Uso do Infinitivo (8), Paralelismo (7).
+  - Cada exercício conta com explicação gramatical aprofundada, `concept`, `conceptExplanation`, comparativo `correctSide` x `wrongSide` e `linoTip`.
+

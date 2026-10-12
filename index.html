@@ -541,38 +541,81 @@
                     <!-- Dossiê de Densidade Gramatical & Radar das 6 Bancas -->
                     <div class="grammar-density-container" id="grammar-density-panel">
                         <div class="grammar-density-header">
-                            <h3>📊 Densidade Gramatical: Radar de Rigor das 6 Bancas</h3>
-                            <span class="hint" style="color: #94a3b8; font-size: 0.85rem;">Como corretores avaliam a norma culta</span>
+                            <div>
+                                <h3>📊 Densidade Gramatical & Lógica da Língua</h3>
+                                <span class="hint" style="color: #94a3b8; font-size: 0.85rem;">Critérios de correção das bancas e explicações descomplicadas do português</span>
+                            </div>
+                            <!-- Abas de navegação da Densidade -->
+                            <div class="grammar-density-tabs-nav">
+                                <button type="button" class="density-nav-btn active" id="btn-tab-radar" data-tab="radar">
+                                    🏛️ Radar das 6 Bancas
+                                </button>
+                                <button type="button" class="density-nav-btn" id="btn-tab-logica" data-tab="logica">
+                                    💡 A Lógica da Língua (Por que Aplicar Assim?)
+                                </button>
+                            </div>
                         </div>
-                        <div class="grammar-bancas-grid">
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">ENEM <span>Competência 1 (200 pts)</span></span>
-                                <span class="banca-rule">Tolera no máximo 2 desvios pontuais e 1 falha estrutural leve para atingir nota 200. Truncamentos de períodos e justaposições com vírgula zeram a matriz de excelência.</span>
+
+                        <!-- ABA 1: RADAR DE RIGOR DAS 6 BANCAS -->
+                        <div id="density-content-radar" class="density-tab-pane active">
+                            <div class="grammar-bancas-grid">
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">ENEM <span>Competência 1 (200 pts)</span></span>
+                                    <span class="banca-rule">Tolera no máximo 2 desvios pontuais e 1 falha estrutural leve para atingir nota 200. Truncamentos de períodos e justaposições com vírgula zeram a matriz de excelência.</span>
+                                </div>
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">UEMA (PAES) <span>Critério 5 (2.0 pts)</span></span>
+                                    <span class="banca-rule">Correção rigorosa: desvios de crase, regência e concordância descontam de forma cumulativa. Exige vocabulário preciso e pune oralidade ou repetições.</span>
+                                </div>
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">EXATO Dissertativo <span>Critério 1 (20 pts)</span></span>
+                                    <span class="banca-rule">Norma culta estrita: penaliza truncamentos e desvios de concordância. Exige período composto coeso sem ambiguidades.</span>
+                                </div>
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">EXATO Carta <span>Critérios 1 e 3 (40 pts)</span></span>
+                                    <span class="banca-rule">Registro culto aliado à interlocução: proíbe gírias, exige pronomes de tratamento adequados e pontuação exata no vocativo.</span>
+                                </div>
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">UFG (Verbena) <span>Critério 3 (5.0 pts)</span></span>
+                                    <span class="banca-rule">Modalidade escrita acadêmica: pune severamente o uso de 'onde' para conceitos abstratos, falta de paralelismo e desvios de regência.</span>
+                                </div>
+                                <div class="grammar-banca-card">
+                                    <span class="banca-name">UNITINS <span>Critério 5 (4.0 pts)</span></span>
+                                    <span class="banca-rule">Padrão culto estrito: desconta rasuras, erros ortográficos, vírgulas separando sujeito de predicado e falhas de pontuação.</span>
+                                </div>
                             </div>
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">UEMA (PAES) <span>Critério 5 (2.0 pts)</span></span>
-                                <span class="banca-rule">Correção rigorosa: desvios de crase, regência e concordância descontam de forma cumulativa. Exige vocabulário preciso e pune oralidade ou repetições.</span>
+                        </div>
+
+                        <!-- ABA 2: A LÓGICA DA LÍNGUA (EXPLICAÇÃO LEVE & DIDÁTICA) -->
+                        <div id="density-content-logica" class="density-tab-pane hidden">
+                            <div class="grammar-logic-intro">
+                                <h4 style="color: #38bdf8; font-size: 1rem; margin-bottom: 0.35rem;">Desmistificando o Português sem Decoreba</h4>
+                                <p style="color: #cbd5e1; font-size: 0.88rem; margin: 0; line-height: 1.5;">
+                                    A gramática da redação não é um conjunto de proibições aleatórias: ela reflete como o cérebro do leitor processa ideias com clareza. Escolha um tópico abaixo para entender a lógica real e dominar a regra de uma vez por todas.
+                                </p>
                             </div>
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">EXATO Dissertativo <span>Critério 1 (20 pts)</span></span>
-                                <span class="banca-rule">Norma culta estrita: penaliza truncamentos e desvios de concordância. Exige período composto coeso sem ambiguidades.</span>
+
+                            <!-- Pílulas de Tópicos da Lógica -->
+                            <div class="grammar-logic-pills-nav">
+                                <button type="button" class="grammar-logic-pill active" data-topic="virgula">🚂 A Vírgula e o Trem das Palavras</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="crase">🧮 Crase: A Fusão Matemática (A + A)</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="regencia">🧬 Regência: O DNA do Significado</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="proporcao">⚖️ Proporção vs Causa: As Balanças</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="paralelismo">🪞 Paralelismo: A Simetria do Cérebro</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="onde">📍 O Pronome "Onde" Tem CEP Físico</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="subjuntivo">🌫️ Concessão & O Modo da Dúvida</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="partitivo">👥 Sujeito Partitivo: A Lógica do Grupo</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="pois">🦎 O "Pois" Camaleão</button>
                             </div>
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">EXATO Carta <span>Critérios 1 e 3 (40 pts)</span></span>
-                                <span class="banca-rule">Registro culto aliado à interlocução: proíbe gírias, exige pronomes de tratamento adequados e pontuação exata no vocativo.</span>
-                            </div>
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">UFG (Verbena) <span>Critério 3 (5.0 pts)</span></span>
-                                <span class="banca-rule">Modalidade escrita acadêmica: pune severamente o uso de 'onde' para conceitos abstratos, falta de paralelismo e desvios de regência.</span>
-                            </div>
-                            <div class="grammar-banca-card">
-                                <span class="banca-name">UNITINS <span>Critério 5 (4.0 pts)</span></span>
-                                <span class="banca-rule">Padrão culto estrito: desconta rasuras, erros ortográficos, vírgulas separando sujeito de predicado e falhas de pontuação.</span>
+
+                            <!-- Card de Exibição Dinâmica da Lógica -->
+                            <div id="grammar-logic-display" class="grammar-logic-card">
+                                <!-- Conteúdo injetado dinamicamente via script.js -->
                             </div>
                         </div>
 
                         <!-- Pílulas de Consulta Rápida: Leis de Ouro da Gramática -->
-                        <div style="margin-top: 1rem;">
+                        <div style="margin-top: 1.25rem; border-top: 1px solid #1e293b; pt: 1rem;">
                             <h4 style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.5rem;">⚡ Pílulas Rápidas de Fixação (Regras de Ouro)</h4>
                             <div class="grammar-rules-pillbox">
                                 <button type="button" class="grammar-rule-tab active" data-rule="virgula">Vírgula & Conectivos</button>
@@ -581,6 +624,9 @@
                                 <button type="button" class="grammar-rule-tab" data-rule="regencia">Regência dos Verbos Nobres</button>
                                 <button type="button" class="grammar-rule-tab" data-rule="paralelismo">Paralelismo Sintático</button>
                                 <button type="button" class="grammar-rule-tab" data-rule="referencial">Coesão Referencial Limpa</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="onde">Uso Restrito de 'Onde'</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="subjuntivo">Concessivos & Subjuntivo</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="pois">Posição do 'Pois'</button>
                             </div>
                             <div id="grammar-rule-content" class="grammar-rule-detail">
                                 <strong>📌 Regra da Vírgula com Conectivos:</strong><br>

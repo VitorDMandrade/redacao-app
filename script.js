@@ -1277,6 +1277,240 @@ document.addEventListener('DOMContentLoaded', () => {
         loadDrillsByCategory('Crase');
     }
 
+    // ==========================================
+    // DENSIDADE GRAMATICAL & LÓGICA DA LÍNGUA
+    // ==========================================
+    const grammarLogicData = {
+        virgula: {
+            titulo: "A Vírgula e o Trem das Palavras",
+            subtitulo: "Desmistificando a 'Pausa para Respirar': Por que a vírgula é pura engenharia sintática",
+            icone: "🚂",
+            tag: "Pontuação & Sintaxe",
+            logica: "Em português, a oração padrão é como uma locomotiva puxando seus vagões em linha reta: [Quem faz a ação: Sujeito] + [A ação: Verbo] + [O complemento: Objeto]. Quando você coloca uma vírgula entre o sujeito e o verbo ('A maioria dos jovens, enfrentam...'), você literalmente desconecta a locomotiva dos vagões! O cérebro do corretor espera que o agente e a ação estejam colados. A vírgula só existe para sinalizar quando um bloco estranho (uma explicação ou uma circunstância de tempo/lugar) foi inserido no meio do caminho. Ela funciona como um par de parênteses: você abre uma vírgula e fecha outra.",
+            porQueBancasCobram: "Os corretores do ENEM (C1), UEMA, UFG e UNITINS caçam a 'vírgula isolada entre sujeito e predicado' porque ela demonstra desconhecimento da estrutura oracional básica da língua. Já o adjunto adverbial longo deslocado ('No Brasil contemporâneo,') exige vírgula para avisar o leitor que a frase começou invertida.",
+            testePratico: "Faça o 'Teste do Trem': Aponte o dedo para quem faz a ação (sujeito) e para o verbo. Se não houver nada intercalado entre eles, JAMAIS coloque vírgula, mesmo que a frase tenha três linhas!",
+            exemploCerto: "A ausência de políticas públicas eficazes de saneamento básico compromete a dignidade humana nas periferias brasileiras.",
+            exemploErrado: "A ausência de políticas públicas eficazes de saneamento básico, compromete a dignidade humana nas periferias brasileiras."
+        },
+        crase: {
+            titulo: "Crase: A Fusão Matemática (A + A = À)",
+            subtitulo: "A crase não é um acento inventado: é a soma física de uma preposição com um artigo",
+            icone: "🧮",
+            tag: "Regência & Artigo",
+            logica: "A crase não é um enfeite ou um acento tônico; é uma crase física (do grego 'fusão'). Para ela existir, você precisa obrigatoriamente de DOIS 'As': o primeiro 'a' é exigido por quem manda antes (o verbo ou substantivo que pede preposição: 'acesso a', 'favorável a', 'ir a'); o segundo 'a' é o artigo feminino que acompanha a palavra seguinte ('a educação', 'a saúde', 'a população'). Se você trocar a palavra feminina por uma masculina da mesma família ('acesso ao ensino', 'favorável ao projeto'), você verá nitidamente o 'a' (preposição) somado ao 'o' (artigo) virando 'ao'. Se virou 'ao' no masculino, tem crase no feminino!",
+            porQueBancasCobram: "A crase testa ao mesmo tempo a sua capacidade de reconhecer regência verbal/nominal e morfologia de artigos. Corretores da UEMA e do ENEM penalizam severamente o 'a' sem crase antes de termo feminino regido e a crase indevida antes de verbo ou palavras masculinas.",
+            testePratico: "O 'Teste do Masculino': Troque a palavra feminina por uma masculina qualquer. Deu 'AO'? Leva crase obrigatória! Deu apenas 'O' ou 'A'? Sem crase! Exemplo: 'Assistiu à aula' -> 'Assistiu AO jogo' (tem crase!). Antes de verbo? Verbo não aceita artigo (ninguém fala 'o comer é belo'), logo nunca tem crase antes de verbo!",
+            exemploCerto: "O projeto de intervenção visa garantir o acesso irrestrito à educação de qualidade e à saúde básica.",
+            exemploErrado: "O projeto de intervenção visa garantir o acesso irrestrito a educação de qualidade e à partir de novas leis."
+        },
+        regencia: {
+            titulo: "Regência: O DNA do Significado dos Verbos",
+            subtitulo: "Por que mudar a preposição de um verbo muda a sua própria identidade",
+            icone: "🧬",
+            tag: "Sintaxe de Regência",
+            logica: "Na língua portuguesa culta, a preposição não é um adorno; ela altera a semântica do verbo. 'Visar' sem preposição significa apontar uma arma ou carimbar um passaporte; 'visar a' significa almejar ou buscar como objetivo. 'Implicar' significa 'trazer como consequência direta'; por isso ele é transitivo direto e dispensa qualquer preposição (dizer 'implicará em problemas' é um vício coloquial). 'Assistir o' é prestar auxílio médico; 'assistir ao' é presenciar ou contemplar.",
+            porQueBancasCobram: "A regência é o maior termômetro da erudição natural de um candidato. Bancas como UFG (Verbena), UEMA e ENEM consideram o uso correto de 'visar ao bem-estar' e 'implicará mudanças' (sem 'em') como marca de maturidade linguística superior.",
+            testePratico: "Lembre-se dos 3 Reis da Redação: 1) Implicar NÃO tem 'em' (implica algo). 2) Visar com sentido de meta TEM 'a' (visa ao progresso). 3) Obedecer sempre pede 'a' (obedece às leis).",
+            exemploCerto: "A negligência governamental implicará severos prejuízos ambientais e deixará de visar ao desenvolvimento sustentável.",
+            exemploErrado: "A negligência governamental implicará em severos prejuízos ambientais e deixará de visar o desenvolvimento sustentável."
+        },
+        proporcao: {
+            titulo: "Proporção vs Causa: As Duas Balanças Lógicas",
+            subtitulo: "Por que 'À medida que' e 'Na medida em que' são mundos completamente diferentes",
+            icone: "⚖️",
+            tag: "Conectivos & Semântica",
+            logica: "'À medida que' é uma régua sincronizada: conforme um lado se move gradativamente, o outro se move junto (proporção). 'Na medida em que' é uma balança de causas: equivale estritamente a 'já que', 'uma vez que', 'porque' (causalidade). Misturar as duas expressões criando 'à medida em que' (com crase e 'em') é gerar uma anomalia linguística inexistente na gramática normativa.",
+            porQueBancasCobram: "O uso de 'à medida em que' é um dos erros mais frequentes e batidos de vestibulandos. Os corretores detectam na hora e descontam na Competência 1 e Competência 4.",
+            testePratico: "Quer falar de tempo correndo junto e aumento gradual? Use 'À medida que'. Quer justificar uma razão ou causa? Use 'Na medida em que' ou simplesmente 'Visto que'. E nunca, em hipótese alguma, misture crase com a preposição 'em'!",
+            exemploCerto: "À medida que a urbanização se expande, os desafios sanitários aumentam, na medida em que faltam investimentos estruturais.",
+            exemploErrado: "À medida em que a urbanização se expande, os desafios sanitários aumentam decorrente da falta de verbas."
+        },
+        paralelismo: {
+            titulo: "Paralelismo: A Simetria que o Cérebro Exige",
+            subtitulo: "Como a coordenação de ideias em espelho garante clareza e ritmo no texto",
+            icone: "🪞",
+            tag: "Estrutura Sintática",
+            logica: "O cérebro humano processa sequências lógicas buscando padrões e simetria. Quando você coordena dois elementos (com 'e', 'ou', 'não só... mas também'), o segundo membro deve ser o espelho gramatical do primeiro. Se você começou com verbo no infinitivo ('combater o crime'), o segundo membro deve ser outro infinitivo ('e proteger o cidadão'). Se começou com substantivo ('a defesa dos direitos'), o segundo deve ser substantivo ('e a garantia da justiça'). Misturar infinitivo com gerúndio ou substantivo quebra a espinha dorsal da frase.",
+            porQueBancasCobram: "A falta de paralelismo é penalizada tanto na C1 (falha sintática) quanto na C4 (coesão defeituosa). Bancas exigentes como UEMA, UFG e ENEM consideram o paralelismo impecável como requisito para notas na faixa de excelência.",
+            testePratico: "O 'Teste da Gangorra': Se o lado esquerdo do conectivo for 'Verbo + Substantivo', o lado direito DEVE ser 'Verbo + Substantivo'. Se o lado esquerdo for 'de + Substantivo', o lado direito DEVE ser 'de + Substantivo'.",
+            exemploCerto: "Cabe ao Estado não só formular políticas públicas de inclusão, mas também fiscalizar sua aplicação nos municípios.",
+            exemploErrado: "Cabe ao Estado não só formular políticas públicas de inclusão, mas também a fiscalização de sua aplicação nos municípios."
+        },
+        onde: {
+            titulo: "O Pronome 'Onde' Tem CEP Físico",
+            subtitulo: "Por que uma lei, uma sociedade ou um filme nunca podem ser chamados de 'onde'",
+            icone: "📍",
+            tag: "Coesão Referencial",
+            logica: "Na língua portuguesa, 'onde' é um pronome relativo de raiz estritamente espacial e geográfica. Ele só pode substituir lugares físicos palpáveis: uma cidade, um hospital, um país, uma escola, uma rua. Uma sociedade, uma conjuntura, uma obra literária, um período histórico ou uma Constituição NÃO são terrenos com coordenadas de GPS nem paredes! Para ideias conceituais, temporais ou abstratas, utilize 'em que', 'no qual', 'na qual' ou 'durante o qual'.",
+            porQueBancasCobram: "O vício de usar 'onde' para tudo é um reflexo direto da oralidade cotidiana. As bancas de redação de Medicina e vestibulares tradicionais (UEMA, UFG, ENEM) aplicam penalidades severas ao primeiro 'onde' abstrato encontrado.",
+            testePratico: "Pergunte a si mesmo: 'Dá para andar a pé ou digitar esse lugar no Google Maps?' Se a resposta for NÃO (como em sociedade, debate, lei, século), risque o 'onde' imediatamente e escreva 'em que' ou 'no qual'!",
+            exemploCerto: "O documentário 'Ilha das Flores', no qual se retratam as desigualdades brasileiras, reflete a sociedade em que vivemos.",
+            exemploErrado: "O documentário 'Ilha das Flores', onde se retratam as desigualdades brasileiras, reflete a sociedade onde vivemos."
+        },
+        subjuntivo: {
+            titulo: "Concessão & O Modo da Dúvida (Subjuntivo)",
+            subtitulo: "Por que 'Embora' e 'Conquanto' exigem o modo subjuntivo e nunca o indicativo",
+            icone: "🌫️",
+            tag: "Modo Verbal & Coesão",
+            logica: "O modo Indicativo é o modo da certeza factual ('eu sei', 'eles fazem'). O modo Subjuntivo é o modo da ressalva, da hipótese, da concessão ('embora saibam', 'conquanto façam'). Quando você usa um conectivo concessivo, você está admitindo uma oposição hipotética que não é forte o suficiente para derrubar sua tese. Por isso, a língua portuguesa exige que o verbo venha no Subjuntivo ('embora existam', nunca 'embora existem').",
+            porQueBancasCobram: "Erros de correlação verbal com concessivos são classificados como falha grave de modalidade culta. O corretor percebe imediatamente a discordância entre a ressalva e o tempo verbal.",
+            testePratico: "Sempre que usar 'Embora', 'Conquanto', 'Ainda que', 'Mesmo que' ou 'Posto que', conjure o verbo no presente do subjuntivo: 'que eles tenham', 'que haja', 'que existam'. Se soar com certeza do indicativo ('embora tem', 'embora há'), corrija na hora!",
+            exemploCerto: "Embora a Constituição de 1988 assegure a saúde como direito de todos, conquanto existam verbas, a realidade hospitalar permanece precária.",
+            exemploErrado: "Embora a Constituição de 1988 assegura a saúde como direito de todos, conquanto existem verbas, a realidade hospitalar permanece precária."
+        },
+        partitivo: {
+            titulo: "Sujeito Partitivo: A Lógica da Concordância de Grupo",
+            subtitulo: "Entenda por que 'A maioria dos jovens participa' e 'participam' são ambas formas cultas",
+            icone: "👥",
+            tag: "Concordância Verbal",
+            logica: "Expressões partitivas ('a maioria de', 'grande parte de', 'uma parcela de', 'metade de') reúnem um núcleo singular ('a maioria') com um especificador plural ('dos estudantes'). A língua portuguesa oferece ao autor uma escolha de foco: você pode concordar gramaticalmente com o núcleo singular ('A maioria participa' - foco no coletivo) ou concordar por atração afetiva com os indivíduos no plural ('A maioria dos jovens participam' - foco nas pessoas).",
+            porQueBancasCobram: "Muitos alunos perdem tempo ou têm medo de errar achando que uma das formas é proibida. Ambas são 100% legítimas na norma padrão e aceitas com nota máxima pelas 6 bancas.",
+            testePratico: "Escolha uma das duas opções e mantenha a consistência no mesmo parágrafo. Se você usou o singular ('a maioria apoia'), evite mudar no período seguinte para o plural sem motivo argumentativo.",
+            exemploCerto: "Grande parte dos cidadãos brasileiros carece de saneamento básico (concordância com 'grande parte') OU carecem (com 'dos cidadãos).",
+            exemploErrado: "Misturar tempos desconexos sem manter a coerência interna do raciocínio no mesmo parágrafo."
+        },
+        pois: {
+            titulo: "O 'Pois' Camaleão: Causa vs Conclusão",
+            subtitulo: "A posição do 'pois' dentro da oração define se ele explica ou conclui o raciocínio",
+            icone: "🦎",
+            tag: "Conectivos & Pontuação",
+            logica: "O conectivo 'pois' tem dupla personalidade de acordo com a sua posição sintática: 1) ANTES do verbo ('Não saia, pois vai chover'): ele é causal/explicativo, sinônimo de 'porque'. 2) DEPOIS do verbo, prensado entre duas vírgulas ('O problema é grave; cabe, pois, ao Estado intervir'): ele vira um operador CONCLUSIVO sofisticadíssimo, clone exato do 'portanto'.",
+            porQueBancasCobram: "Empregar o 'pois' posposto ao verbo com duas vírgulas no parágrafo de Conclusão demonstra domínio avançado de operadores discursivos (Competência 4 no ENEM e Critério de Coesão nas demais bancas).",
+            testePratico: "Quer impressionar o corretor na proposta de intervenção ou fechamento de desenvolvimento? Coloque o 'pois' após o verbo auxiliar: 'É mister, pois, que o Ministério...' ou 'Cabe, pois, à sociedade...'.",
+            exemploCerto: "A inércia governamental aprofunda a desigualdade; é urgente, pois, reformular a gestão das políticas públicas.",
+            exemploErrado: "A inércia governamental aprofunda a desigualdade, pois cabe reformular as políticas públicas (usado com sentido conclusivo antes do verbo sem pontuação)."
+        }
+    };
+
+    const grammarRulesData = {
+        virgula: `<strong>📌 Regra da Vírgula com Conectivos:</strong><br>
+1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
+2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
+3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').`,
+        crase: `<strong>📌 Crase Fatal na Redação:</strong><br>
+1. Troque por palavra masculina: se der 'AO', tem crase ('acesso à saúde' = 'acesso ao hospital').<br>
+2. NUNCA use crase antes de verbo ('a partir de', 'a combater').<br>
+3. Locuções proporcionais femininas têm crase obrigatória: 'À medida que', 'À proporção que'.`,
+        proporcao: `<strong>📌 Proporção vs Causa:</strong><br>
+1. 'À medida que' = proporção temporal sincronizada ('À medida que os anos passam...').<br>
+2. 'Na medida em que' = causa / justificativa ('A medida falhou na medida em que faltou verba...').<br>
+3. 'À medida em que' (híbrido) É ERRO GRAVE. Nunca misture crase com 'em'!`,
+        regencia: `<strong>📌 Regência dos Verbos Nobres:</strong><br>
+1. 'Implicar' = transitivo direto (NÃO tem 'em'): 'implicará mudanças', nunca 'implicará em mudanças'.<br>
+2. 'Visar' (almejar) = transitivo indireto: 'visar ao progresso', nunca 'visar o progresso'.<br>
+3. 'Obedecer' / 'Desobedecer' = transitivo indireto: 'obedecer às leis', nunca 'obedecer as leis'.`,
+        paralelismo: `<strong>📌 Paralelismo Sintático Estrito:</strong><br>
+1. Elementos coordenados devem ter a mesma forma gramatical: infinitivo com infinitivo, substantivo com substantivo.<br>
+2. Em 'não só... mas também', a estrutura gramatical das duas pontas deve ser idêntica.<br>
+3. Se iniciou uma lista com preposição ('de reformas, de investimentos'), mantenha o 'de' em todos os termos.`,
+        referencial: `<strong>📌 Coesão Referencial Limpa:</strong><br>
+1. Elimine 'o mesmo' para retomar pessoas ou termos anteriores. Troque por 'este', 'ele' ou elipse.<br>
+2. 'Este' / 'Esta' = retoma o termo mais próximo ou introduz ideia nova.<br>
+3. 'Esse' / 'Essa' = retoma termo já citado no parágrafo.`,
+        onde: `<strong>📌 Uso Restrito do Pronome 'Onde':</strong><br>
+1. Só use 'onde' para lugares físicos com chão, teto ou CEP: escola, cidade, hospital.<br>
+2. Para sociedade, época, filme, debate ou lei, use 'em que', 'no qual' ou 'na qual'.`,
+        subjuntivo: `<strong>📌 Concessivos & Modo Subjuntivo:</strong><br>
+1. Conectivos concessivos ('Embora', 'Conquanto', 'Ainda que', 'Posto que') exigem verbo no Subjuntivo.<br>
+2. Diga 'Embora existam leis', NUNCA 'Embora existem leis'.<br>
+3. 'Posto que' é estritamente concessivo (= embora), nunca causal!`,
+        pois: `<strong>📌 Posição Estratégica do 'Pois':</strong><br>
+1. ANTES do verbo = Causal / Explicativo ('Não pare, pois o tempo urge').<br>
+2. DEPOIS do verbo (intercalado entre vírgulas) = Conclusivo ('Cabe, pois, ao Ministério agir').`
+    };
+
+    function renderGrammarLogic(topic) {
+        const display = document.getElementById('grammar-logic-display');
+        if (!display) return;
+        const d = grammarLogicData[topic] || grammarLogicData.virgula;
+        display.innerHTML = `
+            <div class="logic-header">
+                <div>
+                    <h5 class="logic-title">${d.icone} ${d.titulo}</h5>
+                    <span style="font-size: 0.82rem; color: #94a3b8;">${d.subtitulo}</span>
+                </div>
+                <span class="logic-badge">${d.tag}</span>
+            </div>
+            <div class="logic-block">
+                <span class="logic-block-label" style="color: #38bdf8;">🧠 Como a Língua Realmente Pensa:</span>
+                <p class="logic-block-text">${d.logica}</p>
+            </div>
+            <div class="logic-block">
+                <span class="logic-block-label" style="color: #a78bfa;">🔍 Por Que Corretores Cobram Esse Padrão:</span>
+                <p class="logic-block-text">${d.porQueBancasCobram}</p>
+            </div>
+            <div class="logic-block" style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #f59e0b; padding: 10px 12px; border-radius: 6px;">
+                <span class="logic-block-label" style="color: #fbbf24;">⚡ Teste Prático de 5 Segundos (Sem Decoreba):</span>
+                <p class="logic-block-text" style="color: #fef3c7;">${d.testePratico}</p>
+            </div>
+            <div class="logic-block">
+                <span class="logic-block-label" style="color: #cbd5e1;">⚖️ Comparativo na Prática (Certo vs Errado):</span>
+                <div class="logic-compare-grid">
+                    <div class="logic-compare-card correct">
+                        <strong style="color: #34d399;">✅ Aplicação Impecável:</strong><br>
+                        <span>${d.exemploCerto}</span>
+                    </div>
+                    <div class="logic-compare-card wrong">
+                        <strong style="color: #f87171;">❌ Desvio Penalizado:</strong><br>
+                        <span>${d.exemploErrado}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    // Inicialização das Abas de Densidade
+    const btnTabRadar = document.getElementById('btn-tab-radar');
+    const btnTabLogica = document.getElementById('btn-tab-logica');
+    const contentRadar = document.getElementById('density-content-radar');
+    const contentLogica = document.getElementById('density-content-logica');
+
+    if (btnTabRadar && btnTabLogica && contentRadar && contentLogica) {
+        btnTabRadar.addEventListener('click', () => {
+            btnTabRadar.classList.add('active');
+            btnTabLogica.classList.remove('active');
+            contentRadar.classList.remove('hidden');
+            contentLogica.classList.add('hidden');
+        });
+
+        btnTabLogica.addEventListener('click', () => {
+            btnTabLogica.classList.add('active');
+            btnTabRadar.classList.remove('active');
+            contentLogica.classList.remove('hidden');
+            contentRadar.classList.add('hidden');
+            // Garante renderização inicial da lógica
+            const activePill = document.querySelector('.grammar-logic-pill.active');
+            renderGrammarLogic(activePill ? activePill.getAttribute('data-topic') : 'virgula');
+        });
+    }
+
+    // Eventos das Pílulas de Tópicos da Lógica
+    const logicPills = document.querySelectorAll('.grammar-logic-pill');
+    logicPills.forEach(pill => {
+        pill.addEventListener('click', (e) => {
+            logicPills.forEach(p => p.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            renderGrammarLogic(e.currentTarget.getAttribute('data-topic'));
+        });
+    });
+
+    // Eventos das Pílulas Rápidas de Fixação (Leis de Ouro)
+    const ruleTabs = document.querySelectorAll('.grammar-rule-tab');
+    const ruleContent = document.getElementById('grammar-rule-content');
+    ruleTabs.forEach(tab => {
+        tab.addEventListener('click', (e) => {
+            ruleTabs.forEach(t => t.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+            const rule = e.currentTarget.getAttribute('data-rule');
+            if (ruleContent && grammarRulesData[rule]) {
+                ruleContent.innerHTML = grammarRulesData[rule];
+            }
+        });
+    });
+
+    // Renderização inicial
+    renderGrammarLogic('virgula');
+
     // -----------------------------------------
     // LÓGICA DO DESAFIO GRAMATICAL DINÂMICO
     // -----------------------------------------

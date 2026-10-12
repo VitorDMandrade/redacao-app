@@ -256,6 +256,59 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(scriptContent.includes('Como usar de maneira gramaticalmente certa'), 'Guia didático deve conter regras gramaticais e de pontuação');
         assert.ok(scriptContent.includes('Aplicação nas Bancas'), 'Guia didático deve contemplar orientações para as bancas');
     });
+
+    test('13. Densidade Gramatical Didática e Expansão da Arena de Micro-Treinos', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const scriptContent = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
+        const htmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+        const exercisesContent = fs.readFileSync(path.join(__dirname, '../grammar_exercises.js'), 'utf8');
+
+        // 1. Arena de Micro-Treinos: expansão do banco de dados (mínimo de 80 exercícios)
+        const grammarExercises = require('../grammar_exercises.js');
+
+        assert.ok(Array.isArray(grammarExercises), 'grammarExercises deve ser um Array.');
+        assert.ok(grammarExercises.length >= 80, `grammarExercises deve conter ao menos 80 exercícios (atual: ${grammarExercises.length}).`);
+
+        const categories = ['Crase', 'Vírgula', 'Concordância', 'Regência', 'Conectivos', 'Uso do Infinitivo', 'Paralelismo'];
+        categories.forEach(cat => {
+            const count = grammarExercises.filter(ex => ex.category === cat).length;
+            assert.ok(count >= 5, `Categoria '${cat}' deve conter pelo menos 5 exercícios (atual: ${count}).`);
+        });
+
+        // Valida que cada exercício possui as propriedades fundamentais
+        grammarExercises.forEach((ex, idx) => {
+            assert.ok(ex.question, `Exercício ${idx} deve ter question.`);
+            assert.ok(Array.isArray(ex.options) && ex.options.length >= 2, `Exercício ${idx} deve ter pelo menos 2 options.`);
+            assert.strictEqual(typeof ex.correctOptionIndex, 'number', `Exercício ${idx} deve ter correctOptionIndex numérico.`);
+            assert.ok(ex.explanation, `Exercício ${idx} deve ter explanation.`);
+        });
+
+        // Valida que ao menos 35 exercícios contêm suporte avançado a LinoTip e comparativo Certo x Errado
+        const advancedCount = grammarExercises.filter(ex => ex.correctSide && ex.wrongSide && ex.linoTip).length;
+        assert.ok(advancedCount >= 35, `Deve haver pelo menos 35 exercícios com comparativo avançado e LinoTip (atual: ${advancedCount}).`);
+
+        // 2. Aba Didática de Lógica da Língua em index.html
+        assert.ok(htmlContent.includes('id="btn-tab-radar"'), 'index.html deve conter botão para aba do Radar');
+        assert.ok(htmlContent.includes('id="btn-tab-logica"'), 'index.html deve conter botão para aba de Lógica da Língua');
+        assert.ok(htmlContent.includes('id="density-content-radar"'), 'index.html deve conter container de conteúdo do Radar');
+        assert.ok(htmlContent.includes('id="density-content-logica"'), 'index.html deve conter container de conteúdo de Lógica da Língua');
+        assert.ok(htmlContent.includes('id="grammar-logic-display"'), 'index.html deve conter display interativo de lógica gramatical');
+
+        // 3. Estruturas Didáticas em script.js (grammarLogicData)
+        assert.ok(scriptContent.includes('grammarLogicData'), 'script.js deve conter o objeto grammarLogicData');
+        const expectedTopics = ['virgula', 'crase', 'regencia', 'proporcao', 'paralelismo', 'onde', 'subjuntivo', 'partitivo', 'pois'];
+        expectedTopics.forEach(topic => {
+            assert.ok(scriptContent.includes(`${topic}: {`), `grammarLogicData deve conter o tópico '${topic}'`);
+            assert.ok(htmlContent.includes(`data-topic="${topic}"`), `index.html deve conter pílula de navegação para o tópico '${topic}'`);
+        });
+
+        // Valida que script.js contém seções de lógica sem decoreba
+        assert.ok(scriptContent.includes('Por Que Corretores Cobram Esse Padrão'), 'script.js deve explicar o ponto de vista dos corretores');
+        assert.ok(scriptContent.includes('Teste Prático de 5 Segundos'), 'script.js deve conter o teste prático de 5 segundos');
+        assert.ok(scriptContent.includes('renderGrammarLogic'), 'script.js deve conter a função renderGrammarLogic');
+    });
 });
+
 
 

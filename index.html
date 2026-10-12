@@ -538,6 +538,59 @@
                     <!-- Div para resposta do Tutor Gramatical -->
                     <div id="grammar-tutor-response" style="margin-bottom: 2rem;"></div>
 
+                    <!-- Dossiê de Densidade Gramatical & Radar das 6 Bancas -->
+                    <div class="grammar-density-container" id="grammar-density-panel">
+                        <div class="grammar-density-header">
+                            <h3>📊 Densidade Gramatical: Radar de Rigor das 6 Bancas</h3>
+                            <span class="hint" style="color: #94a3b8; font-size: 0.85rem;">Como corretores avaliam a norma culta</span>
+                        </div>
+                        <div class="grammar-bancas-grid">
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">ENEM <span>Competência 1 (200 pts)</span></span>
+                                <span class="banca-rule">Tolera no máximo 2 desvios pontuais e 1 falha estrutural leve para atingir nota 200. Truncamentos de períodos e justaposições com vírgula zeram a matriz de excelência.</span>
+                            </div>
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">UEMA (PAES) <span>Critério 5 (2.0 pts)</span></span>
+                                <span class="banca-rule">Correção rigorosa: desvios de crase, regência e concordância descontam de forma cumulativa. Exige vocabulário preciso e pune oralidade ou repetições.</span>
+                            </div>
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">EXATO Dissertativo <span>Critério 1 (20 pts)</span></span>
+                                <span class="banca-rule">Norma culta estrita: penaliza truncamentos e desvios de concordância. Exige período composto coeso sem ambiguidades.</span>
+                            </div>
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">EXATO Carta <span>Critérios 1 e 3 (40 pts)</span></span>
+                                <span class="banca-rule">Registro culto aliado à interlocução: proíbe gírias, exige pronomes de tratamento adequados e pontuação exata no vocativo.</span>
+                            </div>
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">UFG (Verbena) <span>Critério 3 (5.0 pts)</span></span>
+                                <span class="banca-rule">Modalidade escrita acadêmica: pune severamente o uso de 'onde' para conceitos abstratos, falta de paralelismo e desvios de regência.</span>
+                            </div>
+                            <div class="grammar-banca-card">
+                                <span class="banca-name">UNITINS <span>Critério 5 (4.0 pts)</span></span>
+                                <span class="banca-rule">Padrão culto estrito: desconta rasuras, erros ortográficos, vírgulas separando sujeito de predicado e falhas de pontuação.</span>
+                            </div>
+                        </div>
+
+                        <!-- Pílulas de Consulta Rápida: Leis de Ouro da Gramática -->
+                        <div style="margin-top: 1rem;">
+                            <h4 style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.5rem;">⚡ Pílulas Rápidas de Fixação (Regras de Ouro)</h4>
+                            <div class="grammar-rules-pillbox">
+                                <button type="button" class="grammar-rule-tab active" data-rule="virgula">Vírgula & Conectivos</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="crase">Crase Fatal</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="proporcao">Proporção vs Causa</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="regencia">Regência dos Verbos Nobres</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="paralelismo">Paralelismo Sintático</button>
+                                <button type="button" class="grammar-rule-tab" data-rule="referencial">Coesão Referencial Limpa</button>
+                            </div>
+                            <div id="grammar-rule-content" class="grammar-rule-detail">
+                                <strong>📌 Regra da Vírgula com Conectivos:</strong><br>
+                                1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
+                                2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
+                                3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Arena de Micro-Treinos -->
                     <div class="training-card"
                         style="border: 2px solid var(--primary); background: rgba(59, 130, 246, 0.05);">
@@ -569,6 +622,8 @@
                                 data-category="Conectivos">Conectivos</button>
                             <button class="btn btn-secondary btn-sm drill-category-btn"
                                 data-category="Uso do Infinitivo">Infinitivo</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn"
+                                data-category="Paralelismo">Paralelismo</button>
                             <button class="btn btn-secondary btn-sm drill-category-btn" data-category="PontosFracos"
                                 style="border-color: var(--warning); color: var(--warning);">Meus Pontos Fracos</button>
                             <button class="btn btn-secondary btn-sm" id="btn-turbo-mode"
@@ -961,14 +1016,28 @@
     <!-- Ferramenta: Dicionário de Conectivos (Flutuante) -->
     <div id="connectives-widget" class="connectives-widget hidden">
         <div class="connectives-header">
-            <h4>Dicionário de Conectivos</h4>
-            <button id="btn-close-connectives">&times;</button>
+            <div class="connectives-header-info">
+                <h4>📖 Dicionário & Guia de Conectivos</h4>
+                <p class="conn-subtitle">Funções lógicas, pontuação gramatical e exemplos práticos para todas as bancas</p>
+            </div>
+            <button id="btn-close-connectives" title="Fechar Dicionário">&times;</button>
         </div>
-        <div class="connectives-categories" style="display: flex; gap: 5px; flex-wrap: wrap;">
+        <div class="connectives-search-wrap">
+            <input type="text" id="conn-search-input" class="connectives-search-input" placeholder="🔍 Pesquisar conectivo, regra ou função (ex: além disso, vírgula, causa)...">
+        </div>
+        <div class="connectives-categories" id="connectives-categories">
             <button class="conn-cat-btn active" data-cat="adicao">Adição</button>
             <button class="conn-cat-btn" data-cat="oposicao">Oposição</button>
             <button class="conn-cat-btn" data-cat="causa">Causa / Efeito</button>
             <button class="conn-cat-btn" data-cat="conclusao">Conclusão</button>
+            <button class="conn-cat-btn" data-cat="tempo">Tempo</button>
+            <button class="conn-cat-btn" data-cat="conformidade">Conformidade</button>
+            <button class="conn-cat-btn" data-cat="condicao">Condição</button>
+            <button class="conn-cat-btn" data-cat="proporcao">Proporção</button>
+            <button class="conn-cat-btn" data-cat="finalidade">Finalidade</button>
+            <button class="conn-cat-btn" data-cat="comparacao">Comparação</button>
+            <button class="conn-cat-btn" data-cat="concessivos">Concessivos</button>
+            <button class="conn-cat-btn" data-cat="asseverativos">Asseverativos</button>
             <button class="conn-cat-btn" data-cat="operadores">Operadores Arg.</button>
             <button class="conn-cat-btn" data-cat="referencial">Coesão Ref.</button>
             <button class="conn-cat-btn" data-cat="detalhamento">Detalhamento</button>
@@ -976,14 +1045,22 @@
             <button class="conn-cat-btn" data-cat="interlocucao_carta" title="Para evocar ou chamar o leitor (Interlocução)">Carta: Interlocução</button>
             <button class="conn-cat-btn" data-cat="meus" style="color: var(--primary); border-color: var(--primary);">Meus</button>
         </div>
-        <div class="connectives-list" id="connectives-list">
-            <!-- Injetado via JS -->
+        <div class="connectives-body">
+            <!-- Painel Didático: O que é, Para que serve, Regras Gramaticais & Bancas -->
+            <div id="connectives-guide-panel" class="connectives-guide-panel">
+                <!-- Injetado dinamicamente via JS -->
+            </div>
+            <!-- Lista / Cards de Conectivos -->
+            <div class="connectives-list" id="connectives-list">
+                <!-- Injetado via JS -->
+            </div>
+            <!-- Área de Adicionar Conectivo Próprio (Visível apenas na aba 'Meus') -->
+            <div id="add-custom-conn-area" class="hidden" style="margin: 10px 14px; display: flex; gap: 6px;">
+                <input type="text" id="custom-conn-input" placeholder="Novo conectivo próprio..." style="flex: 1; padding: 6px 10px; font-size: 0.85rem; border: 1px solid var(--panel-border); border-radius: 6px; outline: none; background: #090d16; color: var(--text-color);">
+                <button id="btn-add-custom-conn" class="btn btn-secondary btn-sm" style="padding: 6px 14px; font-weight: 600;">+ Adicionar</button>
+            </div>
         </div>
-        <div id="add-custom-conn-area" class="hidden" style="margin-top: 10px; display: flex; gap: 5px; padding: 0 10px;">
-            <input type="text" id="custom-conn-input" placeholder="Novo conectivo..." style="flex: 1; padding: 4px 8px; font-size: 0.85rem; border: 1px solid var(--panel-border); border-radius: 4px; outline: none; background: var(--bg-color); color: var(--text-color);">
-            <button id="btn-add-custom-conn" class="btn btn-secondary btn-sm" style="padding: 4px 10px;">+</button>
-        </div>
-        <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; text-align: center;">Clique em um conectivo para colar no Construtor Livre ou Copiar.</p>
+        <p class="conn-footer-hint">💡 Dica de Coesão: Clique em qualquer conectivo para copiá-lo ou inseri-lo diretamente no Construtor Livre.</p>
     </div>
     <button id="btn-open-connectives" class="floating-btn connectives-btn" title="Dicionário de Conectivos" style="position: fixed; bottom: 20px; right: 20px; z-index: 100; font-size: 1.5rem; width: 50px; height: 50px; border-radius: 50%; background: var(--primary); border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer;">📖</button>
 

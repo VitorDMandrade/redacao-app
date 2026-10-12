@@ -235,5 +235,188 @@ const grammarExercises = [
         options: ["Na medida em que", "À medida que", "A fim de que"],
         correctOptionIndex: 2,
         explanation: "'A fim de que' introduz finalidade/objetivo. 'Na medida em que' expressa causa (porque/visto que). E 'À medida que' expressa proporção (à proporção que)."
+    },
+    // --- NOVOS EXERCÍCIOS DE ALTA DENSIDADE & CONECTIVOS AVANÇADOS ---
+    {
+        category: "Conectivos",
+        question: "Em relação ao tempo e pontuação, assinale a construção gramaticalmente correta para iniciar um argumento na redação:",
+        options: [
+            "Desde a promulgação da Constituição de 1988 a saúde é garantida como direito universal.",
+            "Desde a promulgação da Constituição de 1988, a saúde é garantida como direito universal."
+        ],
+        correctOptionIndex: 1,
+        explanation: "Adjunto adverbial temporal de grande extensão (três ou mais palavras) deslocado para o início da oração exige vírgula OBRIGATÓRIA.",
+        correctSide: "Desde a promulgação da Constituição de 1988, a saúde...",
+        wrongSide: "Desde a promulgação da Constituição de 1988 a saúde...",
+        concept: "Adjunto Adverbial Temporal Deslocado",
+        conceptExplanation: "Quando a circunstância de tempo vem anteposta à oração principal, a pontuação isola o termo para garantir clareza e hierarquia sintática.",
+        linoTip: "👨‍🏫 Lino Tip: Toda alusão histórica na introdução ('Na Idade Média,', 'No século XXI,') exige vírgula logo após o bloco temporal!"
+    },
+    {
+        category: "Conectivos",
+        question: "Para citar um sociólogo ou pensador na redação, qual regência do conectivo de conformidade está gramaticalmente correta?",
+        options: [
+            "Segundo ao pensamento de Zygmunt Bauman, a sociedade é líquida.",
+            "Segundo o pensamento de Zygmunt Bauman, a sociedade é líquida."
+        ],
+        correctOptionIndex: 1,
+        explanation: "As conjunções conformativas 'segundo' e 'conforme' NÃO admitem preposição 'a'. Diz-se 'Segundo o autor' ou 'Conforme o sociólogo'.",
+        correctSide: "Segundo o sociólogo Zygmunt Bauman...",
+        wrongSide: "Segundo ao sociólogo Zygmunt Bauman...",
+        concept: "Conectivos de Conformidade",
+        conceptExplanation: "Estabelecem equivalência lógica e respaldo de autoridade entre a tese do estudante e o pensamento de um filósofo ou lei.",
+        linoTip: "👨‍🏫 Lino Tip: Consoante, Segundo e Conforme nunca pedem crase nem 'ao'! Guarde: 'Segundo o autor,'."
+    },
+    {
+        category: "Conectivos",
+        question: "Assinale a opção com a correlação verbal correta para o conectivo condicional 'Caso':",
+        options: [
+            "Caso o governo não intervir, a desigualdade aumentará.",
+            "Caso o governo não intervenha, a desigualdade aumentará."
+        ],
+        correctOptionIndex: 1,
+        explanation: "A conjunção condicional 'Caso' exige o verbo no PRESENTE DO SUBJUNTIVO ('intervenha'). O futuro do subjuntivo ('intervier') é usado apenas com 'Se' ('Se o governo não intervier'). 'Intervir' é infinitivo e gera erro gramatical grave.",
+        correctSide: "Caso o governo não intervenha...",
+        wrongSide: "Caso o governo não intervir...",
+        concept: "Modo Subjuntivo com Conectivos Condicionais",
+        conceptExplanation: "Conectivos como 'Caso', 'Contanto que' e 'Desde que' exigem subjuntivo obrigatório para marcar a hipótese.",
+        linoTip: "👨‍🏫 Lino Tip: 'Caso faça', mas 'Se fizer'. Nunca use o infinitivo após conjunção condicional!"
+    },
+    {
+        category: "Conectivos",
+        question: "Qual das opções representa a locução proporcional correta segundo a norma-padrão da língua portuguesa?",
+        options: [
+            "À medida em que a tecnologia avança, novos dilemas surgem.",
+            "À medida que a tecnologia avança, novos dilemas surgem.",
+            "Na medida que a tecnologia avança, novos dilemas surgem."
+        ],
+        correctOptionIndex: 1,
+        explanation: "A única locução proporcional aceita na norma culta é 'À MEDIDA QUE' (com crase e sem 'em'). 'À medida em que' é um hibridismo errôneo comum que zera o critério de precisão das bancas. 'Na medida em que' expressa causa e não proporção.",
+        correctSide: "À medida que a tecnologia avança...",
+        wrongSide: "À medida em que a tecnologia avança...",
+        concept: "Diferença entre Proporção e Causa",
+        conceptExplanation: "'À medida que' = proporção/simultaneidade. 'Na medida em que' = causa/visto que. A forma 'à medida em que' é erro gramatical grave.",
+        linoTip: "👨‍🏫 Lino Tip: memorize: À MEDIDA QUE (proporção). Nunca misture o 'à' com o 'em'!"
+    },
+    {
+        category: "Conectivos",
+        question: "No parágrafo de proposta de intervenção, para indicar o propósito da ação, qual grafia está correta?",
+        options: [
+            "Afim de combater a intolerância, o Ministério deve agir.",
+            "A fim de combater a intolerância, o Ministério deve agir."
+        ],
+        correctOptionIndex: 1,
+        explanation: "A locução de finalidade escreve-se SEMPRE SEPARADA: 'A fim de' (= com o objetivo de). 'Afim' junto é adjetivo que significa semelhante (ex: interesses afins).",
+        correctSide: "A fim de mitigar o problema...",
+        wrongSide: "Afim de mitigar o problema...",
+        concept: "Locução Prepositiva de Finalidade",
+        conceptExplanation: "'A fim de' introduz a meta/propósito na oração reduzida de infinitivo. O termo junto 'afim' denota afinidade/parentesco.",
+        linoTip: "👨‍🏫 Lino Tip: Na redação é sempre 'A FIM DE' (separado, 3 palavras)! O corretor do ENEM caça 'afim' para descontar na C1."
+    },
+    {
+        category: "Conectivos",
+        question: "Assinale a pontuação e estrutura correta para estabelecer uma comparação com repertório literário:",
+        options: [
+            "Assim como retratado em '1984', a manipulação algorítmica cerceia a autonomia do cidadão.",
+            "Assim como retratado em '1984' a manipulação algorítmica cerceia a autonomia do cidadão."
+        ],
+        correctOptionIndex: 0,
+        explanation: "Orações subordinadas comparativas antepostas à oração principal exigem vírgula obrigatória para isolar a analogia antes da tese central.",
+        correctSide: "Assim como em '1984', a manipulação...",
+        wrongSide: "Assim como em '1984' a manipulação...",
+        concept: "Oração Comparativa Anteposta",
+        conceptExplanation: "Conectivos comparativos ('Assim como', 'À semelhança de') antepostos estruturam a analogia do repertório e devem ser isolados por vírgula.",
+        linoTip: "👨‍🏫 Lino Tip: Fechou a comparação com o livro/filme? Coloque a vírgula antes de entrar no Brasil de hoje!"
+    },
+    {
+        category: "Conectivos",
+        question: "Qual das frases utiliza adequadamente o conectivo concessivo clássico 'Conquanto'?",
+        options: [
+            "Conquanto a Constituição garante direitos, a prática é falha.",
+            "Conquanto a Constituição garanta direitos, a prática é falha."
+        ],
+        correctOptionIndex: 1,
+        explanation: "'Conquanto' (= embora) é uma conjunção concessiva subordinativa e EXIGE o verbo obrigatoriamente no modo SUBJUNTIVO ('garanta'). O uso do indicativo ('garante') é desvio grave.",
+        correctSide: "Conquanto a lei garanta...",
+        wrongSide: "Conquanto a lei garante...",
+        concept: "Conjunção Concessiva e Modo Verbal",
+        conceptExplanation: "A concessão introduz uma oposição que não anula a oração principal e rege estritamente o modo subjuntivo (presente ou imperfeito).",
+        linoTip: "👨‍🏫 Lino Tip: 'Conquanto', 'embora' e 'mesmo que' puxam subjuntivo sempre! 'Conquanto haja', nunca 'conquanto há'."
+    },
+    {
+        category: "Conectivos",
+        question: "Como pontuar o operador asseverativo 'indubitavelmente' ao iniciar o período argumentativo?",
+        options: [
+            "Indubitavelmente a inércia estatal agrava a crise.",
+            "Indubitavelmente, a inércia estatal agrava a crise."
+        ],
+        correctOptionIndex: 1,
+        explanation: "Advérbios e operadores asseverativos que modalizam a frase inteira ('Indubitavelmente,', 'Com efeito,', 'De fato,') exigem vírgula obrigatória ao abrirem o período.",
+        correctSide: "Indubitavelmente, a omissão...",
+        wrongSide: "Indubitavelmente a omissão...",
+        concept: "Modalizadores Asseverativos",
+        conceptExplanation: "Operadores que expressam certeza autoral e ênfase na tese. Funcionam como articuladores discursivos isolados por vírgula.",
+        linoTip: "👨‍🏫 Lino Tip: Asseverativos iniciam período sempre com vírgula: 'Com efeito,', 'De fato,', 'Certamente,'."
+    },
+    {
+        category: "Paralelismo",
+        question: "Qual das frases respeita o princípio do paralelismo sintático com o conectivo aditivo correlativo 'não só... mas também'?",
+        options: [
+            "A educação deve não só formar cidadãos conscientes, mas também capacitar profissionais éticos.",
+            "A educação deve não só a formação de cidadãos conscientes, mas também capacitar profissionais éticos."
+        ],
+        correctOptionIndex: 0,
+        explanation: "O paralelismo sintático exige que as estruturas coordenadas tenham a mesma forma gramatical: verbo no infinitivo ('formar') coordenado com verbo no infinitivo ('capacitar'). Misturar substantivo com verbo quebra o paralelismo.",
+        correctSide: "não só formar... mas também capacitar...",
+        wrongSide: "não só a formação... mas também capacitar...",
+        concept: "Paralelismo Sintático Correlativo",
+        conceptExplanation: "Conectivos duplos ('não só... mas também', 'tanto... quanto') exigem estrita identidade morfológica nas duas pontas da oração.",
+        linoTip: "👨‍🏫 Lino Tip: Se colocou verbo depois de 'não só', obrigue-se a colocar verbo depois de 'mas também'!"
+    },
+    {
+        category: "Conectivos",
+        question: "Identifique a alternativa que evita o vício de linguagem combatido pelas bancas no uso da coesão referencial:",
+        options: [
+            "O ministro apresentou a proposta e o mesmo defendeu sua aprovação.",
+            "O ministro apresentou a proposta e este defendeu sua aprovação."
+        ],
+        correctOptionIndex: 1,
+        explanation: "A gramática normativa e os manuais do ENEM e UEMA condenam o uso de 'o mesmo' com função de pronome pessoal para retomar pessoas. Deve-se usar o pronome demonstrativo ('este'), relativo ('o qual') ou a elipse do sujeito.",
+        correctSide: "O ministro... e este defendeu...",
+        wrongSide: "O ministro... e o mesmo defendeu...",
+        concept: "Emprego Correto de Pronomes Anafóricos",
+        conceptExplanation: "'O mesmo' é pronome de reforço ('ele mesmo fez'), nunca pronome pessoal substituto de substantivo anterior.",
+        linoTip: "👨‍🏫 Lino Tip: Banha o 'o mesmo' do seu texto! Troque por 'este', 'ele', 'o qual' ou simplesmente corte."
+    },
+    {
+        category: "Vírgula",
+        question: "Para expressar CONCLUSÃO com o conectivo 'pois', qual a posição e pontuação correta?",
+        options: [
+            "A evasão escolar é prejudicial, pois prejudica o futuro do país.",
+            "A evasão escolar é prejudicial; deve, pois, ser combatida pelo Estado."
+        ],
+        correctOptionIndex: 1,
+        explanation: "O conectivo 'pois' só tem valor CONCLUSIVO quando vem DESLOCADO após o verbo da oração, obrigatoriamente entre duas vírgulas. Quando vem antes do verbo, tem valor EXPLICATIVO/CAUSAL.",
+        correctSide: "deve, pois, ser combatida...",
+        wrongSide: "pois deve ser combatida (com sentido de conclusão)...",
+        concept: "Polissemia e Pontuação do 'Pois'",
+        conceptExplanation: "'Pois' anteposto ao verbo = causal/explicativo. 'Pois' posposto ao verbo (intercalado) = estritamente conclusivo (= portanto).",
+        linoTip: "👨‍🏫 Lino Tip: Quer impressionar a banca na conclusão? Use o 'pois' após o verbo: 'Cabe, pois, ao Ministério agir'."
+    },
+    {
+        category: "Conectivos",
+        question: "Qual o valor semântico exato do conectivo clássico 'Porquanto'?",
+        options: [
+            "Conclusão (sinônimo de 'portanto')",
+            "Causa / Explicação (sinônimo de 'já que', 'porque')",
+            "Concessão (sinônimo de 'embora')"
+        ],
+        correctOptionIndex: 1,
+        explanation: "Muitos alunos confundem 'Porquanto' com 'Portanto'. 'Porquanto' expressa CAUSA/EXPLICAÇÃO (equivale a 'porque', 'visto que'). 'Portanto' expressa CONCLUSÃO.",
+        correctSide: "A medida falhou, porquanto faltou fiscalização (causa).",
+        wrongSide: "Faltou fiscalização, porquanto a medida falhou (inversão errada).",
+        concept: "Distinção entre Porquanto e Portanto",
+        conceptExplanation: "Conjunção subordinativa causal de registro culto. Estabelece a razão do fato enunciado na oração principal.",
+        linoTip: "👨‍🏫 Lino Tip: PorQUANTO = causa (porquê). PorTANTO = conclusão (portanto)."
     }
 ];

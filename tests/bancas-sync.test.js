@@ -224,6 +224,38 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         const avisoNormal = checkLineLimitWarning(textoNormal, BANCAS['ENEM']);
         assert.equal(avisoNormal, null, 'Redação dentro de 30 linhas não deve emitir aviso de limite.');
     });
+
+    test('12. Dicionário de Conectivos Completo: novas categorias gramaticais e guia didático para as 6 bancas', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const scriptContent = fs.readFileSync(path.join(__dirname, '../script.js'), 'utf8');
+        const htmlContent = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+
+        // Categorias obrigatórias requisitadas pelo usuário
+        const novasCategorias = [
+            'tempo',
+            'conformidade',
+            'condicao',
+            'proporcao',
+            'finalidade',
+            'comparacao',
+            'concessivos',
+            'asseverativos'
+        ];
+
+        novasCategorias.forEach(cat => {
+            assert.ok(scriptContent.includes(`${cat}: [`), `script.js deve conter a categoria '${cat}' em conectivosData`);
+            assert.ok(htmlContent.includes(`data-cat="${cat}"`), `index.html deve conter botão para categoria '${cat}'`);
+        });
+
+        // Valida presença das estruturas conceituais do Guia Didático
+        assert.ok(scriptContent.includes('conectivosGuia'), 'script.js deve conter o objeto conectivosGuia');
+        assert.ok(scriptContent.includes('conectivosExemplos'), 'script.js deve conter conectivosExemplos');
+        assert.ok(scriptContent.includes('O que é:'), 'Guia didático deve conter explicação conceitual (O que é)');
+        assert.ok(scriptContent.includes('Para que serve'), 'Guia didático deve conter a função textual (Para que serve)');
+        assert.ok(scriptContent.includes('Como usar de maneira gramaticalmente certa'), 'Guia didático deve conter regras gramaticais e de pontuação');
+        assert.ok(scriptContent.includes('Aplicação nas Bancas'), 'Guia didático deve contemplar orientações para as bancas');
+    });
 });
 
 

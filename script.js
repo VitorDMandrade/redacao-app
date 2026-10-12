@@ -2337,19 +2337,244 @@ Retorne EXCLUSIVAMENTE um objeto JSON com as chaves:
 
 
 // ==========================================
-// DICIONÁRIO DE CONECTIVOS & MEU MODELO
+// ==========================================
+// DICIONÁRIO DE CONECTIVOS & GUIA DIDÁTICO 2.0
 // ==========================================
 const conectivosData = {
-    adicao: ["Além disso", "Ademais", "Outrossim", "Por conseguinte", "Bem como", "Somado a isso", "Não só... mas também"],
-    oposicao: ["Porém", "Contudo", "Todavia", "Entretanto", "No entanto", "Apesar disso", "Em contrapartida", "Sob outro prisma"],
-    causa: ["Por causa de", "Visto que", "Já que", "Uma vez que", "Dado que", "Haja vista", "Na medida em que", "Em virtude de"],
-    conclusao: ["Portanto", "Logo", "Sendo assim", "Dessa forma", "Nesse sentido", "Em suma", "Diante disso", "Infere-se, portanto,"],
-    operadores: ["Nesse viés", "Sob essa ótica", "Nessa perspectiva", "A partir desse contexto", "Sob esse viés", "De maneira análoga", "Nesse cenário", "Nesse ínterim"],
+    adicao: ["Além disso", "Ademais", "Outrossim", "Por conseguinte", "Bem como", "Somado a isso", "Não só... mas também", "Outro ponto relevante", "Nesse mesmo sentido", "Adicione-se a isso que"],
+    oposicao: ["Porém", "Contudo", "Todavia", "Entretanto", "No entanto", "Apesar disso", "Em contrapartida", "Sob outro prisma", "Não obstante", "Em sentido oposto"],
+    causa: ["Por causa de", "Visto que", "Já que", "Uma vez que", "Dado que", "Haja vista", "Na medida em que", "Em virtude de", "Porquanto", "Decorrente de"],
+    conclusao: ["Portanto", "Logo", "Sendo assim", "Dessa forma", "Nesse sentido", "Em suma", "Diante disso", "Infere-se, portanto,", "Por conseguinte", "Destarte", "Dessarte"],
+    tempo: ["Enquanto", "Logo que", "Assim que", "Quando", "Desde que", "À medida que os anos passam", "No decorrer das últimas décadas", "Desde a promulgação da CF/88", "Simultaneamente", "Atualmente"],
+    conformidade: ["Conforme", "Segundo", "Consoante", "De acordo com", "Em conformidade com", "Como preconiza", "Sob a ótica de", "Em consonância com"],
+    condicao: ["Caso", "Se", "Desde que", "Contanto que", "A não ser que", "A menos que", "Sob a condição de que"],
+    proporcao: ["À medida que", "À proporção que", "Ao passo que", "Quanto mais... tanto mais", "Quanto maior... maior"],
+    finalidade: ["A fim de que", "A fim de", "Com o fito de", "Com o intuito de", "Para que", "Com o objetivo de", "De modo a garantir"],
+    comparacao: ["Assim como", "Da mesma forma que", "Do mesmo modo que", "Tal qual", "Tanto quanto", "À semelhança de", "Analogamente a"],
+    concessivos: ["Embora", "Conquanto", "Ainda que", "Mesmo que", "Posto que", "Malgrado", "A despeito de", "Não obstante", "Em que pese a"],
+    asseverativos: ["Indubitavelmente", "Certamente", "Inegavelmente", "Decerto", "De fato", "Com efeito", "Sem dúvida", "É mister reconhecer que", "Efetivamente"],
+    operadores: ["Nesse viés", "Sob essa ótica", "Nessa perspectiva", "A partir desse contexto", "Sob esse viés", "De maneira análoga", "Nesse cenário", "Nesse ínterim", "Sob esse prisma"],
     referencial: ["Este", "Esse", "Aquele", "O qual", "Cujo", "Onde", "No qual", "A que", "Tal", "Dessa forma", "O mesmo"],
-    detalhamento: ["Isso ocorre porque", "Isso é evidenciado por", "Notadamente", "Principalmente", "Em especial", "A exemplo de", "Como é o caso de", "Na medida em que"],
-    opiniao_carta: ["Considero", "Creio", "Entendo", "Defendo", "Constato", "Observo", "Vejo"],
-    interlocucao_carta: ["Veja bem", "Note", "Entenda", "O(a) senhor(a) há de concordar", "Pensemos"],
+    detalhamento: ["Isso ocorre porque", "Isso é evidenciado por", "Notadamente", "Principalmente", "Em especial", "A exemplo de", "Como é o caso de", "Na medida em que", "A saber"],
+    opiniao_carta: ["Considero", "Creio", "Entendo", "Defendo", "Constato", "Observo", "Vejo", "Julgamos imperioso"],
+    interlocucao_carta: ["Veja bem", "Note", "Entenda", "O(a) senhor(a) há de concordar", "Pensemos", "Caros editores", "Prezado leitor"],
     meus: []
+};
+
+const conectivosGuia = {
+    adicao: {
+        titulo: "Conectivos de Adição",
+        tipo: "Conjunções Coordenativas Aditivas & Locuções",
+        oQueE: "Unem orações, períodos ou parágrafos estabelecendo uma relação lógica de soma cumulativa de argumentos ou evidências que convergem para a mesma tese.",
+        servePara: "Agregar um segundo argumento forte no Desenvolvimento 2 (somando ao D1) ou acrescentar um dado/desdobramento dentro do mesmo parágrafo sem quebrar a coerência.",
+        comoUsar: "• Início de período: Ao iniciar com 'Além disso,', 'Ademais,', 'Outrossim,', a VÍRGULA É OBRIGATÓRIA logo após.\n• Intercalado no meio da oração: Deve ficar entre duas vírgulas (ex.: 'O poder público deve, ademais, ampliar a fiscalização.').\n• Correlação 'Não só... mas também': Exige paralelismo sintático estrito nas duas orações.",
+        dicaBanca: "ENEM (C4): Exige conectivos interparágrafos expressos e diversificados. Não repita 'Além disso' no D2 e na Conclusão. UEMA e UFG: Valorizam termos como 'Outrossim' e 'Ademais' sem afetação artificial."
+    },
+    oposicao: {
+        titulo: "Conectivos de Oposição (Adversidade)",
+        tipo: "Conjunções Coordenativas Adversativas",
+        oQueE: "Introduzem uma quebra de expectativa ou contraste entre duas ideias, atribuindo maior relevância argumentativa à oração que vem logo após o conector.",
+        servePara: "Confrontar a teoria legal versus a realidade prática, desconstruir um contra-argumento ou demonstrar antíteses sociais e entraves históricos.",
+        comoUsar: "• 'Mas': Exige vírgula ANTES, NUNCA DEPOIS (ex.: 'A lei existe, mas falta fiscalização.'). Não use 'Mas' para iniciar parágrafos.\n• 'Contudo', 'No entanto', 'Todavia', 'Entretanto': Podem iniciar período com vírgula após, ou vir deslocados após o verbo, entre vírgulas (ex.: 'A medida é boa; esbarra, contudo, na burocracia.').",
+        dicaBanca: "UEMA, UFG e UNITINS adoram o confronto dialético teórico x prático bem articulado com conectores adversativos."
+    },
+    causa: {
+        titulo: "Conectivos de Causa & Motivo",
+        tipo: "Conjunções Subordinativas Causais",
+        oQueE: "Introduzem a razão geradora, o motivo ou a raiz causadora de um determinado fato ou mazela social.",
+        servePara: "Responder ao 'Por que esse problema acontece?' na argumentação, conectando os sintomas do tema às suas raízes históricas ou políticas.",
+        comoUsar: "• 'Na medida em que': Expressa CAUSA (sinônimo de 'já que', 'porque'). Não confunda com 'À medida que' (proporção).\n• Oração causal anteposta: Pede vírgula obrigatória antes da principal (ex.: 'Visto que faltam verbas, os hospitais colapsam.').\n• 'Haja vista': É invariável (não flexione para 'hajam vistas').",
+        dicaBanca: "Crucial para a Competência 3 do ENEM e Critério 3 da UEMA/UFG, pois a banca penaliza argumentações que só descrevem o problema sem apontar as causas."
+    },
+    conclusao: {
+        titulo: "Conectivos de Conclusão & Fechamento",
+        tipo: "Conjunções Coordenativas Conclusivas",
+        oQueE: "Encerram uma cadeia dedutiva de raciocínio, amarrando a tese ou deduzindo a consequência final dos argumentos debatidos.",
+        servePara: "Abrir o parágrafo de Conclusão ou arrematar criticamente o fechamento de cada parágrafo de desenvolvimento.",
+        comoUsar: "• 'Portanto' inicial: Sempre acompanhado de vírgula imediata ('Portanto, cabe ao Estado agir.').\n• 'Pois' conclusivo: Só é conclusivo quando vem DESLOCADO após o verbo, entre vírgulas ('Cabe, pois, ao Ministério agir.'). Se vier antes do verbo, é causal!\n• 'Por conseguinte' e 'Dessa forma': Excelentes alternativas para evitar repetição.",
+        dicaBanca: "No ENEM, marca a abertura da Proposta de Intervenção. Na UEMA e UFG, conduz a síntese reflexiva ou provocação crítica final."
+    },
+    tempo: {
+        titulo: "Conectivos de Tempo (Temporais)",
+        tipo: "Conjunções Subordinativas Temporais & Adjuntos",
+        oQueE: "Localizam as orações e argumentos no tempo, expressando simultaneidade, anterioridade, posterioridade ou duração contínua dos fatos.",
+        servePara: "Articular alusões históricas com a contemporaneidade (ex: 'Desde a colonização...', 'No século XXI...') ou demonstrar a dinâmica cronológica de um problema.",
+        comoUsar: "• Adjunto adverbial de tempo deslocado (3 ou mais palavras): Vírgula OBRIGATÓRIA logo após (ex.: 'Desde a promulgação da Constituição de 1988, a igualdade...').\n• Oração temporal anteposta: Pede vírgula obrigatória (ex.: 'Enquanto o debate for silenciado, a violência persistirá.').",
+        dicaBanca: "Indispensável na Introdução para fazer a transição da contextualização histórica para o problema do Brasil hodierno."
+    },
+    conformidade: {
+        titulo: "Conectivos de Conformidade",
+        tipo: "Conjunções Subordinativas Conformativas",
+        oQueE: "Estabelecem correspondência e harmonia entre a reflexão do aluno e a autoridade de um filósofo, sociólogo, legislação ou instituição.",
+        servePara: "Dar legitimidade e respaldo teórico ao repertório sociocultural (Citar CF/88, Bauman, Freire, Djamila Ribeiro, OMS, etc.).",
+        comoUsar: "• NÃO use preposição 'a' com 'Segundo' e 'Conforme': Diga 'Segundo o sociólogo,' e NUNCA 'Segundo ao sociólogo'.\n• Oração conformativa intercalada ou anteposta: Pede vírgula obrigatória (ex.: 'Consoante preconiza a Constituição Cidadã, a saúde...').",
+        dicaBanca: "Item essencial para obter nota 200 na C2 do ENEM e nota máxima em repertório na UEMA e UFG (produtividade legitimada)."
+    },
+    condicao: {
+        titulo: "Conectivos de Condição (Condicionais)",
+        tipo: "Conjunções Subordinativas Condicionais",
+        oQueE: "Subordinam a realização da ideia principal à ocorrência ou cumprimento de uma hipótese ou pré-requisito.",
+        servePara: "Construir advertências lógicas ('Se nada for feito...') ou condicionar a eficácia de uma política pública à adesão da comunidade.",
+        comoUsar: "• Modo verbal: 'Caso' exige PRESENTE DO SUBJUNTIVO ('Caso o Estado intervenha...'). 'Se' pede FUTURO DO SUBJUNTIVO ('Se o Estado intervier...'). Nunca use infinitivo ('Caso intervir' é erro grave).\n• Oração condicional anteposta: Pede vírgula obrigatória antes da oração principal.",
+        dicaBanca: "Confere altíssima maturidade argumentativa no fechamento de desenvolvimentos e no detalhamento de propostas."
+    },
+    proporcao: {
+        titulo: "Conectivos de Proporção (Proporcionais)",
+        tipo: "Conjunções Subordinativas Proporcionais",
+        oQueE: "Expressam variação simultânea e gradual entre dois fenômenos que aumentam ou diminuem em paralelo.",
+        servePara: "Demonstrar a gravidade progressiva de uma mazela social em consonância com a inércia do poder público ou avanço da tecnologia.",
+        comoUsar: "• REGRA DE OURO: Use 'À MEDIDA QUE' (com crase, sem 'em'). JAMAIS use 'À medida em que' (essa forma não existe na norma culta!).\n• 'Na medida em que' é causal (= porque) e NÃO proporcional.\n• Outras opções corretas: 'Ao passo que', 'À proporção que', 'Quanto mais... tanto mais'.",
+        dicaBanca: "O desvio 'à medida em que' é penalizado com rigor em C1 (ENEM), C5 (UEMA) e C1 (EXATO). Domine esta regra!"
+    },
+    finalidade: {
+        titulo: "Conectivos de Finalidade",
+        tipo: "Conjunções Subordinativas Finais & Locuções",
+        oQueE: "Indicam o propósito, objetivo, intenção ou meta a ser alcançada por determinada medida ou posicionamento.",
+        servePara: "Introduzir o Efeito/Finalidade na Proposta de Intervenção (ENEM e EXATO) ou dar propósito à tese na conclusão crítica (UEMA, UFG, UNITINS).",
+        comoUsar: "• SEMPRE SEPARADO: Escreva 'A fim de' (com o objetivo de). 'Afim' junto é adjetivo para afinidade (ideias afins).\n• 'A fim de' + verbo no infinitivo (ex: 'a fim de combater o preconceito').\n• 'A fim de que' + verbo no subjuntivo (ex: 'a fim de que todos usufruam da cidadania').",
+        dicaBanca: "No ENEM, garante o elemento 'Efeito/Finalidade' da C5. O erro gráfico 'afim de' desconta pontos na C1."
+    },
+    comparacao: {
+        titulo: "Conectivos de Comparação (Comparativos)",
+        tipo: "Conjunções Subordinativas Comparativas",
+        oQueE: "Estabelecem um paralelo analógico ou contraste entre duas realidades, épocas históricas, obras literárias ou contextos sociais.",
+        servePara: "Trazer analogias de livros, filmes ou distopias (ex: '1984', 'Vidas Secas', 'Admirável Mundo Novo') para confrontar com a realidade brasileira.",
+        comoUsar: "• Oração comparativa anteposta: Sempre separada por vírgula da oração principal (ex.: 'Assim como em 1984, a vigilância algorítmica...').\n• Conectores recomendados: 'Assim como', 'À semelhança de', 'Do mesmo modo que', 'Da mesma forma que'.",
+        dicaBanca: "Demonstra alto domínio de projeto de texto e autoria crítica (Competência 2 do ENEM e Critério 2 da UEMA/UFG)."
+    },
+    concessivos: {
+        titulo: "Conectivos Concessivos (Concessão)",
+        tipo: "Conjunções Subordinativas Concessivas",
+        oQueE: "Introduzem uma objeção ou fato contrário que, apesar de verídico, NÃO possui força suficiente para anular a conclusão da oração principal.",
+        servePara: "Admitir um aspecto da realidade para, em seguida, contra-argumentar com firmeza e elegância (recurso nobre de persuasão).",
+        comoUsar: "• SUBJUNTIVO OBRIGATÓRIO: 'Conquanto', 'Embora', 'Ainda que' exigem subjuntivo (ex.: 'Conquanto existam leis, a prática...', e nunca 'existem').\n• Vírgula obrigatória separando a oração concessiva da principal.\n• 'Malgrado' e 'A despeito de' são locuções nobres muito valorizadas por bancas exigentes.",
+        dicaBanca: "UEMA, UFG e UNITINS valorizam imensamente o uso de 'conquanto' e 'malgrado' por evidenciarem domínio sintático avançado."
+    },
+    asseverativos: {
+        titulo: "Conectivos Asseverativos (Certeza & Ênfase)",
+        tipo: "Modalizadores Argumentativos de Certeza",
+        oQueE: "Operadores discursivos que expressam convicção categórica, certeza incontestável e autoria vigorosa em relação à tese defendida.",
+        servePara: "Eliminar a hesitação ('talvez', 'pode ser que') e conferir firmeza e contundência crítica à argumentação.",
+        comoUsar: "• Em início de período: Exigem vírgula obrigatória logo após ('Indubitavelmente, a omissão estatal...', 'Com efeito, a educação...').\n• Intercalados: Entre duas vírgulas ('Esse quadro resulta, inegavelmente, da inércia governamental.').",
+        dicaBanca: "Elemento de ouro para demonstrar a 'marca de autoria' exigida na C3 do ENEM e nos critérios de consistência da UEMA e UFG."
+    },
+    operadores: {
+        titulo: "Operadores Argumentativos de Perspectiva",
+        tipo: "Articuladores Textuais Interparágrafos",
+        oQueE: "Expressões que sinalizam a perspectiva, o ângulo ou o viés sociológico e reflexivo sob o qual o tema será desdobrado.",
+        servePara: "Abrir o primeiro período dos parágrafos de Desenvolvimento (D1 e D2), conectando a Tese da introdução com o argumento.",
+        comoUsar: "• Sempre seguidos de vírgula ao abrirem período ('Nesse viés,', 'Sob essa ótica,', 'Nessa perspectiva,', 'Sob esse prisma,').",
+        dicaBanca: "Garante fluidez e progressão temática pontuadas na Competência 4 do ENEM e no Critério 4 da UEMA e UFG."
+    },
+    referencial: {
+        titulo: "Coesão Referencial & Anafórica",
+        tipo: "Pronomes Demonstrativos e Relativos",
+        oQueE: "Mecanismos gramaticais que retomam ou antecipam elementos no texto, evitando repetições cansativas de substantivos.",
+        servePara: "Garantir a progressão contínua das frases sem redundância de palavras-chave do tema.",
+        comoUsar: "• 'Este/Esta': Retoma o termo mais próximo ou introduz o que ainda vai ser dito.\n• 'Esse/Essa': Retoma o termo anterior genérico.\n• ATENÇÃO: NÃO use 'o mesmo' para substituir pessoas (ex.: 'o aluno faltou e o mesmo reprovou' é ERRO grave!). Use 'este', 'ele' ou elipse.\n• 'Onde': Restrito a LUGAR FÍSICO. Para situações, use 'em que' ou 'no qual'.",
+        dicaBanca: "O corretor busca ativamente erros com 'o mesmo' e 'onde'. Evitá-los garante os 200 pontos de C1/C4."
+    },
+    detalhamento: {
+        titulo: "Conectivos de Detalhamento & Exemplificação",
+        tipo: "Operadores Explicativos e Ilustrativos",
+        oQueE: "Expressões que introduzem dados empíricos, casos da realidade, causas aprofundadas ou esclarecimentos pontuais.",
+        servePara: "Materializar a argumentação com exemplos práticos após a formulação da tese abstrata.",
+        comoUsar: "• Seguidos de vírgula ou isolados ('Notadamente,', 'A exemplo de,', 'Como é o caso de,', 'A saber,').",
+        dicaBanca: "Aumenta a densidade argumentativa e evita textos puramente vagos ou abstratos."
+    },
+    opiniao_carta: {
+        titulo: "Carta do Leitor: Verbos de Opinião",
+        tipo: "Marcadores Discursivos de 1ª Pessoa",
+        oQueE: "Verbos e locuções modais em primeira pessoa (singular ou plural) adequados para manifestar juízo de valor em Carta do Leitor.",
+        servePara: "No gênero epistolar (EXATO Carta do Leitor), o autor manifesta seu posicionamento de forma direta, clara e fundamentada perante a sociedade.",
+        comoUsar: "• Uso em 1ª pessoa: 'Considero', 'Entendo', 'Defendo', 'Constatamos'. Na dissertação tradicional, prefira a impessoalidade.",
+        dicaBanca: "Específico para a prova de Carta do Leitor da EXATO (UFT/UFNT). Não utilize na dissertação do ENEM/UEMA!"
+    },
+    interlocucao_carta: {
+        titulo: "Carta do Leitor: Interlocução com o Destinatário",
+        tipo: "Marcadores de Diálogo e Apelo",
+        oQueE: "Fórmulas dialógicas que convocam o destinatário (editores de revista, leitores, autoridades) a refletir ou agir em conjunto com o autor.",
+        servePara: "Sustentar a situação comunicativa pública da Carta do Leitor (EXATO), garantindo diálogo respeitoso e persuasivo.",
+        comoUsar: "• Vocativos com vírgula ('Prezados editores,', 'Senhor redator,'). Chamadas moderadas: 'Veja bem,', 'Note,', 'Pensemos conjuntamente,'.",
+        dicaBanca: "Exigência indispensável no Critério 2 e 3 da Carta da EXATO (UFT/UFNT)."
+    },
+    meus: {
+        titulo: "Meus Conectivos Personalizados",
+        tipo: "Banco Pessoal do Estudante",
+        oQueE: "Seu repertório coesivo pessoal gravado localmente no dispositivo para consulta e cópia rápida.",
+        servePara: "Armazenar os conectivos coringas que você mais gosta de utilizar em seus treinos de redação.",
+        comoUsar: "• Digite o novo conectivo no campo abaixo e clique em '+ Adicionar'.\n• Clique no conectivo para copiá-lo ou no '×' para excluí-lo.",
+        dicaBanca: "Tenha de 4 a 6 conectivos de domínio absoluto para cada função antes do dia da sua prova."
+    }
+};
+
+const conectivosExemplos = {
+    "Além disso": "Além disso, a omissão estatal perpetua a marginalização das populações vulneráveis.",
+    "Ademais": "Ademais, constata-se a ineficiência crônica dos órgãos fiscalizadores.",
+    "Outrossim": "Outrossim, a ausência do debate pedagógico cristaliza preconceitos históricos.",
+    "Porém": "A legislação assegura o direito, porém a prática cotidiana desmente a norma.",
+    "Contudo": "Contudo, tal prerrogativa cidadã esbarra no descaso institucional.",
+    "Todavia": "Todavia, o estigma social impede que os indivíduos busquem auxílio especializado.",
+    "Entretanto": "Entretanto, a inércia legislativa aprofunda o abismo entre as classes.",
+    "No entanto": "No entanto, as verbas públicas destinadas ao setor revelam-se escassas.",
+    "Em contrapartida": "Em contrapartida, os projetos voluntários tentam suprir a carência de assistência básica.",
+    "Visto que": "Visto que faltam investimentos primários, os serviços básicos colapsam.",
+    "Já que": "Já que o preconceito é enraizado, faz-se imperiosa uma reeducação coletiva.",
+    "Uma vez que": "Uma vez que a escola não debate o tema, a desinformação se dissemina com facilidade.",
+    "Na medida em que": "Na medida em que a discriminação é tolerada, rompem-se os laços de coesão social.",
+    "Haja vista": "Haja vista a carência de profissionais capacitados, as filas de espera aumentam.",
+    "Em virtude de": "Em virtude da desigualdade regional, certas comarcas permanecem desassistidas.",
+    "Porquanto": "O plano falhou, porquanto a execução foi desprovida de rigor técnico.",
+    "Portanto": "Portanto, cabe ao Ministério da Educação formular diretrizes inclusivas com urgência.",
+    "Logo": "Logo, a passividade cidadã não pode ser aceita como normalidade social.",
+    "Dessa forma": "Dessa forma, consolida-se um ambiente favorável ao desenvolvimento humano sustentável.",
+    "Nesse sentido": "Nesse sentido, a mobilização popular configura elemento chave para a transformação.",
+    "Infere-se, portanto,": "Infere-se, portanto, que a apatia coletiva legitima a violência urbana.",
+    "Por conseguinte": "Por conseguinte, milhares de famílias permanecem à margem da cidadania plena.",
+    "Destarte": "Destarte, a superação desse impasse exige articulação entre os Três Poderes.",
+    "Dessarte": "Dessarte, a saúde preventiva deve assumir papel central nas políticas públicas.",
+    "Desde a promulgação da CF/88": "Desde a promulgação da Constituição de 1988, a igualdade é direito inalienável de todos.",
+    "Enquanto": "Enquanto persistir o silenciamento das vítimas, a impunidade reinará no tecido social.",
+    "Logo que": "Logo que as denúncias ganham notoriedade, o debate público avança.",
+    "Assim que": "Assim que os recursos forem repassados, as reformas estruturais deverão ter início.",
+    "No decorrer das últimas décadas": "No decorrer das últimas décadas, os avanços democráticos foram constantemente desafiados.",
+    "Conforme": "Conforme preconiza a Carta Magna, a dignidade da pessoa humana é princípio basilar.",
+    "Consoante": "Consoante adverte Zygmunt Bauman, a modernidade líquida corrói os laços de solidariedade comunitária.",
+    "Segundo": "Segundo o pensamento freireano, a educação constitui ferramenta essencial de emancipação cidadã.",
+    "De acordo com": "De acordo com dados oficiais do Ipea, a renda média dos grupos minoritários recuou.",
+    "Em conformidade com": "Em conformidade com o Estatuto da Criança e do Adolescente, a proteção integral é prioridade absoluta.",
+    "Caso": "Caso o poder público não intervenha com urgência, o abismo social continuará a se expandir.",
+    "Se": "Se a sociedade civil não se mobilizar ativamente, os direitos duramente conquistados retrocederão.",
+    "Contanto que": "Contanto que haja fiscalização austera, os índices de degradação ambiental recuarão.",
+    "Desde que": "Desde que haja sinergia interinstitucional, a erradicação da fome torna-se viável.",
+    "À medida que": "À medida que a tecnologia avança sem regulação ética, novos perigos existenciais emergem.",
+    "Ao passo que": "Ao passo que o consumo desenfreado cresce, os recursos naturais tornam-se escassos.",
+    "À proporção que": "À proporção que a escolaridade sobe, reduzem-se os índices de criminalidade violenta.",
+    "A fim de": "A fim de mitigar tais disparidades, cabe ao poder público instituir incentivos fiscais.",
+    "A fim de que": "A fim de que as futuras gerações desfrutem de dignidade, intervenções urgentes devem ser coordenadas.",
+    "Com o fito de": "Com o fito de garantir o pleno acesso à justiça, defensorias devem ser ampliadas no interior.",
+    "Com o intuito de": "Com o intuito de democratizar a leitura, bibliotecas itinerantes foram criadas.",
+    "Assim como": "Assim como na obra 'Vidas Secas', a privação da voz condena o cidadão à invisibilidade.",
+    "À semelhança de": "À semelhança da distopia de George Orwell, a privacidade dos indivíduos é constantemente violada.",
+    "Do mesmo modo que": "Do mesmo modo que nos países desenvolvidos, o Brasil necessita valorizar a pesquisa de ponta.",
+    "Conquanto": "Conquanto a legislação seja moderna, sua efetivação prática esbarra em barreiras culturais arcaicas.",
+    "Malgrado": "Malgrado os esforços do terceiro setor, a erradicação do problema exige uma firme política de Estado.",
+    "A despeito de": "A despeito das garantias legais existentes, a intolerância velada segue fazendo vítimas diárias.",
+    "Não obstante": "Não obstante as promessas de campanha, a infraestrutura dos bairros periféricos permanece precária.",
+    "Indubitavelmente": "Indubitavelmente, a omissão governamental é o principal vetor gerador dessa crise social.",
+    "Com efeito": "Com efeito, o investimento maciço em ciência básica é a única via para a soberania nacional.",
+    "De fato": "De fato, a negligência estrutural aprofunda a desigualdade de oportunidades entre os jovens.",
+    "Certamente": "Certamente, a indiferença coletiva funciona como combustível para a continuidade do preconceito.",
+    "Nesse viés": "Nesse viés, cabe analisar como a herança colonial moldou as disparidades contemporâneas.",
+    "Sob essa ótica": "Sob essa ótica, a falta de saneamento básico não é mero descuido, mas violação de direitos humanos.",
+    "Nessa perspectiva": "Nessa perspectiva, a literatura engajada atua como denúncia das mazelas silenciosas.",
+    "Este": "Aprovou-se o projeto de lei, e este estabelece penalidades mais severas aos infratores.",
+    "Notadamente": "Diversas regiões sofrem com o abandono, notadamente as periferias dos grandes centros urbanos.",
+    "Principalmente": "A evasão atinge os mais vulneráveis, principalmente jovens do ensino médio noturno.",
+    "Considero": "Considero inadmissível a passividade das autoridades diante de denúncias tão contundentes.",
+    "Defendo": "Defendo que a revisão tributária deve priorizar a desoneração dos itens da cesta básica.",
+    "Veja bem": "Veja bem, caro editor: não se trata de privilégio corporativo, mas do cumprimento estrito da lei.",
+    "Note": "Note que a matéria veiculada desconsiderou a realidade geográfica dos moradores ribeirinhos."
 };
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -2361,50 +2586,151 @@ document.addEventListener('DOMContentLoaded', () => {
     const btnCloseConn = document.getElementById('btn-close-connectives');
     const widgetConn = document.getElementById('connectives-widget');
     const listConn = document.getElementById('connectives-list');
+    const guidePanel = document.getElementById('connectives-guide-panel');
+    const searchInput = document.getElementById('conn-search-input');
     const catBtns = document.querySelectorAll('.conn-cat-btn');
     
     const addCustomArea = document.getElementById('add-custom-conn-area');
     const customConnInput = document.getElementById('custom-conn-input');
     const btnAddCustomConn = document.getElementById('btn-add-custom-conn');
 
-    function renderConnectives(cat) {
-        if (!listConn) return;
-        listConn.innerHTML = '';
-        
-        if (cat === 'meus') {
-            addCustomArea.classList.remove('hidden');
-        } else {
-            addCustomArea.classList.add('hidden');
-        }
+    let currentActiveCategory = 'adicao';
 
-        const data = conectivosData[cat] || [];
-        if (data.length === 0 && cat === 'meus') {
-            listConn.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem; padding: 10px;">Você ainda não adicionou nenhum conectivo próprio.</p>';
+    function renderConnectivesGuide(cat) {
+        if (!guidePanel) return;
+        const g = conectivosGuia[cat];
+        if (!g) {
+            guidePanel.style.display = 'none';
             return;
         }
 
-        data.forEach(word => {
-            const span = document.createElement('span');
-            span.className = 'conn-word';
-            span.innerText = word;
-            span.title = 'Clique para copiar ou usar no construtor';
-            
+        guidePanel.style.display = 'flex';
+        guidePanel.innerHTML = `
+            <div class="conn-guide-header">
+                <h5 class="conn-guide-title">📘 ${g.titulo}</h5>
+                <span class="conn-guide-badge">${g.tipo || 'Operador Coesivo'}</span>
+            </div>
+            <div class="conn-guide-block">
+                <span class="conn-guide-label">🔍 O que é:</span>
+                <p class="conn-guide-text">${g.oQueE}</p>
+            </div>
+            <div class="conn-guide-block">
+                <span class="conn-guide-label">🎯 Para que serve na redação:</span>
+                <p class="conn-guide-text">${g.servePara}</p>
+            </div>
+            <div class="conn-guide-block">
+                <span class="conn-guide-label">✍️ Como usar de maneira gramaticalmente certa (Regras & Pontuação):</span>
+                <p class="conn-guide-text">${g.comoUsar}</p>
+            </div>
+            <div class="conn-guide-bancas">
+                <span class="conn-guide-label">🏛️ Aplicação nas Bancas (ENEM, UEMA, UFG, UNITINS, EXATO):</span>
+                <p class="conn-guide-text">${g.dicaBanca}</p>
+            </div>
+        `;
+    }
+
+    function renderConnectives(cat, filterQuery = '') {
+        if (!listConn) return;
+        listConn.innerHTML = '';
+        currentActiveCategory = cat;
+
+        // Renderiza o Guia Didático da categoria ativa
+        if (!filterQuery) {
+            renderConnectivesGuide(cat);
+        } else if (guidePanel) {
+            guidePanel.style.display = 'none';
+        }
+        
+        if (cat === 'meus' && !filterQuery) {
+            if (addCustomArea) addCustomArea.classList.remove('hidden');
+        } else {
+            if (addCustomArea) addCustomArea.classList.add('hidden');
+        }
+
+        let wordsToRender = [];
+        const query = (filterQuery || '').trim().toLowerCase();
+
+        if (query) {
+            // Busca global em todas as categorias
+            Object.keys(conectivosData).forEach(c => {
+                (conectivosData[c] || []).forEach(w => {
+                    const ex = (conectivosExemplos[w] || '').toLowerCase();
+                    if (w.toLowerCase().includes(query) || ex.includes(query) || c.includes(query)) {
+                        if (!wordsToRender.some(item => item.word === w)) {
+                            wordsToRender.push({ word: w, cat: c });
+                        }
+                    }
+                });
+            });
+        } else {
+            const data = conectivosData[cat] || [];
+            wordsToRender = data.map(w => ({ word: w, cat }));
+        }
+
+        if (wordsToRender.length === 0) {
+            listConn.innerHTML = `<p style="color: #94a3b8; font-size: 0.88rem; padding: 18px; text-align: center; background: #141e30; border-radius: 8px; border: 1px dashed #334155;">${
+                query ? `Nenhum conectivo encontrado para "${filterQuery}". Tente outro termo ou categoria.` : 'Nenhum conectivo cadastrado nesta categoria ainda.'
+            }</p>`;
+            return;
+        }
+
+        wordsToRender.forEach(({ word, cat: wordCat }) => {
+            const card = document.createElement('div');
+            card.className = 'conn-item-card';
+            card.title = 'Clique para copiar ou adicionar ao Construtor Livre';
+
+            const top = document.createElement('div');
+            top.className = 'conn-item-top';
+
+            const term = document.createElement('span');
+            term.className = 'conn-item-term';
+            term.textContent = word;
+
+            const actions = document.createElement('div');
+            actions.className = 'conn-item-actions';
+
+            const copyBtn = document.createElement('button');
+            copyBtn.type = 'button';
+            copyBtn.className = 'conn-action-btn';
+            copyBtn.textContent = 'Copiar 📋';
+
+            actions.appendChild(copyBtn);
+
             // Botão de deletar para customizados
-            if (cat === 'meus') {
-                const delBtn = document.createElement('span');
-                delBtn.innerText = ' ×';
+            if (wordCat === 'meus') {
+                const delBtn = document.createElement('button');
+                delBtn.type = 'button';
+                delBtn.className = 'conn-action-btn';
+                delBtn.textContent = 'Excluir ×';
                 delBtn.style.color = 'var(--danger)';
-                delBtn.style.cursor = 'pointer';
+                delBtn.style.borderColor = 'rgba(239, 68, 68, 0.4)';
                 delBtn.onclick = (e) => {
                     e.stopPropagation();
-                    conectivosData.meus = conectivosData.meus.filter(w => w !== word);
-                    localStorage.setItem('redacao_meus_conectivos', JSON.stringify(conectivosData.meus));
-                    renderConnectives('meus');
+                    if (confirm(`Remover o conectivo "${word}" dos seus favoritos?`)) {
+                        conectivosData.meus = conectivosData.meus.filter(w => w !== word);
+                        localStorage.setItem('redacao_meus_conectivos', JSON.stringify(conectivosData.meus));
+                        renderConnectives('meus');
+                    }
                 };
-                span.appendChild(delBtn);
+                actions.appendChild(delBtn);
             }
 
-            span.onclick = () => {
+            top.appendChild(term);
+            top.appendChild(actions);
+            card.appendChild(top);
+
+            // Adiciona exemplo se disponível
+            const exampleText = conectivosExemplos[word];
+            if (exampleText) {
+                const exDiv = document.createElement('div');
+                exDiv.className = 'conn-item-example';
+                // Destaca o conectivo em negrito no exemplo
+                const highlighted = exampleText.replace(new RegExp(`(${word})`, 'i'), '<strong>$1</strong>');
+                exDiv.innerHTML = `"${highlighted}"`;
+                card.appendChild(exDiv);
+            }
+
+            const triggerAction = () => {
                 const modelView = document.getElementById('model-view');
                 if (modelView && !modelView.classList.contains('hidden')) {
                     // ADICIONAR AO CONSTRUTOR LIVRE usando a factory function
@@ -2412,35 +2738,58 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (ba && typeof createConnPiece === 'function') {
                         ba.appendChild(createConnPiece(word));
                         saveBuilderState();
-                        // Feedback visual no chip do dicionário
-                        const origText = span.querySelector('span') ? span.querySelector('span:first-child')?.innerText : span.innerText;
-                        const label = span.querySelector('span') || span;
-                        const prev = label.innerText;
-                        label.innerText = '✓ Adicionado!';
-                        setTimeout(() => { label.innerText = prev; }, 1200);
+                        copyBtn.textContent = '✓ Adicionado!';
+                        copyBtn.style.background = 'var(--success)';
+                        copyBtn.style.color = '#fff';
+                        setTimeout(() => {
+                            copyBtn.textContent = 'Copiar 📋';
+                            copyBtn.style.background = '';
+                            copyBtn.style.color = '';
+                        }, 1200);
                         return;
                     }
                 }
 
                 // COPIAR (default)
                 navigator.clipboard.writeText(word);
-                const orig = span.innerText;
-                span.innerText = 'Copiado!';
-                setTimeout(() => renderConnectives(cat), 1500); // re-render
+                copyBtn.textContent = 'Copiado! ✓';
+                copyBtn.style.background = 'var(--success)';
+                copyBtn.style.color = '#fff';
+                setTimeout(() => {
+                    copyBtn.textContent = 'Copiar 📋';
+                    copyBtn.style.background = '';
+                    copyBtn.style.color = '';
+                }, 1400);
             };
-            listConn.appendChild(span);
+
+            card.onclick = triggerAction;
+            listConn.appendChild(card);
         });
     }
 
-    if (btnAddCustomConn) {
+    if (btnAddCustomConn && customConnInput) {
         btnAddCustomConn.addEventListener('click', () => {
             const val = customConnInput.value.trim();
             if (val) {
-                conectivosData.meus.push(val);
-                localStorage.setItem('redacao_meus_conectivos', JSON.stringify(conectivosData.meus));
+                if (!conectivosData.meus.includes(val)) {
+                    conectivosData.meus.push(val);
+                    localStorage.setItem('redacao_meus_conectivos', JSON.stringify(conectivosData.meus));
+                }
                 customConnInput.value = '';
                 renderConnectives('meus');
             }
+        });
+        customConnInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                btnAddCustomConn.click();
+            }
+        });
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const val = /** @type {HTMLInputElement} */ (e.target).value;
+            renderConnectives(currentActiveCategory, val);
         });
     }
 
@@ -2449,18 +2798,69 @@ document.addEventListener('DOMContentLoaded', () => {
             widgetConn.classList.toggle('hidden');
             if (!widgetConn.classList.contains('hidden')) {
                 const active = document.querySelector('.conn-cat-btn.active');
-                if (active) renderConnectives(active.getAttribute('data-cat'));
+                const cat = active ? active.getAttribute('data-cat') || 'adicao' : 'adicao';
+                renderConnectives(cat);
             }
         });
-        btnCloseConn.addEventListener('click', () => {
-            widgetConn.classList.add('hidden');
-        });
+        if (btnCloseConn) {
+            btnCloseConn.addEventListener('click', () => {
+                widgetConn.classList.add('hidden');
+            });
+        }
 
         catBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 catBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                renderConnectives(btn.getAttribute('data-cat'));
+                if (searchInput) searchInput.value = '';
+                const cat = btn.getAttribute('data-cat') || 'adicao';
+                renderConnectives(cat);
+            });
+        });
+    }
+
+    // Inicialização das Pílulas de Densidade Gramatical (View de Treino)
+    const ruleTabs = document.querySelectorAll('.grammar-rule-tab');
+    const ruleContent = document.getElementById('grammar-rule-content');
+    const grammarRulesData = {
+        virgula: `<strong>📌 Regra da Vírgula com Conectivos:</strong><br>
+1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
+2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
+3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').<br>
+4. 'Pois' conclusivo deve vir deslocado após o verbo entre duas vírgulas ('Cabe, pois, ao Ministério agir.').`,
+        crase: `<strong>📌 A Regra de Ouro da Crase:</strong><br>
+1. Método do 'AO': Troque a palavra feminina seguinte por uma masculina equivalente. Se der 'AO', a crase é OBRIGATÓRIA (ex.: 'Favorável à lei' → 'Favorável ao projeto').<br>
+2. Método 'Volto da / Volto de': Vou a, volto da = crase há! Vou a, volto de = crase pra quê? (ex.: 'Vou à Bahia / Volto da Bahia'; 'Vou a Roma / Volto de Roma').<br>
+3. Crase PROIBIDA: antes de verbos ('a partir de', 'a combater'), antes de palavras masculinas ('a prazo', 'a pé') e antes de pronomes de tratamento e indefinidos.`,
+        proporcao: `<strong>📌 Proporção vs Causa (O Maior Erro da Redação):</strong><br>
+1. 'À MEDIDA QUE': Proporção gradual e simultânea (com crase e sem 'em'). Ex.: 'À medida que a tecnologia avança, novos dilemas surgem.'<br>
+2. 'NA MEDIDA EM QUE': Causa e motivo (= já que, porque). Ex.: 'A medida fracassou, na medida em que faltaram recursos.'<br>
+3. PROIBIDO: 'À medida em que' é erro gramatical grave que resulta em desconto severo nas bancas!`,
+        regencia: `<strong>📌 Regência dos Verbos Nobres da Redação:</strong><br>
+1. IMPLICAR: É Transitivo Direto (sem 'em'). O correto é 'A crise implica graves consequências' (e nunca 'implica em').<br>
+2. VISAR (almejar): É Transitivo Indireto com 'a'. O correto é 'visar ao bem-estar coletivo' (visa + a).<br>
+3. PREFERIR: Rege preposição 'a'. O correto é 'preferem as redes sociais a ler livros' (e nunca 'do que ler').<br>
+4. OBEDECER: Exige preposição 'a' ('obedecer às leis', 'obedecer aos princípios').`,
+        paralelismo: `<strong>📌 Paralelismo Sintático Obrigatório:</strong><br>
+1. Conectivos duplos correlativos ('não só... mas também', 'tanto... quanto') exigem a mesma classe morfológica dos dois lados.<br>
+• Certo: 'A escola deve não só acolher os jovens, mas também estimular a cidadania.' (verbo + verbo).<br>
+• Errado: 'A escola deve não só o acolhimento, mas também estimular a cidadania.' (substantivo + verbo quebra o paralelismo).<br>
+2. Artigos em enumerações: Se colocar artigo no primeiro termo, coloque em todos ('o respeito, a empatia e a solidariedade').`,
+        referencial: `<strong>📌 Coesão Referencial Limpa (Sem 'O Mesmo'):</strong><br>
+1. Banimento do 'o mesmo': Nunca use 'o mesmo' para substituir pessoas. 'O réu foi preso e o mesmo confessou' é erro gramatical condenado pelo ENEM e UEMA. Troque por 'e este confessou' ou 'o qual confessou'.<br>
+2. 'Onde': Só pode ser usado para LUGAR FÍSICO real ('a cidade onde resido'). Para conceitos abstratos ou leis, use 'em que', 'no qual' ou 'contexto no qual'.<br>
+3. 'Este' vs 'Esse': 'Este' refere-se ao termo imediatamente anterior ou ao tempo presente; 'Esse' retoma termo já citado no período anterior.`
+    };
+
+    if (ruleTabs && ruleContent) {
+        ruleTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                ruleTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                const key = tab.getAttribute('data-rule');
+                if (key && grammarRulesData[key]) {
+                    ruleContent.innerHTML = grammarRulesData[key];
+                }
             });
         });
     }

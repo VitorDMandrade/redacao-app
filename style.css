@@ -162,16 +162,22 @@ body {
     display: grid;
     gap: 2rem;
     transition: opacity 0.3s ease;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 #write-view,
 #training-view,
 #repertory-view,
-#grammar-view {
-    grid-template-columns: 1fr;
+#grammar-view,
+#model-view {
+    grid-template-columns: minmax(0, 1fr);
     max-width: 1000px;
     margin: 0 auto;
     width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 #result-view {
@@ -343,6 +349,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .training-theme {
@@ -353,6 +362,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 2rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .training-card {
@@ -603,6 +615,9 @@ body {
     display: flex;
     flex-direction: column;
     box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .panel-header {
@@ -1931,15 +1946,23 @@ body {
     border-radius: 10px;
     padding: 1.25rem;
     margin-bottom: 2rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .grammar-density-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     margin-bottom: 1rem;
     border-bottom: 1px solid #1e293b;
     padding-bottom: 0.75rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .grammar-density-header h3 {
@@ -1958,6 +1981,9 @@ body {
     padding: 4px;
     border-radius: 8px;
     border: 1px solid #334155;
+    flex-wrap: wrap;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .density-nav-btn {
@@ -1985,6 +2011,9 @@ body {
 
 .density-tab-pane {
     animation: fadeIn 0.25s ease-in-out;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .density-tab-pane.hidden {
@@ -1998,6 +2027,9 @@ body {
     border-radius: 8px;
     padding: 12px 16px;
     margin-bottom: 1rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .grammar-logic-pills-nav {
@@ -2006,6 +2038,35 @@ body {
     overflow-x: auto;
     padding-bottom: 8px;
     margin-bottom: 1rem;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
+}
+
+.grammar-logic-pills-nav::-webkit-scrollbar,
+.grammar-rules-pillbox::-webkit-scrollbar {
+    height: 6px;
+}
+
+.grammar-logic-pills-nav::-webkit-scrollbar-track,
+.grammar-rules-pillbox::-webkit-scrollbar-track {
+    background: rgba(15, 23, 42, 0.5);
+    border-radius: 4px;
+}
+
+.grammar-logic-pills-nav::-webkit-scrollbar-thumb,
+.grammar-rules-pillbox::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+
+.grammar-logic-pills-nav::-webkit-scrollbar-thumb:hover,
+.grammar-rules-pillbox::-webkit-scrollbar-thumb:hover {
+    background: #0284c7;
 }
 
 .grammar-logic-pill {
@@ -2018,6 +2079,7 @@ body {
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.15s;
+    flex-shrink: 0;
 }
 
 .grammar-logic-pill:hover, .grammar-logic-pill.active {
@@ -2035,6 +2097,9 @@ body {
     display: flex;
     flex-direction: column;
     gap: 14px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .logic-header {
@@ -2043,6 +2108,8 @@ body {
     align-items: center;
     border-bottom: 1px solid #1e293b;
     padding-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
 }
 
 .logic-title {
@@ -2066,6 +2133,8 @@ body {
     display: flex;
     flex-direction: column;
     gap: 4px;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .logic-block-label {
@@ -2083,13 +2152,17 @@ body {
     color: #cbd5e1;
     line-height: 1.55;
     margin: 0;
+    word-break: break-word;
 }
 
 .logic-compare-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 10px;
     margin-top: 6px;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .logic-compare-card {
@@ -2097,6 +2170,9 @@ body {
     border-radius: 8px;
     font-size: 0.84rem;
     line-height: 1.45;
+    min-width: 0;
+    box-sizing: border-box;
+    word-break: break-word;
 }
 
 .logic-compare-card.correct {
@@ -2113,9 +2189,12 @@ body {
 
 .grammar-bancas-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 12px;
     margin-bottom: 1.25rem;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 .grammar-banca-card {
@@ -2127,6 +2206,8 @@ body {
     flex-direction: column;
     gap: 6px;
     transition: transform 0.15s, border-color 0.15s;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .grammar-banca-card:hover {
@@ -2147,6 +2228,7 @@ body {
     font-size: 0.82rem;
     color: #cbd5e1;
     line-height: 1.45;
+    word-break: break-word;
 }
 
 .grammar-rules-pillbox {
@@ -2155,6 +2237,13 @@ body {
     overflow-x: auto;
     padding-bottom: 6px;
     margin-bottom: 1rem;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: #334155 transparent;
 }
 
 .grammar-rule-tab {
@@ -2167,6 +2256,7 @@ body {
     cursor: pointer;
     white-space: nowrap;
     transition: all 0.15s;
+    flex-shrink: 0;
 }
 
 .grammar-rule-tab:hover, .grammar-rule-tab.active {
@@ -2183,5 +2273,9 @@ body {
     font-size: 0.88rem;
     color: #e2e8f0;
     line-height: 1.55;
+    min-width: 0;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
 }
 

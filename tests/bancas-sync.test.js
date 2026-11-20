@@ -309,7 +309,7 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(scriptContent.includes('renderGrammarLogic'), 'script.js deve conter a função renderGrammarLogic');
     });
 
-    test('14. Padrão UNITINS: 25 a 30 linhas, eixos temáticos exclusivos e guia dialético', () => {
+    test('14. Padrão UNITINS: Edital 2027/1-05 (critérios C1-C5, escala 0.5), 25 a 30 linhas, eixos exclusivos e guia dialético', () => {
         const unitins = BANCAS['UNITINS'];
         assert.equal(unitins.limiteLinhas.min, 25, 'UNITINS deve ter mínimo recomendado de 25 linhas.');
         assert.equal(unitins.limiteLinhas.max, 30, 'UNITINS deve ter máximo de 30 linhas.');
@@ -317,6 +317,14 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(unitins.resumoPratico.includes('Síntese da Tensão'), 'Resumo UNITINS deve explicitar Síntese da Tensão.');
         assert.ok(SYSTEM_PROMPT.includes('25 e 30 linhas'), 'SYSTEM_PROMPT deve mencionar 25 e 30 linhas para UNITINS.');
         assert.ok(SYSTEM_PROMPT.includes('Retomada') && SYSTEM_PROMPT.includes('Síntese da Tensão'), 'SYSTEM_PROMPT deve conter a fórmula de conclusão da UNITINS.');
+        assert.ok(SYSTEM_PROMPT.includes('DEGRAUS DE 0,5 PONTO'), 'SYSTEM_PROMPT deve exigir degraus de 0,5 ponto na UNITINS.');
+
+        // Valida ordem oficial dos 5 critérios do Edital 2027/1-05
+        assert.ok(unitins.criterios[0].nome.includes('Modalidade Escrita Formal'), 'UNITINS c1 deve ser Modalidade Escrita Formal.');
+        assert.ok(unitins.criterios[1].nome.includes('Tema'), 'UNITINS c2 deve ser Tema e Compreensão.');
+        assert.ok(unitins.criterios[2].nome.includes('Estrutura'), 'UNITINS c3 deve ser Estrutura.');
+        assert.ok(unitins.criterios[3].nome.includes('Autoria'), 'UNITINS c4 deve ser Consistência, Progressão Lógica e Autoria.');
+        assert.ok(unitins.criterios[4].nome.includes('Coesão'), 'UNITINS c5 deve ser Coesão.');
 
         // Eixos exclusivos da UNITINS com os 3 modelos e guias
         assert.ok(Array.isArray(unitins.eixosTematicos) && unitins.eixosTematicos.length >= 4, 'UNITINS deve possuir seus próprios eixos temáticos.');

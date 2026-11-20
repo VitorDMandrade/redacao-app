@@ -797,6 +797,54 @@ const REPERTORIOS_COMPLETOS = [
         "uso": "Ditadura dos Padrões Estéticos: A mercantilização e a uniformização dos corpos impostas pela publicidade e pelas redes sociais gerando transtornos de imagem.; Consumismo Infantil e Hiperconsumo: A manipulação do desejo de crianças e jovens por meio de estímulos de marketing direcionados.; Alienação e Passividade Cívica: O uso do entretenimento de massa superficial e fragmentado para desviar o debate público de questões estruturais urgentes.; Homogeneização Cultural por Algoritmos: A perda da pluralidade e do letramento artístico em plataformas que priorizam fórmulas repetitivas de fácil engajamento.",
         "frase": "\"Ao formular o conceito de 'Indústria Cultural', o filósofo Theodor W. Adorno adverte que a transformação dos bens culturais em mercadorias padronizadas atrofia a capacidade reflexiva dos indivíduos, condicionando-os à passividade e ao consumo alienado. Ao transpor essa tese para a sociedade brasileira contemporânea no tocante a [TEMA], constata-se a gravidade dessa dinâmica, cenário no qual imperativos comerciais moldam o comportamento coletivo e fragilizam a autonomia e a emancipação crítica dos cidadãos.\"",
         "tipo": "dev"
+    },
+    {
+        "obra": "TITÃS — TELEVISÃO (CANÇÃO)",
+        "autor": "Banda de rock brasileira Titãs (composição de Arnaldo Antunes, Marcelo Fromer e Toni Bellotto, 1986).",
+        "resumo": "A canção critica a influência constante das telas sobre a percepção, a atenção e os hábitos cotidianos dos indivíduos.",
+        "uso": "Leitura Digital vs Papel: Questionar se o contato frequente com telas gera mais leitura ou exposição superficial.; Hiperconectividade: Substituição da experiência reflexiva por estímulos audiovisuais rápidos.; Hábitos Cotidianos e Juventude: Moldagem comportamental pela mídia e plataformas digitais.",
+        "frase": "Na canção 'Televisão', a banda brasileira Titãs critica a influência incessante das telas sobre a percepção e os hábitos cotidianos dos indivíduos. De maneira análoga, no contexto de [TEMA], observa-se que a exposição contínua a fluxos digitais rápidos nem sempre se converte em compreensão aprofundada.",
+        "tipo": "intro"
+    },
+    {
+        "obra": "ULRICH BECK (SOCIEDADE DE RISCO)",
+        "autor": "Sociólogo alemão, na obra \"Sociedade de Risco: Rumo a uma Outra Modernidade\" (1986).",
+        "resumo": "Sustenta que a modernidade tardia produz riscos globais (climáticos, digitais, sanitários e financeiros) que afetam os diferentes grupos sociais de forma desigual.",
+        "uso": "Crise Climática e Desastres: Exposição desigual de populações vulneráveis a enchentes e eventos extremos.; Economia Digital e Riscos: Novas vulnerabilidades financeiras e informacionais na era conectada.; Saúde Pública: Impactos desiguais de epidemias e crises sanitárias.",
+        "frase": "Segundo o sociólogo alemão Ulrich Beck, na obra 'Sociedade de Risco', a modernidade contemporânea gera ameaças sistêmicas cujos danos recaem de maneira desigual sobre os grupos sociais. Sob essa ótica, [TEMA] evidencia como avanços técnicos e crises atuais ampliam vulnerabilidades quando não acompanhados de proteção institucional.",
+        "tipo": "intro"
+    },
+    {
+        "obra": "AGENDA 2030 DA ONU (ODS 4 E ODS 8)",
+        "autor": "Organização das Nações Unidas (ONU) — Objetivos de Desenvolvimento Sustentável (2015).",
+        "resumo": "O ODS 4 defende educação inclusiva e equitativa de qualidade ao longo da vida; o ODS 8 preconiza trabalho decente, crescimento econômico sustentável e oportunidades dignas para jovens.",
+        "uso": "Educação e Leitura Digital (ODS 4): Democratização de dispositivos, conectividade e mediação pedagógica para leitura crítica.; Trabalho Juvenil e Plataformas (ODS 8): Promoção de empreendedorismo digital planejado em oposição à precarização e à ilusão de ganhos fáceis.; Desigualdade Social: Garantia de direitos fundamentais articulados ao desenvolvimento humano.",
+        "frase": "Em consonância com os Objetivos de Desenvolvimento Sustentável da Agenda 2030 da ONU (como o ODS 4 de educação de qualidade e o ODS 8 de trabalho decente), o progresso social exige oportunidades reais de formação e autonomia. Aplicado a [TEMA], tal marco normativo revela a distância entre as metas globais assumidas e a realidade enfrentada por parcelas da população.",
+        "tipo": "dev"
+    },
+    {
+        "obra": "BERTHA LUTZ & CÓDIGO ELEITORAL DE 1932",
+        "autor": "Bertha Lutz (bióloga, ativista e deputada) e Decreto nº 21.076/1932 (Voto Feminino).",
+        "resumo": "Marco histórico da conquista da cidadania política formal das mulheres no Brasil, fruto de mobilização coletiva em prol do sufrágio e da presença feminina nas instituições.",
+        "uso": "Representatividade Feminina e Democracia: Contrastar a conquista histórica do direito ao voto com a atual sub-representação feminina no Congresso e barreiras partidárias.; Violência Política de Gênero: Evidenciar que igualdade jurídica não basta sem condições iguais de disputa.; Direitos Políticos e Cidadania: Valorização de processos históricos de ampliação democrática.",
+        "frase": "Desde a conquista do voto feminino pelo Código Eleitoral de 1932 e a atuação emblemática de Bertha Lutz na defesa da cidadania política das mulheres, a democracia brasileira expandiu seus marcos formais de participação. Contudo, ao examinar [TEMA], percebe-se que a igualdade jurídica conquistada historicamente ainda convive com obstáculos concretos à representatividade efetiva.",
+        "tipo": "intro"
+    },
+    {
+        "obra": "SHERRY TURKLE (ALONE TOGETHER)",
+        "autor": "Socióloga e psicóloga norte-americana, professora do MIT, na obra \"Alone Together\" (2011).",
+        "resumo": "Analisa como a mediação intensa das telas transforma relações, comportamentos e expectativas humanas, substituindo conexões profundas e atenção sustentada por interações imediatistas e performáticas.",
+        "uso": "Telas e Leitura: Hiperconexão que fragmenta o foco e reduz a profundidade cognitiva.; Juventude e Redes Sociais: Comparação contínua, ilusão de sucesso instantâneo e busca por validação digital.; Saúde Mental e Isolamento: Solidão e ansiedade em meio à conectividade permanente.",
+        "frase": "Na obra 'Alone Together', a pesquisadora Sherry Turkle adverte que a mediação constante dos dispositivos digitais remodela comportamentos humanos, favorecendo a superficialidade e a busca por respostas imediatas. Essa reflexão contribui para analisar [TEMA], ao mostrar como a lógica performática das telas interfere nos hábitos formativos e nas expectativas da juventude.",
+        "tipo": "intro"
+    },
+    {
+        "obra": "ECONOMIA DE PLATAFORMAS E AUTOMAÇÃO (VAROUFAKIS / HARARI)",
+        "autor": "Yanis Varoufakis (economista grego) e Yuval Noah Harari (historiador israelense).",
+        "resumo": "Analisam como plataformas digitais, algoritmos e processos de automação reconfiguram o mercado de trabalho, concentram poder econômico e criam novas instabilidades financeiras e laborais.",
+        "uso": "Trabalho por Aplicativos e Juventude: Transformação das formas tradicionais de renda, precarização e insegurança trabalhista.; Dinheiro Rápido e Economia Digital: Oportunidades autônomas via tecnologia versus riscos de especulação e vulnerabilidade financeira.; Educação Profissional: Necessidade de adaptação crítica diante da automação.",
+        "frase": "Como analisam pensadores contemporâneos a exemplo de Yanis Varoufakis e Yuval Noah Harari, a ascensão das plataformas digitais e da automação transforma profundamente o mundo do trabalho e a geração de renda. No debate sobre [TEMA], essa transição revela tanto a abertura de novos caminhos produtivos quanto a exposição de jovens a vínculos instáveis e promessas econômicas ilusórias.",
+        "tipo": "dev"
     }
 ];
 
@@ -2999,7 +3047,7 @@ const REPERTORIOS_MAPEADOS = [
 
 if (typeof EIXOS_MESTRES !== 'undefined') {
     EIXOS_MESTRES.length = 0;
-    EIXOS_MESTRES.push({ nome: '0. Banco Premium Completo (97 Fichas)', repertorios: REPERTORIOS_COMPLETOS });
+    EIXOS_MESTRES.push({ nome: '0. Banco Premium Completo (105 Fichas)', repertorios: REPERTORIOS_COMPLETOS });
     REPERTORIOS_MAPEADOS.forEach(eixo => EIXOS_MESTRES.push(eixo));
 }
 

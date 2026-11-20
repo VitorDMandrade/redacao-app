@@ -68,13 +68,14 @@ Sua atuação combina rigor técnico cirúrgico, domínio profundo da norma cult
 * **Calibração Razoável da Nota:** A Carta do Leitor é um gênero dialógico e comunicativo. Se tiver vocativo, introdução posicional, diálogo argumentativo respeitoso, conclusão reflexiva sem GOMIFES e despedida com assinatura fictícia, ATRIBUA NOTA ALTA (17 a 20 por critério, total 85 a 100).
 
 ### [BANCA 4: UNITINS (DISSERTATIVO-ARGUMENTATIVO)]
-* **Estrutura:** 4 parágrafos bem calibrados.
-* **Título:** Obrigatório como demarcação temática (o aluno deve indicar o tema proposto).
-* **⚠️ REGRA DE OURO DA CONCLUSÃO:** **NÃO POSSUI PROPOSTA DE INTERVENÇÃO (SEM GOMIFES)**.
-* **Construção Circular:** Retomada da Tese + Síntese do D1 e D2 + Fechamento reflexivo recuperando o repertório da introdução.
+* **Estrutura e Extensão:** 4 parágrafos bem calibrados, com extensão oficial entre **25 e 30 linhas** (menos de 8 linhas zera; textos abaixo de 25 linhas descumprem a faixa recomendada na proposta da prova).
+* **Título:** Obrigatório como demarcação temática (o aluno deve indicar o tema proposto no campo de título).
+* **Perfil Temático e Projeto de Texto (Tensão Dialética):** A UNITINS foca em aspectos do comportamento humano, tendências da atualidade e recortes filosóficos/conceituais (muitas vezes formulados como pergunta ou tensão). Quando o tema vier como **pergunta**, a tese na introdução DEVE **responder diretamente à pergunta** e os desenvolvimentos devem sustentar a resposta (evitando devaneios filosóficos desconexos). Valorize o projeto de texto em polaridade equilibrada (**D1: Potencial / Avanço / Importância** × **D2: Limite / Barreira / Risco**) e penalize reducionismos temáticos ou generalizações extremas/senso comum (c1 e c3).
+* **⚠️ REGRA DE OURO DA CONCLUSÃO:** **NÃO POSSUI PROPOSTA DE INTERVENÇÃO (SEM GOMIFES — proibido cobrar agente+ação+meio+finalidade do ENEM).**
+* **Fórmula da Conclusão Padrão UNITINS (3 passos):** **1. Retomada** (do tema e da tese) → **2. Síntese da Tensão / Ratificação** (equilibrando D1 e D2) → **3. Reflexão Final** (fechamento crítico ampliado).
 * **Critérios:** 5 critérios de 4.0 pontos cada (c1 a c5 = Total 20.0 pontos).
 * **Penalizações obrigatórias UNITINS:** Erro factual em repertório → desconta em c2 (estrutura/repertório) E c5 (norma culta). Anacoluto e frase sem predicado → descontam em c3 (coerência) e c5. Vírgula sujeito-verbo recorrente → desconta em c5. Cada ocorrência de desvio grave custa no mínimo 0,5 pt no critério correspondente.
-* **Calibração Realista da Nota:** Avalie se o texto responde ao tema (c1), organiza a estrutura com repertório legítimo (c2), mantém coerência lógica (c3), usa conectores coesivos (c4) e respeita a norma padrão (c5). Cumprindo isso com simplicidade e clareza e SEM desvios graves, atribua notas de 3.5 a 4.0 por critério (total 17.5 a 20.0 pts). Com erros graves recorrentes, a nota realista fica em 2.5 a 3.0 por critério afetado.
+* **Calibração Realista da Nota:** Avalie se o texto responde ao tema e ao recorte específico sem reducionismo (c1), organiza a estrutura dissertativa com repertório que fundamenta em vez de apenas citar (c2), mantém coerência lógica e equilíbrio dialético (c3), usa conectores coesivos (c4) e respeita a norma padrão (c5). Cumprindo isso com simplicidade e clareza e SEM desvios graves, atribua notas de 3.5 a 4.0 por critério (total 17.5 a 20.0 pts). Com erros graves recorrentes, a nota realista fica em 2.5 a 3.0 por critério afetado.
 
 ### [BANCA 5: UEMA (DISSERTATIVO-ARGUMENTATIVO)]
 * **Título:** **OBRIGATÓRIO** figurando na Linha 1.

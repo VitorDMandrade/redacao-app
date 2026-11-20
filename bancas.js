@@ -262,20 +262,253 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
         nome: "UNITINS",
         notaMaxima: 20.0,
         exigeTitulo: true,
-        limiteLinhas: { min: 8, max: 30 },
+        limiteLinhas: { min: 25, max: 30 },
         generosPermitidos: ['dissertativo'],
         labelTreino: "Treino por Partes",
         labelFolha: "Folha Oficial UNITINS",
         criterios: [
-            { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 4.0, desc: "O texto responde ao tema proposto, evitando tangenciamento." },
-            { id: "c2", nome: "Estruturação do Texto e Repertório", pontuacao: 4.0, desc: "Domínio da estrutura em prosa e mobilização de repertório sociocultural pertinente." },
-            { id: "c3", nome: "Coerência", pontuacao: 4.0, desc: "Articulação conceitual, consistência lógica da tese e ausência de contradições." },
-            { id: "c4", nome: "Coesão Textual", pontuacao: 4.0, desc: "Uso adequado de conectores e pronomes na transição de parágrafos e frases." },
-            { id: "c5", nome: "Domínio da Modalidade Escrita Padrão", pontuacao: 4.0, desc: "Ortografia, regência, concordância, descontando rasuras e ilegibilidade." }
+            { id: "c1", nome: "Atendimento ao Tema Proposto", pontuacao: 4.0, desc: "O texto responde ao tema proposto (especialmente quando formulado em pergunta ou tensão conceitual), evitando tangenciamento e reducionismos." },
+            { id: "c2", nome: "Estruturação do Texto e Repertório", pontuacao: 4.0, desc: "Domínio da estrutura dissertativa (Introdução com tese responsiva, D1 e D2 equilibrados em tensão, Conclusão reflexiva) e repertório pertinente que fundamenta o argumento." },
+            { id: "c3", nome: "Coerência", pontuacao: 4.0, desc: "Articulação conceitual, consistência lógica entre os polos argumentativos (Potencial × Limite / Avanço × Barreiras) e ausência de extremos ou contradições." },
+            { id: "c4", nome: "Coesão Textual", pontuacao: 4.0, desc: "Uso adequado de conectores inter e intraparágrafos e pronomes na transição de ideias." },
+            { id: "c5", nome: "Domínio da Modalidade Escrita Padrão", pontuacao: 4.0, desc: "Ortografia, regência, concordância, crase e pontuação rigorosa, descontando rasuras e ilegibilidade." }
         ],
-        orientacoes: "Você DEVE marcar o tema escolhido no campo de título. Textos com 7 linhas ou menos são zerados. Evite teses genéricas (ex: negligência estatal) e repertórios de bolso. Conclusão reflexiva (SEM intervenção GOMIFES).",
-        resumoPratico: "Banca acadêmico-analítica: intervenção não obrigatória (dispensada/proibida). Indique o tema escolhido no título. Demanda altíssimo rigor com a norma culta, autoria na argumentação e um fechamento crítico ao invés da tradicional proposta do ENEM.",
-        eixosTematicos: EIXOS_MESTRES
+        orientacoes: "Você DEVE marcar o tema escolhido no campo de título. Extensão oficial exigida nas propostas da UNITINS: mínimo de 25 e máximo de 30 linhas (textos curtos abaixo de 25 linhas descumprem a instrução da prova). Foco temático em comportamento humano, tendências da atualidade e recortes filosóficos/conceituais. Quando o tema for uma pergunta, responda diretamente já na tese da introdução e equilibre D1 (Potencial/Avanço) × D2 (Limite/Barreira), evitando extremos e teses genéricas. Conclusão padrão UNITINS em 3 etapas (PROIBIDO modelo GOMIFES do ENEM): Retomada → Síntese da Tensão / Ratificação → Reflexão Final.",
+        resumoPratico: "Padrão UNITINS (25 a 30 linhas): Marque o tema no título. Foco em comportamento humano, tendências atuais e recortes conceituais. Se houver pergunta temática, responda-a na tese e estruture em tensão equilibrada: D1 (Potencial/Avanço) × D2 (Limite/Barreira), evitando generalizações extremas. Conclusão em 3 passos: Retomada → Síntese da Tensão → Reflexão Final (SEM proposta GOMIFES).",
+        eixosTematicos: [
+            {
+                nome: "1. Leitura, Telas e Comportamento Digital (UNITINS)",
+                guiaModelo: {
+                    tema: "Ler na tela é ler menos?",
+                    polaridade: "Ampliação (Potencial) × Superficialidade (Limite)",
+                    tesePossivel: "Ler na tela não significa necessariamente ler menos, pois os meios digitais ampliam o acesso a livros, notícias e conteúdos educativos; entretanto, a dinâmica acelerada das plataformas favorece uma leitura fragmentada, prejudicando a concentração e a compreensão aprofundada.",
+                    d1: "Potencial (Ampliação): Democratização do acesso via celulares, leitores digitais e bibliotecas virtuais; superação de barreiras geográficas e econômicas.",
+                    d2: "Limite (Superficialidade): Fragmentação do ato de ler, excesso de estímulos, rolagens contínuas, menor retenção/compreensão profunda em relação ao papel.",
+                    cuidadoTema: "Responda à pergunta já na tese da introdução! Não fique em reflexão filosófica abstrata sem responder no desenvolvimento. O suporte digital não determina sozinho a qualidade da leitura.",
+                    conclusao: "1. Retomada (ampliação do acesso × risco de fragmentação) → 2. Ratificação (ler na tela não é ler menos, mas tende à fragmentação) → 3. Reflexão (como transformar acesso em leitura profunda, contínua e crítica)."
+                },
+                repertorios: [
+                    {
+                        obra: "Televisão — Titãs (Música)",
+                        autor: "Banda Titãs (Composição de Arnaldo Antunes, Marcelo Fromer e Toni Bellotto)",
+                        resumo: "A canção critica a influência das telas sobre a percepção, a atenção e os hábitos cotidianos dos indivíduos.",
+                        uso: "Permite questionar se o contato constante com conteúdos digitais representa efetivamente mais leitura ou apenas maior exposição a informações rápidas.",
+                        frase: "Na canção 'Televisão', a banda brasileira Titãs critica a influência incessante das telas sobre a percepção e os hábitos cotidianos. De maneira análoga, ao discutir se [TEMA], percebe-se que o contato constante com conteúdos digitais nem sempre equivale a leitura crítica, podendo converter-se em mera exposição a estímulos rápidos.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "A Era do Capitalismo de Vigilância (Livro)",
+                        autor: "Shoshana Zuboff",
+                        resumo: "As plataformas digitais utilizam dados e mecanismos de recomendação para capturar e reter a atenção do usuário pelo maior tempo possível.",
+                        uso: "O ambiente digital disputa permanentemente a atenção do leitor, incentivando cliques, rolagens e leituras breves em lugar do aprofundamento.",
+                        frase: "Segundo a socióloga Shoshana Zuboff, em 'A Era do Capitalismo de Vigilância', as plataformas digitais estruturam algoritmos voltados à captura permanente da atenção humana. Sob essa ótica, [TEMA] revela como o incentivo contínuo a cliques e rolagens favorece leituras breves e fragmentadas em detrimento da reflexão aprofundada.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Magnifica Humanitas (Encíclica / Reflexão 2026)",
+                        autor: "Papa Leão XIV",
+                        resumo: "A tecnologia deve ser avaliada pela capacidade de contribuir para o desenvolvimento humano, e não somente pela eficiência ou volume que proporciona.",
+                        uso: "A leitura digital deve ser analisada pela qualidade da experiência formativa que oferece, e não apenas pela quantidade de textos disponíveis.",
+                        frase: "Sob a perspectiva humanista de Papa Leão XIV, em 'Magnifica Humanitas', a tecnologia deve servir ao desenvolvimento humano integral, e não apenas à eficiência mecânica. Aplicado a [TEMA], esse princípio evidencia que a leitura em suportes digitais deve ser avaliada pela qualidade da experiência formativa, e não só pelo volume de textos acessados.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Meio Técnico-Científico-Informacional (Conceito)",
+                        autor: "Milton Santos",
+                        resumo: "A técnica e a informação passaram a organizar as relações sociais, o território e a circulação do conhecimento.",
+                        uso: "D1 (Potencial): Celulares, leitores digitais e bibliotecas virtuais tornam livros, artigos e materiais educativos mais acessíveis, superando barreiras geográficas e econômicas.",
+                        frase: "De acordo com o geógrafo brasileiro Milton Santos, o meio técnico-científico-informacional reorganiza a circulação do conhecimento por meio da técnica. No debate sobre [TEMA], nota-se o potencial democratizante das telas, visto que celulares e acervos virtuais ampliam o acesso a livros e artigos, superando barreiras geográficas e econômicas.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "ODS 4 — Educação de Qualidade (Agenda 2030 / ONU)",
+                        autor: "Organização das Nações Unidas (ONU)",
+                        resumo: "Defende uma educação inclusiva, equitativa e capaz de ampliar oportunidades de aprendizagem ao longo da vida.",
+                        uso: "D1 (Potencial): Recursos digitais democratizam o acesso à leitura quando escolas e bibliotecas oferecem dispositivos, conectividade e orientação.",
+                        frase: "Em consonância com o Objetivo de Desenvolvimento Sustentável 4 da ONU, garantir educação inclusiva requer ampliar oportunidades concretas de aprendizagem. Nesse sentido, diante de [TEMA], ferramentas digitais tornam-se aliadas da formação de leitores quando integradas a conectividade, acesso a dispositivos e mediação pedagógica.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Sociedade do Desempenho / Cansaço (Livro)",
+                        autor: "Byung-Chul Han",
+                        resumo: "Analisa uma sociedade marcada pela aceleração, pelo excesso de estímulos e pela necessidade de permanecer continuamente ativo.",
+                        uso: "D2 (Limite): Notificações, múltiplas abas e alternância constante de conteúdos dificultam a concentração necessária para a leitura prolongada e reflexiva.",
+                        frase: "Conforme o filósofo Byung-Chul Han analisa em 'Sociedade do Cansaço', a hiperaceleração e o excesso de estímulos corroem a atenção contemplativa. No tocante a [TEMA], notificações constantes e alternância de abas dificultam o foco sustentado, tornando a leitura em tela mais fragmentada e superficial.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Dados: Retratos da Leitura (6ª ed.) & Nielsen BookData (2026)",
+                        autor: "Instituto Pró-Livro / USP / Nielsen BookData",
+                        resumo: "53% dos brasileiros são não leitores (1ª vez maioria), mas 49% tiveram contato com leitura digital e 18 milhões passaram a ler mais no formato; a maior barreira é comportamental (vídeos/redes).",
+                        uso: "Excelente para sustentar simultaneamente D1 (crescimento do consumo digital, sobretudo via celular) e D2 (fragmentação e competição com redes sociais).",
+                        frase: "Segundo levantamentos recentes como 'Retratos da Leitura no Brasil' e a pesquisa Nielsen BookData, embora milhões de brasileiros tenham ampliado seu contato com textos via celular, a maioria da população ainda declara não ler livros com frequência, impactada pela competição com vídeos curtos e redes sociais.",
+                        tipo: "dev"
+                    }
+                ]
+            },
+            {
+                nome: "2. Representatividade Feminina e Democracia (UNITINS)",
+                guiaModelo: {
+                    tema: "Representatividade feminina e democracia no Brasil",
+                    polaridade: "Avanço Democrático (D1) × Limites Persistentes (D2)",
+                    tesePossivel: "Embora o Brasil tenha ampliado os mecanismos institucionais de incentivo à participação feminina e registrado crescimento da presença de mulheres no Congresso, a representatividade política ainda encontra limites na sub-representação e na permanência de obstáculos que tornam desigual o acesso feminino aos espaços de decisão.",
+                    d1: "Avanço democrático (D1): Queda histórica de barreiras jurídicas, cota de 30% a 70% de candidaturas (Lei 12.034/2009), ampliação da bancada feminina (109 deputadas em 2026, ~21% da Câmara) e pluralidade de perspectivas.",
+                    d2: "Limites persistentes (D2): Igualdade formal ≠ igualdade efetiva; barreiras partidárias, queda de 24% nas candidaturas femininas e violência política de gênero (177 processos no TSE em 2026).",
+                    cuidadoTema: "Não reduza o tema a 'machismo genérico' nem a 'violência contra a mulher em geral': o recorte é representatividade política, participação democrática e violência política de gênero. Lembre também que mais mulheres eleitas não significa uniformidade ideológica.",
+                    conclusao: "1. Retomada (representatividade feminina e qualidade democrática) → 2. Síntese da Tensão (avanços legais existem, mas a presença no poder segue baixa e cercada de obstáculos) → 3. Reflexão (representatividade envolve acesso, presença, permanência e condições reais de disputa)."
+                },
+                repertorios: [
+                    {
+                        obra: "Voto Feminino — Código Eleitoral de 1932",
+                        autor: "Marco Histórico Brasileiro (Decreto nº 21.076/1932)",
+                        resumo: "Conquista histórica que inaugurou a cidadania política formal das mulheres no Brasil.",
+                        uso: "Contrastar a longa trajetória de conquista formal da cidadania política com a persistente sub-representação atual nos espaços de poder.",
+                        frase: "Desde a conquista do voto feminino pelo Código Eleitoral de 1932, o Brasil deu passos decisivos rumo à ampliação da cidadania política das mulheres. Contudo, ao analisar [TEMA], nota-se que a igualdade jurídica conquistada ao longo do século XX ainda não se traduziu em paridade efetiva nos espaços de decisão.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Bertha Lutz e a Cidadania Política Feminina",
+                        autor: "Bióloga, ativista e deputada federal brasileira",
+                        resumo: "Liderança central na luta pelo sufrágio feminino e pela participação política das mulheres nas instituições brasileiras.",
+                        uso: "Demonstrar a participação política como resultado de processo histórico contínuo, ainda inconcluso na efetivação de condições iguais.",
+                        frase: "A atuação histórica de Bertha Lutz na defesa do sufrágio e da presença feminina no Parlamento evidencia que a participação política das mulheres decorre de um processo contínuo de reivindicação democrática. Sob essa ótica, o debate sobre [TEMA] expõe a necessidade de superar barreiras institucionais que ainda restringem o alcance desse legado.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Constituição Federal de 1988 — Igualdade Jurídica",
+                        autor: "Assembleia Nacional Constituinte",
+                        resumo: "Consagra a igualdade jurídica entre homens e mulheres e o princípio democrático como fundamentos da República.",
+                        uso: "Contrastar a igualdade formal garantida pela lei (como as cotas eleitorais) com a desigualdade concreta de representação e acesso.",
+                        frase: "Embora a Constituição Federal de 1988 assegure a igualdade jurídica entre homens e mulheres e a legislação eleitoral estabeleça cotas mínimas de candidaturas, a realidade em torno de [TEMA] revela o descompasso entre o direito formal de concorrer e a existência de condições efetivas de disputa.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Hannah Arendt — Espaço Público e Participação",
+                        autor: "Filósofa e teórica política alemã",
+                        resumo: "Valoriza a presença ativa, a pluralidade e a participação plural dos indivíduos no espaço público como essência da política democrática.",
+                        uso: "Discutir a exclusão ou restrição da presença feminina e demonstrar que a democracia não se reduz ao ato de votar, exigindo pluralidade de vozes nas decisões.",
+                        frase: "Para a filósofa política Hannah Arendt, a vitalidade da esfera pública depende da presença plural e da atuação livre dos cidadãos nas decisões coletivas. Aplicada a [TEMA], essa concepção demonstra que a democracia não se esgota no ato de votar, sendo empobrecida sempre que barreiras partidárias ou a violência política restringem a permanência das mulheres no poder.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Dados TSE & Câmara dos Deputados (2026)",
+                        autor: "TSE / Câmara dos Deputados / Agência Brasil",
+                        resumo: "Bancada feminina chegou a 109 deputadas (~21% de 513 cadeiras), mas houve queda de 24% nas candidaturas e alta de 127% nos processos de violência política de gênero no TSE.",
+                        uso: "Sustentar com dados precisos a tensão entre o avanço numérico no Legislativo e a persistência de obstáculos concretos na disputa eleitoral.",
+                        frase: "Dados da Câmara dos Deputados e do Tribunal Superior Eleitoral ilustram essa dualidade: conquanto a presença feminina no Legislativo tenha alcançado seu maior patamar histórico com 109 deputadas eleitas, o recuo no total de candidaturas e o aumento dos registros de violência política de gênero evidenciam entraves estruturais à igualdade democrática.",
+                        tipo: "dev"
+                    }
+                ]
+            },
+            {
+                nome: "3. Dinheiro Rápido, Juventude e Plataformas (UNITINS)",
+                guiaModelo: {
+                    tema: "Dinheiro rápido: oportunidade ou ilusão para os jovens?",
+                    polaridade: "Novas Oportunidades de Renda (D1 · Potencial) × Ilusão do Enriquecimento Fácil (D2 · Limite)",
+                    tesePossivel: "As novas possibilidades digitais de geração de renda podem favorecer a autonomia financeira juvenil e o empreendedorismo, mas a promessa de enriquecimento fácil por meio de apostas e atalhos ilusórios também apresenta riscos severos aos projetos de futuro.",
+                    d1: "Potencial (Novas oportunidades de renda): A tecnologia e a internet ampliam alternativas legítimas de trabalho, comércio eletrônico, serviços digitais e autonomia financeira fora de trajetórias convencionais.",
+                    d2: "Limite (A ilusão do dinheiro fácil): Histórias de sucesso artificiais e promessas imediatistas estimulam decisões arriscadas, como apostas digitais, comprometendo a educação e o futuro (34% da ABMES).",
+                    cuidadoTema: "Mantenha os dois desenvolvimentos focados no recorte da JUVENTUDE. Não generalize em extremos: não afirme que todo jovem que busca renda digital está iludido; diferencie oportunidade real (que exige planejamento e trabalho) de promessa fácil.",
+                    conclusao: "1. Retomada (posição equilibrada sobre dinheiro rápido e juventude) → 2. Síntese (oportunidades legítimas × riscos das ilusões) → 3. Reflexão (equilíbrio entre autonomia financeira digital e planejamento sustentável frente a expectativas irreais)."
+                },
+                repertorios: [
+                    {
+                        obra: "O Choque do Futuro (Livro)",
+                        autor: "Alvin Toffler",
+                        resumo: "As rápidas transformações tecnológicas e sociais modificam o cotidiano, as formas de trabalho e exigem adaptação constante dos indivíduos.",
+                        uso: "Contextualizar na introdução as mudanças aceleradas na maneira de trabalhar e gerar renda com a mediação da tecnologia.",
+                        frase: "Em 'O Choque do Futuro', o escritor norte-americano Alvin Toffler analisa como a velocidade das inovações tecnológicas transforma profundamente as relações cotidianas e de trabalho. Nesse horizonte, ao avaliar [TEMA], observa-se que a economia digital reconfigura as vias de ganho financeiro dos jovens, oscilando entre novas formas de autonomia e a atração por atalhos ilusórios.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Alone Together (Livro)",
+                        autor: "Sherry Turkle",
+                        resumo: "Investiga como a mediação tecnológica altera o comportamento humano, gerando vínculos mais imediatos, performáticos e vulneráveis à validação digital.",
+                        uso: "Explicar na introdução ou D2 como a exibição contínua de estilos de vida e sucesso instantâneo nas redes molda expectativas juvenis irreais.",
+                        frase: "A socióloga Sherry Turkle, em 'Alone Together', adverte que a mediação intensa das telas reconfigura expectativas sociais e comportamentais. Transposta essa análise para [TEMA], nota-se que a vitrine constante de enriquecimento instantâneo nas redes estimula jovens a confundirem performance digital com prosperidade sólida.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "ODS 8 — Trabalho Decente e Crescimento Econômico (Agenda 2030)",
+                        autor: "Organização das Nações Unidas (ONU)",
+                        resumo: "A Agenda 2030 da ONU defende ampliar oportunidades de trabalho digno, produtivo e empreendedorismo sustentável, especialmente para jovens.",
+                        uso: "D1 (Potencial): Fundamentar como o comércio eletrônico, a prestação de serviços digitais e o trabalho online planejado podem gerar autonomia financeira juvenil.",
+                        frase: "Sob a diretriz do Objetivo de Desenvolvimento Sustentável 8 da Agenda 2030 da ONU, a promoção de trabalho digno e empreendedorismo produtivo constitui pilar da autonomia juvenil. No contexto de [TEMA], plataformas de comércio eletrônico e serviços digitais representam oportunidades concretas de renda quando associadas a capacitação e planejamento.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Sociedade do Cansaço (Livro)",
+                        autor: "Byung-Chul Han",
+                        resumo: "A cobrança permanente por desempenho, visibilidade e sucesso rápido leva à exaustão e à busca desesperada por resultados imediatos.",
+                        uso: "D2 (Limite): Explicar a pressão social sentida pelos jovens para alcançar sucesso financeiro cada vez mais cedo, subestimando riscos de promessas fáceis.",
+                        frase: "Segundo o filósofo Byung-Chul Han, em 'Sociedade do Cansaço', a cobrança incessante por desempenho e sucesso precoce submete o indivíduo contemporâneo a uma lógica de urgência permanente. Diante de [TEMA], essa pressão impulsiona jovens a buscar atalhos financeiros imediatistas, subestimando os riscos de endividamento e frustração.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Economia de Plataformas e Automação (Yanis Varoufakis / Yuval Noah Harari)",
+                        autor: "Yanis Varoufakis / Yuval Noah Harari",
+                        resumo: "Analisam a centralidade dos aplicativos, das plataformas algorítmicas e da automação na reconfiguração do trabalho e da renda no século XXI.",
+                        uso: "Aprofundar a transição do emprego tradicional para a economia mediada por plataformas e os desafios da precarização e instabilidade para os jovens.",
+                        frase: "Como analisam pensadores contemporâneos a exemplo de Yanis Varoufakis e Yuval Noah Harari, o avanço das plataformas digitais e da automação altera radicalmente as formas tradicionais de remuneração. No debate sobre [TEMA], essa reconfiguração amplia iniciativas independentes na rede, mas também expõe jovens à instabilidade e à sedução de ganhos especulativos.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Pesquisa ABMES (2026) — Apostas x Graduação",
+                        autor: "Associação Brasileira de Mantenedoras de Ensino Superior (ABMES)",
+                        resumo: "34% dos entrevistados afirmaram que precisariam interromper os gastos com apostas para conseguir iniciar uma graduação em 2026.",
+                        uso: "D2 (Limite): Dado concreto mostrando como a promessa de ganho imediato em apostas compromete projetos educacionais e profissionais futuros dos jovens.",
+                        frase: "Essa vulnerabilidade é corroborada por levantamento da ABMES, segundo o qual 34% dos entrevistados apontaram a necessidade de interromper gastos com apostas para viabilizar o ingresso no ensino superior — evidência clara de como a ilusão do retorno imediato compromete projetos formativos de longo prazo.",
+                        tipo: "dev"
+                    }
+                ]
+            },
+            {
+                nome: "4. Comportamento Humano, Risco e Sociedade Contemporânea (UNITINS)",
+                guiaModelo: {
+                    tema: "Recortes Filosóficos e Tendências da Atualidade (Perfil UNITINS)",
+                    polaridade: "Progresso / Realidade Contemporânea × Riscos Éticos / Impactos Humanos",
+                    tesePossivel: "Use a abordagem dialética característica da UNITINS: reconheça os avanços ou nuances legítimas do fenômeno no D1 e problematize os limites éticos, comportamentais ou sociais no D2, encerrando com Retomada → Síntese da Tensão → Reflexão.",
+                    d1: "Avalie as contribuições, a relevância ou os avanços reais do fenômeno analisado, fundamentando com autores humanos ou marcos históricos.",
+                    d2: "Problematize os efeitos colaterais, as desigualdades na exposição ao risco ou as contradições comportamentais sem cair em extremismos.",
+                    cuidadoTema: "A UNITINS costuma cobrar tendências contemporâneas e dilemas humanos/conceituais (diferentes do recorte estrito de vulnerabilidade social do ENEM). Leia atentamente os textos motivadores e mantenha rigor conceitual.",
+                    conclusao: "Fórmula de Ouro UNITINS: 1. Retomada do tema e da tese → 2. Síntese equilibrada da tensão (D1 × D2) → 3. Reflexão final prospectiva (SEM intervenção GOMIFES)."
+                },
+                repertorios: [
+                    {
+                        obra: "Sociedade de Risco (Livro)",
+                        autor: "Ulrich Beck",
+                        resumo: "Demonstra que a modernidade tardia produz riscos globais (climáticos, tecnológicos, sanitários e financeiros) que afetam os grupos sociais de forma desigual.",
+                        uso: "Temas sobre eventos climáticos, impactos tecnológicos, saúde pública e vulnerabilidade desigual diante de crises contemporâneas.",
+                        frase: "Para o sociólogo alemão Ulrich Beck, na obra 'Sociedade de Risco', a modernidade avançada gera ameaças sistêmicas cujos impactos se distribuem de maneira profundamente desigual. Sob esse prisma, a análise de [TEMA] evidencia que inovações e crises contemporâneas produzem benefícios concentrados, mas transferem seus riscos mais severos às parcelas desprotegidas.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "A Vida Não É Útil (Livro)",
+                        autor: "Ailton Krenak",
+                        resumo: "Critica a sociedade que reduz a existência humana à utilidade produtiva, à eficiência incessante e ao lucro, apagando o sentido reflexivo e comunitário da vida.",
+                        uso: "Saúde mental, redes sociais (existir para consumir/ser visto), meio ambiente, trabalho e invisibilidade de grupos não vistos como 'úteis'.",
+                        frase: "Em 'A Vida Não É Útil', o pensador indígena brasileiro Ailton Krenak critica a racionalidade contemporânea que reduz o valor da existência humana à utilidade produtiva e ao consumo. Essa reflexão ilumina [TEMA], revelando que a subordinação dos hábitos e do tempo humano à lógica da performance corrói o equilíbrio psíquico e coletivo.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Laudato Si' (Encíclica, 2015 — § 138)",
+                        autor: "Papa Francisco",
+                        resumo: "Sustenta o princípio da ecologia integral ('tudo está interligado'), unindo degradação ambiental, desigualdade social, hábitos de consumo e dignidade humana.",
+                        uso: "Temas socioambientais, adaptação climática, consumo consciente e responsabilidade intergeracional.",
+                        frase: "Na encíclica 'Laudato Si'', o pontífice Papa Francisco sintetiza o princípio da ecologia integral ao afirmar que 'tudo está interligado'. Ao examinar [TEMA], percebe-se que as escolhas econômicas e comportamentais da atualidade impactam simultaneamente o equilíbrio ambiental e a dignidade das populações mais vulneráveis.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Sobre o Autoritarismo Brasileiro (Livro)",
+                        autor: "Lilia Schwarcz",
+                        resumo: "Explica como heranças históricas de desigualdade, patrimonialismo e discriminação estrutural persistem naturalizadas nas relações sociais e institucionais.",
+                        uso: "Temas de cidadania, racismo estrutural, desigualdades persistentes e desafios à cultura democrática no Brasil.",
+                        frase: "A historiadora e antropóloga Lilia Schwarcz, em 'Sobre o Autoritarismo Brasileiro', demonstra que estruturas históricas de hierarquia e exclusão tendem a se naturalizar no cotidiano institucional. Sob essa ótica, [TEMA] reflete entraves culturais profundos que ainda limitam a consolidação de práticas plenamente democráticas e igualitárias.",
+                        tipo: "dev"
+                    }
+                ]
+            }
+        ]
     }
 };
 

@@ -308,6 +308,35 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(scriptContent.includes('Teste Prático de 5 Segundos'), 'script.js deve conter o teste prático de 5 segundos');
         assert.ok(scriptContent.includes('renderGrammarLogic'), 'script.js deve conter a função renderGrammarLogic');
     });
+
+    test('14. Padrão UNITINS: 25 a 30 linhas, eixos temáticos exclusivos e guia dialético', () => {
+        const unitins = BANCAS['UNITINS'];
+        assert.equal(unitins.limiteLinhas.min, 25, 'UNITINS deve ter mínimo recomendado de 25 linhas.');
+        assert.equal(unitins.limiteLinhas.max, 30, 'UNITINS deve ter máximo de 30 linhas.');
+        assert.ok(unitins.resumoPratico.includes('Retomada'), 'Resumo UNITINS deve explicitar Retomada na conclusão.');
+        assert.ok(unitins.resumoPratico.includes('Síntese da Tensão'), 'Resumo UNITINS deve explicitar Síntese da Tensão.');
+        assert.ok(SYSTEM_PROMPT.includes('25 e 30 linhas'), 'SYSTEM_PROMPT deve mencionar 25 e 30 linhas para UNITINS.');
+        assert.ok(SYSTEM_PROMPT.includes('Retomada') && SYSTEM_PROMPT.includes('Síntese da Tensão'), 'SYSTEM_PROMPT deve conter a fórmula de conclusão da UNITINS.');
+
+        // Eixos exclusivos da UNITINS com os 3 modelos e guias
+        assert.ok(Array.isArray(unitins.eixosTematicos) && unitins.eixosTematicos.length >= 4, 'UNITINS deve possuir seus próprios eixos temáticos.');
+        const temasGuias = unitins.eixosTematicos.map(e => e.guiaModelo && e.guiaModelo.tema).filter(Boolean);
+        assert.ok(temasGuias.some(t => t.includes('Ler na tela é ler menos?')), 'UNITINS deve incluir modelo Ler na tela é ler menos?');
+        assert.ok(temasGuias.some(t => t.includes('Representatividade feminina')), 'UNITINS deve incluir modelo Representatividade feminina e democracia');
+        assert.ok(temasGuias.some(t => t.includes('Dinheiro rápido')), 'UNITINS deve incluir modelo Dinheiro rápido: oportunidade ou ilusão');
+
+        // Cada eixo UNITINS deve possuir repertórios de intro e dev para não quebrar o filtro da aba Repertório
+        unitins.eixosTematicos.forEach(eixo => {
+            assert.ok(eixo.repertorios.some(r => r.tipo === 'intro'), `Eixo UNITINS '${eixo.nome}' deve ter repertório tipo intro.`);
+            assert.ok(eixo.repertorios.some(r => r.tipo === 'dev'), `Eixo UNITINS '${eixo.nome}' deve ter repertório tipo dev.`);
+        });
+
+        // Validador: 12 linhas na UNITINS NÃO deve bloquear em validateEssay, mas deve emitir aviso em checkLineLimitWarning
+        const texto12Linhas = Array(4).fill('A'.repeat(220)).join('\n\n'); // 4 parágrafos de ~3 linhas = ~12 linhas
+        assert.equal(validateEssay(texto12Linhas, unitins, 'Ler na tela é ler menos?'), null, 'validateEssay não deve bloquear texto de 12 linhas na UNITINS.');
+        const avisoUnitins = checkLineLimitWarning(texto12Linhas, unitins);
+        assert.ok(avisoUnitins && avisoUnitins.includes('25 e 30 linhas'), 'checkLineLimitWarning deve alertar sobre a faixa de 25 e 30 linhas na UNITINS.');
+    });
 });
 
 

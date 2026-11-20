@@ -152,19 +152,27 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('train-hint-4').textContent = "Reflexão final, despedida formal e assinatura neutra (Ex: Um(a) leitor(a)). NUNCA assine com nome real!";
         } else {
             document.getElementById('train-title-1').textContent = "1. Introdução";
-            document.getElementById('train-hint-1').textContent = "Apresente o tema, contextualização/repertório e sua tese com dois argumentos.";
             document.getElementById('train-title-2').textContent = "2. Desenvolvimento 1";
-            document.getElementById('train-hint-2').textContent = "Apresente o primeiro argumento com causa, repertório legitimado e reflexão crítica.";
             document.getElementById('train-title-3').textContent = "3. Desenvolvimento 2";
-            document.getElementById('train-hint-3').textContent = "Apresente o segundo argumento aprofundando o debate e a consequência social.";
             document.getElementById('train-title-4').textContent = "4. Conclusão";
 
-            // Diferenciação entre bancas de Intervenção (ENEM / EXATO) e Síntese Reflexiva (UEMA / UFG / UNITINS)
-            const isGomifesBanca = currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO';
-            if (isGomifesBanca) {
-                document.getElementById('train-hint-4').textContent = "Retome a tese e elabore a proposta de intervenção social com os 5 elementos (GOMIFES: Agente, Ação, Meio/Modo, Efeito e Detalhamento).";
+            if (currentBanca.id === 'UNITINS') {
+                document.getElementById('train-hint-1').textContent = "Contextualize com repertório e formule uma tese clara respondendo ao tema (especialmente se for pergunta) com equilíbrio.";
+                document.getElementById('train-hint-2').textContent = "D1 (Potencial / Avanço): Desenvolva as contribuições, oportunidades ou avanços ligados ao recorte temático com repertório produtivo.";
+                document.getElementById('train-hint-3').textContent = "D2 (Limite / Barreira): Problematize os obstáculos, riscos ou fragilidades sem generalizações extremas.";
+                document.getElementById('train-hint-4').textContent = "Padrão UNITINS (SEM GOMIFES): 1. Retomada da tese/tema → 2. Síntese da Tensão / Ratificação (D1 × D2) → 3. Reflexão Final ampliada.";
             } else {
-                document.getElementById('train-hint-4').textContent = "Retome a tese e construa uma síntese circular reflexiva e crítica profunda. (ATENÇÃO: Proibido modelo de proposta GOMIFES nesta banca!).";
+                document.getElementById('train-hint-1').textContent = "Apresente o tema, contextualização/repertório e sua tese com dois argumentos.";
+                document.getElementById('train-hint-2').textContent = "Apresente o primeiro argumento com causa, repertório legitimado e reflexão crítica.";
+                document.getElementById('train-hint-3').textContent = "Apresente o segundo argumento aprofundando o debate e a consequência social.";
+
+                // Diferenciação entre bancas de Intervenção (ENEM / EXATO) e Síntese Reflexiva (UEMA / UFG)
+                const isGomifesBanca = currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO';
+                if (isGomifesBanca) {
+                    document.getElementById('train-hint-4').textContent = "Retome a tese e elabore a proposta de intervenção social com os 5 elementos (GOMIFES: Agente, Ação, Meio/Modo, Efeito e Detalhamento).";
+                } else {
+                    document.getElementById('train-hint-4').textContent = "Retome a tese e construa uma síntese circular reflexiva e crítica profunda. (ATENÇÃO: Proibido modelo de proposta GOMIFES nesta banca!).";
+                }
             }
         }
 
@@ -320,6 +328,53 @@ document.addEventListener('DOMContentLoaded', () => {
         currentAxisTitle.textContent = `Eixo: ${eixo.nome}`;
         repertoryList.innerHTML = '';
         currentEixoIndex = currentBanca.eixosTematicos.indexOf(eixo);
+
+        if (eixo.guiaModelo) {
+            const g = eixo.guiaModelo;
+            const guideCard = document.createElement('div');
+            guideCard.style.cssText = 'background: #141e30; border: 1px solid #334155; border-left: 4px solid var(--primary); border-radius: 10px; padding: 16px; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px;';
+            guideCard.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 10px;">
+                    <div>
+                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #38bdf8;">📘 Guia de Estruturação UNITINS (25 a 30 linhas)</span>
+                        <h4 style="margin: 4px 0 2px; color: #f8fafc; font-size: 1.05rem;">${g.tema}</h4>
+                        <span style="font-size: 0.84rem; color: #a78bfa; font-weight: 600;">Polaridade: ${g.polaridade}</span>
+                    </div>
+                    ${!g.tema.includes('(Perfil UNITINS)') ? `<button type="button" class="btn btn-primary btn-sm btn-praticar-modelo-unitins" style="white-space: nowrap;">✍️ Praticar este Tema na Folha</button>` : ''}
+                </div>
+                <div style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.5;">
+                    <strong style="color: #38bdf8;">💡 Tese Possível:</strong> ${g.tesePossivel}
+                </div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
+                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #cbd5e1; line-height: 1.45;">
+                        <strong style="color: #34d399;">D1 (Lado Positivo / Avanço):</strong><br>${g.d1}
+                    </div>
+                    <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.25); border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #cbd5e1; line-height: 1.45;">
+                        <strong style="color: #fb7185;">D2 (Limite / Barreira):</strong><br>${g.d2}
+                    </div>
+                </div>
+                <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #f59e0b; border-radius: 6px; padding: 8px 12px; font-size: 0.84rem; color: #fef3c7; line-height: 1.45;">
+                    <strong>⚠️ Cuidado com a Leitura do Tema:</strong> ${g.cuidadoTema}
+                </div>
+                <div style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.45;">
+                    <strong style="color: #c084fc;">🏁 Conclusão Padrão UNITINS (Sem GOMIFES):</strong> ${g.conclusao}
+                </div>
+            `;
+            const btnPraticar = guideCard.querySelector('.btn-praticar-modelo-unitins');
+            if (btnPraticar) {
+                btnPraticar.addEventListener('click', () => {
+                    if (themeInput) themeInput.value = g.tema;
+                    if (essayTitle && currentBanca && currentBanca.id === 'UNITINS') {
+                        essayTitle.value = g.tema;
+                    }
+                    if (typeof switchMode === 'function' && btnModeFull && writeView) {
+                        switchMode(btnModeFull, writeView);
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                });
+            }
+            repertoryList.appendChild(guideCard);
+        }
 
         if (eixo.repertorios) {
             if (filterBar) filterBar.style.display = 'flex';
@@ -1758,7 +1813,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 let instrucaoBancaBloco = `\nBanca Alvo: ${currentBanca.nome}\nGênero: ${isCarta ? 'Carta do Leitor' : 'Dissertativo-Argumentativo'}\nTema: ${theme || 'Não informado'}\nBloco (${partName}):\n${text}\n`;
 
-                if (!isCarta && (currentBanca.id === 'UEMA' || currentBanca.id === 'UFG' || currentBanca.id === 'UNITINS') && String(part) === '4') {
+                if (!isCarta && currentBanca.id === 'UNITINS' && String(part) === '4') {
+                    instrucaoBancaBloco += `\nATENÇÃO RIGOROSA (PADRÃO UNITINS): A banca UNITINS NÃO utiliza proposta de intervenção social com 5 elementos (GOMIFES). A conclusão DEVE seguir a fórmula em 3 passos: 1. Retomada (do tema e da tese) → 2. Síntese da Tensão / Ratificação (equilibrando os polos D1 × D2) → 3. Reflexão Final ampliada. Não cobre agente, ação, meio ou detalhamento.\n`;
+                } else if (!isCarta && (currentBanca.id === 'UEMA' || currentBanca.id === 'UFG') && String(part) === '4') {
                     instrucaoBancaBloco += `\nATENÇÃO RIGOROSA: Esta banca (${currentBanca.nome}) NÃO utiliza proposta de intervenção social com 5 elementos (GOMIFES). A conclusão DEVE ser uma síntese circular reflexiva e crítica profunda. Não cobre agente, ação, meio ou detalhamento.\n`;
                 } else if (!isCarta && (currentBanca.id === 'ENEM' || currentBanca.id === 'EXATO_DISSERTATIVO') && String(part) === '4') {
                     instrucaoBancaBloco += `\nATENÇÃO: A conclusão deve conter proposta de intervenção social completa com os 5 elementos (Agente, Ação, Meio/Modo, Efeito e Detalhamento).\n`;

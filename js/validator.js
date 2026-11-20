@@ -43,9 +43,12 @@ export function validateEssay(text, currentBanca, title = '') {
 
     if (currentBanca.limiteLinhas) {
         const minLines = currentBanca.limiteLinhas.min || 8;
-        const maxLines = currentBanca.limiteLinhas.max || 30;
 
-        if (estimatedLines < minLines) {
+        if (currentBanca.id === 'UNITINS') {
+            if (estimatedLines < 8) {
+                return `⚠️ Radar de Conformidade: Textos com menos de 8 linhas recebem nota zero na UNITINS (sua redação possui cerca de ${estimatedLines} linhas).`;
+            }
+        } else if (estimatedLines < minLines) {
             if (currentBanca.nome.includes('UEMA') || minLines === 15) {
                 return `⚠️ Radar de Conformidade: A banca UEMA exige no mínimo 15 linhas escritas (sua redação possui cerca de ${estimatedLines} linhas). Textos com menos de 15 linhas são sumariamente eliminados com NOTA ZERO pelo edital oficial.`;
             }
@@ -112,7 +115,12 @@ export function checkLineLimitWarning(text, currentBanca) {
     const estimatedLines = rawParagraphs.reduce((acc, p) => {
         return acc + Math.max(1, Math.ceil(p.length / 94));
     }, 0);
+    const minLines = currentBanca.limiteLinhas.min || 8;
     const maxLines = currentBanca.limiteLinhas.max || 30;
+
+    if (currentBanca.id === 'UNITINS' && estimatedLines < minLines) {
+        return `⚠️ Radar de Conformidade: A proposta oficial da UNITINS recomenda entre ${minLines} e ${maxLines} linhas (sua redação possui cerca de ${estimatedLines} linhas). Estamos enviando para análise mesmo assim, mas lembre-se de atingir ${minLines} linhas na prova!`;
+    }
 
     if (estimatedLines > maxLines) {
         return `⚠️ Radar de Conformidade: Sua redação possui cerca de ${estimatedLines} linhas e ultrapassa o limite permitido de ${maxLines} linhas da banca ${currentBanca.nome}. Provavelmente ela não caberia na folha de redação tradicional, mas estamos enviando para análise de qualquer jeito!`;

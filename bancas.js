@@ -318,6 +318,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         resumo: "A técnica e a informação passaram a organizar as relações sociais, o território e a circulação do conhecimento.",
                         uso: "D1 (Potencial): Celulares, leitores digitais e bibliotecas virtuais tornam livros, artigos e materiais educativos mais acessíveis, superando barreiras geográficas e econômicas.",
                         frase: "De acordo com o geógrafo brasileiro Milton Santos, o meio técnico-científico-informacional reorganiza a circulação do conhecimento por meio da técnica. No debate sobre [TEMA], nota-se o potencial democratizante das telas, visto que celulares e acervos virtuais ampliam o acesso a livros e artigos, superando barreiras geográficas e econômicas.",
+                        audio: "arquivos de audio para repertório/Milton_Santos_e_a_cidadania_pelo_CEP.m4a",
                         tipo: "dev"
                     },
                     {
@@ -334,6 +335,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         resumo: "Analisa uma sociedade marcada pela aceleração, pelo excesso de estímulos e pela necessidade de permanecer continuamente ativo.",
                         uso: "D2 (Limite): Notificações, múltiplas abas e alternância constante de conteúdos dificultam a concentração necessária para a leitura prolongada e reflexiva.",
                         frase: "Conforme o filósofo Byung-Chul Han analisa em 'Sociedade do Cansaço', a hiperaceleração e o excesso de estímulos corroem a atenção contemplativa. No tocante a [TEMA], notificações constantes e alternância de abas dificultam o foco sustentado, tornando a leitura em tela mais fragmentada e superficial.",
+                        audio: "arquivos de audio para repertório/Sociedade_do_Cansaço_na_redação_do_ENEM.m4a",
                         tipo: "dev"
                     },
                     {
@@ -418,6 +420,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         resumo: "As rápidas transformações tecnológicas e sociais modificam o cotidiano, as formas de trabalho e exigem adaptação constante dos indivíduos.",
                         uso: "Contextualizar na introdução as mudanças aceleradas na maneira de trabalhar e gerar renda com a mediação da tecnologia.",
                         frase: "Em 'O Choque do Futuro', o escritor norte-americano Alvin Toffler analisa como a velocidade das inovações tecnológicas transforma profundamente as relações cotidianas e de trabalho. Nesse horizonte, ao avaliar [TEMA], observa-se que a economia digital reconfigura as vias de ganho financeiro dos jovens, oscilando entre novas formas de autonomia e a atração por atalhos ilusórios.",
+                        audio: "arquivos de audio para repertório/Choque_do_Futuro_na_Redação_do_ENEM.m4a",
                         tipo: "intro"
                     },
                     {
@@ -442,6 +445,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         resumo: "A cobrança permanente por desempenho, visibilidade e sucesso rápido leva à exaustão e à busca desesperada por resultados imediatos.",
                         uso: "D2 (Limite): Explicar a pressão social sentida pelos jovens para alcançar sucesso financeiro cada vez mais cedo, subestimando riscos de promessas fáceis.",
                         frase: "Segundo o filósofo Byung-Chul Han, em 'Sociedade do Cansaço', a cobrança incessante por desempenho e sucesso precoce submete o indivíduo contemporâneo a uma lógica de urgência permanente. Diante de [TEMA], essa pressão impulsiona jovens a buscar atalhos financeiros imediatistas, subestimando os riscos de endividamento e frustração.",
+                        audio: "arquivos de audio para repertório/Sociedade_do_Cansaço_na_redação_do_ENEM.m4a",
                         tipo: "dev"
                     },
                     {
@@ -488,6 +492,7 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         resumo: "Critica a sociedade que reduz a existência humana à utilidade produtiva, à eficiência incessante e ao lucro, apagando o sentido reflexivo e comunitário da vida.",
                         uso: "Saúde mental, redes sociais (existir para consumir/ser visto), meio ambiente, trabalho e invisibilidade de grupos não vistos como 'úteis'.",
                         frase: "Em 'A Vida Não É Útil', o pensador indígena brasileiro Ailton Krenak critica a racionalidade contemporânea que reduz o valor da existência humana à utilidade produtiva e ao consumo. Essa reflexão ilumina [TEMA], revelando que a subordinação dos hábitos e do tempo humano à lógica da performance corrói o equilíbrio psíquico e coletivo.",
+                        audio: "arquivos de audio para repertório/Ailton_Krenak_na_Redação_do_ENEM.m4a",
                         tipo: "dev"
                     },
                     {

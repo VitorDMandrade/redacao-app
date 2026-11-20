@@ -337,6 +337,39 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         const avisoUnitins = checkLineLimitWarning(texto12Linhas, unitins);
         assert.ok(avisoUnitins && avisoUnitins.includes('25 e 30 linhas'), 'checkLineLimitWarning deve alertar sobre a faixa de 25 e 30 linhas na UNITINS.');
     });
+
+    test('15. Compêndio Limpo de Repertórios (33 obras) e Integridade dos Áudios (.m4a)', () => {
+        const fs = require('fs');
+        const path = require('path');
+        const { REPERTORIOS_COMPLETOS, REPERTORIOS_MAPEADOS } = require('../repertories.js');
+
+        assert.equal(REPERTORIOS_COMPLETOS.length, 33, 'REPERTORIOS_COMPLETOS deve conter exatamente os 33 repertórios limpos do Compêndio.');
+        assert.equal(REPERTORIOS_MAPEADOS.length, 5, 'REPERTORIOS_MAPEADOS deve conter exatamente os 5 Blocos Analíticos.');
+
+        // Garante ausência de duplicatas de obra e presença de frase/áudio válido em disco
+        const obrasVistas = new Set();
+        REPERTORIOS_COMPLETOS.forEach(rep => {
+            assert.ok(rep.obra && rep.autor && rep.resumo && rep.uso && rep.frase, `Repertório '${rep.obra}' deve ter todos os campos textuais completos.`);
+            assert.ok(!obrasVistas.has(rep.obra), `Obra duplicada encontrada em repertories.js: ${rep.obra}`);
+            obrasVistas.add(rep.obra);
+            assert.ok(rep.audio, `Repertório '${rep.obra}' deve possuir caminho de áudio.`);
+            const audioPath = path.join(__dirname, '..', rep.audio);
+            assert.ok(fs.existsSync(audioPath), `Arquivo de áudio não encontrado no disco: ${rep.audio}`);
+        });
+
+        // Garante também que qualquer áudio declarado em bancas.js existe em disco
+        EXPECTED_BANCAS.forEach(b => {
+            const eixos = BANCAS[b.id].eixosTematicos || [];
+            eixos.forEach(eixo => {
+                (eixo.repertorios || []).forEach(rep => {
+                    if (rep.audio) {
+                        const audioPath = path.join(__dirname, '..', rep.audio);
+                        assert.ok(fs.existsSync(audioPath), `Áudio da banca ${b.id} não encontrado no disco: ${rep.audio}`);
+                    }
+                });
+            });
+        });
+    });
 });
 
 

@@ -3,6 +3,43 @@ let showFavoritesOnly = false;
 let currentRepertorySearch = '';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Theme Toggle (Dark / Light) ---
+    const themeToggleBtn = document.getElementById('dark-mode-toggle');
+    const moonIcon = document.getElementById('moon-icon');
+    const sunIcon = document.getElementById('sun-icon');
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    function applyTheme(theme) {
+        const isDark = theme !== 'light';
+        document.documentElement.classList.toggle('dark-mode', isDark);
+        document.documentElement.classList.toggle('light-theme', !isDark);
+        document.body.classList.toggle('dark-mode', isDark);
+        document.body.classList.toggle('light-theme', !isDark);
+
+        if (moonIcon && sunIcon) {
+            moonIcon.style.display = isDark ? 'block' : 'none';
+            sunIcon.style.display = isDark ? 'none' : 'block';
+        }
+        if (themeToggleBtn) {
+            themeToggleBtn.setAttribute('aria-pressed', String(!isDark));
+            themeToggleBtn.setAttribute('title', isDark ? 'Mudar para tema claro' : 'Mudar para tema escuro');
+        }
+        if (themeMeta) {
+            themeMeta.setAttribute('content', isDark ? '#0b0d14' : '#f1f5f9');
+        }
+    }
+
+    const savedTheme = localStorage.getItem('redacao_theme') || 'dark';
+    applyTheme(savedTheme);
+
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+            const nextTheme = document.documentElement.classList.contains('light-theme') ? 'dark' : 'light';
+            localStorage.setItem('redacao_theme', nextTheme);
+            applyTheme(nextTheme);
+        });
+    }
+
     // --- Navigation & Core Elements ---
     const navButtons = document.querySelectorAll('.nav-btn');
     const appLayouts = document.querySelectorAll('.app-layout');
@@ -121,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (selectedGenero === 'carta') {
             titleContainer.style.display = 'none';
         } else {
-            titleContainer.style.display = 'block';
+            titleContainer.style.display = 'flex';
             if (currentBanca.exigeTitulo) {
                 titleStatus.textContent = "(Obrigatório)";
                 titleStatus.style.color = "var(--danger)";
@@ -219,7 +256,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (view) {
                 const h2 = view.querySelector('h2');
                 if (h2) {
-                    h2.innerHTML = `${v.title} <span style="font-size: 0.6em; background: var(--primary); color: white; padding: 2px 8px; border-radius: 12px; vertical-align: middle; margin-left: 10px;">Banca: ${currentBanca.nome}</span>`;
+                    h2.innerHTML = `${v.title} <span class="banca-pill-badge">Banca: ${currentBanca.nome}</span>`;
                 }
             }
         });

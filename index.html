@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#1e293b">
+    <meta name="theme-color" content="#0b0d14">
+    <meta name="color-scheme" content="dark light">
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -36,23 +37,22 @@
 
     <main class="container">
         <header class="header">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div class="header-top">
+                <div class="header-spacer" aria-hidden="true"></div>
                 <h1>Simulador de Redação</h1>
-                <div style="display: flex; gap: 0.5rem; align-items: center;">
-                    <button id="btn-open-history" class="btn btn-secondary btn-sm" aria-label="Abrir Histórico"
-                        style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border-color: var(--panel-border);">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <div class="header-actions">
+                    <button id="btn-open-history" class="btn btn-secondary btn-icon" aria-label="Abrir Histórico" title="Histórico de Redações">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <circle cx="12" cy="12" r="10"></circle>
                             <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
                     </button>
-                    <button id="dark-mode-toggle" class="btn btn-secondary btn-sm" aria-label="Alternar Dark Mode"
-                        style="border-radius: 50%; width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center; background: transparent; border-color: var(--panel-border);">
-                        <svg id="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    <button id="dark-mode-toggle" class="btn btn-secondary btn-icon" aria-label="Alternar tema claro e escuro" title="Alternar tema">
+                        <svg id="moon-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
-                        <svg id="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg id="sun-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: none;">
                             <circle cx="12" cy="12" r="5"></circle>
                             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -67,13 +67,11 @@
                     </button>
                 </div>
             </div>
-            <p>Escreva na folha oficial e receba a correção interativa da Inteligência Artificial.</p>
-            <div class="selectors-container"
-                style="margin-top: 1rem; display: flex; gap: 1rem; align-items: center; justify-content: center; flex-wrap: wrap;">
+            <p class="header-subtitle">Escreva na folha oficial e receba a correção interativa da Inteligência Artificial.</p>
+            <div class="selectors-container">
                 <div class="banca-selector-container">
-                    <label for="banca-select" style="font-weight: 500;">Banca Examinadora:</label>
-                    <select id="banca-select"
-                        style="padding: 0.5rem; border-radius: 4px; border: 1px solid var(--panel-border); background: var(--panel-bg); color: var(--text-color); margin-left: 0.5rem; font-family: 'Inter', sans-serif;">
+                    <label for="banca-select">Banca Examinadora</label>
+                    <select id="banca-select">
                         <option value="ENEM">ENEM</option>
                         <option value="UEMA">UEMA (PAES)</option>
                         <option value="EXATO_DISSERTATIVO">Exato (UFT/UFNT) - Dissertativo</option>
@@ -144,11 +142,11 @@
                             placeholder="Digite o título da redação (se a banca exigir)...">
                     </div>
 
-                    <div class="resumo-pratico-container" id="resumo-pratico-container"
-                        style="margin: 1rem 1.5rem; padding: 1rem; background: rgba(59, 130, 246, 0.1); border-left: 4px solid var(--primary); border-radius: 4px; font-size: 0.9rem;">
-                        <strong>Resumo Estratégico:</strong> <span id="resumo-pratico-text">Priorize a construção de
+                    <div class="resumo-pratico-container" id="resumo-pratico-container">
+                        <span class="resumo-badge">Estratégia</span>
+                        <div><strong>Resumo Estratégico:</strong> <span id="resumo-pratico-text">Priorize a construção de
                             propostas de intervenção detalhadas e repertórios coringa legítimos focados em Meio
-                            Ambiente, Tecnologia e Inclusão Social.</span>
+                            Ambiente, Tecnologia e Inclusão Social.</span></div>
                     </div>
 
                     <!-- Co-piloto de Redação (Live Feedback) -->
@@ -172,10 +170,9 @@
 
                 <div class="submit-area">
                     <div class="word-count">Palavras: <span id="word-count-val">0</span></div>
-                    <button class="btn btn-secondary" id="copy-prompt-btn"
-                        style="border-color: var(--primary); color: var(--primary); display: flex; align-items: center; gap: 0.5rem; width: 100%; justify-content: center; font-size: 1.1rem; padding: 1rem;">
+                    <button class="btn btn-primary submit-prompt-btn" id="copy-prompt-btn">
                         <span>Modo Copiador Inteligente (Grátis via Advanced)</span>
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="m12 5 7 7-7 7"></path>
@@ -384,54 +381,47 @@
 
                         <!-- Lista de Repertórios do Eixo (Modo Prática) -->
                         <div id="repertory-practice-container">
-                            <div class="filter-bar" id="repertory-filter-bar"
-                                style="display:flex; gap:10px; justify-content:center; margin-bottom:15px; flex-wrap: wrap; align-items: center;">
-                                <input type="text" id="repertory-search" placeholder="Pesquisar repertório..."
-                                    style="flex: 1; min-width: 200px; padding: 6px 12px; border-radius: 4px; border: 1px solid var(--panel-border); background: rgba(0,0,0,0.2); color: var(--text-color); font-family: 'Inter', sans-serif;">
+                            <div class="filter-bar" id="repertory-filter-bar">
+                                <input type="text" id="repertory-search" class="rep-search-input" placeholder="Pesquisar repertório...">
 
-                                <div class="toggle-switch"
-                                    style="display: flex; background: rgba(0,0,0,0.2); border-radius: 20px; padding: 4px; border: 1px solid var(--panel-border);">
-                                    <button class="toggle-btn active" id="btn-toggle-intro"
-                                        style="padding: 6px 16px; border-radius: 16px; border: none; background: var(--primary); color: white; cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Introdução</button>
-                                    <button class="toggle-btn" id="btn-toggle-dev"
-                                        style="padding: 6px 16px; border-radius: 16px; border: none; background: transparent; color: var(--text-main); cursor: pointer; font-size: 0.9em; transition: all 0.3s; font-family: 'Inter', sans-serif;">Desenvolvimento</button>
+                                <div class="toggle-switch">
+                                    <button class="toggle-btn active" id="btn-toggle-intro">Introdução</button>
+                                    <button class="toggle-btn" id="btn-toggle-dev">Desenvolvimento</button>
                                 </div>
 
-                                <button class="btn btn-secondary" id="btn-filter-favs"
-                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px;"><svg
-                                        viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
-                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <polygon
-                                            points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
-                                        </polygon>
-                                    </svg> Favoritos</button>
+                                <div class="filter-actions-group">
+                                    <button class="btn btn-secondary btn-filter-pill" id="btn-filter-favs"><svg
+                                            viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <polygon
+                                                points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2">
+                                            </polygon>
+                                        </svg> Favoritos</button>
 
-                                <button class="btn btn-secondary" id="btn-shuffle-reps"
-                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px; border-color: var(--warning); color: var(--warning);">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
-                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="16 3 21 3 21 8"></polyline>
-                                        <line x1="4" y1="20" x2="21" y2="3"></line>
-                                        <polyline points="21 16 21 21 16 21"></polyline>
-                                        <line x1="15" y1="15" x2="21" y2="21"></line>
-                                        <line x1="4" y1="4" x2="9" y2="9"></line>
-                                    </svg>
-                                    Embaralhar
-                                </button>
+                                    <button class="btn btn-secondary btn-filter-pill btn-pill-warning" id="btn-shuffle-reps">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="16 3 21 3 21 8"></polyline>
+                                            <line x1="4" y1="20" x2="21" y2="3"></line>
+                                            <polyline points="21 16 21 21 16 21"></polyline>
+                                            <line x1="15" y1="15" x2="21" y2="21"></line>
+                                            <line x1="4" y1="4" x2="9" y2="9"></line>
+                                        </svg>
+                                        Embaralhar
+                                    </button>
 
-                                <button class="btn btn-secondary" id="btn-add-custom-rep"
-                                    style="padding: 5px 15px; font-size: 0.9em; border-radius: 20px; border-color: var(--primary); color: var(--primary);">+
-                                    Meu Repertório</button>
-                                <button class="btn btn-secondary" id="btn-export-pdf"
-                                    style="padding: 5px 15px; font-size: 0.9em; display:flex; align-items:center; gap:5px; border-radius: 20px; border-color: var(--success); color: var(--success);">
-                                    <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
-                                        stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                                        <polyline points="7 10 12 15 17 10"></polyline>
-                                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                                    </svg>
-                                    Revisão PDF
-                                </button>
+                                    <button class="btn btn-secondary btn-filter-pill btn-pill-primary" id="btn-add-custom-rep">+
+                                        Meu Repertório</button>
+                                    <button class="btn btn-secondary btn-filter-pill btn-pill-success" id="btn-export-pdf">
+                                        <svg viewBox="0 0 24 24" width="14" height="14" stroke="currentColor"
+                                            stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                            <polyline points="7 10 12 15 17 10"></polyline>
+                                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                                        </svg>
+                                        Revisão PDF
+                                    </button>
+                                </div>
                             </div>
                             <div class="repertory-list" id="repertory-list">
                                 <!-- Injetado via JS -->
@@ -519,8 +509,7 @@
 
                 <div class="training-cards">
                     <div class="training-card" id="grammar-tutor-card">
-                        <div class="card-header"
-                            style="background: rgba(var(--danger-rgb), 0.1); border-left: 4px solid var(--danger);">
+                        <div class="card-header card-header-accent-danger">
                             <h3>Tutor de Dúvidas Gramaticais</h3>
                             <span class="hint">Pergunte ao Prof. Lino sobre qualquer erro ou dúvida gramatical.</span>
                         </div>
@@ -543,7 +532,7 @@
                         <div class="grammar-density-header">
                             <div>
                                 <h3>📊 Densidade Gramatical & Lógica da Língua</h3>
-                                <span class="hint" style="color: #94a3b8; font-size: 0.85rem;">Critérios de correção das bancas e explicações descomplicadas do português</span>
+                                <span class="hint" style="color: var(--text-muted); font-size: 0.85rem;">Critérios de correção das bancas e explicações descomplicadas do português</span>
                             </div>
                             <!-- Abas de navegação da Densidade -->
                             <div class="grammar-density-tabs-nav">
@@ -589,8 +578,8 @@
                         <!-- ABA 2: A LÓGICA DA LÍNGUA (EXPLICAÇÃO LEVE & DIDÁTICA) -->
                         <div id="density-content-logica" class="density-tab-pane hidden">
                             <div class="grammar-logic-intro">
-                                <h4 style="color: #38bdf8; font-size: 1rem; margin-bottom: 0.35rem;">Desmistificando o Português sem Decoreba</h4>
-                                <p style="color: #cbd5e1; font-size: 0.88rem; margin: 0; line-height: 1.5;">
+                                <h4 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.35rem;">Desmistificando o Português sem Decoreba</h4>
+                                <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0; line-height: 1.5;">
                                     A gramática da redação não é um conjunto de proibições aleatórias: ela reflete como o cérebro do leitor processa ideias com clareza. Escolha um tópico abaixo para entender a lógica real e dominar a regra de uma vez por todas.
                                 </p>
                             </div>
@@ -615,8 +604,8 @@
                         </div>
 
                         <!-- Pílulas de Consulta Rápida: Leis de Ouro da Gramática -->
-                        <div style="margin-top: 1.25rem; border-top: 1px solid #1e293b; pt: 1rem;">
-                            <h4 style="color: #cbd5e1; font-size: 0.92rem; margin-bottom: 0.5rem;">⚡ Pílulas Rápidas de Fixação (Regras de Ouro)</h4>
+                        <div style="margin-top: 1.25rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
+                            <h4 style="color: var(--text-main); font-size: 0.92rem; margin-bottom: 0.65rem;">⚡ Pílulas Rápidas de Fixação (Regras de Ouro)</h4>
                             <div class="grammar-rules-pillbox">
                                 <button type="button" class="grammar-rule-tab active" data-rule="virgula">Vírgula & Conectivos</button>
                                 <button type="button" class="grammar-rule-tab" data-rule="crase">Crase Fatal</button>
@@ -638,8 +627,7 @@
                     </div>
 
                     <!-- Arena de Micro-Treinos -->
-                    <div class="training-card"
-                        style="border: 2px solid var(--primary); background: rgba(59, 130, 246, 0.05);">
+                    <div class="training-card arena-card">
                         <div class="card-header"
                             style="display: flex; justify-content: space-between; align-items: flex-start;">
                             <div>
@@ -735,8 +723,7 @@
                         </div>
 
                         <div id="grammar-challenge-display" style="margin-top: 1rem;">
-                            <div
-                                style="padding: 1rem 1.5rem; background: rgba(var(--danger-rgb), 0.1); border-left: 4px solid var(--danger); border-radius: 4px; margin-bottom: 1rem;">
+                            <div class="challenge-prompt-callout">
                                 <h4
                                     style="color: var(--danger); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600;">
                                     ENCONTRE OS ERROS E REESCREVA:</h4>
@@ -839,13 +826,14 @@
 
                     <!-- Esqueleto (Folha em Branco) -->
                     <div class="training-card">
-                        <div class="card-header"
-                            style="background: rgba(var(--success-rgb), 0.1); border-left: 4px solid var(--success);">
-                            <button class="btn btn-sm btn-secondary" id="btn-save-model" style="float: right;">💾 Salvar
+                        <div class="card-header card-header-accent-success">
+                            <div>
+                                <h3>4. Meu Esqueleto (Molde Salvo)</h3>
+                                <span class="hint">Estes são os conectivos e estruturas genéricas extraídas da redação,
+                                    organizadas nos respectivos parágrafos para uso futuro.</span>
+                            </div>
+                            <button class="btn btn-sm btn-secondary" id="btn-save-model">💾 Salvar
                                 Molde</button>
-                            <h3>4. Meu Esqueleto (Molde Salvo)</h3>
-                            <span class="hint">Estes são os conectivos e estruturas genéricas extraídas da redação,
-                                organizadas nos respectivos parágrafos para uso futuro.</span>
                         </div>
 
                         <div id="model-skeleton-area"
@@ -1108,7 +1096,7 @@
         </div>
         <p class="conn-footer-hint">💡 Dica de Coesão: Clique em qualquer conectivo para copiá-lo ou inseri-lo diretamente no Construtor Livre.</p>
     </div>
-    <button id="btn-open-connectives" class="floating-btn connectives-btn" title="Dicionário de Conectivos" style="position: fixed; bottom: 20px; right: 20px; z-index: 100; font-size: 1.5rem; width: 50px; height: 50px; border-radius: 50%; background: var(--primary); border: none; box-shadow: 0 4px 10px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; cursor: pointer;">📖</button>
+    <button id="btn-open-connectives" class="floating-btn connectives-btn" title="Dicionário de Conectivos" aria-label="Dicionário de Conectivos">📖</button>
 
     <!-- Ponte de Módulos (Legacy Bridge) -->
     <script type="module">

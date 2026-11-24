@@ -326,12 +326,21 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(unitins.criterios[3].nome.includes('Autoria'), 'UNITINS c4 deve ser Consistência, Progressão Lógica e Autoria.');
         assert.ok(unitins.criterios[4].nome.includes('Coesão'), 'UNITINS c5 deve ser Coesão.');
 
-        // Eixos exclusivos da UNITINS com os 3 modelos e guias
-        assert.ok(Array.isArray(unitins.eixosTematicos) && unitins.eixosTematicos.length >= 4, 'UNITINS deve possuir seus próprios eixos temáticos.');
+        // Eixos exclusivos da UNITINS com os 4 temas-modelo + perfil geral
+        assert.ok(Array.isArray(unitins.eixosTematicos) && unitins.eixosTematicos.length >= 5, 'UNITINS deve possuir seus 5 eixos temáticos.');
         const temasGuias = unitins.eixosTematicos.map(e => e.guiaModelo && e.guiaModelo.tema).filter(Boolean);
         assert.ok(temasGuias.some(t => t.includes('Ler na tela é ler menos?')), 'UNITINS deve incluir modelo Ler na tela é ler menos?');
         assert.ok(temasGuias.some(t => t.includes('Representatividade feminina')), 'UNITINS deve incluir modelo Representatividade feminina e democracia');
         assert.ok(temasGuias.some(t => t.includes('Dinheiro rápido')), 'UNITINS deve incluir modelo Dinheiro rápido: oportunidade ou ilusão');
+        assert.ok(temasGuias.some(t => t.includes('solidão acompanhada')), 'UNITINS deve incluir modelo A solidão acompanhada na era das máquinas que conversam');
+
+        const eixoDinheiro = unitins.eixosTematicos.find(e => e.nome.includes('Dinheiro Rápido'));
+        assert.ok(eixoDinheiro && eixoDinheiro.repertorios.some(r => r.obra.includes('Bernardo Soares')), 'Eixo Dinheiro Rápido deve incluir Texto I · Bernardo Soares.');
+
+        const eixoSolidao = unitins.eixosTematicos.find(e => e.nome.includes('Solidão Acompanhada'));
+        assert.ok(eixoSolidao && Array.isArray(eixoSolidao.guiaModelo.textosMotivadores) && eixoSolidao.guiaModelo.textosMotivadores.length === 3, 'Eixo Solidão Acompanhada deve trazer os 3 textos motivadores.');
+        assert.ok(eixoSolidao.repertorios.some(r => r.obra.includes('Sedigi')) && eixoSolidao.repertorios.some(r => r.obra.includes('Locomotiva')) && eixoSolidao.repertorios.some(r => r.obra.includes('Glauco Arbix')), 'Eixo Solidão Acompanhada deve incluir os repertórios da coletânea.');
+        assert.ok(SYSTEM_PROMPT.includes('paradoxo argumentativo') && SYSTEM_PROMPT.includes('conscientização social'), 'SYSTEM_PROMPT UNITINS deve orientar sobre paradoxo/metáfora temática e conscientização social opcional.');
 
         // Cada eixo UNITINS deve possuir repertórios de intro e dev para não quebrar o filtro da aba Repertório
         unitins.eixosTematicos.forEach(eixo => {

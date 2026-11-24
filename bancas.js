@@ -406,7 +406,9 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                 nome: "3. Dinheiro Rápido, Juventude e Plataformas (UNITINS)",
                 guiaModelo: {
                     tema: "Dinheiro rápido: oportunidade ou ilusão para os jovens?",
+                    perguntaGuia: "A busca pelo dinheiro rápido pode representar uma oportunidade real para os jovens ou se transformar em uma ilusão?",
                     polaridade: "Novas Oportunidades de Renda (D1 · Potencial) × Ilusão do Enriquecimento Fácil (D2 · Limite)",
+                    conceitosChave: "Oportunidade real (exige planejamento e trabalho) × Promessa fácil (pode ocultar riscos)",
                     tesePossivel: "As novas possibilidades digitais de geração de renda podem favorecer a autonomia financeira juvenil e o empreendedorismo, mas a promessa de enriquecimento fácil por meio de apostas e atalhos ilusórios também apresenta riscos severos aos projetos de futuro.",
                     d1: "Potencial (Novas oportunidades de renda): A tecnologia e a internet ampliam alternativas legítimas de trabalho, comércio eletrônico, serviços digitais e autonomia financeira fora de trajetórias convencionais.",
                     d2: "Limite (A ilusão do dinheiro fácil): Histórias de sucesso artificiais e promessas imediatistas estimulam decisões arriscadas, como apostas digitais, comprometendo a educação e o futuro (34% da ABMES).",
@@ -430,6 +432,14 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                         uso: "Explicar na introdução ou D2 como a exibição contínua de estilos de vida e sucesso instantâneo nas redes molda expectativas juvenis irreais.",
                         frase: "A socióloga Sherry Turkle, em 'Alone Together', adverte que a mediação intensa das telas reconfigura expectativas sociais e comportamentais. Transposta essa análise para [TEMA], nota-se que a vitrine constante de enriquecimento instantâneo nas redes estimula jovens a confundirem performance digital com prosperidade sólida.",
                         tipo: "intro"
+                    },
+                    {
+                        obra: "Texto I — Bernardo Soares (Visibilidade e Retorno Digital)",
+                        autor: "Bernardo Soares (Coletânea Guia UNITINS)",
+                        resumo: "As redes sociais podem gerar visibilidade, alcance comercial e retorno financeiro fora das trajetórias profissionais convencionais.",
+                        uso: "D1 (Potencial): Fundamentar como as redes e o comércio digital ampliam alternativas legítimas de renda e autonomia juvenil quando há trabalho planejado.",
+                        frase: "Como destaca Bernardo Soares ao analisar as novas dinâmicas digitais, as redes sociais podem gerar visibilidade e retorno financeiro fora das trajetórias convencionais. Diante de [TEMA], essa possibilidade amplia a autonomia econômica de jovens que utilizam o ambiente virtual para vender produtos e prestar serviços com planejamento.",
+                        tipo: "dev"
                     },
                     {
                         obra: "ODS 8 — Trabalho Decente e Crescimento Econômico (Agenda 2030)",
@@ -467,7 +477,78 @@ V. Assinatura → Nome fictício (ex: "Leitor Interessado", "Um Estudante de Pal
                 ]
             },
             {
-                nome: "4. Comportamento Humano, Risco e Sociedade Contemporânea (UNITINS)",
+                nome: "4. Solidão Acompanhada e Máquinas que Conversam (UNITINS)",
+                guiaModelo: {
+                    tema: "A solidão acompanhada na era das máquinas que conversam",
+                    perguntaGuia: "A inteligência artificial pode aliviar a solidão sem substituir as relações humanas?",
+                    polaridade: "Acolhimento e Companhia Virtual (D1 · Potencial) × Substituição dos Vínculos Humanos (D2 · Limite)",
+                    conceitosChave: "Companhia virtual (sistemas que simulam conversas e respostas acolhedoras) × Vínculo humano (reciprocidade, convivência e experiências compartilhadas)",
+                    textosMotivadores: [
+                        "Texto I (Sedigi/MJSP & Unicef): apps de AI Companions subiram de 16 (2022) para 128 (jul/2025), com 60 milhões de downloads no 1º sem/2025 e 72% dos adolescentes nos EUA (13–17); riscos de apego intenso, uso compulsivo, coleta de dados íntimos, privação de sono e queda escolar.",
+                        "Texto II (CNN Brasil / Locomotiva): 60% relatam alívio na sensação de solidão, 30% já choraram com IA e 58% revelaram segredos inéditos (72% entre jovens de 18 a 24 anos). Nota crítica: relato de percepção, não prova de benefício duradouro.",
+                        "Texto III (Jornal da USP / Glauco Arbix): 'Chatbot não é um amigo, é um robô'; usuários frequentes relatam vazio ainda maior; IA deve servir ao ser humano com senso crítico, supervisão e responsabilidade, sem substituir amizades recíprocas."
+                    ],
+                    tesePossivel: "A inteligência artificial apresenta potencial para amenizar momentaneamente a sensação de solidão ao oferecer escuta acessível e sem julgamento, mas seu uso como substituta das relações humanas pode comprometer vínculos afetivos autênticos e agravar o isolamento.",
+                    d1: "Potencial (Acolhimento e companhia virtual): Disponível a qualquer hora e sem julgamento, a IA oferece espaço imediato de desabafo e alívio emocional percebido (60% na pesquisa CNN/Locomotiva; 72% dos jovens de 18 a 24 anos já confiaram questões íntimas à ferramenta).",
+                    d2: "Limite (Substituição dos vínculos humanos): O apego intenso e a dependência emocional de máquinas ocupam o espaço da escuta cotidiana presencial, fragilizam o bem-estar e ampliam o vazio entre usuários frequentes (Sedigi/MJSP e Jornal da USP).",
+                    cuidadoTema: "Tema com abordagem metafórica/paradoxo argumentativo ('solidão acompanhada') + recorte contextual ('máquinas que conversam'): os textos motivadores dão o direcionamento objetivo e cabe a você delimitar a tese. Diferencie sensação de companhia × reciprocidade humana e NÃO afirme que toda interação com IA causa dependência. Proposta de intervenção é opcional (use apenas reflexão crítica / conscientização social, sem receita GOMIFES).",
+                    conclusao: "1. Retomada (sua posição sobre a IA como companhia) → 2. Síntese da Tensão (acolhimento momentâneo × limites da substituição dos laços) → 3. Reflexão Final (receber respostas simuladas × construir relações recíprocas; uso responsável e conscientização social opcional, SEM GOMIFES)."
+                },
+                repertorios: [
+                    {
+                        obra: "O Choque do Futuro (Livro)",
+                        autor: "Alvin Toffler",
+                        resumo: "A rapidez das transformações tecnológicas modifica comportamentos cotidianos, redefine vínculos e exige adaptação psíquica e social constante.",
+                        uso: "Introdução: Mostrar que a velocidade da inovação fez a inteligência artificial deixar de ser apenas ferramenta técnica para participar de experiências emocionais.",
+                        frase: "Em 'O Choque do Futuro', Alvin Toffler adverte que a aceleração tecnológica reconfigura rapidamente os hábitos e exige adaptação psíquica dos indivíduos. Ao analisar [TEMA], percebe-se que as máquinas deixaram de cumprir apenas funções técnicas para mediar também o desabafo e as experiências emocionais cotidianas.",
+                        audio: "arquivos de audio para repertório/Choque_do_Futuro_na_Redação_do_ENEM.m4a",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Alone Together — Sozinhos Juntos (Livro)",
+                        autor: "Sherry Turkle",
+                        resumo: "Analisa como as tecnologias interativas criam a sensação de companhia constante sem exigir a reciprocidade nem a vulnerabilidade das relações humanas profundas.",
+                        uso: "Introdução ou D1: Explicar o paradoxo da 'solidão acompanhada' e por que as pessoas procuram máquinas disponíveis e sem julgamento para expressar sentimentos.",
+                        frase: "Na obra 'Alone Together', a socióloga Sherry Turkle sintetiza o paradoxo contemporâneo em que a tecnologia simula proximidade afetiva sem sustentar vínculos humanos profundos. Sob essa perspectiva, [TEMA] expõe a tensão entre o alívio imediato propiciado por assistentes conversacionais e o risco de esvaziamento da convivência recíproca.",
+                        tipo: "intro"
+                    },
+                    {
+                        obra: "Pesquisa CNN Brasil / Instituto Locomotiva (Texto II · Coletânea)",
+                        autor: "CNN Brasil / Instituto Locomotiva (Álvaro Machado Dias)",
+                        resumo: "60% relatam redução da sensação de solidão ao conversar com IA, 30% já choraram nessas interações e 58% revelaram segredos inéditos — índice que sobe para 72% entre jovens de 18 a 24 anos.",
+                        uso: "D1 (Potencial): Embasar a percepção de acolhimento imediato e sem julgamento, lembrando que se trata de relato de percepção momentânea, não prova de benefício duradouro.",
+                        frase: "Levantamento conduzido pela CNN Brasil e pelo Instituto Locomotiva indica que 60% dos participantes percebem alívio momentâneo da solidão ao dialogar com sistemas de inteligência artificial, enquanto 72% dos jovens adultos já confiaram confidências à máquina — dado que evidencia o acolhimento imediato como percepção subjetiva, embora sem comprovar benefício afetivo duradouro.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Sociedade do Cansaço (Livro)",
+                        autor: "Byung-Chul Han",
+                        resumo: "A cobrança incessante por desempenho e o esgotamento contemporâneo levam o sujeito a evitar atritos relacionais e buscar interações imediatas e confortáveis.",
+                        uso: "D2 (Limite): Explicar por que indivíduos esgotados substituem a paciência exigida pelo convívio humano pela disponibilidade ininterrupta e complacente das máquinas.",
+                        frase: "Segundo o filósofo Byung-Chul Han, em 'Sociedade do Cansaço', o esgotamento decorrente da cobrança contínua enfraquece a disposição para lidar com a alteridade e o atrito próprios dos encontros humanos. Nesse cenário, [TEMA] revela como a busca por respostas imediatas e acríticas em chatbots pode substituir gradualmente a escuta cotidiana de familiares e amigos.",
+                        audio: "arquivos de audio para repertório/Sociedade_do_Cansaço_na_redação_do_ENEM.m4a",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Nota Técnica Sedigi/MJSP & Relatório Unicef (Texto I · Coletânea)",
+                        autor: "Secretaria Nacional de Direitos Digitais (MJSP) / Unicef",
+                        resumo: "Apps de AI Companions saltaram de 16 (2022) para 128 (jul/2025), com 60 milhões de downloads no 1º sem/2025 e adesão de 72% dos adolescentes nos EUA; aponta apego intenso, uso compulsivo e distanciamento presencial.",
+                        uso: "D2 (Limite): Demonstrar com rigor institucional os riscos da dependência emocional, coleta excessiva de dados íntimos e prejuízos escolares e presenciais entre jovens.",
+                        frase: "Conforme aponta nota técnica da Secretaria Nacional de Direitos Digitais do Ministério da Justiça, amparada em dados do Unicef, a multiplicação acelerada dos aplicativos de companhia artificial — que atingiram 60 milhões de downloads em apenas um semestre — associa-se a riscos concretos de apego compulsivo, privação de sono e afastamento das relações presenciais.",
+                        tipo: "dev"
+                    },
+                    {
+                        obra: "Jornal da USP / Glauco Arbix — 'Chatbot não é um amigo, é um robô' (Texto III)",
+                        autor: "Jornal da USP / Prof. Glauco Arbix",
+                        resumo: "Destaca aumento da solidão e sensação de vazio em usuários frequentes de chatbots, defendendo senso crítico, supervisão e consciência de que a IA não substitui amizades recíprocas.",
+                        uso: "D2 (Limite) / Conclusão: Contrabalancear a ilusão de amizade artificial e defender a necessidade de conscientização social e uso crítico a serviço do ser humano.",
+                        frase: "Em análise divulgada pelo Jornal da USP, o pesquisador Glauco Arbix adverte que interações artificiais recorrentes não substituem a reciprocidade das amizades e tendem a ampliar o vazio emocional em usuários frequentes. Logo, o enfrentamento de [TEMA] demanda senso crítico e conscientização social para manter a tecnologia a serviço do humano, e não no lugar de seus vínculos.",
+                        tipo: "dev"
+                    }
+                ]
+            },
+            {
+                nome: "5. Comportamento Humano, Risco e Sociedade Contemporânea (UNITINS)",
                 guiaModelo: {
                     tema: "Recortes Filosóficos e Tendências da Atualidade (Perfil UNITINS)",
                     polaridade: "Progresso / Realidade Contemporânea × Riscos Éticos / Impactos Humanos",

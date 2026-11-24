@@ -369,32 +369,47 @@ document.addEventListener('DOMContentLoaded', () => {
         if (eixo.guiaModelo) {
             const g = eixo.guiaModelo;
             const guideCard = document.createElement('div');
-            guideCard.style.cssText = 'background: #141e30; border: 1px solid #334155; border-left: 4px solid var(--primary); border-radius: 10px; padding: 16px; margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px;';
+            guideCard.className = 'unitins-guide-card';
+            const coletaneaHtml = Array.isArray(g.textosMotivadores) && g.textosMotivadores.length
+                ? `<div class="unitins-guide-coletanea">
+                        <strong>📚 Coletânea e Direcionamento Objetivo:</strong>
+                        <ul>${g.textosMotivadores.map(item => `<li>${item}</li>`).join('')}</ul>
+                   </div>`
+                : '';
+            const perguntaHtml = g.perguntaGuia
+                ? `<div class="unitins-guide-question"><strong>❓ Pergunta que sua redação responde:</strong> ${g.perguntaGuia}</div>`
+                : '';
+            const conceitosHtml = g.conceitosChave
+                ? `<div class="unitins-guide-concepts"><strong>⚖️ Distinção Conceitual Chave:</strong> ${g.conceitosChave}</div>`
+                : '';
             guideCard.innerHTML = `
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; border-bottom: 1px solid #1e293b; padding-bottom: 10px;">
+                <div class="unitins-guide-header">
                     <div>
-                        <span style="font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: #38bdf8;">📘 Guia de Estruturação UNITINS (25 a 30 linhas)</span>
-                        <h4 style="margin: 4px 0 2px; color: #f8fafc; font-size: 1.05rem;">${g.tema}</h4>
-                        <span style="font-size: 0.84rem; color: #a78bfa; font-weight: 600;">Polaridade: ${g.polaridade}</span>
+                        <span class="unitins-guide-badge">📘 Guia de Estruturação UNITINS (25 a 30 linhas)</span>
+                        <h4>${g.tema}</h4>
+                        <span class="unitins-guide-polarity">Polaridade: ${g.polaridade}</span>
                     </div>
                     ${!g.tema.includes('(Perfil UNITINS)') ? `<button type="button" class="btn btn-primary btn-sm btn-praticar-modelo-unitins" style="white-space: nowrap;">✍️ Praticar este Tema na Folha</button>` : ''}
                 </div>
-                <div style="font-size: 0.88rem; color: #e2e8f0; line-height: 1.5;">
-                    <strong style="color: #38bdf8;">💡 Tese Possível:</strong> ${g.tesePossivel}
+                ${perguntaHtml}
+                ${conceitosHtml}
+                ${coletaneaHtml}
+                <div class="unitins-guide-thesis">
+                    <strong>💡 Tese Possível:</strong> ${g.tesePossivel}
                 </div>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
-                    <div style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.25); border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #cbd5e1; line-height: 1.45;">
-                        <strong style="color: #34d399;">D1 (Lado Positivo / Avanço):</strong><br>${g.d1}
+                <div class="unitins-guide-grid">
+                    <div class="unitins-guide-box d1">
+                        <strong>D1 (Potencial / Avanço):</strong><br>${g.d1}
                     </div>
-                    <div style="background: rgba(244, 63, 94, 0.08); border: 1px solid rgba(244, 63, 94, 0.25); border-radius: 8px; padding: 10px; font-size: 0.84rem; color: #cbd5e1; line-height: 1.45;">
-                        <strong style="color: #fb7185;">D2 (Limite / Barreira):</strong><br>${g.d2}
+                    <div class="unitins-guide-box d2">
+                        <strong>D2 (Limite / Barreira):</strong><br>${g.d2}
                     </div>
                 </div>
-                <div style="background: rgba(245, 158, 11, 0.08); border-left: 3px solid #f59e0b; border-radius: 6px; padding: 8px 12px; font-size: 0.84rem; color: #fef3c7; line-height: 1.45;">
+                <div class="unitins-guide-warning">
                     <strong>⚠️ Cuidado com a Leitura do Tema:</strong> ${g.cuidadoTema}
                 </div>
-                <div style="font-size: 0.86rem; color: #cbd5e1; line-height: 1.45;">
-                    <strong style="color: #c084fc;">🏁 Conclusão Padrão UNITINS (Sem GOMIFES):</strong> ${g.conclusao}
+                <div class="unitins-guide-conclusion">
+                    <strong>🏁 Conclusão Padrão UNITINS (Sem GOMIFES obrigatório):</strong> ${g.conclusao}
                 </div>
             `;
             const btnPraticar = guideCard.querySelector('.btn-praticar-modelo-unitins');

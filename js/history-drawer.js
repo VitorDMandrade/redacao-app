@@ -5,6 +5,20 @@
  * Padrão Estrangulador: Injeta sua própria UI e estilos sem poluir o monólito.
  */
 import { getCorrectionHistory, getLatestDraft, exportFullDatabaseBackup, importFullDatabaseBackup, deleteCorrection, deleteDraft } from './database.js';
+
+/**
+ * Escapa caracteres especiais para evitar injeção de HTML ao renderizar dados salvos.
+ * @param {unknown} value
+ * @returns {string}
+ */
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
 const DRAWER_HTML = `
   <div id="history-drawer-overlay" class="history-drawer-overlay"></div>
   <aside id="history-drawer" class="history-drawer" aria-hidden="true">
@@ -215,9 +229,9 @@ async function renderCorrecoes() {
             <div class="history-card">
                 <div class="history-card-header">
                     <span class="history-card-date">${formatDate(item.timestamp)}</span>
-                    <span class="history-card-badge">${item.banca || 'ENEM'}</span>
+                    <span class="history-card-badge">${escapeHtml(item.banca || 'ENEM')}</span>
                 </div>
-                <div class="history-card-theme">${item.tema || 'Tema Livre'}</div>
+                <div class="history-card-theme">${escapeHtml(item.tema || 'Tema Livre')}</div>
                 <div class="history-card-score">Nota: ${calculateScore(item.dados?.notas, item.banca)}</div>
                 <div style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
                     <button class="btn btn-secondary btn-sm btn-load-history" data-payload="${encodeURIComponent(JSON.stringify(item))}" style="flex: 1;">Visualizar</button>
@@ -277,9 +291,9 @@ async function renderRascunhos() {
             <div class="history-card">
                 <div class="history-card-header">
                     <span class="history-card-date">${formatDate(draft.timestamp)}</span>
-                    <span class="history-card-badge">${draft.banca || 'ENEM'}</span>
+                    <span class="history-card-badge">${escapeHtml(draft.banca || 'ENEM')}</span>
                 </div>
-                <div class="history-card-theme">${draft.tema || 'Rascunho Atual'}</div>
+                <div class="history-card-theme">${escapeHtml(draft.tema || 'Rascunho Atual')}</div>
                 <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
                     ${draft.totalPalavras || 0} palavras &bull; ~${draft.linhasEstimadas || 0} linhas
                 </div>

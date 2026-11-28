@@ -298,10 +298,18 @@ export function initLiveFeedback() {
                 console.warn('Erro no worker do co-piloto:', error);
             };
 
+            const bancaEl = /** @type {HTMLSelectElement|null} */ (document.getElementById('banca-select'));
             // Delega o processamento pesado de tokenização e frequências para o worker
-            copilotWorker.postMessage({ rawText: text });
+            copilotWorker.postMessage({ rawText: text, banca: bancaEl ? bancaEl.value : 'ENEM' });
         }
     }, 350);
+
+    const bancaSelectEl = document.getElementById('banca-select');
+    if (bancaSelectEl) {
+        bancaSelectEl.addEventListener('change', () => {
+            onInputDebounced(essayTextarea.value || '');
+        });
+    }
 
     essayTextarea.addEventListener('input', (e) => {
         // @ts-ignore

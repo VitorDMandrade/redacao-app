@@ -260,6 +260,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+
+        const unitinsPrecheck = document.getElementById('unitins-precheck-panel');
+        if (unitinsPrecheck) {
+            unitinsPrecheck.classList.toggle('hidden', currentBanca.id !== 'UNITINS');
+        }
     }
 
     // Navigation Logic
@@ -1983,6 +1988,46 @@ document.addEventListener('DOMContentLoaded', () => {
                         { id: 1, name: "Frase 1", hint: "Síntese das reivindicações ou posicionamento final do leitor." },
                         { id: 2, name: "Frase 2", hint: "Chamamento final de ação ou reflexão aos editores/leitores." },
                         { id: 3, name: "Frase 3", hint: "Despedida formal respeitosa e assinatura neutra (NUNCA assine com nome real!)." }
+                    ]
+                }
+            };
+        }
+
+        // UNITINS (Fórmula Mecânica das 14 Frases — 25 a 30 linhas, sem GOMIFES)
+        if (banca && banca.id === 'UNITINS') {
+            return {
+                intro: {
+                    title: "Introdução UNITINS (3 Frases · 6 a 7 linhas)",
+                    periods: [
+                        { id: 1, name: "Frase 1 — Repertório Contextualizador", hint: "Apresente um autor, obra ou conceito que dialogue com o comportamento ou tendência do tema." },
+                        { id: 2, name: "Frase 2 — Ponte Objetiva para o Tema", hint: "Conecte o repertório à realidade atual utilizando exatamente as palavras-chave ou recorte da proposta." },
+                        { id: 3, name: "Frase 3 — Tese Dialética (Potencial × Limite)", hint: "Responda diretamente à pergunta (ou desfaça o paradoxo) anunciando D1 (Potencial/Avanço) + 'mas/entretanto' + D2 (Limite/Risco)." }
+                    ]
+                },
+                d1: {
+                    title: "Desenvolvimento 1 — Potencial / Avanço (4 Frases · 7 a 8 linhas)",
+                    periods: [
+                        { id: 1, name: "Frase 1 — Tópico Frasal", hint: "Afirme diretamente o lado positivo, o avanço ou a oportunidade legítima ligada ao tema." },
+                        { id: 2, name: "Frase 2 — Repertório ou Dado Interpretado", hint: "Traga um repertório ou dado da coletânea interpretado com suas palavras (NUNCA copie os motivadores)." },
+                        { id: 3, name: "Frase 3 — Explicação 'Como e Por Quê' (Autoria C4)", hint: "Explique por conta própria o mecanismo real de como e por que esse potencial funciona na prática." },
+                        { id: 4, name: "Frase 4 — Fechamento do Bloco", hint: "Amarre a consequência desse avanço de volta à tese, mantendo rigorosamente o recorte temático." }
+                    ]
+                },
+                d2: {
+                    title: "Desenvolvimento 2 — Limite / Barreira / Risco (4 Frases · 7 a 8 linhas)",
+                    periods: [
+                        { id: 1, name: "Frase 1 — Tópico Frasal Adversativo", hint: "Use conector adversativo ('Entretanto', 'Contudo') para apontar o limite/risco sem generalizações extremas." },
+                        { id: 2, name: "Frase 2 — Repertório ou Dado Institucional", hint: "Apresente repertório ou evidência institucional que comprove o obstáculo ou efeito colateral." },
+                        { id: 3, name: "Frase 3 — Análise Crítica Equilibrada (Autoria C4)", hint: "Mostre o impacto concreto usando expressões equilibradas ('tende a', 'pode favorecer'), evitando absolutos como 'todo jovem' ou 'sempre'." },
+                        { id: 4, name: "Frase 4 — Fechamento do Bloco", hint: "Conclua o raciocínio retomando a tensão central do tema." }
+                    ]
+                },
+                conclusao: {
+                    title: "Conclusão UNITINS — 3 Passos, Sem GOMIFES (3 Frases · 5 a 6 linhas)",
+                    periods: [
+                        { id: 1, name: "Frase 1 — Retomada", hint: "Inicie com conector conclusivo ('Portanto', 'Dessa forma') e reafirme sua tese/posição com outras palavras." },
+                        { id: 2, name: "Frase 2 — Síntese da Tensão (D1 × D2)", hint: "Una em equilíbrio os dois polos discutidos no texto (potencial × limite)." },
+                        { id: 3, name: "Frase 3 — Reflexão Final (Sem GOMIFES)", hint: "Feche de forma circular/crítica resgatando o conceito da introdução (menção a conscientização social é opcional; PROIBIDO modelo GOMIFES do ENEM)." }
                     ]
                 }
             };

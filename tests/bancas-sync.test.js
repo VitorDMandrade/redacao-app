@@ -387,6 +387,26 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
             });
         });
     });
+
+    test('16. Hardening: PDF sem colisão de ID, acessibilidade viewport, CDN fixa, Tutorial UNITINS e XSS escape', () => {
+        const fs = require('fs');
+        const path = require('path');
+
+        const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+        const pdfExportJs = fs.readFileSync(path.join(__dirname, '..', 'js', 'pdf-export.js'), 'utf8');
+        const historyDrawerJs = fs.readFileSync(path.join(__dirname, '..', 'js', 'history-drawer.js'), 'utf8');
+        const scriptJs = fs.readFileSync(path.join(__dirname, '..', 'script.js'), 'utf8');
+        const manifestJson = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'manifest.webmanifest'), 'utf8'));
+
+        assert.ok(!pdfExportJs.includes("'btn-export-pdf'"), 'pdf-export.js não deve colidir com btn-export-pdf de Treino de Repertório.');
+        assert.ok(pdfExportJs.includes('btn-export-result-pdf'), 'pdf-export.js deve usar btn-export-result-pdf.');
+        assert.ok(!/user-scalable\s*=\s*no/i.test(indexHtml) && !/maximum-scale\s*=\s*1/i.test(indexHtml), 'Viewport não deve bloquear zoom do usuário.');
+        assert.ok(!indexHtml.includes('sortablejs@latest'), 'SortableJS deve usar versão fixa em vez de @latest.');
+        assert.ok(historyDrawerJs.includes('function escapeHtml'), 'history-drawer.js deve escapar HTML dinâmico.');
+        assert.ok(scriptJs.includes("banca.id === 'UNITINS'") && scriptJs.includes('Introdução UNITINS'), 'script.js deve ter roteiro UNITINS no Modo Tutorial.');
+        assert.ok(indexHtml.includes('id="unitins-precheck-panel"'), 'index.html deve possuir o checklist pré-envio UNITINS.');
+        assert.equal(manifestJson.theme_color, '#0b0d14', 'manifest.webmanifest deve estar sincronizado com o tema escuro atual.');
+    });
 });
 
 

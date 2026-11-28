@@ -11,11 +11,28 @@ const stopWords = new Set([
 ]);
 
 self.onmessage = (event) => {
-    const { rawText } = event.data;
+    const { rawText, banca } = event.data;
     
     if (!rawText || rawText.trim().length === 0) {
         self.postMessage({ feedback: null });
         return;
+    }
+
+    // 0. Guardrails específicos da UNITINS (Edital 2027/1-05)
+    const paragraphsRaw = rawText.split('\n').filter(p => p.trim().length > 0);
+    if (banca === 'UNITINS') {
+        const generalizationMatch = rawText.match(/\b(todo jovem|todos os jovens|toda interação|sempre gera|sempre causa|nunca funciona|jamais resolverá)\b/i);
+        if (generalizationMatch) {
+            self.postMessage({ feedback: `Alerta UNITINS: Evite generalizações absolutas ("${generalizationMatch[0]}"). Prefira expressões equilibradas como "pode favorecer" ou "tende a".` });
+            return;
+        }
+        if (paragraphsRaw.length >= 4) {
+            const lastParagraph = paragraphsRaw[paragraphsRaw.length - 1];
+            if (/\b(cabe ao minist[ée]rio|por meio de palestras|com o fito de mitigar|detalhamento da proposta)\b/i.test(lastParagraph)) {
+                self.postMessage({ feedback: 'Alerta UNITINS: A banca não exige proposta GOMIFES do ENEM. Conclua em 3 passos: Retomada → Síntese da Tensão → Reflexão Final.' });
+                return;
+            }
+        }
     }
 
     // 1. Checagem de Repetição de Palavras

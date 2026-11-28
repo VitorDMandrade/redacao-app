@@ -7,10 +7,10 @@ export function initPdfExport() {
   const actionsContainer = document.querySelector('#result-view .paper-header .actions');
   if (!actionsContainer) return;
 
-  if (document.getElementById('btn-export-pdf')) return;
+  if (document.getElementById('btn-export-result-pdf')) return;
 
   const btnExport = document.createElement('button');
-  btnExport.id = 'btn-export-pdf';
+  btnExport.id = 'btn-export-result-pdf';
   btnExport.type = 'button';
   btnExport.className = 'btn btn-secondary';
   btnExport.innerHTML = `

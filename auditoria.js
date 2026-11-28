@@ -38,6 +38,22 @@ idsObrigatorios.forEach(id => {
     }
 });
 
+// Checagem de IDs duplicados no index.html
+const allIds = [...htmlContent.matchAll(/\bid\s*=\s*["']([^"']+)["']/gi)].map(m => m[1]);
+const idCounts = {};
+allIds.forEach(id => {
+    idCounts[id] = (idCounts[id] || 0) + 1;
+});
+const duplicateIds = Object.entries(idCounts).filter(([, count]) => count > 1);
+if (duplicateIds.length > 0) {
+    duplicateIds.forEach(([id, count]) => {
+        console.error(`❌ ERRO CRÍTICO: ID duplicado '${id}' aparece ${count}x em index.html!`);
+        falhas++;
+    });
+} else {
+    console.log(`✅ Nenhum ID duplicado entre ${allIds.length} IDs de index.html.`);
+}
+
 console.log('\n=======================================');
 if (falhas === 0) {
     console.log('🎉 Auditoria aprovada! A estrutura do index.html parece íntegra.');

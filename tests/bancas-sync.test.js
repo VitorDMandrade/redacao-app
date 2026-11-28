@@ -407,6 +407,22 @@ describe('Sincronização das 6 Bancas Examinadoras', () => {
         assert.ok(indexHtml.includes('id="unitins-precheck-panel"'), 'index.html deve possuir o checklist pré-envio UNITINS.');
         assert.equal(manifestJson.theme_color, '#0b0d14', 'manifest.webmanifest deve estar sincronizado com o tema escuro atual.');
     });
+
+    test('17. Estúdio Gramatical Reformado: 4 abas internas, barra de progresso e sem duplicata de regra', () => {
+        const fs = require('fs');
+        const path = require('path');
+
+        const indexHtml = fs.readFileSync(path.join(__dirname, '..', 'index.html'), 'utf8');
+        const scriptJs = fs.readFileSync(path.join(__dirname, '..', 'script.js'), 'utf8');
+
+        ['grammar-studio-nav', 'grammar-pane-arena', 'grammar-pane-estudo', 'grammar-pane-desafio', 'grammar-pane-tutor', 'arena-progress-bar', 'arena-accuracy', 'arena-streak']
+            .forEach(id => {
+                assert.ok(indexHtml.includes(`id="${id}"`), `index.html deve conter #${id} no Estúdio Gramatical.`);
+            });
+
+        const ruleDataMatches = scriptJs.match(/const grammarRulesData =/g) || [];
+        assert.equal(ruleDataMatches.length, 1, 'script.js não deve duplicar const grammarRulesData.');
+    });
 });
 
 

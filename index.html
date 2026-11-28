@@ -514,90 +514,142 @@
         <!-- View de Treino Gramatical -->
         <div class="app-layout hidden" id="grammar-view">
             <section class="training-section panel">
-                <div class="panel-header">
-                    <h2>Treinamento Gramatical (Microestruturas)</h2>
-                    <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem;">Exercícios práticos de
-                        coesão, concordância, crase e pontuação.</p>
+                <div class="panel-header grammar-studio-header">
+                    <div>
+                        <h2>Treinamento Gramatical (Microestruturas)</h2>
+                        <p class="studio-subtitle">Pratique microestruturas de prova, consulte a lógica sem decoreba ou gere desafios com IA.</p>
+                    </div>
                 </div>
 
-                <div class="training-cards">
-                    <div class="training-card" id="grammar-tutor-card">
-                        <div class="card-header card-header-accent-danger">
-                            <h3>Tutor de Dúvidas Gramaticais</h3>
-                            <span class="hint">Pergunte ao Prof. Lino sobre qualquer erro ou dúvida gramatical.</span>
+                <!-- Navegação de Abas do Estúdio Gramatical -->
+                <div class="grammar-studio-nav" id="grammar-studio-nav" role="tablist" aria-label="Modos do Estúdio Gramatical">
+                    <button type="button" class="grammar-studio-tab active" role="tab" aria-selected="true" data-grammar-pane="arena">⚡ Arena de Micro-Treinos</button>
+                    <button type="button" class="grammar-studio-tab" role="tab" aria-selected="false" data-grammar-pane="estudo">📚 Lógica &amp; Radar das Bancas</button>
+                    <button type="button" class="grammar-studio-tab" role="tab" aria-selected="false" data-grammar-pane="desafio">🧪 Desafio Dinâmico (IA)</button>
+                    <button type="button" class="grammar-studio-tab" role="tab" aria-selected="false" data-grammar-pane="tutor">👨‍🏫 Tutor de Dúvidas</button>
+                </div>
+
+                <!-- ABA 1 (PADRÃO): ARENA DE MICRO-TREINOS -->
+                <div id="grammar-pane-arena" class="grammar-pane active" role="tabpanel">
+                    <div class="training-card arena-card">
+                        <div class="card-header arena-header">
+                            <div>
+                                <h3>Arena de Micro-Treinos <span id="arena-question-counter" class="arena-q-counter"></span></h3>
+                                <span class="hint">Resolva questões objetivas para fixar Crase, Vírgula, Regência e Coesão.</span>
+                            </div>
+                            <div class="arena-header-actions">
+                                <div id="turbo-timer-container" class="turbo-timer-pill hidden">
+                                    ⏱ <span id="turbo-timer-display">60</span>s
+                                </div>
+                                <button class="btn btn-secondary btn-sm btn-turbo" id="btn-turbo-mode" type="button">Modo Turbo (60s) 🚀</button>
+                                <button class="btn btn-secondary btn-sm btn-analytics" id="btn-arena-analytics" type="button">Meu Desempenho 📊</button>
+                            </div>
                         </div>
-                        <textarea class="training-textarea" id="grammar-tutor-textarea" style="min-height: 120px;"
-                            placeholder="Ex: Professor, por que 'atualmente no século XXI' é pleonasmo?"></textarea>
+
+                        <div class="arena-categories-bar">
+                            <button class="btn btn-secondary btn-sm drill-category-btn active" data-category="Crase" type="button">Crase</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Vírgula" type="button">Vírgula</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Concordância" type="button">Concordância</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Regência" type="button">Regência</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Conectivos" type="button">Conectivos</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Uso do Infinitivo" type="button">Infinitivo</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="Paralelismo" type="button">Paralelismo</button>
+                            <button class="btn btn-secondary btn-sm drill-category-btn drill-weak-btn" data-category="PontosFracos" type="button">Meus Pontos Fracos</button>
+                        </div>
+
+                        <div class="arena-toolbar">
+                            <div class="arena-progress-wrap">
+                                <div id="arena-progress-bar" class="arena-progress-track" aria-label="Progresso na categoria">
+                                    <div id="arena-progress-fill" class="arena-progress-fill" style="width: 0%;"></div>
+                                </div>
+                            </div>
+                            <div class="arena-metrics-row">
+                                <span class="arena-metric-chip">Questão <strong id="drill-counter">1</strong></span>
+                                <span class="arena-metric-chip is-success">Acertos: <strong id="drill-score">0</strong></span>
+                                <span class="arena-metric-chip is-danger">Erros: <strong id="drill-errors">0</strong></span>
+                                <span class="arena-metric-chip">Aproveitamento: <strong id="arena-accuracy">—</strong></span>
+                                <span class="arena-metric-chip is-streak">Sequência: <strong id="arena-streak">0</strong></span>
+                            </div>
+                        </div>
+
+                        <div id="drill-container" class="arena-stage">
+                            <h4 id="drill-question" class="arena-question-text">
+                                O combate ___ desigualdade deve ser prioridade.
+                            </h4>
+
+                            <div id="drill-options" class="drill-options-grid">
+                                <!-- Botões de opção gerados via script.js -->
+                            </div>
+
+                            <div id="drill-feedback" class="drill-feedback-box hidden">
+                                <!-- Mensagem de feedback e explicação -->
+                            </div>
+
+                            <div class="arena-stage-footer">
+                                <button class="btn btn-primary hidden" id="btn-next-drill" type="button">Próxima Questão →</button>
+                                <span class="arena-shortcuts-hint">Atalhos: teclas <kbd>1</kbd>–<kbd>4</kbd> para responder · <kbd>Enter</kbd> para avançar</span>
+                            </div>
+                        </div>
                     </div>
+                </div>
 
-                    <div class="submit-area" style="margin-bottom: 2rem;">
-                        <button class="btn btn-secondary" id="grammar-tutor-submit"
-                            style="border-color: var(--primary); color: var(--primary);">
-                            <span>Copiador Inteligente: Perguntar ao Professor</span>
-                        </button>
-                    </div>
-
-                    <!-- Div para resposta do Tutor Gramatical -->
-                    <div id="grammar-tutor-response" style="margin-bottom: 2rem;"></div>
-
-                    <!-- Dossiê de Densidade Gramatical & Radar das 6 Bancas -->
+                <!-- ABA 2: DENSIDADE GRAMATICAL, LÓGICA E RADAR DAS BANCAS -->
+                <div id="grammar-pane-estudo" class="grammar-pane hidden" role="tabpanel">
                     <div class="grammar-density-container" id="grammar-density-panel">
                         <div class="grammar-density-header">
                             <div>
-                                <h3>📊 Densidade Gramatical & Lógica da Língua</h3>
-                                <span class="hint" style="color: var(--text-muted); font-size: 0.85rem;">Critérios de correção das bancas e explicações descomplicadas do português</span>
+                                <h3>📊 Densidade Gramatical &amp; Lógica da Língua</h3>
+                                <span class="hint">Critérios oficiais das bancas e explicações objetivas de aplicação sem decoreba</span>
                             </div>
-                            <!-- Abas de navegação da Densidade -->
                             <div class="grammar-density-tabs-nav">
                                 <button type="button" class="density-nav-btn active" id="btn-tab-radar" data-tab="radar">
                                     🏛️ Radar das 6 Bancas
                                 </button>
                                 <button type="button" class="density-nav-btn" id="btn-tab-logica" data-tab="logica">
-                                    💡 A Lógica da Língua (Por que Aplicar Assim?)
+                                    💡 A Lógica da Língua
                                 </button>
                             </div>
                         </div>
 
-                        <!-- ABA 1: RADAR DE RIGOR DAS 6 BANCAS -->
+                        <!-- RADAR DAS 6 BANCAS -->
                         <div id="density-content-radar" class="density-tab-pane active">
                             <div class="grammar-bancas-grid">
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="ENEM">
                                     <span class="banca-name">ENEM <span>Competência 1 (200 pts)</span></span>
                                     <span class="banca-rule">Tolera no máximo 2 desvios pontuais e 1 falha estrutural leve para atingir nota 200. Truncamentos de períodos e justaposições com vírgula zeram a matriz de excelência.</span>
                                 </div>
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="UEMA">
                                     <span class="banca-name">UEMA (PAES) <span>Critério 5 (2.0 pts)</span></span>
                                     <span class="banca-rule">Correção rigorosa: desvios de crase, regência e concordância descontam de forma cumulativa. Exige vocabulário preciso e pune oralidade ou repetições.</span>
                                 </div>
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="EXATO_DISSERTATIVO">
                                     <span class="banca-name">EXATO Dissertativo <span>Critério 1 (20 pts)</span></span>
                                     <span class="banca-rule">Norma culta estrita: penaliza truncamentos e desvios de concordância. Exige período composto coeso sem ambiguidades.</span>
                                 </div>
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="EXATO_CARTA">
                                     <span class="banca-name">EXATO Carta <span>Critérios 1 e 3 (40 pts)</span></span>
                                     <span class="banca-rule">Registro culto aliado à interlocução: proíbe gírias, exige pronomes de tratamento adequados e pontuação exata no vocativo.</span>
                                 </div>
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="UFG">
                                     <span class="banca-name">UFG (Verbena) <span>Critério 3 (5.0 pts)</span></span>
                                     <span class="banca-rule">Modalidade escrita acadêmica: pune severamente o uso de 'onde' para conceitos abstratos, falta de paralelismo e desvios de regência.</span>
                                 </div>
-                                <div class="grammar-banca-card">
+                                <div class="grammar-banca-card" data-banca="UNITINS">
                                     <span class="banca-name">UNITINS <span>Critério 1 (4.0 pts)</span></span>
                                     <span class="banca-rule">Modalidade escrita formal (escala de 0,5 em 0,5; Edital 2027/1): avalia gramática, ortografia, morfossintaxe e pontuação. Nota 4,0 admite poucos ou nenhum desvio sem prejuízo à formalidade; vírgulas sujeito-verbo e falhas graves rebaixam para 2,0–3,0.</span>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- ABA 2: A LÓGICA DA LÍNGUA (EXPLICAÇÃO LEVE & DIDÁTICA) -->
+                        <!-- A LÓGICA DA LÍNGUA -->
                         <div id="density-content-logica" class="density-tab-pane hidden">
                             <div class="grammar-logic-intro">
-                                <h4 style="color: var(--accent); font-size: 1rem; margin-bottom: 0.35rem;">Desmistificando o Português sem Decoreba</h4>
-                                <p style="color: var(--text-muted); font-size: 0.88rem; margin: 0; line-height: 1.5;">
-                                    A gramática da redação não é um conjunto de proibições aleatórias: ela reflete como o cérebro do leitor processa ideias com clareza. Escolha um tópico abaixo para entender a lógica real e dominar a regra de uma vez por todas.
+                                <h4>Desmistificando o Português sem Decoreba</h4>
+                                <p>
+                                    A gramática da redação reflete como o leitor processa ideias com clareza. Escolha um tópico abaixo para entender a lógica real e dominar a regra.
                                 </p>
                             </div>
 
-                            <!-- Pílulas de Tópicos da Lógica -->
                             <div class="grammar-logic-pills-nav">
                                 <button type="button" class="grammar-logic-pill active" data-topic="virgula">🚂 A Vírgula e o Trem das Palavras</button>
                                 <button type="button" class="grammar-logic-pill" data-topic="crase">🧮 Crase: A Fusão Matemática (A + A)</button>
@@ -605,174 +657,126 @@
                                 <button type="button" class="grammar-logic-pill" data-topic="proporcao">⚖️ Proporção vs Causa: As Balanças</button>
                                 <button type="button" class="grammar-logic-pill" data-topic="paralelismo">🪞 Paralelismo: A Simetria do Cérebro</button>
                                 <button type="button" class="grammar-logic-pill" data-topic="onde">📍 O Pronome "Onde" Tem CEP Físico</button>
-                                <button type="button" class="grammar-logic-pill" data-topic="subjuntivo">🌫️ Concessão & O Modo da Dúvida</button>
+                                <button type="button" class="grammar-logic-pill" data-topic="subjuntivo">🌫️ Concessão &amp; O Modo da Dúvida</button>
                                 <button type="button" class="grammar-logic-pill" data-topic="partitivo">👥 Sujeito Partitivo: A Lógica do Grupo</button>
                                 <button type="button" class="grammar-logic-pill" data-topic="pois">🦎 O "Pois" Camaleão</button>
                             </div>
 
-                            <!-- Card de Exibição Dinâmica da Lógica -->
                             <div id="grammar-logic-display" class="grammar-logic-card">
                                 <!-- Conteúdo injetado dinamicamente via script.js -->
                             </div>
                         </div>
 
-                        <!-- Pílulas de Consulta Rápida: Leis de Ouro da Gramática -->
-                        <div style="margin-top: 1.25rem; border-top: 1px solid var(--panel-border); padding-top: 1rem;">
-                            <h4 style="color: var(--text-main); font-size: 0.92rem; margin-bottom: 0.65rem;">⚡ Pílulas Rápidas de Fixação (Regras de Ouro)</h4>
-                            <div class="grammar-rules-pillbox">
-                                <button type="button" class="grammar-rule-tab active" data-rule="virgula">Vírgula & Conectivos</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="crase">Crase Fatal</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="proporcao">Proporção vs Causa</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="regencia">Regência dos Verbos Nobres</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="paralelismo">Paralelismo Sintático</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="referencial">Coesão Referencial Limpa</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="onde">Uso Restrito de 'Onde'</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="subjuntivo">Concessivos & Subjuntivo</button>
-                                <button type="button" class="grammar-rule-tab" data-rule="pois">Posição do 'Pois'</button>
+                        <!-- REGRAS DE OURO (COLAPSÁVEL PARA REDUZIR RUÍDO VISUAL) -->
+                        <details class="grammar-quick-rules-details">
+                            <summary>⚡ Pílulas Rápidas de Fixação (9 Regras de Ouro para Revisão Relâmpago)</summary>
+                            <div class="grammar-quick-rules-body">
+                                <div class="grammar-rules-pillbox">
+                                    <button type="button" class="grammar-rule-tab active" data-rule="virgula">Vírgula &amp; Conectivos</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="crase">Crase Fatal</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="proporcao">Proporção vs Causa</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="regencia">Regência dos Verbos Nobres</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="paralelismo">Paralelismo Sintático</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="referencial">Coesão Referencial Limpa</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="onde">Uso Restrito de 'Onde'</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="subjuntivo">Concessivos &amp; Subjuntivo</button>
+                                    <button type="button" class="grammar-rule-tab" data-rule="pois">Posição do 'Pois'</button>
+                                </div>
+                                <div id="grammar-rule-content" class="grammar-rule-detail">
+                                    <strong>📌 Regra da Vírgula com Conectivos:</strong><br>
+                                    1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
+                                    2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
+                                    3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').
+                                </div>
                             </div>
-                            <div id="grammar-rule-content" class="grammar-rule-detail">
-                                <strong>📌 Regra da Vírgula com Conectivos:</strong><br>
-                                1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
-                                2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
-                                3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').
-                            </div>
-                        </div>
+                        </details>
                     </div>
+                </div>
 
-                    <!-- Arena de Micro-Treinos -->
-                    <div class="training-card arena-card">
-                        <div class="card-header"
-                            style="display: flex; justify-content: space-between; align-items: flex-start;">
-                            <div>
-                                <h3 style="color: var(--primary);">Arena de Micro-Treinos ⚡ <span id="arena-question-counter" style="font-size: 0.9rem; color: var(--text-muted); font-weight: normal; margin-left: 10px;"></span></h3>
-                                <span class="hint">Resolva exercícios rápidos para fixar Crase, Vírgula e Conectivos
-                                    (Mão na Massa).</span>
+                <!-- ABA 3: DESAFIO GRAMATICAL DINÂMICO (FLUXO IA) -->
+                <div id="grammar-pane-desafio" class="grammar-pane hidden" role="tabpanel">
+                    <div class="training-cards">
+                        <div class="training-card">
+                            <div class="card-header">
+                                <h3>1. Gerar Desafio com IA</h3>
+                                <span class="hint">Copie o prompt, gere um texto com erros no Gemini e cole o JSON abaixo.</span>
                             </div>
-                            <!-- Turbo Timer Display -->
-                            <div id="turbo-timer-container" class="hidden"
-                                style="text-align: right; background: var(--danger); color: white; padding: 0.2rem 0.6rem; border-radius: 4px; font-weight: bold; font-variant-numeric: tabular-nums;">
-                                ⏱ <span id="turbo-timer-display">60</span>s
+                            <div class="submit-area">
+                                <button class="btn btn-primary" id="btn-copy-grammar-challenge" type="button" style="width: 100%;">
+                                    <span>Copiar Prompt: Gerar Desafio</span>
+                                </button>
+                            </div>
+                            <textarea class="training-textarea" id="grammar-challenge-input"
+                                style="min-height: 90px;"
+                                placeholder="Cole o JSON do Desafio gerado pelo Gemini aqui..."></textarea>
+                        </div>
+
+                        <div class="training-card hidden" id="grammar-challenge-area">
+                            <div class="card-header">
+                                <h3>2. Encontre e Corrija os Erros</h3>
+                                <span class="hint">Reescreva o trecho aplicando a norma culta e coesão adequada.</span>
+                            </div>
+
+                            <div id="grammar-challenge-display">
+                                <div class="challenge-prompt-callout">
+                                    <h4>ENCONTRE OS ERROS E REESCREVA:</h4>
+                                    <p id="grammar-challenge-text"></p>
+                                    <p id="grammar-challenge-hint"></p>
+                                </div>
+
+                                <textarea class="training-textarea" id="grammar-challenge-rewrite"
+                                    style="min-height: 120px;"
+                                    placeholder="Reescreva o parágrafo corrigindo todos os erros gramaticais e de coesão..."></textarea>
                             </div>
                         </div>
 
-                        <div
-                            style="margin-top: 1rem; margin-bottom: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                            <button class="btn btn-secondary btn-sm drill-category-btn active"
-                                data-category="Crase">Crase</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Vírgula">Vírgula</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Concordância">Concordância</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Regência">Regência</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Conectivos">Conectivos</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Uso do Infinitivo">Infinitivo</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn"
-                                data-category="Paralelismo">Paralelismo</button>
-                            <button class="btn btn-secondary btn-sm drill-category-btn" data-category="PontosFracos"
-                                style="border-color: var(--warning); color: var(--warning);">Meus Pontos Fracos</button>
-                            <button class="btn btn-secondary btn-sm" id="btn-turbo-mode"
-                                style="background: var(--danger); color: white; border-color: var(--danger);">Modo Turbo
-                                (60s) 🚀</button>
-                            <button class="btn btn-secondary btn-sm" id="btn-arena-analytics"
-                                style="border-color: var(--primary); color: var(--primary);">Meu Desempenho 📊</button>
+                        <div class="training-card hidden" id="grammar-evaluate-area">
+                            <div class="card-header">
+                                <h3>3. Avaliar Minha Reescrita</h3>
+                                <span class="hint">Copie o prompt de correção, envie no Gemini e cole o JSON retornado.</span>
+                            </div>
+                            <div class="submit-area">
+                                <button class="btn btn-primary" id="btn-evaluate-grammar-challenge" type="button" style="width: 100%;">
+                                    <span>Copiar Prompt: Corrigir Desafio</span>
+                                </button>
+                            </div>
+                            <textarea class="training-textarea" id="grammar-evaluate-input"
+                                style="min-height: 90px;"
+                                placeholder="Cole o JSON da Correção gerado pelo Gemini aqui..."></textarea>
                         </div>
 
-                        <div id="drill-container"
-                            style="background: rgba(30, 41, 59, 0.8); border: 1px solid var(--panel-border); border-radius: 8px; padding: 1.5rem; text-align: center;">
-                            <div
-                                style="display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 0.9rem; color: var(--text-muted);">
-                                <span>Questão <span id="drill-counter">1</span></span>
-                                <span>
-                                    <span style="margin-right: 15px;">Acertos: <span id="drill-score" style="color: var(--success); font-weight: bold;">0</span></span>
-                                    <span>Erros: <span id="drill-errors" style="color: var(--danger); font-weight: bold;">0</span></span>
-                                </span>
-                            </div>
-
-                            <h4 id="drill-question"
-                                style="font-size: 1.1rem; line-height: 1.5; margin-bottom: 1.5rem; font-weight: 500;">
-                                O combate ___ desigualdade deve ser prioridade.
-                            </h4>
-
-                            <div id="drill-options"
-                                style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-bottom: 1.5rem;">
-                                <!-- Botões de opção serão gerados aqui -->
-                            </div>
-
-                            <div id="drill-feedback" class="hidden"
-                                style="padding: 1rem; border-radius: 4px; font-size: 0.95rem; line-height: 1.5; margin-bottom: 1rem; text-align: left;">
-                                <!-- Mensagem de feedback (acertou/errou) e explicação -->
-                            </div>
-
-                            <button class="btn btn-primary hidden" id="btn-next-drill" style="margin: 0 auto;">Próxima
-                                Questão ➔</button>
-                        </div>
+                        <div id="grammar-challenge-response"></div>
                     </div>
+                </div>
 
-                    <!-- 1. Gerar Desafio -->
-                    <div class="training-card">
-                        <div class="card-header">
-                            <h3>1. Desafio Gramatical Dinâmico</h3>
-                            <span class="hint">Copie o prompt, jogue no Gemini e cole a resposta dele aqui.</span>
-                        </div>
-                        <div class="submit-area" style="margin-top: 1rem;">
-                            <button class="btn btn-secondary" id="btn-copy-grammar-challenge"
-                                style="border-color: var(--primary); color: var(--primary); width: 100%; font-weight: bold;">
-                                <span>Copiar Prompt: Gerar Desafio</span>
-                            </button>
-                        </div>
-                        <textarea class="training-textarea" id="grammar-challenge-input"
-                            style="min-height: 80px; margin-top: 1rem;"
-                            placeholder="Cole o JSON do Desafio gerado pelo Gemini aqui..."></textarea>
-                    </div>
-
-                    <!-- 2. Resolver o Desafio -->
-                    <div class="training-card hidden" id="grammar-challenge-area">
-                        <div class="card-header">
-                            <h3>2. Tente Resolver</h3>
-                            <span class="hint">Encontre e corrija os erros no texto gerado abaixo.</span>
-                        </div>
-
-                        <div id="grammar-challenge-display" style="margin-top: 1rem;">
-                            <div class="challenge-prompt-callout">
-                                <h4
-                                    style="color: var(--danger); margin-bottom: 0.5rem; font-size: 0.9rem; font-weight: 600;">
-                                    ENCONTRE OS ERROS E REESCREVA:</h4>
-                                <p id="grammar-challenge-text"
-                                    style="font-family: monospace; line-height: 1.6; color: var(--text-main); font-size: 1.05rem;">
-                                </p>
-                                <p id="grammar-challenge-hint"
-                                    style="margin-top: 0.75rem; font-size: 0.85rem; color: var(--warning);"></p>
+                <!-- ABA 4: TUTOR DE DÚVIDAS GRAMATICAIS -->
+                <div id="grammar-pane-tutor" class="grammar-pane hidden" role="tabpanel">
+                    <div class="training-cards">
+                        <div class="training-card" id="grammar-tutor-card">
+                            <div class="card-header card-header-accent-danger">
+                                <div>
+                                    <h3>Tutor de Dúvidas Gramaticais</h3>
+                                    <span class="hint">Pergunte ao Prof. Lino ou use um atalho abaixo para preencher sua dúvida.</span>
+                                </div>
                             </div>
-
-                            <textarea class="training-textarea" id="grammar-challenge-rewrite"
-                                style="min-height: 120px;"
-                                placeholder="Reescreva o parágrafo corrigindo todos os erros gramaticais e de coesão..."></textarea>
+                            <div class="tutor-quick-chips">
+                                <button type="button" class="tutor-quick-chip" data-question="Professor, quando a crase é proibida antes de 'que' ou de verbos?">Crase antes de verbo / "que"</button>
+                                <button type="button" class="tutor-quick-chip" data-question="Professor, por que nunca devo usar vírgula entre sujeito e verbo mesmo com sujeito longo?">Vírgula sujeito-verbo</button>
+                                <button type="button" class="tutor-quick-chip" data-question="Professor, qual a diferença exata entre 'onde', 'aonde' e 'em que' na redação?">'Onde' vs 'em que'</button>
+                                <button type="button" class="tutor-quick-chip" data-question="Professor, como usar 'haja vista' e 'à medida que' sem errar concordância e crase na UNITINS?">'Haja vista' &amp; 'À medida que'</button>
+                            </div>
+                            <textarea class="training-textarea" id="grammar-tutor-textarea" style="min-height: 130px;"
+                                placeholder="Ex: Professor, por que 'atualmente no século XXI' é pleonasmo?"></textarea>
+                            <div class="submit-area">
+                                <button class="btn btn-primary" id="grammar-tutor-submit" type="button" style="width: 100%;">
+                                    <span>Copiador Inteligente: Perguntar ao Professor</span>
+                                </button>
+                            </div>
                         </div>
+
+                        <div id="grammar-tutor-response"></div>
                     </div>
-
-                    <!-- 3. Avaliar Desafio -->
-                    <div class="training-card hidden" id="grammar-evaluate-area">
-                        <div class="card-header">
-                            <h3>3. Avaliar Desafio</h3>
-                            <span class="hint">Copie o prompt de avaliação, jogue no Gemini e cole o resultado.</span>
-                        </div>
-                        <div class="submit-area" style="margin-top: 1rem;">
-                            <button class="btn btn-secondary" id="btn-evaluate-grammar-challenge"
-                                style="border-color: var(--primary); background: var(--primary); color: white; width: 100%; font-weight: bold;">
-                                <span>Copiar Prompt: Corrigir Desafio</span>
-                            </button>
-                        </div>
-                        <textarea class="training-textarea" id="grammar-evaluate-input"
-                            style="min-height: 80px; margin-top: 1rem;"
-                            placeholder="Cole o JSON da Correção gerado pelo Gemini aqui..."></textarea>
-                    </div>
-
-                    <!-- Resposta da Correção -->
-                    <div id="grammar-challenge-response"></div>
-                </div> <!-- Closing training-cards -->
+                </div>
             </section>
         </div>
 

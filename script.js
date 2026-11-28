@@ -265,6 +265,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (unitinsPrecheck) {
             unitinsPrecheck.classList.toggle('hidden', currentBanca.id !== 'UNITINS');
         }
+
+        document.querySelectorAll('.grammar-banca-card[data-banca]').forEach(card => {
+            card.classList.toggle('is-current-banca', card.getAttribute('data-banca') === currentBanca.id);
+        });
     }
 
     // Navigation Logic
@@ -1104,6 +1108,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // -----------------------------------------
+    // ESTÚDIO GRAMATICAL (ABAS & TUTOR RÁPIDO)
+    // -----------------------------------------
+    const studioTabs = document.querySelectorAll('.grammar-studio-tab');
+    const studioPanes = document.querySelectorAll('.grammar-pane');
+    if (studioTabs.length > 0 && studioPanes.length > 0) {
+        studioTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                const targetKey = tab.getAttribute('data-grammar-pane');
+                studioTabs.forEach(t => {
+                    t.classList.remove('active');
+                    t.setAttribute('aria-selected', 'false');
+                });
+                tab.classList.add('active');
+                tab.setAttribute('aria-selected', 'true');
+                studioPanes.forEach(pane => pane.classList.add('hidden'));
+                const targetPane = document.getElementById(`grammar-pane-${targetKey}`);
+                if (targetPane) targetPane.classList.remove('hidden');
+            });
+        });
+    }
+
+    const tutorQuickChips = document.querySelectorAll('.tutor-quick-chip');
+    const tutorInputEl = document.getElementById('grammar-tutor-textarea');
+    if (tutorQuickChips.length > 0 && tutorInputEl) {
+        tutorQuickChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const q = chip.getAttribute('data-question') || '';
+                if (q) {
+                    tutorInputEl.value = q;
+                    tutorInputEl.focus();
+                }
+            });
+        });
+    }
+
+    // -----------------------------------------
     // LÓGICA DA ARENA DE MICRO-TREINOS
     // -----------------------------------------
     let currentDrillCategory = 'Crase';
@@ -1111,6 +1151,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentDrillIndex = 0;
     let drillScore = 0;
     let drillErrors = 0;
+    let drillStreak = 0;
 
     // Turbo Mode Variables
     let isTurboMode = false;
@@ -1125,11 +1166,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const drillCounterDisplay = document.getElementById('drill-counter');
     const drillScoreDisplay = document.getElementById('drill-score');
     const drillErrorsDisplay = document.getElementById('drill-errors');
-    
+    const arenaProgressFill = document.getElementById('arena-progress-fill');
+    const arenaAccuracyDisplay = document.getElementById('arena-accuracy');
+    const arenaStreakDisplay = document.getElementById('arena-streak');
+
     // UI elements for Turbo Mode
     const btnTurboMode = document.getElementById('btn-turbo-mode');
     const turboTimerContainer = document.getElementById('turbo-timer-container');
     const turboTimerDisplay = document.getElementById('turbo-timer-display');
+
+    function updateArenaMetrics() {
+        const totalAnswered = drillScore + drillErrors;
+        if (arenaAccuracyDisplay) {
+            arenaAccuracyDisplay.textContent = totalAnswered > 0
+                ? `${Math.round((drillScore / totalAnswered) * 100)}%`
+                : '—';
+        }
+        if (arenaStreakDisplay) {
+            arenaStreakDisplay.textContent = String(drillStreak);
+        }
+        if (arenaProgressFill) {
+            const totalQ = currentDrillExercises.length || 1;
+            const pct = Math.min(100, Math.round((Math.min(currentDrillIndex, totalQ) / totalQ) * 100));
+            arenaProgressFill.style.width = `${pct}%`;
+        }
+    }
 
     function loadDrillsByCategory(category) {
         if (typeof grammarExercises === 'undefined') return;
@@ -1142,25 +1203,28 @@ document.addEventListener('DOMContentLoaded', () => {
         if (category === 'PontosFracos') {
             const wrongAnswers = JSON.parse(localStorage.getItem('redacao_wrong_drills') || '[]');
             if (wrongAnswers.length === 0) {
-                drillQuestionDisplay.innerHTML = `<span style="color:var(--success)">Parabéns! Você não tem pontos fracos registrados.</span>`;
+                currentDrillExercises = [];
+                drillQuestionDisplay.innerHTML = `<span class="arena-empty-msg">Parabéns! Você não tem pontos fracos registrados no momento.</span>`;
                 drillOptionsContainer.innerHTML = '';
                 drillFeedbackDisplay.classList.add('hidden');
                 btnNextDrill.classList.add('hidden');
+                updateArenaMetrics();
                 return;
             }
-            // Filtra os exercícios que estão no array de pontos fracos
             currentDrillExercises = grammarExercises.filter(ex => wrongAnswers.includes(ex.question));
         } else {
             currentDrillExercises = grammarExercises.filter(ex => ex.category === category);
         }
 
-        // Embaralha as questoes da categoria
+        // Embaralha as questões da categoria
         currentDrillExercises.sort(() => Math.random() - 0.5);
         currentDrillIndex = 0;
         drillScore = 0;
         drillErrors = 0;
+        drillStreak = 0;
         drillScoreDisplay.textContent = '0';
-        if(drillErrorsDisplay) drillErrorsDisplay.textContent = '0';
+        if (drillErrorsDisplay) drillErrorsDisplay.textContent = '0';
+        updateArenaMetrics();
 
         if (currentDrillExercises.length > 0) {
             renderCurrentDrill();
@@ -1168,16 +1232,31 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCurrentDrill() {
+        updateArenaMetrics();
         if (currentDrillIndex >= currentDrillExercises.length) {
-            drillQuestionDisplay.innerHTML = `<span style="color:var(--success)">Parabéns! Você completou os treinos de ${currentDrillCategory}!</span>`;
+            const total = drillScore + drillErrors;
+            const pct = total > 0 ? Math.round((drillScore / total) * 100) : 100;
+            if (arenaProgressFill) arenaProgressFill.style.width = '100%';
+            drillQuestionDisplay.innerHTML = `
+                <div class="arena-complete-state">
+                    <strong>Parabéns! Treino de ${currentDrillCategory} concluído.</strong>
+                    <span>Aproveitamento: ${pct}% (${drillScore} acertos · ${drillErrors} erros)</span>
+                </div>
+            `;
             drillOptionsContainer.innerHTML = '';
+            const restartBtn = document.createElement('button');
+            restartBtn.type = 'button';
+            restartBtn.className = 'btn btn-primary';
+            restartBtn.textContent = `Treinar ${currentDrillCategory} Novamente`;
+            restartBtn.onclick = () => loadDrillsByCategory(currentDrillCategory);
+            drillOptionsContainer.appendChild(restartBtn);
             drillFeedbackDisplay.classList.add('hidden');
             btnNextDrill.classList.add('hidden');
             return;
         }
 
         const drill = currentDrillExercises[currentDrillIndex];
-        
+
         const counterUI = document.getElementById('arena-question-counter');
         if (counterUI) {
             counterUI.textContent = `(Questão ${currentDrillIndex + 1} de ${currentDrillExercises.length})`;
@@ -1185,33 +1264,42 @@ document.addEventListener('DOMContentLoaded', () => {
         drillCounterDisplay.textContent = currentDrillIndex + 1;
         drillQuestionDisplay.textContent = drill.question;
         drillFeedbackDisplay.classList.add('hidden');
+        drillFeedbackDisplay.classList.remove('is-success', 'is-error');
         btnNextDrill.classList.add('hidden');
 
         drillOptionsContainer.innerHTML = '';
+        const letters = ['A', 'B', 'C', 'D'];
         drill.options.forEach((opt, idx) => {
             const btn = document.createElement('button');
-            btn.className = 'btn btn-secondary';
-            btn.textContent = opt;
+            btn.type = 'button';
+            btn.className = 'btn btn-secondary drill-option-btn';
+            const keySpan = document.createElement('span');
+            keySpan.className = 'drill-opt-key';
+            keySpan.textContent = letters[idx] || String(idx + 1);
+            const textSpan = document.createElement('span');
+            textSpan.className = 'drill-opt-text';
+            textSpan.textContent = opt;
+            btn.appendChild(keySpan);
+            btn.appendChild(textSpan);
             btn.onclick = () => handleDrillAnswer(idx, drill, btn);
             drillOptionsContainer.appendChild(btn);
         });
     }
 
     function handleDrillAnswer(selectedIndex, drill, clickedBtn) {
-        // Desabilita os botoes
+        // Desabilita os botões
         Array.from(drillOptionsContainer.children).forEach(b => b.disabled = true);
 
         const isCorrect = selectedIndex === drill.correctOptionIndex;
-        let wrongAnswers = JSON.parse(localStorage.getItem('redacao_wrong_drills') || '[]');
 
         // Define a "Lino Tip" padrão baseada na categoria
         let linoTip = "";
         if (drill.category === 'Crase') {
-            linoTip = "👨‍🏫 Lino Tip: O Método Cachorrão salva vidas! Troque a palavra feminina por uma masculina (ex: 'o problema'). Se der 'AO', tem crase.";
+            linoTip = "👨‍🏫 Dica Prof. Lino: Troque a palavra feminina por uma masculina (ex: 'o problema'). Se der 'AO', tem crase.";
         } else if (drill.category === 'Vírgula') {
-            linoTip = "👨‍🏫 Lino Tip: Cuidado com a Vírgula Suicida! Jamais separe o sujeito do seu verbo, mesmo que o sujeito seja um termo longo.";
+            linoTip = "👨‍🏫 Dica Prof. Lino: Jamais separe o sujeito do seu verbo com vírgula, mesmo que o sujeito seja longo.";
         } else {
-            linoTip = "👨‍🏫 Lino Tip: A redação nota 1000 exige conectivos lógicos explícitos entre parágrafos. Evite o gerúndio fraco!";
+            linoTip = "👨‍🏫 Dica Prof. Lino: Prefira períodos claros, conectivos lógicos exatos e evite gerundismos.";
         }
 
         const finalTip = drill.linoTip || linoTip;
@@ -1219,14 +1307,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let extraFeedback = "";
         if (drill.correctSide && drill.wrongSide) {
             extraFeedback = `
-                <div style="margin-top: 15px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; font-size: 0.9rem;">
-                    <div style="background: rgba(16, 185, 129, 0.1); border-radius: 8px; padding: 10px; border: 1px solid var(--success);">
-                        <strong style="color:var(--success)">✅ Lado Correto:</strong><br>
-                        <span style="color:var(--text-main)">${drill.correctSide}</span>
+                <div class="drill-compare-grid">
+                    <div class="drill-compare-card is-right">
+                        <strong>✅ Forma Correta:</strong>
+                        <span>${drill.correctSide}</span>
                     </div>
-                    <div style="background: rgba(239, 68, 68, 0.1); border-radius: 8px; padding: 10px; border: 1px solid var(--danger);">
-                        <strong style="color:var(--danger)">❌ Lado Errado:</strong><br>
-                        <span style="color:var(--text-main)">${drill.wrongSide}</span>
+                    <div class="drill-compare-card is-wrong">
+                        <strong>❌ Forma Inadequada:</strong>
+                        <span>${drill.wrongSide}</span>
                     </div>
                 </div>
             `;
@@ -1235,41 +1323,37 @@ document.addEventListener('DOMContentLoaded', () => {
         let conceptBox = "";
         if (drill.concept && drill.conceptExplanation) {
             conceptBox = `
-                <div style="margin-top: 15px; background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 12px; border-left: 4px solid var(--primary);">
-                    <strong style="color:var(--primary)">📚 O que é: ${drill.concept}?</strong><br>
-                    <span style="color:var(--text-main); font-size: 0.9rem;">${drill.conceptExplanation}</span>
+                <div class="drill-concept-box">
+                    <strong>📚 Conceito: ${drill.concept}</strong>
+                    <span>${drill.conceptExplanation}</span>
                 </div>
             `;
         }
 
         if (isCorrect) {
-            clickedBtn.style.backgroundColor = 'var(--success)';
-            clickedBtn.style.color = '#fff';
-            clickedBtn.style.borderColor = 'var(--success)';
+            clickedBtn.classList.add('is-correct');
             drillScore++;
+            drillStreak++;
             drillScoreDisplay.textContent = drillScore;
 
-            drillFeedbackDisplay.style.backgroundColor = 'rgba(16, 185, 129, 0.1)';
-            drillFeedbackDisplay.style.borderLeft = '4px solid var(--success)';
-            drillFeedbackDisplay.innerHTML = `<strong style="color:var(--success)">✅ Acertou!</strong><br><span style="color:var(--text-main)">${drill.explanation}</span>${extraFeedback}${conceptBox}<br><br><em style="color:var(--primary); font-size:0.9rem;">${finalTip}</em>`;
+            drillFeedbackDisplay.classList.remove('is-error');
+            drillFeedbackDisplay.classList.add('is-success');
+            drillFeedbackDisplay.innerHTML = `<strong class="feedback-badge-ok">✅ Acertou!</strong><p class="feedback-expl">${drill.explanation}</p>${extraFeedback}${conceptBox}<em class="feedback-tip">${finalTip}</em>`;
         } else {
-            clickedBtn.style.backgroundColor = 'var(--danger)';
-            clickedBtn.style.color = '#fff';
-            clickedBtn.style.borderColor = 'var(--danger)';
-
-            // Incrementa erros
+            clickedBtn.classList.add('is-wrong');
             drillErrors++;
+            drillStreak = 0;
             if (drillErrorsDisplay) drillErrorsDisplay.textContent = drillErrors;
 
-            // Destaca a correta
-            drillOptionsContainer.children[drill.correctOptionIndex].style.borderColor = 'var(--success)';
-            drillOptionsContainer.children[drill.correctOptionIndex].style.borderWidth = '2px';
+            const correctBtn = drillOptionsContainer.children[drill.correctOptionIndex];
+            if (correctBtn) correctBtn.classList.add('is-correct-hint');
 
-            drillFeedbackDisplay.style.backgroundColor = 'rgba(239, 68, 68, 0.1)';
-            drillFeedbackDisplay.style.borderLeft = '4px solid var(--danger)';
-            drillFeedbackDisplay.innerHTML = `<strong style="color:var(--danger)">❌ Errou!</strong><br><span style="color:var(--text-main)">${drill.explanation}</span>${extraFeedback}${conceptBox}<br><br><em style="color:var(--primary); font-size:0.9rem;">${finalTip}</em>`;
+            drillFeedbackDisplay.classList.remove('is-success');
+            drillFeedbackDisplay.classList.add('is-error');
+            drillFeedbackDisplay.innerHTML = `<strong class="feedback-badge-err">❌ Atenção ao desvio!</strong><p class="feedback-expl">${drill.explanation}</p>${extraFeedback}${conceptBox}<em class="feedback-tip">${finalTip}</em>`;
         }
 
+        updateArenaMetrics();
         drillFeedbackDisplay.classList.remove('hidden');
 
         // ADR-15: Grava no IndexedDB de forma transacional e assíncrona
@@ -1280,7 +1364,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isTurboMode) {
             btnNextDrill.classList.remove('hidden');
         } else {
-            // No modo turbo, avança automaticamente após 1.5s
+            // No modo turbo, avança automaticamente após 2s
             setTimeout(() => {
                 if (isTurboMode) {
                     currentDrillIndex++;
@@ -1289,6 +1373,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 2000);
         }
     }
+
+    // Atalhos de teclado 1-4 e Enter na Arena de Micro-Treinos
+    document.addEventListener('keydown', (e) => {
+        const grammarViewEl = document.getElementById('grammar-view');
+        const arenaPaneEl = document.getElementById('grammar-pane-arena');
+        if (!grammarViewEl || grammarViewEl.classList.contains('hidden')) return;
+        if (!arenaPaneEl || arenaPaneEl.classList.contains('hidden')) return;
+
+        const tag = (document.activeElement && document.activeElement.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'textarea' || tag === 'select') return;
+
+        if (['1', '2', '3', '4'].includes(e.key)) {
+            const optIdx = Number(e.key) - 1;
+            const optionBtns = drillOptionsContainer ? drillOptionsContainer.querySelectorAll('.drill-option-btn') : [];
+            if (optionBtns[optIdx] && !optionBtns[optIdx].disabled) {
+                e.preventDefault();
+                optionBtns[optIdx].click();
+            }
+        } else if (e.key === 'Enter' && btnNextDrill && !btnNextDrill.classList.contains('hidden')) {
+            e.preventDefault();
+            btnNextDrill.click();
+        }
+    });
 
     if (btnNextDrill) {
         btnNextDrill.addEventListener('click', () => {
@@ -1345,6 +1452,7 @@ document.addEventListener('DOMContentLoaded', () => {
         currentDrillIndex = 0;
         drillScore = 0;
         drillErrors = 0;
+        drillStreak = 0;
         drillScoreDisplay.textContent = '0';
         if(drillErrorsDisplay) drillErrorsDisplay.textContent = '0';
 
@@ -1369,6 +1477,7 @@ document.addEventListener('DOMContentLoaded', () => {
         isTurboMode = false;
         clearInterval(turboTimerInterval);
         turboTimerContainer.classList.add('hidden');
+        if (btnTurboMode) btnTurboMode.classList.remove('active');
 
         if (timeOut) {
             drillQuestionDisplay.innerHTML = `<span style="color:var(--danger)">Fim do Tempo! ⏰</span><br>Você acertou <strong style="color:var(--success)">${drillScore}</strong> questões em 60 segundos!`;
@@ -3207,51 +3316,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Inicialização das Pílulas de Densidade Gramatical (View de Treino)
-    const ruleTabs = document.querySelectorAll('.grammar-rule-tab');
-    const ruleContent = document.getElementById('grammar-rule-content');
-    const grammarRulesData = {
-        virgula: `<strong>📌 Regra da Vírgula com Conectivos:</strong><br>
-1. Conectivo iniciando período ('Além disso,', 'Portanto,', 'Contudo,') pede vírgula OBRIGATÓRIA logo após.<br>
-2. Conectivo intercalado no meio da oração ('O Estado deve, ademais, ampliar...') fica OBRIGATORIAMENTE entre duas vírgulas.<br>
-3. A conjunção 'mas' leva vírgula ANTES, NUNCA DEPOIS ('..., mas a realidade...').<br>
-4. 'Pois' conclusivo deve vir deslocado após o verbo entre duas vírgulas ('Cabe, pois, ao Ministério agir.').`,
-        crase: `<strong>📌 A Regra de Ouro da Crase:</strong><br>
-1. Método do 'AO': Troque a palavra feminina seguinte por uma masculina equivalente. Se der 'AO', a crase é OBRIGATÓRIA (ex.: 'Favorável à lei' → 'Favorável ao projeto').<br>
-2. Método 'Volto da / Volto de': Vou a, volto da = crase há! Vou a, volto de = crase pra quê? (ex.: 'Vou à Bahia / Volto da Bahia'; 'Vou a Roma / Volto de Roma').<br>
-3. Crase PROIBIDA: antes de verbos ('a partir de', 'a combater'), antes de palavras masculinas ('a prazo', 'a pé') e antes de pronomes de tratamento e indefinidos.`,
-        proporcao: `<strong>📌 Proporção vs Causa (O Maior Erro da Redação):</strong><br>
-1. 'À MEDIDA QUE': Proporção gradual e simultânea (com crase e sem 'em'). Ex.: 'À medida que a tecnologia avança, novos dilemas surgem.'<br>
-2. 'NA MEDIDA EM QUE': Causa e motivo (= já que, porque). Ex.: 'A medida fracassou, na medida em que faltaram recursos.'<br>
-3. PROIBIDO: 'À medida em que' é erro gramatical grave que resulta em desconto severo nas bancas!`,
-        regencia: `<strong>📌 Regência dos Verbos Nobres da Redação:</strong><br>
-1. IMPLICAR: É Transitivo Direto (sem 'em'). O correto é 'A crise implica graves consequências' (e nunca 'implica em').<br>
-2. VISAR (almejar): É Transitivo Indireto com 'a'. O correto é 'visar ao bem-estar coletivo' (visa + a).<br>
-3. PREFERIR: Rege preposição 'a'. O correto é 'preferem as redes sociais a ler livros' (e nunca 'do que ler').<br>
-4. OBEDECER: Exige preposição 'a' ('obedecer às leis', 'obedecer aos princípios').`,
-        paralelismo: `<strong>📌 Paralelismo Sintático Obrigatório:</strong><br>
-1. Conectivos duplos correlativos ('não só... mas também', 'tanto... quanto') exigem a mesma classe morfológica dos dois lados.<br>
-• Certo: 'A escola deve não só acolher os jovens, mas também estimular a cidadania.' (verbo + verbo).<br>
-• Errado: 'A escola deve não só o acolhimento, mas também estimular a cidadania.' (substantivo + verbo quebra o paralelismo).<br>
-2. Artigos em enumerações: Se colocar artigo no primeiro termo, coloque em todos ('o respeito, a empatia e a solidariedade').`,
-        referencial: `<strong>📌 Coesão Referencial Limpa (Sem 'O Mesmo'):</strong><br>
-1. Banimento do 'o mesmo': Nunca use 'o mesmo' para substituir pessoas. 'O réu foi preso e o mesmo confessou' é erro gramatical condenado pelo ENEM e UEMA. Troque por 'e este confessou' ou 'o qual confessou'.<br>
-2. 'Onde': Só pode ser usado para LUGAR FÍSICO real ('a cidade onde resido'). Para conceitos abstratos ou leis, use 'em que', 'no qual' ou 'contexto no qual'.<br>
-3. 'Este' vs 'Esse': 'Este' refere-se ao termo imediatamente anterior ou ao tempo presente; 'Esse' retoma termo já citado no período anterior.`
-    };
-
-    if (ruleTabs && ruleContent) {
-        ruleTabs.forEach(tab => {
-            tab.addEventListener('click', () => {
-                ruleTabs.forEach(t => t.classList.remove('active'));
-                tab.classList.add('active');
-                const key = tab.getAttribute('data-rule');
-                if (key && grammarRulesData[key]) {
-                    ruleContent.innerHTML = grammarRulesData[key];
-                }
-            });
-        });
-    }
+    // (Bloco duplicado de pílulas de regras removido; unificado em grammarRulesData acima)
 
     // ==========================================
     // CONSTRUTOR LIVRE (MEU MODELO) - DRAG & DROP

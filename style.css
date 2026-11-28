@@ -3064,6 +3064,490 @@ html.light-theme .unitins-guide-conclusion strong {
     flex-shrink: 0;
 }
 
+/* ========================================================
+   Estúdio Gramatical (Abas, Arena, Lógica, Desafio & Tutor)
+   ======================================================== */
+.studio-subtitle {
+    color: var(--text-muted);
+    font-size: 0.92rem;
+    margin-top: 0.35rem;
+}
+
+.grammar-studio-nav {
+    display: flex;
+    gap: 0.35rem;
+    padding: 0.35rem;
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+    border-radius: 0.95rem;
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+}
+
+.grammar-studio-tab {
+    flex: 1 0 auto;
+    background: transparent;
+    border: 1px solid transparent;
+    color: var(--text-muted);
+    padding: 0.65rem 1rem;
+    border-radius: 0.7rem;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s var(--ease-out-expo), background-color 0.2s var(--ease-out-expo), border-color 0.2s var(--ease-out-expo), box-shadow 0.2s var(--ease-out-expo);
+}
+
+.grammar-studio-tab:hover {
+    color: var(--text-main);
+    background: rgba(var(--primary-rgb), 0.08);
+}
+
+.grammar-studio-tab.active {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 2px 10px rgba(var(--primary-rgb), 0.32);
+}
+
+.grammar-pane.hidden {
+    display: none !important;
+}
+
+.arena-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.85rem;
+}
+
+.arena-q-counter {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: 0.5rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.arena-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.turbo-timer-pill {
+    background: var(--danger);
+    color: #ffffff;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0.55rem;
+    font-weight: 700;
+    font-size: 0.85rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.app-layout .btn-turbo {
+    background: rgba(var(--danger-rgb), 0.14);
+    color: var(--danger);
+    border-color: rgba(var(--danger-rgb), 0.42);
+}
+
+.app-layout .btn-turbo:hover,
+.app-layout .btn-turbo.active {
+    background: var(--danger);
+    color: #ffffff;
+    border-color: var(--danger);
+}
+
+.app-layout .btn-analytics {
+    border-color: rgba(var(--primary-rgb), 0.45);
+    color: var(--accent);
+}
+
+.arena-categories-bar {
+    display: flex;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin: 1rem 1.5rem 0.85rem;
+}
+
+.app-layout .drill-weak-btn {
+    border-color: rgba(var(--warning-rgb), 0.55);
+    color: var(--warning);
+}
+
+.arena-toolbar {
+    margin: 0 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.arena-progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--surface-3);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.arena-progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 999px;
+    transition: width 0.35s var(--ease-out-expo);
+}
+
+.arena-metrics-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    font-variant-numeric: tabular-nums;
+}
+
+.arena-metric-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+    color: var(--text-muted);
+}
+
+.arena-metric-chip strong {
+    color: var(--text-main);
+}
+
+.arena-metric-chip.is-success strong {
+    color: var(--success);
+}
+
+.arena-metric-chip.is-danger strong {
+    color: var(--danger);
+}
+
+.arena-metric-chip.is-streak strong {
+    color: var(--warning);
+}
+
+.arena-stage {
+    margin: 0 1.5rem;
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+    border-radius: 0.9rem;
+    padding: 1.5rem;
+    text-align: left;
+}
+
+.arena-question-text {
+    font-size: 1.08rem;
+    line-height: 1.58;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 1.25rem;
+    text-align: center;
+}
+
+.drill-options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 0.75rem;
+    margin-bottom: 1.15rem;
+}
+
+.app-layout .drill-option-btn {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.75rem;
+    text-align: left;
+    padding: 0.85rem 1rem;
+    border-radius: 0.75rem;
+    background: var(--surface-1);
+    border: 1px solid var(--panel-border);
+    color: var(--text-main);
+    font-weight: 500;
+    line-height: 1.4;
+}
+
+.app-layout .drill-option-btn:hover:not(:disabled) {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+.drill-opt-key {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    flex-shrink: 0;
+}
+
+.app-layout .drill-option-btn.is-correct {
+    background: rgba(var(--success-rgb), 0.16);
+    border-color: var(--success);
+    color: var(--text-main);
+}
+
+.app-layout .drill-option-btn.is-correct .drill-opt-key {
+    background: var(--success);
+    border-color: var(--success);
+    color: #ffffff;
+}
+
+.app-layout .drill-option-btn.is-wrong {
+    background: rgba(var(--danger-rgb), 0.16);
+    border-color: var(--danger);
+    color: var(--text-main);
+}
+
+.app-layout .drill-option-btn.is-wrong .drill-opt-key {
+    background: var(--danger);
+    border-color: var(--danger);
+    color: #ffffff;
+}
+
+.app-layout .drill-option-btn.is-correct-hint {
+    border-color: var(--success);
+    box-shadow: 0 0 0 1px var(--success);
+}
+
+.drill-feedback-box {
+    padding: 1rem 1.15rem;
+    border-radius: 0.75rem;
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 1rem;
+    border: 1px solid var(--panel-border);
+    background: var(--surface-1);
+}
+
+.drill-feedback-box.is-success {
+    background: rgba(var(--success-rgb), 0.08);
+    border-color: rgba(var(--success-rgb), 0.4);
+}
+
+.drill-feedback-box.is-error {
+    background: rgba(var(--danger-rgb), 0.08);
+    border-color: rgba(var(--danger-rgb), 0.4);
+}
+
+.feedback-badge-ok {
+    color: var(--success);
+    display: inline-block;
+    margin-bottom: 0.35rem;
+}
+
+.feedback-badge-err {
+    color: var(--danger);
+    display: inline-block;
+    margin-bottom: 0.35rem;
+}
+
+.feedback-expl {
+    color: var(--text-main);
+    margin: 0 0 0.65rem;
+}
+
+.feedback-tip {
+    display: block;
+    margin-top: 0.75rem;
+    color: var(--accent);
+    font-size: 0.88rem;
+}
+
+.drill-compare-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 0.65rem;
+    margin-top: 0.75rem;
+}
+
+.drill-compare-card {
+    border-radius: 0.65rem;
+    padding: 0.7rem 0.9rem;
+    font-size: 0.86rem;
+    color: var(--text-main);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.drill-compare-card.is-right {
+    background: rgba(var(--success-rgb), 0.1);
+    border: 1px solid rgba(var(--success-rgb), 0.35);
+}
+
+.drill-compare-card.is-right strong {
+    color: var(--success);
+}
+
+.drill-compare-card.is-wrong {
+    background: rgba(var(--danger-rgb), 0.1);
+    border: 1px solid rgba(var(--danger-rgb), 0.35);
+}
+
+.drill-compare-card.is-wrong strong {
+    color: var(--danger);
+}
+
+.drill-concept-box {
+    margin-top: 0.75rem;
+    background: var(--surface-2);
+    border: 1px solid rgba(var(--primary-rgb), 0.3);
+    border-radius: 0.65rem;
+    padding: 0.75rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.87rem;
+    color: var(--text-main);
+}
+
+.drill-concept-box strong {
+    color: var(--accent);
+}
+
+.arena-stage-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.arena-shortcuts-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    margin-left: auto;
+}
+
+.arena-shortcuts-hint kbd {
+    display: inline-block;
+    padding: 0.1rem 0.35rem;
+    font-size: 0.74rem;
+    font-family: inherit;
+    background: var(--surface-1);
+    border: 1px solid var(--panel-border);
+    border-radius: 4px;
+    color: var(--text-main);
+}
+
+.arena-complete-state {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    color: var(--success);
+}
+
+.arena-complete-state span {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.arena-empty-msg {
+    color: var(--success);
+}
+
+.grammar-banca-card.is-current-banca {
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.09);
+    box-shadow: var(--shadow-sm);
+}
+
+.grammar-quick-rules-details {
+    margin-top: 1.25rem;
+    border-top: 1px solid var(--panel-border);
+    padding-top: 0.95rem;
+}
+
+.grammar-quick-rules-details > summary {
+    cursor: pointer;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: var(--text-main);
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.65rem;
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+}
+
+.grammar-quick-rules-details > summary::after {
+    content: '+';
+    font-weight: 700;
+    color: var(--accent);
+}
+
+.grammar-quick-rules-details[open] > summary::after {
+    content: '−';
+}
+
+.grammar-quick-rules-body {
+    padding-top: 0.9rem;
+}
+
+.tutor-quick-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    padding: 0.9rem 1.5rem 0;
+}
+
+.tutor-quick-chip {
+    background: var(--surface-2);
+    border: 1px solid var(--panel-border);
+    color: var(--text-muted);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+
+.tutor-quick-chip:hover {
+    color: var(--text-main);
+    border-color: var(--primary);
+    background: rgba(var(--primary-rgb), 0.1);
+}
+
+@media (max-width: 768px) {
+    .arena-categories-bar,
+    .arena-toolbar,
+    .arena-stage {
+        margin-left: 0.75rem;
+        margin-right: 0.75rem;
+    }
+
+    .arena-stage {
+        padding: 1rem;
+    }
+
+    .drill-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tutor-quick-chips {
+        padding: 0.75rem 1rem 0;
+    }
+}
+
 /* Light-Theme Harmony Overrides */
 html.light-theme .paper-wrapper {
     border-color: #cbd5e1;
